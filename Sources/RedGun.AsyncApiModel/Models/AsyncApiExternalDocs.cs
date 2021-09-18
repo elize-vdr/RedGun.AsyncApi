@@ -1,0 +1,69 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. 
+
+using System;
+using System.Collections.Generic;
+using RedGun.AsyncApi.Any;
+using RedGun.AsyncApi.Interfaces;
+using RedGun.AsyncApi.Writers;
+
+namespace RedGun.AsyncApi.Models
+{
+    /// <summary>
+    /// ExternalDocs object.
+    /// </summary>
+    public class AsyncApiExternalDocs : IAsyncApiSerializable, IAsyncApiExtensible
+    {
+        /// <summary>
+        /// A short description of the target documentation.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// REQUIRED. The URL for the target documentation. Value MUST be in the format of a URL.
+        /// </summary>
+        public Uri Url { get; set; }
+
+        /// <summary>
+        /// This object MAY be extended with Specification Extensions.
+        /// </summary>
+        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+
+        /// <summary>
+        /// Serialize <see cref="AsyncApiExternalDocs"/> to Async API v3.0.
+        /// </summary>
+        public void SerializeAsV3(IOpenApiWriter writer)
+        {
+            WriteInternal(writer, OpenApiSpecVersion.OpenApi3_0);
+        }
+
+        /// <summary>
+        /// Serialize <see cref="AsyncApiExternalDocs"/> to Async API v2.0.
+        /// </summary>
+        public void SerializeAsV2(IOpenApiWriter writer)
+        {
+            WriteInternal(writer, OpenApiSpecVersion.OpenApi2_0);
+        }
+
+        private void WriteInternal(IOpenApiWriter writer, OpenApiSpecVersion specVersion)
+        {
+            if (writer == null)
+            {
+                throw Error.ArgumentNull(nameof(writer));
+            }
+
+            writer.WriteStartObject();
+
+            // description
+            writer.WriteProperty(OpenApiConstants.Description, Description);
+
+            // url
+            writer.WriteProperty(OpenApiConstants.Url, Url?.OriginalString);
+
+            // extensions
+            writer.WriteExtensions(Extensions, specVersion);
+
+            writer.WriteEndObject();
+        }
+    }
+}

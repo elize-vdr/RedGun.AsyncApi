@@ -1,0 +1,7 @@
+﻿RedGun.AsyncApi.CommandlineTool/bin
+RedGun.AsyncApi.CommandlineTool/obj
+.idea
+Sources/RedGun.AsyncApi.Readers/bin
+Sources/RedGun.AsyncApi.Readers/obj
+Sources/RedGun.AsyncApiModel/bin
+Sources/RedGun.AsyncApiModel/obj
