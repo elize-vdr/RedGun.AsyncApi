@@ -6,8 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Sources\RedGun.AsyncApi.Readers\RedGun.AsyncApi.Readers.csproj" />
-      <ProjectReference Include="..\Sources\RedGun.AsyncApiModel\RedGun.AsyncApiModel.csproj" />
+      <ProjectReference Include="..\RedGun.AsyncApi.Readers\RedGun.AsyncApi.Readers.csproj" />
+      <ProjectReference Include="..\RedGun.AsyncApiModel\RedGun.AsyncApiModel.csproj" />
     </ItemGroup>
 
     <ItemGroup>

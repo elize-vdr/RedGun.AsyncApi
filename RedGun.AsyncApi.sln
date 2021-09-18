@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.Readers", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApiModel", "Sources\RedGun.AsyncApiModel\RedGun.AsyncApiModel.csproj", "{7AB644BC-684F-4A6A-A40F-A786066CBD15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.CommandlineTool", "RedGun.AsyncApi.CommandlineTool\RedGun.AsyncApi.CommandlineTool.csproj", "{002F3598-531A-436F-AD70-5D096B2F0BA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.CommandlineTool", "Sources\RedGun.AsyncApi.CommandlineTool\RedGun.AsyncApi.CommandlineTool.csproj", "{8165FA64-BA2C-4C24-B020-53CAB91329BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,7 +20,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A41E8239-9423-43B2-90FB-68E37C903908} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
 		{7AB644BC-684F-4A6A-A40F-A786066CBD15} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
-		{002F3598-531A-436F-AD70-5D096B2F0BA0} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
+		{8165FA64-BA2C-4C24-B020-53CAB91329BE} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A41E8239-9423-43B2-90FB-68E37C903908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -31,9 +31,9 @@ Global
 		{7AB644BC-684F-4A6A-A40F-A786066CBD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AB644BC-684F-4A6A-A40F-A786066CBD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AB644BC-684F-4A6A-A40F-A786066CBD15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{002F3598-531A-436F-AD70-5D096B2F0BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{002F3598-531A-436F-AD70-5D096B2F0BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{002F3598-531A-436F-AD70-5D096B2F0BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{002F3598-531A-436F-AD70-5D096B2F0BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

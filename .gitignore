@@ -5,3 +5,5 @@ Sources/RedGun.AsyncApi.Readers/bin
 Sources/RedGun.AsyncApi.Readers/obj
 Sources/RedGun.AsyncApiModel/bin
 Sources/RedGun.AsyncApiModel/obj
+Sources/RedGun.AsyncApi.CommandlineTool/bin
+Sources/RedGun.AsyncApi.CommandlineTool/obj
