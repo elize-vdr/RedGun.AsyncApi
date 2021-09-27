@@ -9,7 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RedGun.AsyncApiModel\RedGun.AsyncApiModel.csproj" />
+      <ProjectReference Include="..\RedGun.AsyncApi\RedGun.AsyncApi.csproj" />
     </ItemGroup>
 
 </Project>
