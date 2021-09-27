@@ -20,12 +20,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -39,7 +39,7 @@ namespace RedGun.AsyncApi.Models
                 writer.WriteRequiredObject(item.Key, item.Value, (w, p) => p.SerializeAsV3(w));
             }
 
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -47,7 +47,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -61,7 +61,8 @@ namespace RedGun.AsyncApi.Models
                 writer.WriteRequiredObject(item.Key, item.Value, (w, p) => p.SerializeAsV2(w));
             }
 
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            // TODO: Remove
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }

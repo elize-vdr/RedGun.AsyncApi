@@ -118,7 +118,7 @@ namespace RedGun.AsyncApi.Readers.V3
         private static readonly AnyFieldMap<AsyncApiParameter> _parameterAnyFields = new AnyFieldMap<AsyncApiParameter>
         {
             {
-                OpenApiConstants.Example,
+                AsyncApiConstants.Example,
                 new AnyFieldMapParameter<AsyncApiParameter>(
                     s => s.Example,
                     (s, v) => s.Example = v,
@@ -126,11 +126,11 @@ namespace RedGun.AsyncApi.Readers.V3
             }
         };
 
-        private static readonly AnyMapFieldMap<AsyncApiParameter, AsyncApiExample> _parameterAnyMapOpenApiExampleFields =
+        private static readonly AnyMapFieldMap<AsyncApiParameter, AsyncApiExample> _parameterAnyMapAsyncApiExampleFields =
             new AnyMapFieldMap<AsyncApiParameter, AsyncApiExample>
         {
             {
-                OpenApiConstants.Examples,
+                AsyncApiConstants.Examples,
                 new AnyMapFieldMapParameter<AsyncApiParameter, AsyncApiExample>(
                     m => m.Examples,
                     e => e.Value,
@@ -153,7 +153,7 @@ namespace RedGun.AsyncApi.Readers.V3
 
             ParseMap(mapNode, parameter, _parameterFixedFields, _parameterPatternFields);
             ProcessAnyFields(mapNode, parameter, _parameterAnyFields);
-            ProcessAnyMapFields(mapNode, parameter, _parameterAnyMapOpenApiExampleFields);
+            ProcessAnyMapFields(mapNode, parameter, _parameterAnyMapAsyncApiExampleFields);
 
             return parameter;
         }

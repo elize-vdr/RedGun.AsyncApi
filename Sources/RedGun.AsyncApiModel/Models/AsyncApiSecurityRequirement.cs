@@ -24,14 +24,14 @@ namespace RedGun.AsyncApi.Models
         /// of type <see cref="AsyncApiSecurityScheme"/> are compared.
         /// </summary>
         public AsyncApiSecurityRequirement()
-            : base(new OpenApiSecuritySchemeReferenceEqualityComparer())
+            : base(new AsyncApiSecuritySchemeReferenceEqualityComparer())
         {
         }
 
         /// <summary>
         /// Serialize <see cref="AsyncApiSecurityRequirement"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -71,7 +71,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiSecurityRequirement"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -112,7 +112,7 @@ namespace RedGun.AsyncApi.Models
         /// Comparer for AsyncApiSecurityScheme that only considers the Id in the Reference
         /// (i.e. the string that will actually be displayed in the written document)
         /// </summary>
-        private class OpenApiSecuritySchemeReferenceEqualityComparer : IEqualityComparer<AsyncApiSecurityScheme>
+        private class AsyncApiSecuritySchemeReferenceEqualityComparer : IEqualityComparer<AsyncApiSecurityScheme>
         {
             /// <summary>
             /// Determines whether the specified objects are equal.

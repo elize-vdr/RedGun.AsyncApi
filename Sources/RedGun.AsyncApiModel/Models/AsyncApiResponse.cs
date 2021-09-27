@@ -39,7 +39,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Indicates if object is populated with data or is just a reference to the data
@@ -54,7 +54,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiResponse"/> to Async API v3.0.
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -73,24 +73,24 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // description
-            writer.WriteRequiredProperty(OpenApiConstants.Description, Description);
+            writer.WriteRequiredProperty(AsyncApiConstants.Description, Description);
 
             // headers
-            writer.WriteOptionalMap(OpenApiConstants.Headers, Headers, (w, h) => h.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Headers, Headers, (w, h) => h.SerializeAsV3(w));
 
             // content
-            writer.WriteOptionalMap(OpenApiConstants.Content, Content, (w, c) => c.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Content, Content, (w, c) => c.SerializeAsV3(w));
 
             // links
-            writer.WriteOptionalMap(OpenApiConstants.Links, Links, (w, l) => l.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Links, Links, (w, l) => l.SerializeAsV3(w));
 
             // extension
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -98,7 +98,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiResponse"/> to Async API v2.0.
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -117,14 +117,15 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        // TODO: Remove
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // description
-            writer.WriteRequiredProperty(OpenApiConstants.Description, Description);
+            writer.WriteRequiredProperty(AsyncApiConstants.Description, Description);
 
-            var extensionsClone = new Dictionary<string, IOpenApiExtension>(Extensions);
+            var extensionsClone = new Dictionary<string, IAsyncApiExtension>(Extensions);
 
             if (Content != null)
             {
@@ -133,14 +134,14 @@ namespace RedGun.AsyncApi.Models
                 {
                     // schema
                     writer.WriteOptionalObject(
-                        OpenApiConstants.Schema,
+                        AsyncApiConstants.Schema,
                         mediatype.Value.Schema,
                         (w, s) => s.SerializeAsV2(w));
 
                     // examples
                     if (Content.Values.Any(m => m.Example != null))
                     {
-                        writer.WritePropertyName(OpenApiConstants.Examples);
+                        writer.WritePropertyName(AsyncApiConstants.Examples);
                         writer.WriteStartObject();
 
                         foreach (var mediaTypePair in Content)
@@ -155,7 +156,8 @@ namespace RedGun.AsyncApi.Models
                         writer.WriteEndObject();
                     }
 
-                    writer.WriteExtensions(mediatype.Value.Extensions, OpenApiSpecVersion.OpenApi2_0);
+                    // TODO: Remove
+                    writer.WriteExtensions(mediatype.Value.Extensions, AsyncApiSpecVersion.OpenApi2_0);
 
                     foreach (var key in mediatype.Value.Extensions.Keys)
                     {
@@ -167,10 +169,11 @@ namespace RedGun.AsyncApi.Models
             }
 
             // headers
-            writer.WriteOptionalMap(OpenApiConstants.Headers, Headers, (w, h) => h.SerializeAsV2(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Headers, Headers, (w, h) => h.SerializeAsV2(w));
 
             // extension
-            writer.WriteExtensions(extensionsClone, OpenApiSpecVersion.OpenApi2_0);
+            // TODO: Remove
+            writer.WriteExtensions(extensionsClone, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }

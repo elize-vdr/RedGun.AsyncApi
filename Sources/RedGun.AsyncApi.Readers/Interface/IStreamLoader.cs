@@ -16,7 +16,7 @@ namespace RedGun.AsyncApi.Readers.Interface
         /// <summary>
         /// Use Uri to locate data and convert into an input object.
         /// </summary>
-        /// <param name="uri">Identifier of some source of an OpenAPI Description</param>
+        /// <param name="uri">Identifier of some source of an AsyncAPI Description</param>
         /// <returns>A data objext that can be processed by a reader to generate an <see cref="AsyncApiDocument"/></returns>
         Task<Stream> LoadAsync(Uri uri);
 

@@ -14,12 +14,12 @@ namespace RedGun.AsyncApi.Interfaces
         /// Serialize Async API element to v3.0.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        void SerializeAsV3(IOpenApiWriter writer);
+        void SerializeAsV3(IAsyncApiWriter writer);
 
         /// <summary>
         /// Serialize Async API element to v2.0.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        void SerializeAsV2(IOpenApiWriter writer);
+        void SerializeAsV2(IAsyncApiWriter writer);
     }
 }

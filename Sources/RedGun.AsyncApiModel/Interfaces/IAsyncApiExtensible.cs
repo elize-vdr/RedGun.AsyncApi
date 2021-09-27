@@ -14,6 +14,6 @@ namespace RedGun.AsyncApi.Interfaces
         /// <summary>
         /// Specification extensions.
         /// </summary>
-        IDictionary<string, IOpenApiExtension> Extensions { get; set; }
+        IDictionary<string, IAsyncApiExtension> Extensions { get; set; }
     }
 }

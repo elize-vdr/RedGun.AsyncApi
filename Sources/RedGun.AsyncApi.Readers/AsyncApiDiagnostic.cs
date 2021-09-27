@@ -15,11 +15,11 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// List of all errors.
         /// </summary>
-        public IList<OpenApiError> Errors { get; set; } = new List<OpenApiError>();
+        public IList<AsyncApiError> Errors { get; set; } = new List<AsyncApiError>();
 
         /// <summary>
         /// Async API specification version of the document parsed.
         /// </summary>
-        public OpenApiSpecVersion SpecificationVersion { get; set; }
+        public AsyncApiSpecVersion SpecificationVersion { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Reference object.
@@ -57,7 +57,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiExample"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -76,24 +76,24 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // summary
-            writer.WriteProperty(OpenApiConstants.Summary, Summary);
+            writer.WriteProperty(AsyncApiConstants.Summary, Summary);
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // value
-            writer.WriteOptionalObject(OpenApiConstants.Value, Value, (w, v) => w.WriteAny(v));
+            writer.WriteOptionalObject(AsyncApiConstants.Value, Value, (w, v) => w.WriteAny(v));
 
             // externalValue
-            writer.WriteProperty(OpenApiConstants.ExternalValue, ExternalValue);
+            writer.WriteProperty(AsyncApiConstants.ExternalValue, ExternalValue);
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -101,7 +101,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiExample"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Example object of this form does not exist in V2.
             // V2 Example object requires knowledge of media type and exists only
@@ -111,7 +111,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             // Example object of this form does not exist in V2.
             // V2 Example object requires knowledge of media type and exists only

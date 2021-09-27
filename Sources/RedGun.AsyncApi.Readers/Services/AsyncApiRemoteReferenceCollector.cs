@@ -9,7 +9,7 @@ using RedGun.AsyncApi.Services;
 namespace RedGun.AsyncApi.Readers.Services
 {
     /// <summary>
-    /// Builds a list of all remote references used in an OpenApi document
+    /// Builds a list of all remote references used in an AsyncApi document
     /// </summary>
     internal class AsyncApiRemoteReferenceCollector : AsyncApiVisitorBase
     {

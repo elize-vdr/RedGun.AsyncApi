@@ -16,7 +16,7 @@ using SharpYaml.Serialization;
 namespace RedGun.AsyncApi.Readers
 {
     /// <summary>
-    /// The Parsing Context holds temporary state needed whilst parsing an OpenAPI Document
+    /// The Parsing Context holds temporary state needed whilst parsing an AsyncAPI Document
     /// </summary>
     public class ParsingContext
     {
@@ -24,7 +24,7 @@ namespace RedGun.AsyncApi.Readers
         private readonly Dictionary<string, object> _tempStorage = new Dictionary<string, object>();
         private readonly Dictionary<object, Dictionary<string, object>> _scopedTempStorage = new Dictionary<object, Dictionary<string, object>>();
         private readonly Dictionary<string, Stack<string>> _loopStacks = new Dictionary<string, Stack<string>>();
-        internal Dictionary<string, Func<IAsyncApiAny, OpenApiSpecVersion, IOpenApiExtension>> ExtensionParsers { get; set; } = new Dictionary<string, Func<IAsyncApiAny, OpenApiSpecVersion, IOpenApiExtension>>();
+        internal Dictionary<string, Func<IAsyncApiAny, AsyncApiSpecVersion, IAsyncApiExtension>> ExtensionParsers { get; set; } = new Dictionary<string, Func<IAsyncApiAny, AsyncApiSpecVersion, IAsyncApiExtension>>();
         internal RootNode RootNode { get; set; }
         internal List<AsyncApiTag> Tags { get; private set; } = new List<AsyncApiTag>();
         internal Uri BaseUrl { get; set; }
@@ -58,18 +58,20 @@ namespace RedGun.AsyncApi.Readers
 
             switch (inputVersion)
             {
+                // TODO
                 /*
                 case string version when version == "2.0":
                     VersionService = new AsyncApiV2VersionService();
                     doc = VersionService.LoadDocument(RootNode);
-                    this.Diagnostic.SpecificationVersion = OpenApiSpecVersion.OpenApi2_0;
+                    this.Diagnostic.SpecificationVersion = AsyncApiSpecVersion.OpenApi2_0;
                     break;
                     */
+
 
                 case string version when version.StartsWith("3.0"):
                     VersionService = new AsyncApiV3VersionService();
                     doc = VersionService.LoadDocument(RootNode);
-                    this.Diagnostic.SpecificationVersion = OpenApiSpecVersion.OpenApi3_0;
+                    this.Diagnostic.SpecificationVersion = AsyncApiSpecVersion.AsyncApi2_0;
                     break;
 
                 default:
@@ -83,9 +85,9 @@ namespace RedGun.AsyncApi.Readers
         /// Initiates the parsing process of a fragment.  Not thread safe and should only be called once on a parsing context
         /// </summary>
         /// <param name="yamlDocument"></param>
-        /// <param name="version">OpenAPI version of the fragment</param>
+        /// <param name="version">AsyncAPI version of the fragment</param>
         /// <returns>An AsyncApiDocument populated based on the passed yamlDocument </returns>
-        internal T ParseFragment<T>(YamlDocument yamlDocument, OpenApiSpecVersion version) where T : IAsyncApiElement
+        internal T ParseFragment<T>(YamlDocument yamlDocument, AsyncApiSpecVersion version) where T : IAsyncApiElement
         {
             var node = ParseNode.Create(this, yamlDocument.RootNode);
 
@@ -93,14 +95,15 @@ namespace RedGun.AsyncApi.Readers
 
             switch (version)
             {
+                // TODO
                 /*
-                case OpenApiSpecVersion.OpenApi2_0:
+                case AsyncApiSpecVersion.OpenApi2_0:
                     VersionService = new AsyncApiV2VersionService();
                     element = this.VersionService.LoadElement<T>(node);
                     break;
                     */
 
-                case OpenApiSpecVersion.OpenApi3_0:
+                case AsyncApiSpecVersion.AsyncApi2_0:
                     this.VersionService = new AsyncApiV3VersionService();
                     element = this.VersionService.LoadElement<T>(node);
                     break;
@@ -114,7 +117,7 @@ namespace RedGun.AsyncApi.Readers
         /// </summary>
         private static string GetVersion(RootNode rootNode)
         {
-            var versionNode = rootNode.Find(new JsonPointer("/openapi"));
+            var versionNode = rootNode.Find(new JsonPointer("/asyncapi"));
 
             if (versionNode != null)
             {

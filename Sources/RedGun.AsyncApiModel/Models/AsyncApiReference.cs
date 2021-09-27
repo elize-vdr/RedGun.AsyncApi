@@ -110,7 +110,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiReference"/> to Async API v3.0.
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -134,7 +134,7 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // $ref
-            writer.WriteProperty(OpenApiConstants.DollarRef, ReferenceV3);
+            writer.WriteProperty(AsyncApiConstants.DollarRef, ReferenceV3);
 
             writer.WriteEndObject();
         }
@@ -142,7 +142,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiReference"/> to Async API v2.0.
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -166,7 +166,7 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // $ref
-            writer.WriteProperty(OpenApiConstants.DollarRef, ReferenceV2);
+            writer.WriteProperty(AsyncApiConstants.DollarRef, ReferenceV2);
 
             writer.WriteEndObject();
         }
@@ -186,22 +186,22 @@ namespace RedGun.AsyncApi.Models
             switch (type)
             {
                 case ReferenceType.Schema:
-                    return OpenApiConstants.Definitions;
+                    return AsyncApiConstants.Definitions;
 
                 case ReferenceType.Parameter:
-                    return OpenApiConstants.Parameters;
+                    return AsyncApiConstants.Parameters;
 
                 case ReferenceType.Response:
-                    return OpenApiConstants.Responses;
+                    return AsyncApiConstants.Responses;
 
                 case ReferenceType.Header:
-                    return OpenApiConstants.Headers;
+                    return AsyncApiConstants.Headers;
 
                 case ReferenceType.Tag:
-                    return OpenApiConstants.Tags;
+                    return AsyncApiConstants.Tags;
 
                 case ReferenceType.SecurityScheme:
-                    return OpenApiConstants.SecurityDefinitions;
+                    return AsyncApiConstants.SecurityDefinitions;
 
                 default:
                     // If the reference type is not supported in V2, simply return null

@@ -66,12 +66,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiComponents"/> to Async API v3.0.
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -86,11 +86,11 @@ namespace RedGun.AsyncApi.Models
                 writer.WriteStartObject();
                 if (loops.TryGetValue(typeof(AsyncApiSchema), out List<object> schemas))
                 {
-                    var openApiSchemas = schemas.Cast<AsyncApiSchema>().Distinct().ToList()
+                    var asyncApiSchemas = schemas.Cast<AsyncApiSchema>().Distinct().ToList()
                         .ToDictionary<AsyncApiSchema, string>(k => k.Reference.Id);
 
                     writer.WriteOptionalMap(
-                       OpenApiConstants.Schemas,
+                       AsyncApiConstants.Schemas,
                        Schemas,
                        (w, key, component) => {
                            component.SerializeAsV3WithoutReference(w);
@@ -107,7 +107,7 @@ namespace RedGun.AsyncApi.Models
 
             // schemas
             writer.WriteOptionalMap(
-                OpenApiConstants.Schemas,
+                AsyncApiConstants.Schemas,
                 Schemas,
                 (w, key, component) =>
                 {
@@ -125,7 +125,7 @@ namespace RedGun.AsyncApi.Models
 
             // responses
             writer.WriteOptionalMap(
-                OpenApiConstants.Responses,
+                AsyncApiConstants.Responses,
                 Responses,
                 (w, key, component) =>
                 {
@@ -143,7 +143,7 @@ namespace RedGun.AsyncApi.Models
 
             // parameters
             writer.WriteOptionalMap(
-                OpenApiConstants.Parameters,
+                AsyncApiConstants.Parameters,
                 Parameters,
                 (w, key, component) =>
                 {
@@ -161,7 +161,7 @@ namespace RedGun.AsyncApi.Models
 
             // examples
             writer.WriteOptionalMap(
-                OpenApiConstants.Examples,
+                AsyncApiConstants.Examples,
                 Examples,
                 (w, key, component) =>
                 {
@@ -179,7 +179,7 @@ namespace RedGun.AsyncApi.Models
 
             // requestBodies
             writer.WriteOptionalMap(
-                OpenApiConstants.RequestBodies,
+                AsyncApiConstants.RequestBodies,
                 RequestBodies,
                 (w, key, component) =>
                 {
@@ -197,7 +197,7 @@ namespace RedGun.AsyncApi.Models
 
             // headers
             writer.WriteOptionalMap(
-                OpenApiConstants.Headers,
+                AsyncApiConstants.Headers,
                 Headers,
                 (w, key, component) =>
                 {
@@ -215,7 +215,7 @@ namespace RedGun.AsyncApi.Models
 
             // securitySchemes
             writer.WriteOptionalMap(
-                OpenApiConstants.SecuritySchemes,
+                AsyncApiConstants.SecuritySchemes,
                 SecuritySchemes,
                 (w, key, component) =>
                 {
@@ -233,7 +233,7 @@ namespace RedGun.AsyncApi.Models
 
             // links
             writer.WriteOptionalMap(
-                OpenApiConstants.Links,
+                AsyncApiConstants.Links,
                 Links,
                 (w, key, component) =>
                 {
@@ -251,7 +251,7 @@ namespace RedGun.AsyncApi.Models
 
             // callbacks
             writer.WriteOptionalMap(
-                OpenApiConstants.Callbacks,
+                AsyncApiConstants.Callbacks,
                 Callbacks,
                 (w, key, component) =>
                 {
@@ -268,7 +268,7 @@ namespace RedGun.AsyncApi.Models
                 });
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -276,7 +276,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiComponents"/> to Async API v2.0.
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Components object does not exist in V2.
         }

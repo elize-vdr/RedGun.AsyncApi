@@ -39,12 +39,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiOAuthFlow"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -54,19 +54,19 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // authorizationUrl
-            writer.WriteProperty(OpenApiConstants.AuthorizationUrl, AuthorizationUrl?.ToString());
+            writer.WriteProperty(AsyncApiConstants.AuthorizationUrl, AuthorizationUrl?.ToString());
 
             // tokenUrl
-            writer.WriteProperty(OpenApiConstants.TokenUrl, TokenUrl?.ToString());
+            writer.WriteProperty(AsyncApiConstants.TokenUrl, TokenUrl?.ToString());
 
             // refreshUrl
-            writer.WriteProperty(OpenApiConstants.RefreshUrl, RefreshUrl?.ToString());
+            writer.WriteProperty(AsyncApiConstants.RefreshUrl, RefreshUrl?.ToString());
 
             // scopes
-            writer.WriteRequiredMap(OpenApiConstants.Scopes, Scopes, (w, s) => w.WriteValue(s));
+            writer.WriteRequiredMap(AsyncApiConstants.Scopes, Scopes, (w, s) => w.WriteValue(s));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -74,7 +74,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiOAuthFlow"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // OAuthFlow object does not exist in V2.
         }

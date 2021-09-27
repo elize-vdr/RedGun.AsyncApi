@@ -16,10 +16,10 @@ namespace RedGun.AsyncApi.Validations
     public class AsyncApiValidator : AsyncApiVisitorBase, IValidationContext
     {
         private readonly ValidationRuleSet _ruleSet;
-        private readonly IList<OpenApiValidatorError> _errors = new List<OpenApiValidatorError>();
+        private readonly IList<AsyncApiValidatorError> _errors = new List<AsyncApiValidatorError>();
 
         /// <summary>
-        /// Create a vistor that will validate an OpenAPIDocument
+        /// Create a vistor that will validate an AsyncAPIDocument
         /// </summary>
         /// <param name="ruleSet"></param>
         public AsyncApiValidator(ValidationRuleSet ruleSet)
@@ -30,7 +30,7 @@ namespace RedGun.AsyncApi.Validations
         /// <summary>
         /// Gets the validation errors.
         /// </summary>
-        public IEnumerable<OpenApiValidatorError> Errors
+        public IEnumerable<AsyncApiValidatorError> Errors
         {
             get
             {
@@ -42,7 +42,7 @@ namespace RedGun.AsyncApi.Validations
         /// Register an error with the validation context.
         /// </summary>
         /// <param name="error">Error to register.</param>
-        public void AddError(OpenApiValidatorError error)
+        public void AddError(AsyncApiValidatorError error)
         {
             if (error == null)
             {
@@ -162,10 +162,10 @@ namespace RedGun.AsyncApi.Validations
         public override void Visit(IAsyncApiExtensible item) => Validate(item);
 
         /// <summary>
-        /// Execute validation rules against an <see cref="IOpenApiExtension"/>
+        /// Execute validation rules against an <see cref="IAsyncApiExtension"/>
         /// </summary>
         /// <param name="item">The object to be validated</param>
-        public override void Visit(IOpenApiExtension item) => Validate(item, item.GetType());
+        public override void Visit(IAsyncApiExtension item) => Validate(item, item.GetType());
 
         /// <summary>
         /// Execute validation rules against a list of <see cref="AsyncApiExample"/>

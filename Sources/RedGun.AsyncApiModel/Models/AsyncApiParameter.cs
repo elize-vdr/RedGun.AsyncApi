@@ -133,12 +133,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiParameter"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -157,51 +157,51 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // name
-            writer.WriteProperty(OpenApiConstants.Name, Name);
+            writer.WriteProperty(AsyncApiConstants.Name, Name);
 
             // in
-            writer.WriteProperty(OpenApiConstants.In, In?.GetDisplayName());
+            writer.WriteProperty(AsyncApiConstants.In, In?.GetDisplayName());
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // required
-            writer.WriteProperty(OpenApiConstants.Required, Required, false);
+            writer.WriteProperty(AsyncApiConstants.Required, Required, false);
 
             // deprecated
-            writer.WriteProperty(OpenApiConstants.Deprecated, Deprecated, false);
+            writer.WriteProperty(AsyncApiConstants.Deprecated, Deprecated, false);
 
             // allowEmptyValue
-            writer.WriteProperty(OpenApiConstants.AllowEmptyValue, AllowEmptyValue, false);
+            writer.WriteProperty(AsyncApiConstants.AllowEmptyValue, AllowEmptyValue, false);
 
             // style
-            writer.WriteProperty(OpenApiConstants.Style, Style?.GetDisplayName());
+            writer.WriteProperty(AsyncApiConstants.Style, Style?.GetDisplayName());
 
             // explode
-            writer.WriteProperty(OpenApiConstants.Explode, Explode, Style.HasValue && Style.Value == ParameterStyle.Form);
+            writer.WriteProperty(AsyncApiConstants.Explode, Explode, Style.HasValue && Style.Value == ParameterStyle.Form);
 
             // allowReserved
-            writer.WriteProperty(OpenApiConstants.AllowReserved, AllowReserved, false);
+            writer.WriteProperty(AsyncApiConstants.AllowReserved, AllowReserved, false);
 
             // schema
-            writer.WriteOptionalObject(OpenApiConstants.Schema, Schema, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Schema, Schema, (w, s) => s.SerializeAsV3(w));
 
             // example
-            writer.WriteOptionalObject(OpenApiConstants.Example, Example, (w, s) => w.WriteAny(s));
+            writer.WriteOptionalObject(AsyncApiConstants.Example, Example, (w, s) => w.WriteAny(s));
 
             // examples
-            writer.WriteOptionalMap(OpenApiConstants.Examples, Examples, (w, e) => e.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Examples, Examples, (w, e) => e.SerializeAsV3(w));
 
             // content
-            writer.WriteOptionalMap(OpenApiConstants.Content, Content, (w, c) => c.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Content, Content, (w, c) => c.SerializeAsV3(w));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -209,7 +209,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiParameter"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -228,49 +228,49 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // in
             if (this is AsyncApiFormDataParameter)
             {
-                writer.WriteProperty(OpenApiConstants.In, "formData");
+                writer.WriteProperty(AsyncApiConstants.In, "formData");
             }
             else if (this is AsyncApiBodyParameter)
             {
-                writer.WriteProperty(OpenApiConstants.In, "body");
+                writer.WriteProperty(AsyncApiConstants.In, "body");
             }
             else
             {
-                writer.WriteProperty(OpenApiConstants.In, In?.GetDisplayName());
+                writer.WriteProperty(AsyncApiConstants.In, In?.GetDisplayName());
             }
 
             // name
-            writer.WriteProperty(OpenApiConstants.Name, Name);
+            writer.WriteProperty(AsyncApiConstants.Name, Name);
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // required
-            writer.WriteProperty(OpenApiConstants.Required, Required, false);
+            writer.WriteProperty(AsyncApiConstants.Required, Required, false);
 
             // deprecated
-            writer.WriteProperty(OpenApiConstants.Deprecated, Deprecated, false);
+            writer.WriteProperty(AsyncApiConstants.Deprecated, Deprecated, false);
 
-            var extensionsClone = new Dictionary<string, IOpenApiExtension>(Extensions);
+            var extensionsClone = new Dictionary<string, IAsyncApiExtension>(Extensions);
 
             // schema
             if (this is AsyncApiBodyParameter)
             {
-                writer.WriteOptionalObject(OpenApiConstants.Schema, Schema, (w, s) => s.SerializeAsV2(w));
+                writer.WriteOptionalObject(AsyncApiConstants.Schema, Schema, (w, s) => s.SerializeAsV2(w));
             }
             // In V2 parameter's type can't be a reference to a custom object schema or can't be of type object
             // So in that case map the type as string.
             else
             if (Schema?.UnresolvedReference == true || Schema?.Type == "object")
             {
-                writer.WriteProperty(OpenApiConstants.Type, "string");
+                writer.WriteProperty(AsyncApiConstants.Type, "string");
             }
             else
             {
@@ -307,7 +307,7 @@ namespace RedGun.AsyncApi.Models
                 }
 
                 // allowEmptyValue
-                writer.WriteProperty(OpenApiConstants.AllowEmptyValue, AllowEmptyValue, false);
+                writer.WriteProperty(AsyncApiConstants.AllowEmptyValue, AllowEmptyValue, false);
 
                 if (this.In == ParameterLocation.Query)
                 {
@@ -328,7 +328,8 @@ namespace RedGun.AsyncApi.Models
 
 
             // extensions
-            writer.WriteExtensions(extensionsClone, OpenApiSpecVersion.OpenApi2_0);
+            // TODO: Remove
+            writer.WriteExtensions(extensionsClone, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }

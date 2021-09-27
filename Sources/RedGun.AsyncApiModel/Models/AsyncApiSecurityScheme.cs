@@ -61,7 +61,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Indicates if object is populated with data or is just a reference to the data
@@ -76,7 +76,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiSecurityScheme"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -95,15 +95,15 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // type
-            writer.WriteProperty(OpenApiConstants.Type, Type.GetDisplayName());
+            writer.WriteProperty(AsyncApiConstants.Type, Type.GetDisplayName());
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             switch (Type)
             {
@@ -111,30 +111,30 @@ namespace RedGun.AsyncApi.Models
                     // These properties apply to apiKey type only.
                     // name
                     // in
-                    writer.WriteProperty(OpenApiConstants.Name, Name);
-                    writer.WriteProperty(OpenApiConstants.In, In.GetDisplayName());
+                    writer.WriteProperty(AsyncApiConstants.Name, Name);
+                    writer.WriteProperty(AsyncApiConstants.In, In.GetDisplayName());
                     break;
                 case SecuritySchemeType.Http:
                     // These properties apply to http type only.
                     // scheme
                     // bearerFormat
-                    writer.WriteProperty(OpenApiConstants.Scheme, Scheme);
-                    writer.WriteProperty(OpenApiConstants.BearerFormat, BearerFormat);
+                    writer.WriteProperty(AsyncApiConstants.Scheme, Scheme);
+                    writer.WriteProperty(AsyncApiConstants.BearerFormat, BearerFormat);
                     break;
                 case SecuritySchemeType.OAuth2:
                     // This property apply to oauth2 type only.
                     // flows
-                    writer.WriteOptionalObject(OpenApiConstants.Flows, Flows, (w, o) => o.SerializeAsV3(w));
+                    writer.WriteOptionalObject(AsyncApiConstants.Flows, Flows, (w, o) => o.SerializeAsV3(w));
                     break;
                 case SecuritySchemeType.OpenIdConnect:
                     // This property apply to openIdConnect only.
                     // openIdConnectUrl
-                    writer.WriteProperty(OpenApiConstants.OpenIdConnectUrl, OpenIdConnectUrl?.ToString());
+                    writer.WriteProperty(AsyncApiConstants.OpenIdConnectUrl, OpenIdConnectUrl?.ToString());
                     break;
             }
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -142,7 +142,8 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiSecurityScheme"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        // TODO: Remove
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -161,9 +162,10 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        // TODO: Remove
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
-            if (Type == SecuritySchemeType.Http && Scheme != OpenApiConstants.Basic)
+            if (Type == SecuritySchemeType.Http && Scheme != AsyncApiConstants.Basic)
             {
                 // Bail because V2 does not support non-basic HTTP scheme
                 writer.WriteStartObject();
@@ -185,7 +187,7 @@ namespace RedGun.AsyncApi.Models
             switch (Type)
             {
                 case SecuritySchemeType.Http:
-                    writer.WriteProperty(OpenApiConstants.Type, OpenApiConstants.Basic);
+                    writer.WriteProperty(AsyncApiConstants.Type, AsyncApiConstants.Basic);
                     break;
 
                 case SecuritySchemeType.OAuth2:
@@ -194,7 +196,7 @@ namespace RedGun.AsyncApi.Models
                     // authorizationUrl
                     // tokenUrl
                     // scopes
-                    writer.WriteProperty(OpenApiConstants.Type, Type.GetDisplayName());
+                    writer.WriteProperty(AsyncApiConstants.Type, Type.GetDisplayName());
                     WriteOAuthFlowForV2(writer, Flows);
                     break;
 
@@ -202,17 +204,17 @@ namespace RedGun.AsyncApi.Models
                     // These properties apply to apiKey type only.
                     // name
                     // in
-                    writer.WriteProperty(OpenApiConstants.Type, Type.GetDisplayName());
-                    writer.WriteProperty(OpenApiConstants.Name, Name);
-                    writer.WriteProperty(OpenApiConstants.In, In.GetDisplayName());
+                    writer.WriteProperty(AsyncApiConstants.Type, Type.GetDisplayName());
+                    writer.WriteProperty(AsyncApiConstants.Name, Name);
+                    writer.WriteProperty(AsyncApiConstants.In, In.GetDisplayName());
                     break;
             }
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }
@@ -221,42 +223,44 @@ namespace RedGun.AsyncApi.Models
         /// Arbitrarily chooses one <see cref="AsyncApiOAuthFlow"/> object from the <see cref="AsyncApiOAuthFlows"/>
         /// to populate in V2 security scheme.
         /// </summary>
-        private static void WriteOAuthFlowForV2(IOpenApiWriter writer, AsyncApiOAuthFlows flows)
+        // TODO: Remove
+        private static void WriteOAuthFlowForV2(IAsyncApiWriter writer, AsyncApiOAuthFlows flows)
         {
             if (flows != null)
             {
                 if (flows.Implicit != null)
                 {
-                    WriteOAuthFlowForV2(writer, OpenApiConstants.Implicit, flows.Implicit);
+                    WriteOAuthFlowForV2(writer, AsyncApiConstants.Implicit, flows.Implicit);
                 }
                 else if (flows.Password != null)
                 {
-                    WriteOAuthFlowForV2(writer, OpenApiConstants.Password, flows.Password);
+                    WriteOAuthFlowForV2(writer, AsyncApiConstants.Password, flows.Password);
                 }
                 else if (flows.ClientCredentials != null)
                 {
-                    WriteOAuthFlowForV2(writer, OpenApiConstants.Application, flows.ClientCredentials);
+                    WriteOAuthFlowForV2(writer, AsyncApiConstants.Application, flows.ClientCredentials);
                 }
                 else if (flows.AuthorizationCode != null)
                 {
-                    WriteOAuthFlowForV2(writer, OpenApiConstants.AccessCode, flows.AuthorizationCode);
+                    WriteOAuthFlowForV2(writer, AsyncApiConstants.AccessCode, flows.AuthorizationCode);
                 }
             }
         }
 
-        private static void WriteOAuthFlowForV2(IOpenApiWriter writer, string flowValue, AsyncApiOAuthFlow flow)
+        // TODO: Remove
+        private static void WriteOAuthFlowForV2(IAsyncApiWriter writer, string flowValue, AsyncApiOAuthFlow flow)
         {
             // flow
-            writer.WriteProperty(OpenApiConstants.Flow, flowValue);
+            writer.WriteProperty(AsyncApiConstants.Flow, flowValue);
 
             // authorizationUrl
-            writer.WriteProperty(OpenApiConstants.AuthorizationUrl, flow.AuthorizationUrl?.ToString());
+            writer.WriteProperty(AsyncApiConstants.AuthorizationUrl, flow.AuthorizationUrl?.ToString());
 
             // tokenUrl
-            writer.WriteProperty(OpenApiConstants.TokenUrl, flow.TokenUrl?.ToString());
+            writer.WriteProperty(AsyncApiConstants.TokenUrl, flow.TokenUrl?.ToString());
 
             // scopes
-            writer.WriteOptionalMap(OpenApiConstants.Scopes, flow.Scopes, (w, s) => w.WriteValue(s));
+            writer.WriteOptionalMap(AsyncApiConstants.Scopes, flow.Scopes, (w, s) => w.WriteValue(s));
         }
     }
 }

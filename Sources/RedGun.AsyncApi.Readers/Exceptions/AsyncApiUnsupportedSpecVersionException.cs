@@ -7,12 +7,12 @@ using System.Globalization;
 namespace RedGun.AsyncApi.Readers.Exceptions
 {
     /// <summary>
-    /// Defines an exception indicating OpenAPI Reader encountered an unsupported specification version while reading.
+    /// Defines an exception indicating AsyncAPI Reader encountered an unsupported specification version while reading.
     /// </summary>
     [Serializable]
     public class AsyncApiUnsupportedSpecVersionException : Exception
     {
-        const string messagePattern = "OpenAPI specification version '{0}' is not supported.";
+        const string messagePattern = "AsyncAPI specification version '{0}' is not supported.";
 
         /// <summary>
         /// Initializes the <see cref="AsyncApiUnsupportedSpecVersionException"/> class with a specification version.

@@ -18,32 +18,32 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
         /// For those strings that the schema does not specify the type for, convert them into
         /// the most specific type based on the value.
         /// </summary>
-        public static IAsyncApiAny GetSpecificOpenApiAny(IAsyncApiAny asyncApiAny, AsyncApiSchema schema = null)
+        public static IAsyncApiAny GetSpecificAsyncApiAny(IAsyncApiAny asyncApiAny, AsyncApiSchema schema = null)
         {
-            if (asyncApiAny is AsyncApiArray openApiArray)
+            if (asyncApiAny is AsyncApiArray asyncApiArray)
             {
                 var newArray = new AsyncApiArray();
-                foreach (var element in openApiArray)
+                foreach (var element in asyncApiArray)
                 {
-                    newArray.Add(GetSpecificOpenApiAny(element, schema?.Items));
+                    newArray.Add(GetSpecificAsyncApiAny(element, schema?.Items));
                 }
 
                 return newArray;
             }
 
-            if (asyncApiAny is AsyncApiObject openApiObject)
+            if (asyncApiAny is AsyncApiObject asyncApiObject)
             {
                 var newObject = new AsyncApiObject();
 
-                foreach (var key in openApiObject.Keys.ToList())
+                foreach (var key in asyncApiObject.Keys.ToList())
                 {
                     if (schema?.Properties != null && schema.Properties.TryGetValue(key, out var property))
                     {
-                        newObject[key] = GetSpecificOpenApiAny(openApiObject[key], property);
+                        newObject[key] = GetSpecificAsyncApiAny(asyncApiObject[key], property);
                     }
                     else
                     {
-                        newObject[key] = GetSpecificOpenApiAny(openApiObject[key], schema?.AdditionalProperties);
+                        newObject[key] = GetSpecificAsyncApiAny(asyncApiObject[key], schema?.AdditionalProperties);
                     }
                 }
 

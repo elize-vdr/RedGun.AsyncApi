@@ -47,16 +47,16 @@ namespace RedGun.AsyncApi.Readers.V3
                 {
                     mapNode.Context.StartObject(anyFieldName);
 
-                    var convertedOpenApiAny = AsyncApiAnyConverter.GetSpecificOpenApiAny(
+                    var convertedAsyncApiAny = AsyncApiAnyConverter.GetSpecificAsyncApiAny(
                         anyFieldMap[anyFieldName].PropertyGetter(domainObject),
                         anyFieldMap[anyFieldName].SchemaGetter(domainObject));
 
-                    anyFieldMap[anyFieldName].PropertySetter(domainObject, convertedOpenApiAny);
+                    anyFieldMap[anyFieldName].PropertySetter(domainObject, convertedAsyncApiAny);
                 }
-                catch (OpenApiException exception)
+                catch (AsyncApiException exception)
                 {
                     exception.Pointer = mapNode.Context.GetLocation();
-                    mapNode.Context.Diagnostic.Errors.Add(new OpenApiError(exception));
+                    mapNode.Context.Diagnostic.Errors.Add(new AsyncApiError(exception));
                 }
                 finally
                 {
@@ -81,17 +81,17 @@ namespace RedGun.AsyncApi.Readers.V3
                     foreach (var propertyElement in anyListFieldMap[anyListFieldName].PropertyGetter(domainObject))
                     {
                         newProperty.Add(
-                            AsyncApiAnyConverter.GetSpecificOpenApiAny(
+                            AsyncApiAnyConverter.GetSpecificAsyncApiAny(
                                 propertyElement,
                                 anyListFieldMap[anyListFieldName].SchemaGetter(domainObject)));
                     }
 
                     anyListFieldMap[anyListFieldName].PropertySetter(domainObject, newProperty);
                 }
-                catch (OpenApiException exception)
+                catch (AsyncApiException exception)
                 {
                     exception.Pointer = mapNode.Context.GetLocation();
-                    mapNode.Context.Diagnostic.Errors.Add(new OpenApiError(exception));
+                    mapNode.Context.Diagnostic.Errors.Add(new AsyncApiError(exception));
                 }
                 finally
                 {
@@ -121,7 +121,7 @@ namespace RedGun.AsyncApi.Readers.V3
                         {
                             var any = anyMapFieldMap[anyMapFieldName].PropertyGetter(propertyMapElement.Value);
 
-                            var newAny = AsyncApiAnyConverter.GetSpecificOpenApiAny(
+                            var newAny = AsyncApiAnyConverter.GetSpecificAsyncApiAny(
                                     any,
                                     anyMapFieldMap[anyMapFieldName].SchemaGetter(domainObject));
 
@@ -129,10 +129,10 @@ namespace RedGun.AsyncApi.Readers.V3
                         }
                     }
                 }
-                catch (OpenApiException exception)
+                catch (AsyncApiException exception)
                 {
                     exception.Pointer = mapNode.Context.GetLocation();
-                    mapNode.Context.Diagnostic.Errors.Add(new OpenApiError(exception));
+                    mapNode.Context.Diagnostic.Errors.Add(new AsyncApiError(exception));
                 }
                 finally
                 {
@@ -161,26 +161,26 @@ namespace RedGun.AsyncApi.Readers.V3
 
             return new RuntimeExpressionAnyWrapper
             {
-                Any = AsyncApiAnyConverter.GetSpecificOpenApiAny(node.CreateAny())
+                Any = AsyncApiAnyConverter.GetSpecificAsyncApiAny(node.CreateAny())
             };
         }
 
         public static IAsyncApiAny LoadAny(ParseNode node)
         {
-            return AsyncApiAnyConverter.GetSpecificOpenApiAny(node.CreateAny());
+            return AsyncApiAnyConverter.GetSpecificAsyncApiAny(node.CreateAny());
         }
 
-        private static IOpenApiExtension LoadExtension(string name, ParseNode node)
+        private static IAsyncApiExtension LoadExtension(string name, ParseNode node)
         {
             if (node.Context.ExtensionParsers.TryGetValue(name, out var parser))
             {
                 return parser(
-                    AsyncApiAnyConverter.GetSpecificOpenApiAny(node.CreateAny()),
-                    OpenApiSpecVersion.OpenApi3_0);
+                    AsyncApiAnyConverter.GetSpecificAsyncApiAny(node.CreateAny()),
+                    AsyncApiSpecVersion.AsyncApi2_0);
             }
             else
             {
-                return AsyncApiAnyConverter.GetSpecificOpenApiAny(node.CreateAny());
+                return AsyncApiAnyConverter.GetSpecificAsyncApiAny(node.CreateAny());
             }
         }
 

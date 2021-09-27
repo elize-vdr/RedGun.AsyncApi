@@ -13,13 +13,12 @@ using RedGun.AsyncApi.Writers;
 
 namespace RedGun.AsyncApi.CommandlineTool {
     static class AsyncApiService {
-                public static void ProcessOpenApiDocument(
-            string input,
-            FileInfo output,
-            OpenApiSpecVersion version,
-            OpenApiFormat format,
-            bool inline,
-            bool resolveExternal)
+        public static void ProcessAsyncApiDocument(string input,
+                                                  FileInfo output,
+                                                  AsyncApiSpecVersion version,
+                                                  AsyncApiFormat format,
+                                                  bool inline,
+                                                  bool resolveExternal)
         {
             if (input == null)
             {
@@ -65,18 +64,18 @@ namespace RedGun.AsyncApi.CommandlineTool {
                     textWriter = Console.Out;
                 }
 
-                var settings = new OpenApiWriterSettings()
+                var settings = new AsyncApiWriterSettings()
                 {
                     ReferenceInline = inline == true ? ReferenceInlineSetting.InlineLocalReferences : ReferenceInlineSetting.DoNotInlineReferences
                 };
-                IOpenApiWriter writer;
+                IAsyncApiWriter writer;
                 switch (format)
                 {
-                    case OpenApiFormat.Json:
-                        writer = new OpenApiJsonWriter(textWriter, settings);
+                    case AsyncApiFormat.Json:
+                        writer = new AsyncApiJsonWriter(textWriter, settings);
                         break;
-                    case OpenApiFormat.Yaml:
-                        writer = new OpenApiYamlWriter(textWriter, settings);
+                    case AsyncApiFormat.Yaml:
+                        writer = new AsyncApiYamlWriter(textWriter, settings);
                         break;
                     default:
                         throw new ArgumentException("Unknown format");
@@ -111,7 +110,7 @@ namespace RedGun.AsyncApi.CommandlineTool {
             return stream;
         }
 
-        internal static void ValidateOpenApiDocument(string input)
+        internal static void ValidateAsyncApiDocument(string input)
         {
             if (input == null)
             {
@@ -138,7 +137,7 @@ namespace RedGun.AsyncApi.CommandlineTool {
             }
 
             var statsVisitor = new StatsVisitor();
-            var walker = new OpenApiWalker(statsVisitor);
+            var walker = new AsyncApiWalker(statsVisitor);
             walker.Walk(document);
 
             Console.WriteLine(statsVisitor.GetStatisticsReport());

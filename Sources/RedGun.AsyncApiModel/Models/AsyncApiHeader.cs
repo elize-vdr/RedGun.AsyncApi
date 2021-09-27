@@ -84,12 +84,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiHeader"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -108,45 +108,45 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // required
-            writer.WriteProperty(OpenApiConstants.Required, Required, false);
+            writer.WriteProperty(AsyncApiConstants.Required, Required, false);
 
             // deprecated
-            writer.WriteProperty(OpenApiConstants.Deprecated, Deprecated, false);
+            writer.WriteProperty(AsyncApiConstants.Deprecated, Deprecated, false);
 
             // allowEmptyValue
-            writer.WriteProperty(OpenApiConstants.AllowEmptyValue, AllowEmptyValue, false);
+            writer.WriteProperty(AsyncApiConstants.AllowEmptyValue, AllowEmptyValue, false);
 
             // style
-            writer.WriteProperty(OpenApiConstants.Style, Style?.GetDisplayName());
+            writer.WriteProperty(AsyncApiConstants.Style, Style?.GetDisplayName());
 
             // explode
-            writer.WriteProperty(OpenApiConstants.Explode, Explode, false);
+            writer.WriteProperty(AsyncApiConstants.Explode, Explode, false);
 
             // allowReserved
-            writer.WriteProperty(OpenApiConstants.AllowReserved, AllowReserved, false);
+            writer.WriteProperty(AsyncApiConstants.AllowReserved, AllowReserved, false);
 
             // schema
-            writer.WriteOptionalObject(OpenApiConstants.Schema, Schema, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Schema, Schema, (w, s) => s.SerializeAsV3(w));
 
             // example
-            writer.WriteOptionalObject(OpenApiConstants.Example, Example, (w, s) => w.WriteAny(s));
+            writer.WriteOptionalObject(AsyncApiConstants.Example, Example, (w, s) => w.WriteAny(s));
 
             // examples
-            writer.WriteOptionalMap(OpenApiConstants.Examples, Examples, (w, e) => e.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Examples, Examples, (w, e) => e.SerializeAsV3(w));
 
             // content
-            writer.WriteOptionalMap(OpenApiConstants.Content, Content, (w, c) => c.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Content, Content, (w, c) => c.SerializeAsV3(w));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -154,7 +154,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiHeader"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -173,39 +173,40 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // required
-            writer.WriteProperty(OpenApiConstants.Required, Required, false);
+            writer.WriteProperty(AsyncApiConstants.Required, Required, false);
 
             // deprecated
-            writer.WriteProperty(OpenApiConstants.Deprecated, Deprecated, false);
+            writer.WriteProperty(AsyncApiConstants.Deprecated, Deprecated, false);
 
             // allowEmptyValue
-            writer.WriteProperty(OpenApiConstants.AllowEmptyValue, AllowEmptyValue, false);
+            writer.WriteProperty(AsyncApiConstants.AllowEmptyValue, AllowEmptyValue, false);
 
             // style
-            writer.WriteProperty(OpenApiConstants.Style, Style?.GetDisplayName());
+            writer.WriteProperty(AsyncApiConstants.Style, Style?.GetDisplayName());
 
             // explode
-            writer.WriteProperty(OpenApiConstants.Explode, Explode, false);
+            writer.WriteProperty(AsyncApiConstants.Explode, Explode, false);
 
             // allowReserved
-            writer.WriteProperty(OpenApiConstants.AllowReserved, AllowReserved, false);
+            writer.WriteProperty(AsyncApiConstants.AllowReserved, AllowReserved, false);
 
             // schema
             Schema?.WriteAsItemsProperties(writer);
 
             // example
-            writer.WriteOptionalObject(OpenApiConstants.Example, Example, (w, s) => w.WriteAny(s));
+            writer.WriteOptionalObject(AsyncApiConstants.Example, Example, (w, s) => w.WriteAny(s));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            // TODO: Remove
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }

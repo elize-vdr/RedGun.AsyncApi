@@ -187,7 +187,7 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
             return new T()
             {
                 UnresolvedReference = true,
-                Reference = Context.VersionService.ConvertToOpenApiReference(referenceId, referenceType)
+                Reference = Context.VersionService.ConvertToAsyncApiReference(referenceId, referenceType)
             };
         }
 

@@ -49,7 +49,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Indicates if object is populated with data or is just a reference to the data
@@ -64,7 +64,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiLink"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -83,27 +83,27 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // operationRef
-            writer.WriteProperty(OpenApiConstants.OperationRef, OperationRef);
+            writer.WriteProperty(AsyncApiConstants.OperationRef, OperationRef);
 
             // operationId
-            writer.WriteProperty(OpenApiConstants.OperationId, OperationId);
+            writer.WriteProperty(AsyncApiConstants.OperationId, OperationId);
 
             // parameters
-            writer.WriteOptionalMap(OpenApiConstants.Parameters, Parameters, (w, p) => p.WriteValue(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Parameters, Parameters, (w, p) => p.WriteValue(w));
 
             // requestBody
-            writer.WriteOptionalObject(OpenApiConstants.RequestBody, RequestBody, (w, r) => r.WriteValue(w));
+            writer.WriteOptionalObject(AsyncApiConstants.RequestBody, RequestBody, (w, r) => r.WriteValue(w));
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // server
-            writer.WriteOptionalObject(OpenApiConstants.Server, Server, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Server, Server, (w, s) => s.SerializeAsV3(w));
 
             writer.WriteEndObject();
         }
@@ -111,7 +111,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiLink"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Link object does not exist in V2.
         }
@@ -119,7 +119,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             // Link object does not exist in V2.
         }

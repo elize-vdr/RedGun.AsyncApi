@@ -20,8 +20,8 @@ namespace RedGun.AsyncApi.Any
         /// Serialize AsyncApiObject to writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="specVersion">Version of the OpenAPI specification that that will be output.</param>
-        public void Write(IOpenApiWriter writer, OpenApiSpecVersion specVersion)
+        /// <param name="specVersion">Version of the AsyncAPI specification that that will be output.</param>
+        public void Write(IAsyncApiWriter writer, AsyncApiSpecVersion specVersion)
         {
             writer.WriteStartObject();
 

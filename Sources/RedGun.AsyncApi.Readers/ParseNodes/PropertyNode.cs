@@ -42,12 +42,12 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
                 }
                 catch (AsyncApiReaderException ex)
                 {
-                    Context.Diagnostic.Errors.Add(new OpenApiError(ex));
+                    Context.Diagnostic.Errors.Add(new AsyncApiError(ex));
                 }
-                catch (OpenApiException ex)
+                catch (AsyncApiException ex)
                 {
                     ex.Pointer = Context.GetLocation();
-                    Context.Diagnostic.Errors.Add(new OpenApiError(ex));
+                    Context.Diagnostic.Errors.Add(new AsyncApiError(ex));
                 }
                 finally
                 {
@@ -66,12 +66,12 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
                     }
                     catch (AsyncApiReaderException ex)
                     {
-                        Context.Diagnostic.Errors.Add(new OpenApiError(ex));
+                        Context.Diagnostic.Errors.Add(new AsyncApiError(ex));
                     }
-                    catch (OpenApiException ex)
+                    catch (AsyncApiException ex)
                     {
                         ex.Pointer = Context.GetLocation();
-                        Context.Diagnostic.Errors.Add(new OpenApiError(ex));
+                        Context.Diagnostic.Errors.Add(new AsyncApiError(ex));
                     }
                     finally
                     {
@@ -81,7 +81,7 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
                 else
                 {
                     Context.Diagnostic.Errors.Add(
-                        new OpenApiError("", $"{Name} is not a valid property at {Context.GetLocation()}"));
+                        new AsyncApiError("", $"{Name} is not a valid property at {Context.GetLocation()}"));
                 }
             }
         }

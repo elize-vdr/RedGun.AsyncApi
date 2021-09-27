@@ -18,7 +18,7 @@ namespace RedGun.AsyncApi.Services
     {
         private AsyncApiDocument _currentDocument;
         private bool _resolveRemoteReferences;
-        private List<OpenApiError> _errors = new List<OpenApiError>();
+        private List<AsyncApiError> _errors = new List<AsyncApiError>();
 
         public AsyncApiReferenceResolver(AsyncApiDocument currentDocument, bool resolveRemoteReferences = true)
         {
@@ -26,7 +26,7 @@ namespace RedGun.AsyncApi.Services
             _resolveRemoteReferences = resolveRemoteReferences;
         }
 
-        public IEnumerable<OpenApiError> Errors
+        public IEnumerable<AsyncApiError> Errors
         {
             get
             {
@@ -239,9 +239,9 @@ namespace RedGun.AsyncApi.Services
                 {
                     return _currentDocument.ResolveReference(reference) as T;
                 }
-                catch (OpenApiException ex)
+                catch (AsyncApiException ex)
                 {
-                    _errors.Add(new OpenApiReferenceError(ex));
+                    _errors.Add(new AsyncApiReferenceError(ex));
                     return null;
                 }
             }
@@ -249,7 +249,7 @@ namespace RedGun.AsyncApi.Services
             {
                 if (_currentDocument.Workspace == null)
                 {
-                    _errors.Add(new OpenApiReferenceError(reference,"Cannot resolve external references for documents not in workspaces."));
+                    _errors.Add(new AsyncApiReferenceError(reference,"Cannot resolve external references for documents not in workspaces."));
                     // Leave as unresolved reference
                     return new T()
                     {

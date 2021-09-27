@@ -12,7 +12,7 @@ namespace RedGun.AsyncApi.Validations
         /// Register an error with the validation context.
         /// </summary>
         /// <param name="error">Error to register.</param>
-        void AddError(OpenApiValidatorError error);
+        void AddError(AsyncApiValidatorError error);
 
         /// <summary>
         /// Allow Rule to indicate validation error occured at a deeper context level.  

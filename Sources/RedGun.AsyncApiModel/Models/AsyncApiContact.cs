@@ -33,25 +33,26 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiContact"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
-            WriteInternal(writer, OpenApiSpecVersion.OpenApi3_0);
+            WriteInternal(writer, AsyncApiSpecVersion.AsyncApi2_0);
         }
 
         /// <summary>
         /// Serialize <see cref="AsyncApiContact"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        // TODO: Remove
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
-            WriteInternal(writer, OpenApiSpecVersion.OpenApi2_0);
+            WriteInternal(writer, AsyncApiSpecVersion.OpenApi2_0);
         }
 
-        private void WriteInternal(IOpenApiWriter writer, OpenApiSpecVersion specVersion)
+        private void WriteInternal(IAsyncApiWriter writer, AsyncApiSpecVersion specVersion)
         {
             if (writer == null)
             {
@@ -61,13 +62,13 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // name
-            writer.WriteProperty(OpenApiConstants.Name, Name);
+            writer.WriteProperty(AsyncApiConstants.Name, Name);
 
             // url
-            writer.WriteProperty(OpenApiConstants.Url, Url?.OriginalString);
+            writer.WriteProperty(AsyncApiConstants.Url, Url?.OriginalString);
 
             // email
-            writer.WriteProperty(OpenApiConstants.Email, Email);
+            writer.WriteProperty(AsyncApiConstants.Email, Email);
 
             // extensions
             writer.WriteExtensions(Extensions, specVersion);

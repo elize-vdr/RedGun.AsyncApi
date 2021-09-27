@@ -44,7 +44,7 @@ namespace RedGun.AsyncApi.Any
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="specVersion"></param>
-        public void Write(IOpenApiWriter writer, OpenApiSpecVersion specVersion)
+        public void Write(IAsyncApiWriter writer, AsyncApiSpecVersion specVersion)
         {
             switch (this.PrimitiveType)
             {
@@ -123,7 +123,7 @@ namespace RedGun.AsyncApi.Any
                     break;
 
                 default:
-                    throw new OpenApiWriterException(
+                    throw new AsyncApiWriterException(
                         string.Format(
                             SRResource.PrimitiveTypeNotSupported,
                             this.PrimitiveType));

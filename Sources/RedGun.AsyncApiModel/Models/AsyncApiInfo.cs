@@ -25,7 +25,7 @@ namespace RedGun.AsyncApi.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// REQUIRED. The version of the OpenAPI document.
+        /// REQUIRED. The version of the AsyncAPI document.
         /// </summary>
         public string Version { get; set; }
 
@@ -47,12 +47,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiInfo"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -62,25 +62,25 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // title
-            writer.WriteProperty(OpenApiConstants.Title, Title);
+            writer.WriteProperty(AsyncApiConstants.Title, Title);
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // termsOfService
-            writer.WriteProperty(OpenApiConstants.TermsOfService, TermsOfService?.OriginalString);
+            writer.WriteProperty(AsyncApiConstants.TermsOfService, TermsOfService?.OriginalString);
 
             // contact object
-            writer.WriteOptionalObject(OpenApiConstants.Contact, Contact, (w, c) => c.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Contact, Contact, (w, c) => c.SerializeAsV3(w));
 
             // license object
-            writer.WriteOptionalObject(OpenApiConstants.License, License, (w, l) => l.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.License, License, (w, l) => l.SerializeAsV3(w));
 
             // version
-            writer.WriteProperty(OpenApiConstants.Version, Version);
+            writer.WriteProperty(AsyncApiConstants.Version, Version);
 
             // specification extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -88,7 +88,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiInfo"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -98,25 +98,26 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // title
-            writer.WriteProperty(OpenApiConstants.Title, Title);
+            writer.WriteProperty(AsyncApiConstants.Title, Title);
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // termsOfService
-            writer.WriteProperty(OpenApiConstants.TermsOfService, TermsOfService?.OriginalString);
+            writer.WriteProperty(AsyncApiConstants.TermsOfService, TermsOfService?.OriginalString);
 
             // contact object
-            writer.WriteOptionalObject(OpenApiConstants.Contact, Contact, (w, c) => c.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Contact, Contact, (w, c) => c.SerializeAsV2(w));
 
             // license object
-            writer.WriteOptionalObject(OpenApiConstants.License, License, (w, l) => l.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.License, License, (w, l) => l.SerializeAsV2(w));
 
             // version
-            writer.WriteProperty(OpenApiConstants.Version, Version);
+            writer.WriteProperty(AsyncApiConstants.Version, Version);
 
             // specification extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            // TODO: Remove
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }

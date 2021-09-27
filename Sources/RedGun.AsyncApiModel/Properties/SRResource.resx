@@ -144,28 +144,28 @@
   <data name="ObjectScopeNeededForPropertyNameWriting" xml:space="preserve">
     <value>The active scope must be an object scope for property name '{0}' to be written.</value>
   </data>
-  <data name="OpenApiExceptionGenericError" xml:space="preserve">
+  <data name="AsyncApiExceptionGenericError" xml:space="preserve">
     <value>An error occurred while processing the Async API document.</value>
   </data>
-  <data name="OpenApiFormatNotSupported" xml:space="preserve">
-    <value>The given OpenAPI format '{0}' is not supported.</value>
+  <data name="AsyncApiFormatNotSupported" xml:space="preserve">
+    <value>The given AsyncAPI format '{0}' is not supported.</value>
   </data>
-  <data name="OpenApiObjectElementIsRequired" xml:space="preserve">
+  <data name="AsyncApiObjectElementIsRequired" xml:space="preserve">
     <value>The object element name '{0}' is required.</value>
   </data>
-  <data name="OpenApiObjectMarkAsReference" xml:space="preserve">
-    <value>The OpenApi element '{0}' is already marked as reference object.</value>
+  <data name="AsyncApiObjectMarkAsReference" xml:space="preserve">
+    <value>The AsyncApi element '{0}' is already marked as reference object.</value>
   </data>
-  <data name="OpenApiParameterRequiredPropertyMandatory" xml:space="preserve">
+  <data name="AsyncApiParameterRequiredPropertyMandatory" xml:space="preserve">
     <value>If the parameter location is "path", this property is REQUIRED and its value MUST be true</value>
   </data>
-  <data name="OpenApiSpecVersionNotSupported" xml:space="preserve">
-    <value>The given OpenAPI specification version '{0}' is not supported.</value>
+  <data name="AsyncApiSpecVersionNotSupported" xml:space="preserve">
+    <value>The given AsyncAPI specification version '{0}' is not supported.</value>
   </data>
-  <data name="OpenApiUnsupportedValueType" xml:space="preserve">
+  <data name="AsyncApiUnsupportedValueType" xml:space="preserve">
     <value>The type '{0}' is not supported in Async API document.</value>
   </data>
-  <data name="OpenApiWriterExceptionGenericError" xml:space="preserve">
+  <data name="AsyncApiWriterExceptionGenericError" xml:space="preserve">
     <value>An error occurred while writing the Async API document.</value>
   </data>
   <data name="PrimitiveTypeNotSupported" xml:space="preserve">
@@ -216,7 +216,7 @@
   <data name="Validation_StringMustBeEmailAddress" xml:space="preserve">
     <value>The string '{0}' MUST be in the format of an email address.</value>
   </data>
-  <data name="WorkspaceRequredForExternalReferenceResolution" xml:space="preserve">
-    <value>OpenAPI document must be added to an AsyncApiWorkspace to be able to resolve external references.</value>
+  <data name="WorkspaceRequiredForExternalReferenceResolution" xml:space="preserve">
+    <value>AsyncAPI document must be added to an AsyncApiWorkspace to be able to resolve external references.</value>
   </data>
 </root>

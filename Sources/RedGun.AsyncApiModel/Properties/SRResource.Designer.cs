@@ -144,72 +144,72 @@ namespace RedGun.AsyncApi.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while processing the Async API document..
         /// </summary>
-        internal static string OpenApiExceptionGenericError {
+        internal static string AsyncApiExceptionGenericError {
             get {
-                return ResourceManager.GetString("OpenApiExceptionGenericError", resourceCulture);
+                return ResourceManager.GetString("AsyncApiExceptionGenericError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The given OpenAPI format &apos;{0}&apos; is not supported..
+        ///   Looks up a localized string similar to The given AsyncAPI format &apos;{0}&apos; is not supported..
         /// </summary>
-        internal static string OpenApiFormatNotSupported {
+        internal static string AsyncApiFormatNotSupported {
             get {
-                return ResourceManager.GetString("OpenApiFormatNotSupported", resourceCulture);
+                return ResourceManager.GetString("AsyncApiFormatNotSupported", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The object element name &apos;{0}&apos; is required..
         /// </summary>
-        internal static string OpenApiObjectElementIsRequired {
+        internal static string AsyncApiObjectElementIsRequired {
             get {
-                return ResourceManager.GetString("OpenApiObjectElementIsRequired", resourceCulture);
+                return ResourceManager.GetString("AsyncApiObjectElementIsRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The OpenApi element &apos;{0}&apos; is already marked as reference object..
+        ///   Looks up a localized string similar to The AsyncApi element &apos;{0}&apos; is already marked as reference object..
         /// </summary>
-        internal static string OpenApiObjectMarkAsReference {
+        internal static string AsyncApiObjectMarkAsReference {
             get {
-                return ResourceManager.GetString("OpenApiObjectMarkAsReference", resourceCulture);
+                return ResourceManager.GetString("AsyncApiObjectMarkAsReference", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to If the parameter location is &quot;path&quot;, this property is REQUIRED and its value MUST be true.
         /// </summary>
-        internal static string OpenApiParameterRequiredPropertyMandatory {
+        internal static string AsyncApiParameterRequiredPropertyMandatory {
             get {
-                return ResourceManager.GetString("OpenApiParameterRequiredPropertyMandatory", resourceCulture);
+                return ResourceManager.GetString("AsyncApiParameterRequiredPropertyMandatory", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The given OpenAPI specification version &apos;{0}&apos; is not supported..
+        ///   Looks up a localized string similar to The given AsyncAPI specification version &apos;{0}&apos; is not supported..
         /// </summary>
-        internal static string OpenApiSpecVersionNotSupported {
+        internal static string AsyncApiSpecVersionNotSupported {
             get {
-                return ResourceManager.GetString("OpenApiSpecVersionNotSupported", resourceCulture);
+                return ResourceManager.GetString("AsyncApiSpecVersionNotSupported", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The type &apos;{0}&apos; is not supported in Async API document..
         /// </summary>
-        internal static string OpenApiUnsupportedValueType {
+        internal static string AsyncApiUnsupportedValueType {
             get {
-                return ResourceManager.GetString("OpenApiUnsupportedValueType", resourceCulture);
+                return ResourceManager.GetString("AsyncApiUnsupportedValueType", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while writing the Async API document..
         /// </summary>
-        internal static string OpenApiWriterExceptionGenericError {
+        internal static string AsyncApiWriterExceptionGenericError {
             get {
-                return ResourceManager.GetString("OpenApiWriterExceptionGenericError", resourceCulture);
+                return ResourceManager.GetString("AsyncApiWriterExceptionGenericError", resourceCulture);
             }
         }
         
@@ -359,11 +359,11 @@ namespace RedGun.AsyncApi.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OpenAPI document must be added to an AsyncApiWorkspace to be able to resolve external references..
+        ///   Looks up a localized string similar to AsyncAPI document must be added to an AsyncApiWorkspace to be able to resolve external references..
         /// </summary>
-        internal static string WorkspaceRequredForExternalReferenceResolution {
+        internal static string WorkspaceRequiredForExternalReferenceResolution {
             get {
-                return ResourceManager.GetString("WorkspaceRequredForExternalReferenceResolution", resourceCulture);
+                return ResourceManager.GetString("WorkspaceRequiredForExternalReferenceResolution", resourceCulture);
             }
         }
     }

@@ -246,14 +246,14 @@ namespace RedGun.AsyncApi.Readers.V3
         private static readonly AnyFieldMap<AsyncApiSchema> _schemaAnyFields = new AnyFieldMap<AsyncApiSchema>
         {
             {
-                OpenApiConstants.Default,
+                AsyncApiConstants.Default,
                 new AnyFieldMapParameter<AsyncApiSchema>(
                     s => s.Default,
                     (s, v) => s.Default = v,
                     s => s)
             },
             {
-                 OpenApiConstants.Example,
+                 AsyncApiConstants.Example,
                 new AnyFieldMapParameter<AsyncApiSchema>(
                     s => s.Example,
                     (s, v) => s.Example = v,
@@ -264,7 +264,7 @@ namespace RedGun.AsyncApi.Readers.V3
         private static readonly AnyListFieldMap<AsyncApiSchema> _schemaAnyListFields = new AnyListFieldMap<AsyncApiSchema>
         {
             {
-                OpenApiConstants.Enum,
+                AsyncApiConstants.Enum,
                 new AnyListFieldMapParameter<AsyncApiSchema>(
                     s => s.Enum,
                     (s, v) => s.Enum = v,
@@ -274,7 +274,7 @@ namespace RedGun.AsyncApi.Readers.V3
 
         public static AsyncApiSchema LoadSchema(ParseNode node)
         {
-            var mapNode = node.CheckMapNode(OpenApiConstants.Schema);
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Schema);
 
             var pointer = mapNode.GetReferencePointer();
 
@@ -283,7 +283,7 @@ namespace RedGun.AsyncApi.Readers.V3
                 return new AsyncApiSchema()
                 {
                     UnresolvedReference = true,
-                    Reference = node.Context.VersionService.ConvertToOpenApiReference(pointer, ReferenceType.Schema)
+                    Reference = node.Context.VersionService.ConvertToAsyncApiReference(pointer, ReferenceType.Schema)
                 };
             }
 

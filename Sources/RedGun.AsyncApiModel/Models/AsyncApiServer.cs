@@ -20,7 +20,7 @@ namespace RedGun.AsyncApi.Models
 
         /// <summary>
         /// REQUIRED. A URL to the target host. This URL supports Server Variables and MAY be relative,
-        /// to indicate that the host location is relative to the location where the OpenAPI document is being served.
+        /// to indicate that the host location is relative to the location where the AsyncAPI document is being served.
         /// Variable substitutions will be made when a variable is named in {brackets}.
         /// </summary>
         public string Url { get; set; }
@@ -34,12 +34,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiServer"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -49,16 +49,16 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // url
-            writer.WriteProperty(OpenApiConstants.Url, Url);
+            writer.WriteProperty(AsyncApiConstants.Url, Url);
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // variables
-            writer.WriteOptionalMap(OpenApiConstants.Variables, Variables, (w, v) => v.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Variables, Variables, (w, v) => v.SerializeAsV3(w));
 
             // specification extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -66,7 +66,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiServer"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Server object does not exist in V2.
         }

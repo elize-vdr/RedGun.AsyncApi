@@ -20,20 +20,20 @@ namespace RedGun.AsyncApi.Readers.Interface
         /// <param name="reference">The reference string.</param>
         /// <param name="type">The type of the reference.</param>
         /// <returns>The <see cref="AsyncApiReference"/> object or null.</returns>
-        AsyncApiReference ConvertToOpenApiReference(string reference, ReferenceType? type);
+        AsyncApiReference ConvertToAsyncApiReference(string reference, ReferenceType? type);
 
         /// <summary>
-        /// Loads an OpenAPI Element from a document fragment
+        /// Loads an AsyncAPI Element from a document fragment
         /// </summary>
         /// <typeparam name="T">Type of element to load</typeparam>
         /// <param name="node">document fragment node</param>
-        /// <returns>Instance of OpenAPIElement</returns>
+        /// <returns>Instance of AsyncAPIElement</returns>
         T LoadElement<T>(ParseNode node) where T : IAsyncApiElement;
 
         /// <summary>
         /// Converts a generic RootNode instance into a strongly typed AsyncApiDocument
         /// </summary>
-        /// <param name="rootNode">RootNode containing the information to be converted into an OpenAPI Document</param>
+        /// <param name="rootNode">RootNode containing the information to be converted into an AsyncAPI Document</param>
         /// <returns>Instance of AsyncApiDocument populated with data from rootNode</returns>
         AsyncApiDocument LoadDocument(RootNode rootNode);
     }

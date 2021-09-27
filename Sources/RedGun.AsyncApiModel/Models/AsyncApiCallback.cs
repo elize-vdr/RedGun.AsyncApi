@@ -33,7 +33,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Add a <see cref="AsyncApiPathItem"/> into the <see cref="PathItems"/>.
@@ -63,7 +63,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiCallback"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -80,10 +80,10 @@ namespace RedGun.AsyncApi.Models
         }
 
         /// <summary>
-        /// Serialize to OpenAPI V3 document without using reference.
+        /// Serialize to AsyncAPI V3 document without using reference.
         /// </summary>
 
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
@@ -94,7 +94,7 @@ namespace RedGun.AsyncApi.Models
             }
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -102,7 +102,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiCallback"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Callback object does not exist in V2.
         }
@@ -111,7 +111,7 @@ namespace RedGun.AsyncApi.Models
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
 
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             // Callback object does not exist in V2.
         }

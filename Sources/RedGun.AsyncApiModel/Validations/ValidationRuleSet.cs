@@ -131,7 +131,7 @@ namespace RedGun.AsyncApi.Validations
 
             if (_rules[rule.ElementType].Contains(rule))
             {
-                throw new OpenApiException(SRResource.Validation_RuleAddTwice);
+                throw new AsyncApiException(SRResource.Validation_RuleAddTwice);
             }
 
             _rules[rule.ElementType].Add(rule);
@@ -169,7 +169,7 @@ namespace RedGun.AsyncApi.Validations
             IEnumerable<PropertyInfo> rules = typeof(ValidationRuleSet).Assembly.GetTypes()
                 .Where(t => t.IsClass
                             && t != typeof(object)
-                            && t.GetCustomAttributes(typeof(OpenApiRuleAttribute), false).Any())
+                            && t.GetCustomAttributes(typeof(AsyncApiRuleAttribute), false).Any())
                 .SelectMany(t2 => t2.GetProperties(BindingFlags.Static | BindingFlags.Public)
                                 .Where(p => validationRuleType.IsAssignableFrom(p.PropertyType)));
 

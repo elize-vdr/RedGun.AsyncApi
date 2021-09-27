@@ -38,7 +38,7 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Reads the string input and parses it into an Async API element.
         /// </summary>
-        public T ReadFragment<T>(string input, OpenApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiElement
+        public T ReadFragment<T>(string input, AsyncApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiElement
         {
             using (var reader = new StringReader(input))
             {

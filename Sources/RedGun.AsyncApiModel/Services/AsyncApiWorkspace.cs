@@ -14,7 +14,7 @@ using RedGun.AsyncApi.Models;
 namespace RedGun.AsyncApi.Services
 {
     /// <summary>
-    /// Contains a set of OpenApi documents and document fragments that reference each other
+    /// Contains a set of AsyncApi documents and document fragments that reference each other
     /// </summary>
     public class AsyncApiWorkspace
     {
@@ -23,7 +23,7 @@ namespace RedGun.AsyncApi.Services
         private Dictionary<Uri, Stream> _artifacts = new Dictionary<Uri, Stream>();
 
         /// <summary>
-        /// A list of OpenApiDocuments contained in the workspace
+        /// A list of AsyncApiDocuments contained in the workspace
         /// </summary>
         public IEnumerable<AsyncApiDocument> Documents {
             get {

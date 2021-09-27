@@ -21,25 +21,25 @@ namespace RedGun.AsyncApi.Readers.V3
             new FixedFieldMap<AsyncApiMediaType>
             {
                 {
-                    OpenApiConstants.Schema, (o, n) =>
+                    AsyncApiConstants.Schema, (o, n) =>
                     {
                         o.Schema = LoadSchema(n);
                     }
                 },
                 {
-                    OpenApiConstants.Examples, (o, n) =>
+                    AsyncApiConstants.Examples, (o, n) =>
                     {
                         o.Examples = n.CreateMap(LoadExample);
                     }
                 },
                 {
-                    OpenApiConstants.Example, (o, n) =>
+                    AsyncApiConstants.Example, (o, n) =>
                     {
                         o.Example = n.CreateAny();
                     }
                 },
                 {
-                    OpenApiConstants.Encoding, (o, n) =>
+                    AsyncApiConstants.Encoding, (o, n) =>
                     {
                         o.Encoding = n.CreateMap(LoadEncoding);
                     }
@@ -55,7 +55,7 @@ namespace RedGun.AsyncApi.Readers.V3
         private static readonly AnyFieldMap<AsyncApiMediaType> _mediaTypeAnyFields = new AnyFieldMap<AsyncApiMediaType>
         {
             {
-                OpenApiConstants.Example,
+                AsyncApiConstants.Example,
                 new AnyFieldMapParameter<AsyncApiMediaType>(
                     s => s.Example,
                     (s, v) => s.Example = v,
@@ -64,11 +64,11 @@ namespace RedGun.AsyncApi.Readers.V3
         };
 
 
-        private static readonly AnyMapFieldMap<AsyncApiMediaType, AsyncApiExample> _mediaTypeAnyMapOpenApiExampleFields =
+        private static readonly AnyMapFieldMap<AsyncApiMediaType, AsyncApiExample> _mediaTypeAnyMapAsyncApiExampleFields =
             new AnyMapFieldMap<AsyncApiMediaType, AsyncApiExample>
         {
             {
-                OpenApiConstants.Examples,
+                AsyncApiConstants.Examples,
                 new AnyMapFieldMapParameter<AsyncApiMediaType, AsyncApiExample>(
                     m => m.Examples,
                     e => e.Value,
@@ -79,7 +79,7 @@ namespace RedGun.AsyncApi.Readers.V3
 
         public static AsyncApiMediaType LoadMediaType(ParseNode node)
         {
-            var mapNode = node.CheckMapNode(OpenApiConstants.Content);
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Content);
 
             if (!mapNode.Any())
             {
@@ -91,7 +91,7 @@ namespace RedGun.AsyncApi.Readers.V3
             ParseMap(mapNode, mediaType, _mediaTypeFixedFields, _mediaTypePatternFields);
 
             ProcessAnyFields(mapNode, mediaType, _mediaTypeAnyFields);
-            ProcessAnyMapFields(mapNode, mediaType, _mediaTypeAnyMapOpenApiExampleFields);
+            ProcessAnyMapFields(mapNode, mediaType, _mediaTypeAnyMapAsyncApiExampleFields);
 
             return mediaType;
         }

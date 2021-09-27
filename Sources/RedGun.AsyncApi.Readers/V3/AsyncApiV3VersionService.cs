@@ -53,7 +53,7 @@ namespace RedGun.AsyncApi.Readers.V3
         /// <summary>
         /// Parse the string to a <see cref="AsyncApiReference"/> object.
         /// </summary>
-        public AsyncApiReference ConvertToOpenApiReference(
+        public AsyncApiReference ConvertToAsyncApiReference(
             string reference,
             ReferenceType? type)
         {
@@ -90,7 +90,7 @@ namespace RedGun.AsyncApi.Readers.V3
                         // "$ref": "#/components/schemas/Pet"
                         return ParseLocalReference(segments[1]);
                     }
-                    // Where fragments point into a non-OpenAPI document, the id will be the complete fragment identifier
+                    // Where fragments point into a non-AsyncAPI document, the id will be the complete fragment identifier
                     string id = segments[1];
                     // $ref: externalSource.yaml#/Pet
                     if (id.StartsWith("/components/"))
@@ -106,12 +106,12 @@ namespace RedGun.AsyncApi.Readers.V3
                 }
             }
 
-            throw new OpenApiException(string.Format(SRResource.ReferenceHasInvalidFormat, reference));
+            throw new AsyncApiException(string.Format(SRResource.ReferenceHasInvalidFormat, reference));
         }
 
         public AsyncApiDocument LoadDocument(RootNode rootNode)
         {
-            return AsyncApiV3Deserializer.LoadOpenApi(rootNode);
+            return AsyncApiV3Deserializer.LoadAsyncApi(rootNode);
         }
 
         public T LoadElement<T>(ParseNode node) where T : IAsyncApiElement
@@ -137,7 +137,7 @@ namespace RedGun.AsyncApi.Readers.V3
                 }
             }
 
-            throw new OpenApiException(string.Format(SRResource.ReferenceHasInvalidFormat, localReference));
+            throw new AsyncApiException(string.Format(SRResource.ReferenceHasInvalidFormat, localReference));
         }
     }
 }

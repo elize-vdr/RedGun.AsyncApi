@@ -31,7 +31,7 @@ namespace RedGun.AsyncApi.Readers.Services
 
             // Collect remote references by walking document
             var referenceCollector = new AsyncApiRemoteReferenceCollector(document);
-            var collectorWalker = new OpenApiWalker(referenceCollector);
+            var collectorWalker = new AsyncApiWalker(referenceCollector);
             collectorWalker.Walk(document);
 
             var reader = new AsyncApiStreamReader(_readerSettings);

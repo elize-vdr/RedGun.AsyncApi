@@ -51,12 +51,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiExternalDocs"/> to Async API v3.0.
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -66,22 +66,22 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // contentType
-            writer.WriteProperty(OpenApiConstants.ContentType, ContentType);
+            writer.WriteProperty(AsyncApiConstants.ContentType, ContentType);
 
             // headers
-            writer.WriteOptionalMap(OpenApiConstants.Headers, Headers, (w, h) => h.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Headers, Headers, (w, h) => h.SerializeAsV3(w));
 
             // style
-            writer.WriteProperty(OpenApiConstants.Style, Style?.GetDisplayName());
+            writer.WriteProperty(AsyncApiConstants.Style, Style?.GetDisplayName());
 
             // explode
-            writer.WriteProperty(OpenApiConstants.Explode, Explode, false);
+            writer.WriteProperty(AsyncApiConstants.Explode, Explode, false);
 
             // allowReserved
-            writer.WriteProperty(OpenApiConstants.AllowReserved, AllowReserved, false);
+            writer.WriteProperty(AsyncApiConstants.AllowReserved, AllowReserved, false);
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -89,7 +89,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiExternalDocs"/> to Async API v2.0.
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // nothing here
         }

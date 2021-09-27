@@ -35,7 +35,7 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Reads the stream input and parses it into an Async API document.
         /// </summary>
-        /// <param name="input">TextReader containing OpenAPI description to parse.</param>
+        /// <param name="input">TextReader containing AsyncAPI description to parse.</param>
         /// <param name="diagnostic">Returns diagnostic object containing errors detected during parsing</param>
         /// <returns>Instance of newly created AsyncApiDocument</returns>
         public AsyncApiDocument Read(YamlDocument input, out AsyncApiDiagnostic diagnostic)
@@ -50,14 +50,14 @@ namespace RedGun.AsyncApi.Readers
             AsyncApiDocument document = null;
             try
             {
-                // Parse the OpenAPI Document
+                // Parse the AsyncAPI Document
                 document = context.Parse(input);
 
                 ResolveReferences(diagnostic, document);
             }
-            catch (OpenApiException ex)
+            catch (AsyncApiException ex)
             {
-                diagnostic.Errors.Add(new OpenApiError(ex));
+                diagnostic.Errors.Add(new AsyncApiError(ex));
             }
 
             // Validate the document
@@ -85,14 +85,14 @@ namespace RedGun.AsyncApi.Readers
             AsyncApiDocument document = null;
             try
             {
-                // Parse the OpenAPI Document
+                // Parse the AsyncAPI Document
                 document = context.Parse(input);
 
                 await ResolveReferencesAsync(diagnostic, document);
             }
-            catch (OpenApiException ex)
+            catch (AsyncApiException ex)
             {
-                diagnostic.Errors.Add(new OpenApiError(ex));
+                diagnostic.Errors.Add(new AsyncApiError(ex));
             }
 
             // Validate the document
@@ -135,7 +135,7 @@ namespace RedGun.AsyncApi.Readers
 
         private async Task ResolveReferencesAsync(AsyncApiDiagnostic diagnostic, AsyncApiDocument document)
         {
-            List<OpenApiError> errors = new List<OpenApiError>();
+            List<AsyncApiError> errors = new List<AsyncApiError>();
 
             // Resolve References if requested
             switch (_settings.ReferenceResolution)
@@ -143,15 +143,15 @@ namespace RedGun.AsyncApi.Readers
                 case ReferenceResolutionSetting.ResolveAllReferences:
 
                     // Create workspace for all documents to live in.
-                    var openApiWorkSpace = new AsyncApiWorkspace();
+                    var asyncApiWorkSpace = new AsyncApiWorkspace();
 
                     // Load this root document into the workspace
                     var streamLoader = new DefaultStreamLoader();
-                    var workspaceLoader = new AsyncApiWorkspaceLoader(openApiWorkSpace, _settings.CustomExternalLoader ?? streamLoader, _settings);
+                    var workspaceLoader = new AsyncApiWorkspaceLoader(asyncApiWorkSpace, _settings.CustomExternalLoader ?? streamLoader, _settings);
                     await workspaceLoader.LoadAsync(new AsyncApiReference() { ExternalResource = "/" }, document);
 
                     // Resolve all references in all the documents loaded into the AsyncApiWorkspace
-                    foreach (var doc in openApiWorkSpace.Documents)
+                    foreach (var doc in asyncApiWorkSpace.Documents)
                     {
                         errors.AddRange(doc.ResolveReferences(true));
                     }
@@ -171,13 +171,13 @@ namespace RedGun.AsyncApi.Readers
 
 
         /// <summary>
-        /// Reads the stream input and parses the fragment of an OpenAPI description into an Async API Element.
+        /// Reads the stream input and parses the fragment of an AsyncAPI description into an Async API Element.
         /// </summary>
-        /// <param name="input">TextReader containing OpenAPI description to parse.</param>
-        /// <param name="version">Version of the OpenAPI specification that the fragment conforms to.</param>
+        /// <param name="input">TextReader containing AsyncAPI description to parse.</param>
+        /// <param name="version">Version of the AsyncAPI specification that the fragment conforms to.</param>
         /// <param name="diagnostic">Returns diagnostic object containing errors detected during parsing</param>
         /// <returns>Instance of newly created AsyncApiDocument</returns>
-        public T ReadFragment<T>(YamlDocument input, OpenApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiElement
+        public T ReadFragment<T>(YamlDocument input, AsyncApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiElement
         {
             diagnostic = new AsyncApiDiagnostic();
             var context = new ParsingContext(diagnostic)
@@ -188,12 +188,12 @@ namespace RedGun.AsyncApi.Readers
             IAsyncApiElement element = null;
             try
             {
-                // Parse the OpenAPI element
+                // Parse the AsyncAPI element
                 element = context.ParseFragment<T>(input, version);
             }
-            catch (OpenApiException ex)
+            catch (AsyncApiException ex)
             {
-                diagnostic.Errors.Add(new OpenApiError(ex));
+                diagnostic.Errors.Add(new AsyncApiError(ex));
             }
 
             // Validate the element

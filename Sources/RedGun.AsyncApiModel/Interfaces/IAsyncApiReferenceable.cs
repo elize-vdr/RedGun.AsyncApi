@@ -23,13 +23,13 @@ namespace RedGun.AsyncApi.Interfaces
         AsyncApiReference Reference { get; set; }
 
         /// <summary>
-        /// Serialize to OpenAPI V3 document without using reference.
+        /// Serialize to AsyncAPI V3 document without using reference.
         /// </summary>
-        void SerializeAsV3WithoutReference(IOpenApiWriter writer);
+        void SerializeAsV3WithoutReference(IAsyncApiWriter writer);
 
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        void SerializeAsV2WithoutReference(IOpenApiWriter writer);
+        void SerializeAsV2WithoutReference(IAsyncApiWriter writer);
     }
 }

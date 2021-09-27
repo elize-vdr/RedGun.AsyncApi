@@ -44,25 +44,26 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiXml"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
-            Write(writer, OpenApiSpecVersion.OpenApi3_0);
+            Write(writer, AsyncApiSpecVersion.AsyncApi2_0);
         }
 
         /// <summary>
         /// Serialize <see cref="AsyncApiXml"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        // TODO: Remove
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
-            Write(writer, OpenApiSpecVersion.OpenApi2_0);
+            Write(writer, AsyncApiSpecVersion.OpenApi2_0);
         }
 
-        private void Write(IOpenApiWriter writer, OpenApiSpecVersion specVersion)
+        private void Write(IAsyncApiWriter writer, AsyncApiSpecVersion specVersion)
         {
             if (writer == null)
             {
@@ -72,19 +73,19 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // name
-            writer.WriteProperty(OpenApiConstants.Name, Name);
+            writer.WriteProperty(AsyncApiConstants.Name, Name);
 
             // namespace
-            writer.WriteProperty(OpenApiConstants.Namespace, Namespace?.AbsoluteUri);
+            writer.WriteProperty(AsyncApiConstants.Namespace, Namespace?.AbsoluteUri);
 
             // prefix
-            writer.WriteProperty(OpenApiConstants.Prefix, Prefix);
+            writer.WriteProperty(AsyncApiConstants.Prefix, Prefix);
 
             // attribute
-            writer.WriteProperty(OpenApiConstants.Attribute, Attribute, false);
+            writer.WriteProperty(AsyncApiConstants.Attribute, Attribute, false);
 
             // wrapped
-            writer.WriteProperty(OpenApiConstants.Wrapped, Wrapped, false);
+            writer.WriteProperty(AsyncApiConstants.Wrapped, Wrapped, false);
 
             // extensions
             writer.WriteExtensions(Extensions, specVersion);

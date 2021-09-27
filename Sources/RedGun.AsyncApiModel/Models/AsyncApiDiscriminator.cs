@@ -25,7 +25,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiDiscriminator"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -35,10 +35,10 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // propertyName
-            writer.WriteProperty(OpenApiConstants.PropertyName, PropertyName);
+            writer.WriteProperty(AsyncApiConstants.PropertyName, PropertyName);
 
             // mapping
-            writer.WriteOptionalMap(OpenApiConstants.Mapping, Mapping, (w, s) => w.WriteValue(s));
+            writer.WriteOptionalMap(AsyncApiConstants.Mapping, Mapping, (w, s) => w.WriteValue(s));
 
             writer.WriteEndObject();
         }
@@ -46,7 +46,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiDiscriminator"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Discriminator object does not exist in V2.
         }

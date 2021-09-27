@@ -16,19 +16,19 @@ namespace RedGun.AsyncApi.Readers.V3
         private static readonly FixedFieldMap<AsyncApiTag> _tagFixedFields = new FixedFieldMap<AsyncApiTag>
         {
             {
-                OpenApiConstants.Name, (o, n) =>
+                AsyncApiConstants.Name, (o, n) =>
                 {
                     o.Name = n.GetScalarValue();
                 }
             },
             {
-                OpenApiConstants.Description, (o, n) =>
+                AsyncApiConstants.Description, (o, n) =>
                 {
                     o.Description = n.GetScalarValue();
                 }
             },
             {
-                OpenApiConstants.ExternalDocs, (o, n) =>
+                AsyncApiConstants.ExternalDocs, (o, n) =>
                 {
                     o.ExternalDocs = LoadExternalDocs(n);
                 }

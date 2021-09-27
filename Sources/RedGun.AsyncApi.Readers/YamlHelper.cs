@@ -15,7 +15,7 @@ namespace RedGun.AsyncApi.Readers
             var scalarNode = node as YamlScalarNode;
             if (scalarNode == null)
             {
-                throw new OpenApiException($"Expected scalar at line {node.Start.Line}");
+                throw new AsyncApiException($"Expected scalar at line {node.Start.Line}");
             }
 
             return scalarNode.Value;

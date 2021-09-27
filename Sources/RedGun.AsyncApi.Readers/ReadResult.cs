@@ -11,7 +11,7 @@ using RedGun.AsyncApi.Models;
 namespace RedGun.AsyncApi.Readers
 {
     /// <summary>
-    /// Container object used for returning the result of reading an OpenAPI description.
+    /// Container object used for returning the result of reading an AsyncAPI description.
     /// </summary>
     public class ReadResult
     {

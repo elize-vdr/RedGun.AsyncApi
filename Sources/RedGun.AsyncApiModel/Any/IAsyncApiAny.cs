@@ -8,7 +8,7 @@ namespace RedGun.AsyncApi.Any
     /// <summary>
     /// Base interface for all the types that represent Async API Any.
     /// </summary>
-    public interface IAsyncApiAny : IAsyncApiElement, IOpenApiExtension
+    public interface IAsyncApiAny : IAsyncApiElement, IAsyncApiExtension
     {
         /// <summary>
         /// Type of an <see cref="IAsyncApiAny"/>.

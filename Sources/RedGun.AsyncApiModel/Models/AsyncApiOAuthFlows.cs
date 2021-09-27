@@ -36,12 +36,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiOAuthFlows"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -51,25 +51,25 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // implicit
-            writer.WriteOptionalObject(OpenApiConstants.Implicit, Implicit, (w, o) => o.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Implicit, Implicit, (w, o) => o.SerializeAsV3(w));
 
             // password
-            writer.WriteOptionalObject(OpenApiConstants.Password, Password, (w, o) => o.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Password, Password, (w, o) => o.SerializeAsV3(w));
 
             // clientCredentials
             writer.WriteOptionalObject(
-                OpenApiConstants.ClientCredentials,
+                AsyncApiConstants.ClientCredentials,
                 ClientCredentials,
                 (w, o) => o.SerializeAsV3(w));
 
             // authorizationCode
             writer.WriteOptionalObject(
-                OpenApiConstants.AuthorizationCode,
+                AsyncApiConstants.AuthorizationCode,
                 AuthorizationCode,
                 (w, o) => o.SerializeAsV3(w));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -77,7 +77,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiOAuthFlows"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // OAuthFlows object does not exist in V2.
         }

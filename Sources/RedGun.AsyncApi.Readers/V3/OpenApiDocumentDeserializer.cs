@@ -16,10 +16,10 @@ namespace RedGun.AsyncApi.Readers.V3
     /// </summary>
     internal static partial class AsyncApiV3Deserializer
     {
-        private static FixedFieldMap<AsyncApiDocument> _openApiFixedFields = new FixedFieldMap<AsyncApiDocument>
+        private static FixedFieldMap<AsyncApiDocument> _asyncApiFixedFields = new FixedFieldMap<AsyncApiDocument>
         {
             {
-                "openapi", (o, n) =>
+                "asyncapi", (o, n) =>
                 {
                 } /* Version is valid field but we already parsed it */
             },
@@ -41,21 +41,21 @@ namespace RedGun.AsyncApi.Readers.V3
             {"security", (o, n) => o.SecurityRequirements = n.CreateList(LoadSecurityRequirement)}
         };
 
-        private static PatternFieldMap<AsyncApiDocument> _openApiPatternFields = new PatternFieldMap<AsyncApiDocument>
+        private static PatternFieldMap<AsyncApiDocument> _asyncApiPatternFields = new PatternFieldMap<AsyncApiDocument>
         {
             // We have no semantics to verify X- nodes, therefore treat them as just values.
             {s => s.StartsWith("x-"), (o, p, n) => o.AddExtension(p, LoadExtension(p, n))}
         };
 
-        public static AsyncApiDocument LoadOpenApi(RootNode rootNode)
+        public static AsyncApiDocument LoadAsyncApi(RootNode rootNode)
         {
-            var openApidoc = new AsyncApiDocument();
+            var asyncApiDoc = new AsyncApiDocument();
 
-            var openApiNode = rootNode.GetMap();
+            var asyncApiNode = rootNode.GetMap();
 
-            ParseMap(openApiNode, openApidoc, _openApiFixedFields, _openApiPatternFields);
+            ParseMap(asyncApiNode, asyncApiDoc, _asyncApiFixedFields, _asyncApiPatternFields);
 
-            return openApidoc;
+            return asyncApiDoc;
         }
     }
 }

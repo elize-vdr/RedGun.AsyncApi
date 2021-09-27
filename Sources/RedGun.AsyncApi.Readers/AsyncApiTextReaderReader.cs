@@ -31,7 +31,7 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Reads the stream input and parses it into an Async API document.
         /// </summary>
-        /// <param name="input">TextReader containing OpenAPI description to parse.</param>
+        /// <param name="input">TextReader containing AsyncAPI description to parse.</param>
         /// <param name="diagnostic">Returns diagnostic object containing errors detected during parsing</param>
         /// <returns>Instance of newly created AsyncApiDocument</returns>
         public AsyncApiDocument Read(TextReader input, out AsyncApiDiagnostic diagnostic)
@@ -46,7 +46,7 @@ namespace RedGun.AsyncApi.Readers
             catch (YamlException ex)
             {
                 diagnostic = new AsyncApiDiagnostic();
-                diagnostic.Errors.Add(new OpenApiError($"#line={ex.Start.Line}", ex.Message));
+                diagnostic.Errors.Add(new AsyncApiError($"#line={ex.Start.Line}", ex.Message));
                 return new AsyncApiDocument();
             }
 
@@ -56,7 +56,7 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Reads the content of the TextReader.  If there are references to external documents then they will be read asynchronously.
         /// </summary>
-        /// <param name="input">TextReader containing OpenAPI description to parse.</param>
+        /// <param name="input">TextReader containing AsyncAPI description to parse.</param>
         /// <returns>A ReadResult instance that contains the resulting AsyncApiDocument and a diagnostics instance.</returns>
         public async Task<ReadResult> ReadAsync(TextReader input)
         {
@@ -70,7 +70,7 @@ namespace RedGun.AsyncApi.Readers
             catch (YamlException ex)
             {
                 var diagnostic = new AsyncApiDiagnostic();
-                diagnostic.Errors.Add(new OpenApiError($"#line={ex.Start.Line}", ex.Message));
+                diagnostic.Errors.Add(new AsyncApiError($"#line={ex.Start.Line}", ex.Message));
                 return new ReadResult
                 {
                     AsyncApiDocument = null,
@@ -83,13 +83,13 @@ namespace RedGun.AsyncApi.Readers
 
 
         /// <summary>
-        /// Reads the stream input and parses the fragment of an OpenAPI description into an Async API Element.
+        /// Reads the stream input and parses the fragment of an AsyncAPI description into an Async API Element.
         /// </summary>
-        /// <param name="input">TextReader containing OpenAPI description to parse.</param>
-        /// <param name="version">Version of the OpenAPI specification that the fragment conforms to.</param>
+        /// <param name="input">TextReader containing AsyncAPI description to parse.</param>
+        /// <param name="version">Version of the AsyncAPI specification that the fragment conforms to.</param>
         /// <param name="diagnostic">Returns diagnostic object containing errors detected during parsing</param>
         /// <returns>Instance of newly created AsyncApiDocument</returns>
-        public T ReadFragment<T>(TextReader input, OpenApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiElement
+        public T ReadFragment<T>(TextReader input, AsyncApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiElement
         {
             YamlDocument yamlDocument;
 
@@ -101,7 +101,7 @@ namespace RedGun.AsyncApi.Readers
             catch (YamlException ex)
             {
                 diagnostic = new AsyncApiDiagnostic();
-                diagnostic.Errors.Add(new OpenApiError($"#line={ex.Start.Line}", ex.Message));
+                diagnostic.Errors.Add(new AsyncApiError($"#line={ex.Start.Line}", ex.Message));
                 return default(T);
             }
 

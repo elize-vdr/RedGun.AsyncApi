@@ -51,7 +51,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Write <see cref="RuntimeExpressionAnyWrapper"/>
         /// </summary>
-        public void WriteValue(IOpenApiWriter writer)
+        public void WriteValue(IAsyncApiWriter writer)
         {
             if (writer == null)
             {

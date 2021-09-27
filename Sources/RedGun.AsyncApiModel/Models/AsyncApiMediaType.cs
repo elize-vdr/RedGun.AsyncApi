@@ -41,12 +41,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiExternalDocs"/> to Async API v3.0.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiMediaType"/> to Async API v3.0.
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -56,19 +56,19 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // schema
-            writer.WriteOptionalObject(OpenApiConstants.Schema, Schema, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Schema, Schema, (w, s) => s.SerializeAsV3(w));
 
             // example
-            writer.WriteOptionalObject(OpenApiConstants.Example, Example, (w, e) => w.WriteAny(e));
+            writer.WriteOptionalObject(AsyncApiConstants.Example, Example, (w, e) => w.WriteAny(e));
 
             // examples
-            writer.WriteOptionalMap(OpenApiConstants.Examples, Examples, (w, e) => e.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Examples, Examples, (w, e) => e.SerializeAsV3(w));
 
             // encoding
-            writer.WriteOptionalMap(OpenApiConstants.Encoding, Encoding, (w, e) => e.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Encoding, Encoding, (w, e) => e.SerializeAsV3(w));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -76,7 +76,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiMediaType"/> to Async API v2.0.
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             // Media type does not exist in V2.
         }

@@ -17,7 +17,7 @@ namespace RedGun.AsyncApi.Services
         private readonly Stack<string> _path = new Stack<string>();
 
         /// <summary>
-        /// Properties available to identify context of where an object is within OpenAPI Document
+        /// Properties available to identify context of where an object is within AsyncAPI Document
         /// </summary>
         public CurrentKeys CurrentKeys { get; } = new CurrentKeys();
 
@@ -293,14 +293,14 @@ namespace RedGun.AsyncApi.Services
         /// <summary>
         /// Visits list of <see cref="AsyncApiTag"/>
         /// </summary>
-        public virtual void Visit(IList<AsyncApiTag> openApiTags)
+        public virtual void Visit(IList<AsyncApiTag> asyncApiTags)
         {
         }
 
         /// <summary>
         /// Visits list of <see cref="AsyncApiSecurityRequirement"/>
         /// </summary>
-        public virtual void Visit(IList<AsyncApiSecurityRequirement> openApiSecurityRequirements)
+        public virtual void Visit(IList<AsyncApiSecurityRequirement> asyncApiSecurityRequirements)
         {
         }
 
@@ -312,9 +312,9 @@ namespace RedGun.AsyncApi.Services
         }
 
         /// <summary>
-        /// Visits <see cref="IOpenApiExtension"/>
+        /// Visits <see cref="IAsyncApiExtension"/>
         /// </summary>
-        public virtual void Visit(IOpenApiExtension openApiExtension)
+        public virtual void Visit(IAsyncApiExtension asyncApiExtension)
         {
         }
 

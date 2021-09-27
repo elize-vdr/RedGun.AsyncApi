@@ -28,7 +28,7 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Reads the stream input and parses it into an Async API document.
         /// </summary>
-        /// <param name="input">Stream containing OpenAPI description to parse.</param>
+        /// <param name="input">Stream containing AsyncAPI description to parse.</param>
         /// <param name="diagnostic">Returns diagnostic object containing errors detected during parsing.</param>
         /// <returns>Instance of newly created AsyncApiDocument.</returns>
         public AsyncApiDocument Read(Stream input, out AsyncApiDiagnostic diagnostic)
@@ -46,7 +46,7 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Reads the stream input and parses it into an Async API document.
         /// </summary>
-        /// <param name="input">Stream containing OpenAPI description to parse.</param>
+        /// <param name="input">Stream containing AsyncAPI description to parse.</param>
         /// <returns>Instance result containing newly created AsyncApiDocument and diagnostics object from the process</returns>
         public async Task<ReadResult> ReadAsync(Stream input)
         {
@@ -70,13 +70,13 @@ namespace RedGun.AsyncApi.Readers
         }
 
         /// <summary>
-        /// Reads the stream input and parses the fragment of an OpenAPI description into an Async API Element.
+        /// Reads the stream input and parses the fragment of an AsyncAPI description into an Async API Element.
         /// </summary>
-        /// <param name="input">Stream containing OpenAPI description to parse.</param>
-        /// <param name="version">Version of the OpenAPI specification that the fragment conforms to.</param>
+        /// <param name="input">Stream containing AsyncAPI description to parse.</param>
+        /// <param name="version">Version of the AsyncAPI specification that the fragment conforms to.</param>
         /// <param name="diagnostic">Returns diagnostic object containing errors detected during parsing</param>
         /// <returns>Instance of newly created AsyncApiDocument</returns>
-        public T ReadFragment<T>(Stream input, OpenApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiReferenceable
+        public T ReadFragment<T>(Stream input, AsyncApiSpecVersion version, out AsyncApiDiagnostic diagnostic) where T : IAsyncApiReferenceable
         {
             using (var reader = new StreamReader(input))
             {

@@ -14,12 +14,12 @@ using RedGun.AsyncApi.Writers;
 namespace RedGun.AsyncApi.Models
 {
     /// <summary>
-    /// Describes an OpenAPI object (OpenAPI document). See: https://swagger.io/specification
+    /// Describes an AsyncAPI object (AsyncAPI document). See: https://www.asyncapi.com/
     /// </summary>
     public class AsyncApiDocument : IAsyncApiSerializable, IAsyncApiExtensible
     {
         /// <summary>
-        /// Related workspace containing OpenApiDocuments that are referenced in this document
+        /// Related workspace containing AsyncApiDocuments that are referenced in this document
         /// </summary>
         public AsyncApiWorkspace Workspace { get; set; }
 
@@ -62,12 +62,12 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
-        /// Serialize <see cref="AsyncApiDocument"/> to the latest patch of OpenAPI object V3.0.
+        /// Serialize <see cref="AsyncApiDocument"/> to the latest patch of AsyncAPI object V3.0.
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -76,43 +76,46 @@ namespace RedGun.AsyncApi.Models
 
             writer.WriteStartObject();
 
-            // openapi
-            writer.WriteProperty(OpenApiConstants.OpenApi, "3.0.1");
+            // TODO: Version????
+            // asyncapi
+            writer.WriteProperty(AsyncApiConstants.AsyncApi, "3.0.1");
 
             // info
-            writer.WriteRequiredObject(OpenApiConstants.Info, Info, (w, i) => i.SerializeAsV3(w));
+            writer.WriteRequiredObject(AsyncApiConstants.Info, Info, (w, i) => i.SerializeAsV3(w));
 
             // servers
-            writer.WriteOptionalCollection(OpenApiConstants.Servers, Servers, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.Servers, Servers, (w, s) => s.SerializeAsV3(w));
 
             // paths
-            writer.WriteRequiredObject(OpenApiConstants.Paths, Paths, (w, p) => p.SerializeAsV3(w));
+            writer.WriteRequiredObject(AsyncApiConstants.Paths, Paths, (w, p) => p.SerializeAsV3(w));
 
             // components
-            writer.WriteOptionalObject(OpenApiConstants.Components, Components, (w, c) => c.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Components, Components, (w, c) => c.SerializeAsV3(w));
 
             // security
             writer.WriteOptionalCollection(
-                OpenApiConstants.Security,
+                AsyncApiConstants.Security,
                 SecurityRequirements,
                 (w, s) => s.SerializeAsV3(w));
 
             // tags
-            writer.WriteOptionalCollection(OpenApiConstants.Tags, Tags, (w, t) => t.SerializeAsV3WithoutReference(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.Tags, Tags, (w, t) => t.SerializeAsV3WithoutReference(w));
 
             // external docs
-            writer.WriteOptionalObject(OpenApiConstants.ExternalDocs, ExternalDocs, (w, e) => e.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.ExternalDocs, ExternalDocs, (w, e) => e.SerializeAsV3(w));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
 
+        
         /// <summary>
         /// Serialize <see cref="AsyncApiDocument"/> to OpenAPI object V2.0.
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        // TODO: Remove??
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -122,16 +125,16 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // swagger
-            writer.WriteProperty(OpenApiConstants.Swagger, "2.0");
+            writer.WriteProperty(AsyncApiConstants.Swagger, "2.0");
 
             // info
-            writer.WriteRequiredObject(OpenApiConstants.Info, Info, (w, i) => i.SerializeAsV2(w));
+            writer.WriteRequiredObject(AsyncApiConstants.Info, Info, (w, i) => i.SerializeAsV2(w));
 
             // host, basePath, schemes, consumes, produces
             WriteHostInfoV2(writer, Servers);
 
             // paths
-            writer.WriteRequiredObject(OpenApiConstants.Paths, Paths, (w, p) => p.SerializeAsV2(w));
+            writer.WriteRequiredObject(AsyncApiConstants.Paths, Paths, (w, p) => p.SerializeAsV2(w));
 
             // If references have been inlined we don't need the to render the components section
             // however if they have cycles, then we will need a component rendered
@@ -141,17 +144,17 @@ namespace RedGun.AsyncApi.Models
 
                 if (loops.TryGetValue(typeof(AsyncApiSchema), out List<object> schemas))
                 {
-                    var openApiSchemas = schemas.Cast<AsyncApiSchema>().Distinct().ToList()
+                    var asyncApiSchemas = schemas.Cast<AsyncApiSchema>().Distinct().ToList()
                         .ToDictionary<AsyncApiSchema, string>(k => k.Reference.Id);
 
-                    foreach (var schema in openApiSchemas.Values.ToList())
+                    foreach (var schema in asyncApiSchemas.Values.ToList())
                     {
-                        FindSchemaReferences.ResolveSchemas(Components, openApiSchemas);
+                        FindSchemaReferences.ResolveSchemas(Components, asyncApiSchemas);
                     }
 
                     writer.WriteOptionalMap(
-                       OpenApiConstants.Definitions,
-                       openApiSchemas,
+                       AsyncApiConstants.Definitions,
+                       asyncApiSchemas,
                        (w, key, component) =>
                        {
                            component.SerializeAsV2WithoutReference(w);
@@ -164,7 +167,7 @@ namespace RedGun.AsyncApi.Models
                 // If the reference exists but points to other objects, the object is serialized to just that reference.
                 // definitions
                 writer.WriteOptionalMap(
-                    OpenApiConstants.Definitions,
+                    AsyncApiConstants.Definitions,
                     Components?.Schemas,
                     (w, key, component) =>
                     {
@@ -182,7 +185,7 @@ namespace RedGun.AsyncApi.Models
             }
             // parameters
             writer.WriteOptionalMap(
-                OpenApiConstants.Parameters,
+                AsyncApiConstants.Parameters,
                 Components?.Parameters,
                 (w, key, component) =>
                 {
@@ -200,7 +203,7 @@ namespace RedGun.AsyncApi.Models
 
             // responses
             writer.WriteOptionalMap(
-                OpenApiConstants.Responses,
+                AsyncApiConstants.Responses,
                 Components?.Responses,
                 (w, key, component) =>
                 {
@@ -218,7 +221,7 @@ namespace RedGun.AsyncApi.Models
 
             // securityDefinitions
             writer.WriteOptionalMap(
-                OpenApiConstants.SecurityDefinitions,
+                AsyncApiConstants.SecurityDefinitions,
                 Components?.SecuritySchemes,
                 (w, key, component) =>
                 {
@@ -236,23 +239,25 @@ namespace RedGun.AsyncApi.Models
 
             // security
             writer.WriteOptionalCollection(
-                OpenApiConstants.Security,
+                AsyncApiConstants.Security,
                 SecurityRequirements,
                 (w, s) => s.SerializeAsV2(w));
 
             // tags
-            writer.WriteOptionalCollection(OpenApiConstants.Tags, Tags, (w, t) => t.SerializeAsV2WithoutReference(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.Tags, Tags, (w, t) => t.SerializeAsV2WithoutReference(w));
 
             // externalDocs
-            writer.WriteOptionalObject(OpenApiConstants.ExternalDocs, ExternalDocs, (w, e) => e.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.ExternalDocs, ExternalDocs, (w, e) => e.SerializeAsV2(w));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            // TODO: Remove
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
 
             writer.WriteEndObject();
         }
 
-        private static void WriteHostInfoV2(IOpenApiWriter writer, IList<AsyncApiServer> servers)
+        // TODO: Remove???
+        private static void WriteHostInfoV2(IAsyncApiWriter writer, IList<AsyncApiServer> servers)
         {
             if (servers == null || !servers.Any())
             {
@@ -271,13 +276,13 @@ namespace RedGun.AsyncApi.Models
             if (firstServerUrl.IsAbsoluteUri)
             {
                 writer.WriteProperty(
-                    OpenApiConstants.Host,
+                    AsyncApiConstants.Host,
                     firstServerUrl.GetComponents(UriComponents.Host | UriComponents.Port, UriFormat.SafeUnescaped));
                 
                 // basePath
                 if (firstServerUrl.AbsolutePath != "/")
                 {
-                    writer.WriteProperty(OpenApiConstants.BasePath, firstServerUrl.AbsolutePath);
+                    writer.WriteProperty(AsyncApiConstants.BasePath, firstServerUrl.AbsolutePath);
                 }
             } else
             {
@@ -285,12 +290,12 @@ namespace RedGun.AsyncApi.Models
                 if (relativeUrl.StartsWith("//"))
                 {
                     var pathPosition = relativeUrl.IndexOf('/', 3);
-                    writer.WriteProperty(OpenApiConstants.Host, relativeUrl.Substring(0, pathPosition));
+                    writer.WriteProperty(AsyncApiConstants.Host, relativeUrl.Substring(0, pathPosition));
                     relativeUrl = relativeUrl.Substring(pathPosition);
                 }
                 if (!String.IsNullOrEmpty(relativeUrl) && relativeUrl != "/")
                 {
-                    writer.WriteProperty(OpenApiConstants.BasePath, relativeUrl);
+                    writer.WriteProperty(AsyncApiConstants.BasePath, relativeUrl);
                 }
             }
 
@@ -315,17 +320,17 @@ namespace RedGun.AsyncApi.Models
                 .ToList();
 
             // schemes
-            writer.WriteOptionalCollection(OpenApiConstants.Schemes, schemes, (w, s) => w.WriteValue(s));
+            writer.WriteOptionalCollection(AsyncApiConstants.Schemes, schemes, (w, s) => w.WriteValue(s));
         }
 
         /// <summary>
         /// Walk the AsyncApiDocument and resolve unresolved references
         /// </summary>
         /// <param name="useExternal">Indicates if external references should be resolved.  Document needs to reference a workspace for this to be possible.</param>
-        public IEnumerable<OpenApiError> ResolveReferences(bool useExternal = false)
+        public IEnumerable<AsyncApiError> ResolveReferences(bool useExternal = false)
         {
             var resolver = new AsyncApiReferenceResolver(this, useExternal);
-            var walker = new OpenApiWalker(resolver);
+            var walker = new AsyncApiWalker(resolver);
             walker.Walk(this);
             return resolver.Errors;
         }
@@ -353,7 +358,7 @@ namespace RedGun.AsyncApi.Models
             {
                 if (this.Workspace == null)
                 {
-                    throw new ArgumentException(Properties.SRResource.WorkspaceRequredForExternalReferenceResolution);
+                    throw new ArgumentException(Properties.SRResource.WorkspaceRequiredForExternalReferenceResolution);
                 }
                 return this.Workspace.ResolveReference(reference);
             } 
@@ -380,7 +385,7 @@ namespace RedGun.AsyncApi.Models
 
             if (this.Components == null)
             {
-                throw new OpenApiException(string.Format(Properties.SRResource.InvalidReferenceId, reference.Id));
+                throw new AsyncApiException(string.Format(Properties.SRResource.InvalidReferenceId, reference.Id));
             }
 
             try
@@ -415,12 +420,12 @@ namespace RedGun.AsyncApi.Models
                         return this.Components.Callbacks[reference.Id];
 
                     default:
-                        throw new OpenApiException(Properties.SRResource.InvalidReferenceType);
+                        throw new AsyncApiException(Properties.SRResource.InvalidReferenceType);
                 }
             }
             catch (KeyNotFoundException)
             {
-                throw new OpenApiException(string.Format(Properties.SRResource.InvalidReferenceId, reference.Id));
+                throw new AsyncApiException(string.Format(Properties.SRResource.InvalidReferenceId, reference.Id));
             }
         }
     }
@@ -433,7 +438,7 @@ namespace RedGun.AsyncApi.Models
         {
             var visitor = new FindSchemaReferences();
             visitor.Schemas = schemas;
-            var walker = new OpenApiWalker(visitor);
+            var walker = new AsyncApiWalker(visitor);
             walker.Walk(components);
         }
 

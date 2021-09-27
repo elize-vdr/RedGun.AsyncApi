@@ -20,7 +20,7 @@ namespace RedGun.AsyncApi.Validations
         /// </summary>
         public static void CreateError(this IValidationContext context, string ruleName, string message)
         {
-            OpenApiValidatorError error = new OpenApiValidatorError(ruleName, context.PathString, message);
+            AsyncApiValidatorError error = new AsyncApiValidatorError(ruleName, context.PathString, message);
             context.AddError(error);
         }
     }

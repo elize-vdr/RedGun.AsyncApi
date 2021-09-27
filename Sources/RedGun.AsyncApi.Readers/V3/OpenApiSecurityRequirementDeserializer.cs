@@ -33,7 +33,7 @@ namespace RedGun.AsyncApi.Readers.V3
                 else
                 {
                     mapNode.Context.Diagnostic.Errors.Add(
-                        new OpenApiError(node.Context.GetLocation(), $"Scheme {property.Name} is not found"));
+                        new AsyncApiError(node.Context.GetLocation(), $"Scheme {property.Name} is not found"));
                 }
             }
 

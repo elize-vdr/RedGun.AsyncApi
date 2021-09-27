@@ -12,21 +12,21 @@ namespace RedGun.AsyncApi.CommandlineTool {
 
             var validateCommand = new Command("validate")
                                   {
-                                      new Option("--input", "Input OpenAPI description file path or URL", typeof(string) )
+                                      new Option("--input", "Input AsyncAPI description file path or URL", typeof(string) )
                                   };
-            validateCommand.Handler = CommandHandler.Create<string>(AsyncApiService.ValidateOpenApiDocument);
+            validateCommand.Handler = CommandHandler.Create<string>(AsyncApiService.ValidateAsyncApiDocument);
 
             var transformCommand = new Command("transform")
                                    {
-                                       new Option("--input", "Input OpenAPI description file path or URL", typeof(string) ),
-                                       new Option("--output","Output OpenAPI description file", typeof(FileInfo), arity: ArgumentArity.ZeroOrOne),
-                                       new Option("--version", "OpenAPI specification version", typeof(OpenApiSpecVersion)),
-                                       new Option("--format", "File format",typeof(OpenApiFormat) ),
+                                       new Option("--input", "Input AsyncAPI description file path or URL", typeof(string) ),
+                                       new Option("--output","Output AsyncAPI description file", typeof(FileInfo), arity: ArgumentArity.ZeroOrOne),
+                                       new Option("--version", "AsyncAPI specification version", typeof(AsyncApiSpecVersion)),
+                                       new Option("--format", "File format",typeof(AsyncApiFormat) ),
                                        new Option("--inline", "Inline $ref instances", typeof(bool) ),
                                        new Option("--resolveExternal","Resolve external $refs", typeof(bool))
                                    };
-            transformCommand.Handler = CommandHandler.Create<string, FileInfo, OpenApiSpecVersion, OpenApiFormat, bool, bool>(
-             AsyncApiService.ProcessOpenApiDocument);
+            transformCommand.Handler = CommandHandler.Create<string, FileInfo, AsyncApiSpecVersion, AsyncApiFormat, bool, bool>(
+             AsyncApiService.ProcessAsyncApiDocument);
 
             rootCommand.Add(transformCommand);
             rootCommand.Add(validateCommand);

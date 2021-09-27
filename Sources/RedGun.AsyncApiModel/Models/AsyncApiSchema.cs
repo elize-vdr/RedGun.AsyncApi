@@ -229,7 +229,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
-        public IDictionary<string, IOpenApiExtension> Extensions { get; set; } = new Dictionary<string, IOpenApiExtension>();
+        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
         /// Indicates object is a placeholder reference to an actual object and does not contain valid data.
@@ -244,7 +244,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiSchema"/> to Async API v3.0
         /// </summary>
-        public void SerializeAsV3(IOpenApiWriter writer)
+        public void SerializeAsV3(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -281,127 +281,127 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V3 document without using reference.
         /// </summary>
-        public void SerializeAsV3WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
 
             // title
-            writer.WriteProperty(OpenApiConstants.Title, Title);
+            writer.WriteProperty(AsyncApiConstants.Title, Title);
 
             // multipleOf
-            writer.WriteProperty(OpenApiConstants.MultipleOf, MultipleOf);
+            writer.WriteProperty(AsyncApiConstants.MultipleOf, MultipleOf);
 
             // maximum
-            writer.WriteProperty(OpenApiConstants.Maximum, Maximum);
+            writer.WriteProperty(AsyncApiConstants.Maximum, Maximum);
 
             // exclusiveMaximum
-            writer.WriteProperty(OpenApiConstants.ExclusiveMaximum, ExclusiveMaximum);
+            writer.WriteProperty(AsyncApiConstants.ExclusiveMaximum, ExclusiveMaximum);
 
             // minimum
-            writer.WriteProperty(OpenApiConstants.Minimum, Minimum);
+            writer.WriteProperty(AsyncApiConstants.Minimum, Minimum);
 
             // exclusiveMinimum
-            writer.WriteProperty(OpenApiConstants.ExclusiveMinimum, ExclusiveMinimum);
+            writer.WriteProperty(AsyncApiConstants.ExclusiveMinimum, ExclusiveMinimum);
 
             // maxLength
-            writer.WriteProperty(OpenApiConstants.MaxLength, MaxLength);
+            writer.WriteProperty(AsyncApiConstants.MaxLength, MaxLength);
 
             // minLength
-            writer.WriteProperty(OpenApiConstants.MinLength, MinLength);
+            writer.WriteProperty(AsyncApiConstants.MinLength, MinLength);
 
             // pattern
-            writer.WriteProperty(OpenApiConstants.Pattern, Pattern);
+            writer.WriteProperty(AsyncApiConstants.Pattern, Pattern);
 
             // maxItems
-            writer.WriteProperty(OpenApiConstants.MaxItems, MaxItems);
+            writer.WriteProperty(AsyncApiConstants.MaxItems, MaxItems);
 
             // minItems
-            writer.WriteProperty(OpenApiConstants.MinItems, MinItems);
+            writer.WriteProperty(AsyncApiConstants.MinItems, MinItems);
 
             // uniqueItems
-            writer.WriteProperty(OpenApiConstants.UniqueItems, UniqueItems);
+            writer.WriteProperty(AsyncApiConstants.UniqueItems, UniqueItems);
 
             // maxProperties
-            writer.WriteProperty(OpenApiConstants.MaxProperties, MaxProperties);
+            writer.WriteProperty(AsyncApiConstants.MaxProperties, MaxProperties);
 
             // minProperties
-            writer.WriteProperty(OpenApiConstants.MinProperties, MinProperties);
+            writer.WriteProperty(AsyncApiConstants.MinProperties, MinProperties);
 
             // required
-            writer.WriteOptionalCollection(OpenApiConstants.Required, Required, (w, s) => w.WriteValue(s));
+            writer.WriteOptionalCollection(AsyncApiConstants.Required, Required, (w, s) => w.WriteValue(s));
 
             // enum
-            writer.WriteOptionalCollection(OpenApiConstants.Enum, Enum, (nodeWriter, s) => nodeWriter.WriteAny(s));
+            writer.WriteOptionalCollection(AsyncApiConstants.Enum, Enum, (nodeWriter, s) => nodeWriter.WriteAny(s));
 
             // type
-            writer.WriteProperty(OpenApiConstants.Type, Type);
+            writer.WriteProperty(AsyncApiConstants.Type, Type);
 
             // allOf
-            writer.WriteOptionalCollection(OpenApiConstants.AllOf, AllOf, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.AllOf, AllOf, (w, s) => s.SerializeAsV3(w));
 
             // anyOf
-            writer.WriteOptionalCollection(OpenApiConstants.AnyOf, AnyOf, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.AnyOf, AnyOf, (w, s) => s.SerializeAsV3(w));
 
             // oneOf
-            writer.WriteOptionalCollection(OpenApiConstants.OneOf, OneOf, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.OneOf, OneOf, (w, s) => s.SerializeAsV3(w));
 
             // not
-            writer.WriteOptionalObject(OpenApiConstants.Not, Not, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Not, Not, (w, s) => s.SerializeAsV3(w));
 
             // items
-            writer.WriteOptionalObject(OpenApiConstants.Items, Items, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Items, Items, (w, s) => s.SerializeAsV3(w));
 
             // properties
-            writer.WriteOptionalMap(OpenApiConstants.Properties, Properties, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Properties, Properties, (w, s) => s.SerializeAsV3(w));
 
             // additionalProperties
             if (AdditionalPropertiesAllowed)
             {
                 writer.WriteOptionalObject(
-                    OpenApiConstants.AdditionalProperties,
+                    AsyncApiConstants.AdditionalProperties,
                     AdditionalProperties,
                     (w, s) => s.SerializeAsV3(w));
             }
             else
             {
-                writer.WriteProperty(OpenApiConstants.AdditionalProperties, AdditionalPropertiesAllowed);
+                writer.WriteProperty(AsyncApiConstants.AdditionalProperties, AdditionalPropertiesAllowed);
             }
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // format
-            writer.WriteProperty(OpenApiConstants.Format, Format);
+            writer.WriteProperty(AsyncApiConstants.Format, Format);
 
             // default
-            writer.WriteOptionalObject(OpenApiConstants.Default, Default, (w, d) => w.WriteAny(d));
+            writer.WriteOptionalObject(AsyncApiConstants.Default, Default, (w, d) => w.WriteAny(d));
 
             // nullable
-            writer.WriteProperty(OpenApiConstants.Nullable, Nullable, false);
+            writer.WriteProperty(AsyncApiConstants.Nullable, Nullable, false);
 
             // discriminator
-            writer.WriteOptionalObject(OpenApiConstants.Discriminator, Discriminator, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Discriminator, Discriminator, (w, s) => s.SerializeAsV3(w));
 
             // readOnly
-            writer.WriteProperty(OpenApiConstants.ReadOnly, ReadOnly, false);
+            writer.WriteProperty(AsyncApiConstants.ReadOnly, ReadOnly, false);
 
             // writeOnly
-            writer.WriteProperty(OpenApiConstants.WriteOnly, WriteOnly, false);
+            writer.WriteProperty(AsyncApiConstants.WriteOnly, WriteOnly, false);
 
             // xml
-            writer.WriteOptionalObject(OpenApiConstants.Xml, Xml, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Xml, Xml, (w, s) => s.SerializeAsV2(w));
 
             // externalDocs
-            writer.WriteOptionalObject(OpenApiConstants.ExternalDocs, ExternalDocs, (w, s) => s.SerializeAsV3(w));
+            writer.WriteOptionalObject(AsyncApiConstants.ExternalDocs, ExternalDocs, (w, s) => s.SerializeAsV3(w));
 
             // example
-            writer.WriteOptionalObject(OpenApiConstants.Example, Example, (w, e) => w.WriteAny(e));
+            writer.WriteOptionalObject(AsyncApiConstants.Example, Example, (w, e) => w.WriteAny(e));
 
             // deprecated
-            writer.WriteProperty(OpenApiConstants.Deprecated, Deprecated, false);
+            writer.WriteProperty(AsyncApiConstants.Deprecated, Deprecated, false);
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi3_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }
@@ -409,7 +409,8 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize <see cref="AsyncApiSchema"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV2(IOpenApiWriter writer)
+        // TODO: Remove
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             SerializeAsV2(writer: writer, parentRequiredProperties: new HashSet<string>(), propertyName: null);
         }
@@ -417,7 +418,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Serialize to OpenAPI V2 document without using reference.
         /// </summary>
-        public void SerializeAsV2WithoutReference(IOpenApiWriter writer)
+        public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             SerializeAsV2WithoutReference(
                 writer: writer,
@@ -432,8 +433,9 @@ namespace RedGun.AsyncApi.Models
         /// <param name="writer">The Async API writer.</param>
         /// <param name="parentRequiredProperties">The list of required properties in parent schema.</param>
         /// <param name="propertyName">The property name that will be serialized.</param>
+        // TODO: Remove
         internal void SerializeAsV2(
-            IOpenApiWriter writer,
+            IAsyncApiWriter writer,
             ISet<string> parentRequiredProperties,
             string propertyName)
         {
@@ -476,8 +478,9 @@ namespace RedGun.AsyncApi.Models
         /// <param name="writer">The Async API writer.</param>
         /// <param name="parentRequiredProperties">The list of required properties in parent schema.</param>
         /// <param name="propertyName">The property name that will be serialized.</param>
+        // TODO: Remove
         internal void SerializeAsV2WithoutReference(
-            IOpenApiWriter writer,
+            IAsyncApiWriter writer,
             ISet<string> parentRequiredProperties,
             string propertyName)
         {
@@ -486,7 +489,7 @@ namespace RedGun.AsyncApi.Models
             writer.WriteEndObject();
         }
 
-        internal void WriteAsItemsProperties(IOpenApiWriter writer)
+        internal void WriteAsItemsProperties(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -494,13 +497,13 @@ namespace RedGun.AsyncApi.Models
             }
 
             // type
-            writer.WriteProperty(OpenApiConstants.Type, Type);
+            writer.WriteProperty(AsyncApiConstants.Type, Type);
 
             // format
-            writer.WriteProperty(OpenApiConstants.Format, Format);
+            writer.WriteProperty(AsyncApiConstants.Format, Format);
 
             // items
-            writer.WriteOptionalObject(OpenApiConstants.Items, Items, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Items, Items, (w, s) => s.SerializeAsV2(w));
 
             // collectionFormat
             // We need information from style in parameter to populate this.
@@ -511,47 +514,48 @@ namespace RedGun.AsyncApi.Models
             // this property. This is not supported yet, so we will skip this property at the moment.
 
             // default
-            writer.WriteOptionalObject(OpenApiConstants.Default, Default, (w, d) => w.WriteAny(d));
+            writer.WriteOptionalObject(AsyncApiConstants.Default, Default, (w, d) => w.WriteAny(d));
 
             // maximum
-            writer.WriteProperty(OpenApiConstants.Maximum, Maximum);
+            writer.WriteProperty(AsyncApiConstants.Maximum, Maximum);
 
             // exclusiveMaximum
-            writer.WriteProperty(OpenApiConstants.ExclusiveMaximum, ExclusiveMaximum);
+            writer.WriteProperty(AsyncApiConstants.ExclusiveMaximum, ExclusiveMaximum);
 
             // minimum
-            writer.WriteProperty(OpenApiConstants.Minimum, Minimum);
+            writer.WriteProperty(AsyncApiConstants.Minimum, Minimum);
 
             // exclusiveMinimum
-            writer.WriteProperty(OpenApiConstants.ExclusiveMinimum, ExclusiveMinimum);
+            writer.WriteProperty(AsyncApiConstants.ExclusiveMinimum, ExclusiveMinimum);
 
             // maxLength
-            writer.WriteProperty(OpenApiConstants.MaxLength, MaxLength);
+            writer.WriteProperty(AsyncApiConstants.MaxLength, MaxLength);
 
             // minLength
-            writer.WriteProperty(OpenApiConstants.MinLength, MinLength);
+            writer.WriteProperty(AsyncApiConstants.MinLength, MinLength);
 
             // pattern
-            writer.WriteProperty(OpenApiConstants.Pattern, Pattern);
+            writer.WriteProperty(AsyncApiConstants.Pattern, Pattern);
 
             // maxItems
-            writer.WriteProperty(OpenApiConstants.MaxItems, MaxItems);
+            writer.WriteProperty(AsyncApiConstants.MaxItems, MaxItems);
 
             // minItems
-            writer.WriteProperty(OpenApiConstants.MinItems, MinItems);
+            writer.WriteProperty(AsyncApiConstants.MinItems, MinItems);
 
             // enum
-            writer.WriteOptionalCollection(OpenApiConstants.Enum, Enum, (w, s) => w.WriteAny(s));
+            writer.WriteOptionalCollection(AsyncApiConstants.Enum, Enum, (w, s) => w.WriteAny(s));
 
             // multipleOf
-            writer.WriteProperty(OpenApiConstants.MultipleOf, MultipleOf);
+            writer.WriteProperty(AsyncApiConstants.MultipleOf, MultipleOf);
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
         }
 
+        // TODO: Remove
         internal void WriteAsSchemaProperties(
-            IOpenApiWriter writer,
+            IAsyncApiWriter writer,
             ISet<string> parentRequiredProperties,
             string propertyName)
         {
@@ -561,110 +565,110 @@ namespace RedGun.AsyncApi.Models
             }
 
             // format
-            writer.WriteProperty(OpenApiConstants.Format, Format);
+            writer.WriteProperty(AsyncApiConstants.Format, Format);
 
             // title
-            writer.WriteProperty(OpenApiConstants.Title, Title);
+            writer.WriteProperty(AsyncApiConstants.Title, Title);
 
             // description
-            writer.WriteProperty(OpenApiConstants.Description, Description);
+            writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // default
-            writer.WriteOptionalObject(OpenApiConstants.Default, Default, (w, d) => w.WriteAny(d));
+            writer.WriteOptionalObject(AsyncApiConstants.Default, Default, (w, d) => w.WriteAny(d));
 
             // multipleOf
-            writer.WriteProperty(OpenApiConstants.MultipleOf, MultipleOf);
+            writer.WriteProperty(AsyncApiConstants.MultipleOf, MultipleOf);
 
             // maximum
-            writer.WriteProperty(OpenApiConstants.Maximum, Maximum);
+            writer.WriteProperty(AsyncApiConstants.Maximum, Maximum);
 
             // exclusiveMaximum
-            writer.WriteProperty(OpenApiConstants.ExclusiveMaximum, ExclusiveMaximum);
+            writer.WriteProperty(AsyncApiConstants.ExclusiveMaximum, ExclusiveMaximum);
 
             // minimum
-            writer.WriteProperty(OpenApiConstants.Minimum, Minimum);
+            writer.WriteProperty(AsyncApiConstants.Minimum, Minimum);
 
             // exclusiveMinimum
-            writer.WriteProperty(OpenApiConstants.ExclusiveMinimum, ExclusiveMinimum);
+            writer.WriteProperty(AsyncApiConstants.ExclusiveMinimum, ExclusiveMinimum);
 
             // maxLength
-            writer.WriteProperty(OpenApiConstants.MaxLength, MaxLength);
+            writer.WriteProperty(AsyncApiConstants.MaxLength, MaxLength);
 
             // minLength
-            writer.WriteProperty(OpenApiConstants.MinLength, MinLength);
+            writer.WriteProperty(AsyncApiConstants.MinLength, MinLength);
 
             // pattern
-            writer.WriteProperty(OpenApiConstants.Pattern, Pattern);
+            writer.WriteProperty(AsyncApiConstants.Pattern, Pattern);
 
             // maxItems
-            writer.WriteProperty(OpenApiConstants.MaxItems, MaxItems);
+            writer.WriteProperty(AsyncApiConstants.MaxItems, MaxItems);
 
             // minItems
-            writer.WriteProperty(OpenApiConstants.MinItems, MinItems);
+            writer.WriteProperty(AsyncApiConstants.MinItems, MinItems);
 
             // uniqueItems
-            writer.WriteProperty(OpenApiConstants.UniqueItems, UniqueItems);
+            writer.WriteProperty(AsyncApiConstants.UniqueItems, UniqueItems);
 
             // maxProperties
-            writer.WriteProperty(OpenApiConstants.MaxProperties, MaxProperties);
+            writer.WriteProperty(AsyncApiConstants.MaxProperties, MaxProperties);
 
             // minProperties
-            writer.WriteProperty(OpenApiConstants.MinProperties, MinProperties);
+            writer.WriteProperty(AsyncApiConstants.MinProperties, MinProperties);
 
             // required
-            writer.WriteOptionalCollection(OpenApiConstants.Required, Required, (w, s) => w.WriteValue(s));
+            writer.WriteOptionalCollection(AsyncApiConstants.Required, Required, (w, s) => w.WriteValue(s));
 
             // enum
-            writer.WriteOptionalCollection(OpenApiConstants.Enum, Enum, (w, s) => w.WriteAny(s));
+            writer.WriteOptionalCollection(AsyncApiConstants.Enum, Enum, (w, s) => w.WriteAny(s));
 
             // type
-            writer.WriteProperty(OpenApiConstants.Type, Type);
+            writer.WriteProperty(AsyncApiConstants.Type, Type);
 
             // items
-            writer.WriteOptionalObject(OpenApiConstants.Items, Items, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Items, Items, (w, s) => s.SerializeAsV2(w));
 
             // allOf
-            writer.WriteOptionalCollection(OpenApiConstants.AllOf, AllOf, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalCollection(AsyncApiConstants.AllOf, AllOf, (w, s) => s.SerializeAsV2(w));
 
             // properties
-            writer.WriteOptionalMap(OpenApiConstants.Properties, Properties, (w, key, s) =>
+            writer.WriteOptionalMap(AsyncApiConstants.Properties, Properties, (w, key, s) =>
                 s.SerializeAsV2(w, Required, key));
 
             // additionalProperties
             if (AdditionalPropertiesAllowed)
             {
                 writer.WriteOptionalObject(
-                    OpenApiConstants.AdditionalProperties,
+                    AsyncApiConstants.AdditionalProperties,
                     AdditionalProperties,
                     (w, s) => s.SerializeAsV2(w));
             }
             else
             {
-                writer.WriteProperty(OpenApiConstants.AdditionalProperties, AdditionalPropertiesAllowed);
+                writer.WriteProperty(AsyncApiConstants.AdditionalProperties, AdditionalPropertiesAllowed);
             }
 
             // discriminator
-            writer.WriteProperty(OpenApiConstants.Discriminator, Discriminator?.PropertyName);
+            writer.WriteProperty(AsyncApiConstants.Discriminator, Discriminator?.PropertyName);
 
             // readOnly
             // In V2 schema if a property is part of required properties of parent schema,
             // it cannot be marked as readonly.
             if (!parentRequiredProperties.Contains(propertyName))
             {
-                writer.WriteProperty(name: OpenApiConstants.ReadOnly, value: ReadOnly, defaultValue: false);
+                writer.WriteProperty(name: AsyncApiConstants.ReadOnly, value: ReadOnly, defaultValue: false);
             }
 
             // xml
-            writer.WriteOptionalObject(OpenApiConstants.Xml, Xml, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Xml, Xml, (w, s) => s.SerializeAsV2(w));
 
             // externalDocs
-            writer.WriteOptionalObject(OpenApiConstants.ExternalDocs, ExternalDocs, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.ExternalDocs, ExternalDocs, (w, s) => s.SerializeAsV2(w));
 
             // example
-            writer.WriteOptionalObject(OpenApiConstants.Example, Example, (w, e) => w.WriteAny(e));
+            writer.WriteOptionalObject(AsyncApiConstants.Example, Example, (w, e) => w.WriteAny(e));
 
             // extensions
-            writer.WriteExtensions(Extensions, OpenApiSpecVersion.OpenApi2_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
         }
     }
 }

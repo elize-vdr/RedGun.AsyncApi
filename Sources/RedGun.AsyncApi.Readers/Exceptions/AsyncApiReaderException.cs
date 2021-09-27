@@ -8,10 +8,10 @@ using SharpYaml.Serialization;
 namespace RedGun.AsyncApi.Readers.Exceptions
 {
     /// <summary>
-    /// Defines an exception indicating OpenAPI Reader encountered an issue while reading.
+    /// Defines an exception indicating AsyncAPI Reader encountered an issue while reading.
     /// </summary>
     [Serializable]
-    public class AsyncApiReaderException : OpenApiException
+    public class AsyncApiReaderException : AsyncApiException
     {
         /// <summary>
         /// Initializes the <see cref="AsyncApiReaderException"/> class.

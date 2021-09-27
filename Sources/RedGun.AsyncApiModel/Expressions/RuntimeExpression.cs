@@ -73,7 +73,7 @@ namespace RedGun.AsyncApi.Expressions
                 return new ResponseExpression(source);
             }
 
-            throw new OpenApiException(string.Format(SRResource.RuntimeExpressionHasInvalidFormat, expression));
+            throw new AsyncApiException(string.Format(SRResource.RuntimeExpressionHasInvalidFormat, expression));
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace RedGun.AsyncApi.Readers
     }
 
     /// <summary>
-    /// Configuration settings to control how OpenAPI documents are parsed
+    /// Configuration settings to control how AsyncAPI documents are parsed
     /// </summary>
     public class AsyncApiReaderSettings
     {
@@ -48,10 +48,10 @@ namespace RedGun.AsyncApi.Readers
         /// <summary>
         /// Dictionary of parsers for converting extensions into strongly typed classes
         /// </summary>
-        public Dictionary<string, Func<IAsyncApiAny, OpenApiSpecVersion, IOpenApiExtension>> ExtensionParsers { get; set; } = new Dictionary<string, Func<IAsyncApiAny, OpenApiSpecVersion, IOpenApiExtension>>();
+        public Dictionary<string, Func<IAsyncApiAny, AsyncApiSpecVersion, IAsyncApiExtension>> ExtensionParsers { get; set; } = new Dictionary<string, Func<IAsyncApiAny, AsyncApiSpecVersion, IAsyncApiExtension>>();
 
         /// <summary>
-        /// Rules to use for validating OpenAPI specification.  If none are provided a default set of rules are applied.
+        /// Rules to use for validating AsyncAPI specification.  If none are provided a default set of rules are applied.
         /// </summary>
         public ValidationRuleSet RuleSet { get; set; } = ValidationRuleSet.GetDefaultRuleSet();
 
