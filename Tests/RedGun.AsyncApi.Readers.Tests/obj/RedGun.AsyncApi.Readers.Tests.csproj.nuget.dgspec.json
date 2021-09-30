@@ -160,6 +160,9 @@
             "projectReferences": {
               "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj": {
                 "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj"
+              },
+              "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
+                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj"
               }
             }
           }

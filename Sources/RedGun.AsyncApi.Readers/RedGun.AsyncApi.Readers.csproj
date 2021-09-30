@@ -2,6 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <SignAssembly>true</SignAssembly>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\RedGun.AsyncApi.xml</DocumentationFile>
+        <AssemblyOriginatorKeyFile>..\RedGun.AsyncApi.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>

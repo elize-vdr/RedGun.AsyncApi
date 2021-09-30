@@ -6109,6 +6109,7 @@
     "net5.0": [
       "FluentAssertions >= 6.1.0",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
+      "RedGun.AsyncApi >= 1.0.0",
       "RedGun.AsyncApi.Readers >= 1.0.0",
       "coverlet.collector >= 3.0.2",
       "xunit >= 2.4.1",
@@ -6149,6 +6150,9 @@
           "projectReferences": {
             "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj": {
               "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj"
+            },
+            "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
+              "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj"
             }
           }
         }

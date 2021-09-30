@@ -9,7 +9,7 @@ using RedGun.AsyncApi.Readers.ParseNodes;
 using SharpYaml.Serialization;
 using Xunit;
 
-namespace RedGun.AsyncApi.Readers.Tests.V3Tests
+namespace RedGun.AsyncApi.Readers.Tests.ParseNodes
 {
     [Collection("DefaultSettings")]
     public class OpenApiAnyTests
