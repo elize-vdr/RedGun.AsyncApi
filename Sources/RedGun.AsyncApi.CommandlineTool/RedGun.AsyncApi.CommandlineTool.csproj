@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\RedGun.AsyncApi.Readers\RedGun.AsyncApi.Readers.csproj" />
-      <ProjectReference Include="..\RedGun.AsyncApiModel\RedGun.AsyncApiModel.csproj" />
+      <ProjectReference Include="..\RedGun.AsyncApi\RedGun.AsyncApi.csproj" />
     </ItemGroup>
 
     <ItemGroup>

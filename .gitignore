@@ -3,7 +3,13 @@ RedGun.AsyncApi.CommandlineTool/obj
 .idea
 Sources/RedGun.AsyncApi.Readers/bin
 Sources/RedGun.AsyncApi.Readers/obj
-Sources/RedGun.AsyncApiModel/bin
-Sources/RedGun.AsyncApiModel/obj
+Sources/RedGun.AsyncApi/bin
+Sources/RedGun.AsyncApi/obj
 Sources/RedGun.AsyncApi.CommandlineTool/bin
 Sources/RedGun.AsyncApi.CommandlineTool/obj
+Tests/RedGun.AsyncApi.Readers.Tests/bin
+Tests/RedGun.AsyncApi.Readers.Tests/obj
+Tests/RedGun.AsyncApi.Tests/bin
+Tests/RedGun.AsyncApi.Tests/obj
+Tests/RedGun.AsyncApi.SmokeTests/bin
+Tests/RedGun.AsyncApi.SmokeTests/obj

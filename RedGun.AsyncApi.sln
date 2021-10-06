@@ -8,9 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F16F5B06-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.Readers", "Sources\RedGun.AsyncApi.Readers\RedGun.AsyncApi.Readers.csproj", "{A41E8239-9423-43B2-90FB-68E37C903908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApiModel", "Sources\RedGun.AsyncApiModel\RedGun.AsyncApiModel.csproj", "{7AB644BC-684F-4A6A-A40F-A786066CBD15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi", "Sources\RedGun.AsyncApi\RedGun.AsyncApi.csproj", "{7AB644BC-684F-4A6A-A40F-A786066CBD15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.CommandlineTool", "Sources\RedGun.AsyncApi.CommandlineTool\RedGun.AsyncApi.CommandlineTool.csproj", "{8165FA64-BA2C-4C24-B020-53CAB91329BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.Readers.Tests", "Tests\RedGun.AsyncApi.Readers.Tests\RedGun.AsyncApi.Readers.Tests.csproj", "{DA123CA5-BBC3-4EF5-8F9F-502CD21C9B2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.SmokeTests", "Tests\RedGun.AsyncApi.SmokeTests\RedGun.AsyncApi.SmokeTests.csproj", "{587609E6-EAB9-4863-8AA6-1C7210C57440}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGun.AsyncApi.Tests", "Tests\RedGun.AsyncApi.Tests\RedGun.AsyncApi.Tests.csproj", "{FA6A45E0-82DE-4092-84FE-031BEF19EC58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,9 @@ Global
 		{A41E8239-9423-43B2-90FB-68E37C903908} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
 		{7AB644BC-684F-4A6A-A40F-A786066CBD15} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
 		{8165FA64-BA2C-4C24-B020-53CAB91329BE} = {D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}
+		{DA123CA5-BBC3-4EF5-8F9F-502CD21C9B2D} = {F16F5B06-C698-4CD0-B983-53010A0C44C7}
+		{587609E6-EAB9-4863-8AA6-1C7210C57440} = {F16F5B06-C698-4CD0-B983-53010A0C44C7}
+		{FA6A45E0-82DE-4092-84FE-031BEF19EC58} = {F16F5B06-C698-4CD0-B983-53010A0C44C7}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A41E8239-9423-43B2-90FB-68E37C903908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -35,5 +44,17 @@ Global
 		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8165FA64-BA2C-4C24-B020-53CAB91329BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA123CA5-BBC3-4EF5-8F9F-502CD21C9B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA123CA5-BBC3-4EF5-8F9F-502CD21C9B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA123CA5-BBC3-4EF5-8F9F-502CD21C9B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA123CA5-BBC3-4EF5-8F9F-502CD21C9B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{587609E6-EAB9-4863-8AA6-1C7210C57440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{587609E6-EAB9-4863-8AA6-1C7210C57440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{587609E6-EAB9-4863-8AA6-1C7210C57440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{587609E6-EAB9-4863-8AA6-1C7210C57440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6A45E0-82DE-4092-84FE-031BEF19EC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6A45E0-82DE-4092-84FE-031BEF19EC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6A45E0-82DE-4092-84FE-031BEF19EC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6A45E0-82DE-4092-84FE-031BEF19EC58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

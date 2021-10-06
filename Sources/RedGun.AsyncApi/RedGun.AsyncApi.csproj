@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>RedGun.AsyncApi</RootNamespace>
+        <AssemblyOriginatorKeyFile>..\RedGun.AsyncApi.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\RedGun.AsyncApi.snk">
+        <Link>RedGun.AsyncApi.snk</Link>
+      </None>
+      <None Remove="RedGun.AsyncApi.StrongNameKey.snk" />
+    </ItemGroup>
+
+</Project>
