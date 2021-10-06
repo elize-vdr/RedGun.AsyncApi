@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g23WjoXmV0KiUsi51r/dasHwDZxsMqMfcxekw35WO7nPGJR7fJg+XvDZ9z6Y9qILqxG7wfeOLWpmHibY1LZffA==",
+  "dgSpecHash": "iyFRhPZ6JWiOvuHuGEIMnsrixTcWldfZBcOGXdGqfuGul3jJ8zNWgLqtNGmKKYaSpVCXN0EPa67OODmc18VPmA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.SmokeTests\\RedGun.AsyncApi.SmokeTests.csproj",
+  "projectFilePath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.SmokeTests\\RedGun.AsyncApi.SmokeTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",

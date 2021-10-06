@@ -1,0 +1,14 @@
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\bin\Debug\net5.0\AsyncApiModel.deps.json
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\bin\Debug\net5.0\AsyncApiModel.dll
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\bin\Debug\net5.0\ref\AsyncApiModel.dll
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\bin\Debug\net5.0\AsyncApiModel.pdb
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.csproj.AssemblyReference.cache
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.Properties.SRResource.resources
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.csproj.GenerateResource.cache
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.AssemblyInfoInputs.cache
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.AssemblyInfo.cs
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.csproj.CoreCompileInputs.cache
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.dll
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\ref\AsyncApiModel.dll
+C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\AsyncApi\AsyncApiModel\obj\Debug\net5.0\AsyncApiModel.pdb

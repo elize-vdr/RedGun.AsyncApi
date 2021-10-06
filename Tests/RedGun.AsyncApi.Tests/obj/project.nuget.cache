@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wI6tXJ5fp4LFq+fDnnigIrHIZpwSd5oPy69tLIq+iZk+9ohGJhCNUUh1WZWpJEDLCE1c/PXBTJh8Pe4eL7Tz4A==",
+  "dgSpecHash": "zEwYkwYQXeuEC/xHlQPyhRDMl1qO1uBleAGUO8iwiTHcanQpDQtBxxisEi7QxAWvKKGFTtxIqyP5dOzKiCYKng==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.Tests\\RedGun.AsyncApi.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.Tests\\RedGun.AsyncApi.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\fluentassertions\\6.1.0\\fluentassertions.6.1.0.nupkg.sha512",
