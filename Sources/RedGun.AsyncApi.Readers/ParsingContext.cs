@@ -10,7 +10,7 @@ using RedGun.AsyncApi.Models;
 using RedGun.AsyncApi.Readers.Exceptions;
 using RedGun.AsyncApi.Readers.Interface;
 using RedGun.AsyncApi.Readers.ParseNodes;
-using RedGun.AsyncApi.Readers.V3;
+using RedGun.AsyncApi.Readers.V2;
 using SharpYaml.Serialization;
 
 namespace RedGun.AsyncApi.Readers
@@ -69,7 +69,7 @@ namespace RedGun.AsyncApi.Readers
 
 
                 case string version when version.StartsWith("3.0"):
-                    VersionService = new AsyncApiV3VersionService();
+                    VersionService = new AsyncApiV2VersionService();
                     doc = VersionService.LoadDocument(RootNode);
                     this.Diagnostic.SpecificationVersion = AsyncApiSpecVersion.AsyncApi2_0;
                     break;
@@ -104,7 +104,7 @@ namespace RedGun.AsyncApi.Readers
                     */
 
                 case AsyncApiSpecVersion.AsyncApi2_0:
-                    this.VersionService = new AsyncApiV3VersionService();
+                    this.VersionService = new AsyncApiV2VersionService();
                     element = this.VersionService.LoadElement<T>(node);
                     break;
             }
