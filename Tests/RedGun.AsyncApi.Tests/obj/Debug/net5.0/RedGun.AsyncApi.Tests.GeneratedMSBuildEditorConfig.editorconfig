@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = RedGun.AsyncApi.Tests
-build_property.ProjectDir = C:\Users\Elize.van.der.Riet\Work\RedGun\RedGun.AsyncApi\Tests\RedGun.AsyncApi.Tests\
+build_property.ProjectDir = C:\Users\Elize.van.der.Riet\Work\Projects\Examples\.Net\RedGun.AsyncApi.Net\Tests\RedGun.AsyncApi.Tests\
