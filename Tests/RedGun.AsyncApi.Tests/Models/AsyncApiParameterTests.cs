@@ -182,7 +182,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicParameterAsV3JsonWorks()
+        public void SerializeBasicParameterAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -200,7 +200,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedParameterAsV3JsonWorks()
+        public void SerializeAdvancedParameterAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -232,51 +232,6 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeReferencedParameterAsV3JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""$ref"": ""#/components/parameters/example1""
-}";
-
-            // Act
-            ReferencedParameter.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedParameterAsV3JsonWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""name"": ""name1"",
-  ""in"": ""path""
-}";
-
-            // Act
-            ReferencedParameter.SerializeAsV3WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
         public void SerializeReferencedParameterAsV2JsonWorks()
         {
             // Arrange
@@ -284,7 +239,7 @@ namespace RedGun.AsyncApi.Tests.Models
             var writer = new AsyncApiJsonWriter(outputStringWriter);
             var expected =
                 @"{
-  ""$ref"": ""#/parameters/example1""
+  ""$ref"": ""#/components/parameters/example1""
 }";
 
             // Act
@@ -306,64 +261,12 @@ namespace RedGun.AsyncApi.Tests.Models
             var writer = new AsyncApiJsonWriter(outputStringWriter);
             var expected =
                 @"{
-  ""in"": ""path"",
-  ""name"": ""name1""
+  ""name"": ""name1"",
+  ""in"": ""path""
 }";
 
             // Act
             ReferencedParameter.SerializeAsV2WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeParameterWithSchemaReferenceAsV2JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""in"": ""header"",
-  ""name"": ""name1"",
-  ""description"": ""description1"",
-  ""required"": true,
-  ""type"": ""string""
-}";
-
-            // Act
-            AdvancedHeaderParameterWithSchemaReference.SerializeAsV2(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeParameterWithSchemaTypeObjectAsV2JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""in"": ""header"",
-  ""name"": ""name1"",
-  ""description"": ""description1"",
-  ""required"": true,
-  ""type"": ""string""
-}";
-
-            // Act
-            AdvancedHeaderParameterWithSchemaTypeObject.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -398,7 +301,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            ParameterWithFormStyleAndExplodeFalse.SerializeAsV3WithoutReference(writer);
+            ParameterWithFormStyleAndExplodeFalse.SerializeAsV2WithoutReference(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -432,7 +335,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            ParameterWithFormStyleAndExplodeTrue.SerializeAsV3WithoutReference(writer);
+            ParameterWithFormStyleAndExplodeTrue.SerializeAsV2WithoutReference(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 

@@ -125,7 +125,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeApiKeySecuritySchemeAsV3JsonWorks()
+        public void SerializeApiKeySecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -146,7 +146,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeApiKeySecuritySchemeAsV3YamlWorks()
+        public void SerializeApiKeySecuritySchemeAsV2YamlWorks()
         {
             // Arrange
             var expected =
@@ -165,7 +165,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeHttpBasicSecuritySchemeAsV3JsonWorks()
+        public void SerializeHttpBasicSecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -185,7 +185,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeHttpBearerSecuritySchemeAsV3JsonWorks()
+        public void SerializeHttpBearerSecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -206,7 +206,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeOAuthSingleFlowSecuritySchemeAsV3JsonWorks()
+        public void SerializeOAuthSingleFlowSecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -234,7 +234,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeOAuthMultipleFlowSecuritySchemeAsV3JsonWorks()
+        public void SerializeOAuthMultipleFlowSecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -278,7 +278,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeOpenIdConnectSecuritySchemeAsV3JsonWorks()
+        public void SerializeOpenIdConnectSecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -298,7 +298,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeReferencedSecuritySchemeAsV3JsonWorks()
+        public void SerializeReferencedSecuritySchemeAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -309,10 +309,10 @@ in: query";
 }";
 
             // Act
-            // Add dummy start object, value, and end object to allow SerializeAsV3 to output security scheme 
+            // Add dummy start object, value, and end object to allow SerializeAsV2 to output security scheme 
             // as property name.
             writer.WriteStartObject();
-            ReferencedSecurityScheme.SerializeAsV3(writer);
+            ReferencedSecurityScheme.SerializeAsV2(writer);
             writer.WriteNull();
             writer.WriteEndObject();
             writer.Flush();
@@ -325,7 +325,7 @@ in: query";
         }
 
         [Fact]
-        public void SerializeReferencedSecuritySchemeAsV3JsonWithoutReferenceWorks()
+        public void SerializeReferencedSecuritySchemeAsV2JsonWithoutReferenceWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -338,7 +338,7 @@ in: query";
 }";
 
             // Act
-            ReferencedSecurityScheme.SerializeAsV3WithoutReference(writer);
+            ReferencedSecurityScheme.SerializeAsV2WithoutReference(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 

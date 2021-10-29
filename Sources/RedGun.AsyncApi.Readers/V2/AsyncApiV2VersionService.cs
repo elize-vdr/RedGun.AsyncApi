@@ -1,4 +1,4 @@
-﻿// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK
+﻿// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK.
 // Licensed under the MIT license. 
 
 using System;
@@ -15,13 +15,20 @@ using RedGun.AsyncApi.Readers.Properties;
 namespace RedGun.AsyncApi.Readers.V2
 {
     /// <summary>
-    /// The version service for the Async API V3.0.
+    /// The version service for the Open API V2.0.
     /// </summary>
     internal class AsyncApiV2VersionService : IAsyncApiVersionService
     {
         private IDictionary<Type, Func<ParseNode, object>> _loaders = new Dictionary<Type, Func<ParseNode, object>>
         {
             [typeof(IAsyncApiAny)] = AsyncApiV2Deserializer.LoadAny,
+            [typeof(AsyncApiInfo)] = AsyncApiV2Deserializer.LoadInfo,
+            [typeof(AsyncApiLicense)] = AsyncApiV2Deserializer.LoadLicense,
+            [typeof(AsyncApiServer)] = AsyncApiV2Deserializer.LoadServer,
+            [typeof(AsyncApiServer)] = AsyncApiV2Deserializer.LoadServers,
+            [typeof(AsyncApiTag)] = AsyncApiV2Deserializer.LoadTag,
+            
+            // TODO: Marker to check AsyncApi objects ---------------------------
             [typeof(AsyncApiCallback)] = AsyncApiV2Deserializer.LoadCallback,
             [typeof(AsyncApiComponents)] = AsyncApiV2Deserializer.LoadComponents,
             [typeof(AsyncApiEncoding)] = AsyncApiV2Deserializer.LoadEncoding,
@@ -29,7 +36,6 @@ namespace RedGun.AsyncApi.Readers.V2
             [typeof(AsyncApiExternalDocs)] = AsyncApiV2Deserializer.LoadExternalDocs,
             [typeof(AsyncApiHeader)] = AsyncApiV2Deserializer.LoadHeader,
             [typeof(AsyncApiInfo)] = AsyncApiV2Deserializer.LoadInfo,
-            [typeof(AsyncApiLicense)] = AsyncApiV2Deserializer.LoadLicense,
             [typeof(AsyncApiLink)] = AsyncApiV2Deserializer.LoadLink,
             [typeof(AsyncApiMediaType)] = AsyncApiV2Deserializer.LoadMediaType,
             [typeof(AsyncApiOAuthFlow)] = AsyncApiV2Deserializer.LoadOAuthFlow,
@@ -44,9 +50,7 @@ namespace RedGun.AsyncApi.Readers.V2
             [typeof(AsyncApiSchema)] = AsyncApiV2Deserializer.LoadSchema,
             [typeof(AsyncApiSecurityRequirement)] = AsyncApiV2Deserializer.LoadSecurityRequirement,
             [typeof(AsyncApiSecurityScheme)] = AsyncApiV2Deserializer.LoadSecurityScheme,
-            [typeof(AsyncApiServer)] = AsyncApiV2Deserializer.LoadServer,
             [typeof(AsyncApiServerVariable)] = AsyncApiV2Deserializer.LoadServerVariable,
-            [typeof(AsyncApiTag)] = AsyncApiV2Deserializer.LoadTag,
             [typeof(AsyncApiXml)] = AsyncApiV2Deserializer.LoadXml
         };
 
@@ -90,7 +94,7 @@ namespace RedGun.AsyncApi.Readers.V2
                         // "$ref": "#/components/schemas/Pet"
                         return ParseLocalReference(segments[1]);
                     }
-                    // Where fragments point into a non-AsyncAPI document, the id will be the complete fragment identifier
+                    // Where fragments point into a non-OpenAPI document, the id will be the complete fragment identifier
                     string id = segments[1];
                     // $ref: externalSource.yaml#/Pet
                     if (id.StartsWith("/components/"))

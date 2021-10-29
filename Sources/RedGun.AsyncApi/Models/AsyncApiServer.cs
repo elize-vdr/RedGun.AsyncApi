@@ -24,6 +24,18 @@ namespace RedGun.AsyncApi.Models
         /// Variable substitutions will be made when a variable is named in {brackets}.
         /// </summary>
         public string Url { get; set; }
+        
+        /// <summary>
+        /// REQUIRED. The protocol this URL supports for connection. Supported protocol include, but are not limited
+        /// to: amqp, amqps, http, https, ibmmq, jms, kafka, kafka-secure, anypointmq, mqtt, secure-mqtt, stomp,
+        /// stomps, ws, wss, mercure.
+        /// </summary>
+        public string Protocol { get; set; }
+        
+        /// <summary>
+        /// The version of the protocol used for connection. For instance: AMQP 0.9.1, HTTP 2.0, Kafka 1.0.0, etc.
+        /// </summary>
+        public string ProtocolVersion { get; set; }
 
         /// <summary>
         /// A map between a variable name and its value. The value is used for substitution in the server's URL template.
@@ -37,9 +49,9 @@ namespace RedGun.AsyncApi.Models
         public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
-        /// Serialize <see cref="AsyncApiServer"/> to Async API v3.0
+        /// Serialize <see cref="AsyncApiServer"/> to Async API v2.0
         /// </summary>
-        public void SerializeAsV3(IAsyncApiWriter writer)
+        public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
             {
@@ -55,20 +67,12 @@ namespace RedGun.AsyncApi.Models
             writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // variables
-            writer.WriteOptionalMap(AsyncApiConstants.Variables, Variables, (w, v) => v.SerializeAsV3(w));
+            writer.WriteOptionalMap(AsyncApiConstants.Variables, Variables, (w, v) => v.SerializeAsV2(w));
 
             // specification extensions
             writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
-        }
-
-        /// <summary>
-        /// Serialize <see cref="AsyncApiServer"/> to Async API v2.0
-        /// </summary>
-        public void SerializeAsV2(IAsyncApiWriter writer)
-        {
-            // Server object does not exist in V2.
         }
     }
 }

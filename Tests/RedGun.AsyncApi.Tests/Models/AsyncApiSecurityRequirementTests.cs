@@ -81,41 +81,13 @@ namespace RedGun.AsyncApi.Tests.Models
             };
 
         [Fact]
-        public void SerializeBasicSecurityRequirementAsV3JsonWorks()
+        public void SerializeBasicSecurityRequirementAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{ }";
 
             // Act
             var actual = BasicSecurityRequirement.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeSecurityRequirementWithReferencedSecuritySchemeAsV3JsonWorks()
-        {
-            // Arrange
-            var expected =
-                @"{
-  ""scheme1"": [
-    ""scope1"",
-    ""scope2"",
-    ""scope3""
-  ],
-  ""scheme2"": [
-    ""scope4"",
-    ""scope5""
-  ],
-  ""scheme3"": [ ]
-}";
-
-            // Act
-            var actual =
-                SecurityRequirementWithReferencedSecurityScheme.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
 
             // Assert
             actual = actual.MakeLineBreaksEnvironmentNeutral();
@@ -142,32 +114,8 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            var actual = SecurityRequirementWithReferencedSecurityScheme.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void
-            SerializeSecurityRequirementWithUnreferencedSecuritySchemeAsV3JsonShouldSkipUnserializableKeyValuePair()
-        {
-            // Arrange
-            var expected =
-                @"{
-  ""scheme1"": [
-    ""scope1"",
-    ""scope2"",
-    ""scope3""
-  ],
-  ""scheme3"": [ ]
-}";
-
-            // Act
             var actual =
-                SecurityRequirementWithUnreferencedSecurityScheme.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
+                SecurityRequirementWithReferencedSecurityScheme.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
 
             // Assert
             actual = actual.MakeLineBreaksEnvironmentNeutral();

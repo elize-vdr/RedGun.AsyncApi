@@ -59,7 +59,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedRequestBodyAsV3JsonWorks()
+        public void SerializeAdvancedRequestBodyAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -78,7 +78,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            AdvancedRequestBody.SerializeAsV3(writer);
+            AdvancedRequestBody.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -89,7 +89,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeReferencedRequestBodyAsV3JsonWorks()
+        public void SerializeReferencedRequestBodyAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -100,7 +100,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            ReferencedRequestBody.SerializeAsV3(writer);
+            ReferencedRequestBody.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -111,7 +111,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeReferencedRequestBodyAsV3JsonWithoutReferenceWorks()
+        public void SerializeReferencedRequestBodyAsV2JsonWithoutReferenceWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -130,7 +130,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            ReferencedRequestBody.SerializeAsV3WithoutReference(writer);
+            ReferencedRequestBody.SerializeAsV2WithoutReference(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 

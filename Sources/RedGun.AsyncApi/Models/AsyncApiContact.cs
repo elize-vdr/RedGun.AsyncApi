@@ -1,4 +1,4 @@
-﻿// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK
+﻿// Copied from Microsoft AsyncApi.Net SDK and altered to obtain an AsyncAPI.Net SDK
 // Licensed under the MIT license. 
 
 using System;
@@ -34,22 +34,13 @@ namespace RedGun.AsyncApi.Models
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
         public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
-
-        /// <summary>
-        /// Serialize <see cref="AsyncApiContact"/> to Async API v3.0
-        /// </summary>
-        public void SerializeAsV3(IAsyncApiWriter writer)
-        {
-            WriteInternal(writer, AsyncApiSpecVersion.AsyncApi2_0);
-        }
-
+        
         /// <summary>
         /// Serialize <see cref="AsyncApiContact"/> to Async API v2.0
         /// </summary>
-        // TODO: Remove
         public void SerializeAsV2(IAsyncApiWriter writer)
         {
-            WriteInternal(writer, AsyncApiSpecVersion.OpenApi2_0);
+            WriteInternal(writer, AsyncApiSpecVersion.AsyncApi2_0);
         }
 
         private void WriteInternal(IAsyncApiWriter writer, AsyncApiSpecVersion specVersion)

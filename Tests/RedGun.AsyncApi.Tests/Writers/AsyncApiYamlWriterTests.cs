@@ -376,42 +376,6 @@ components: { }";
             var writer = new AsyncApiYamlWriter(outputString, new AsyncApiWriterSettings { ReferenceInline = ReferenceInlineSetting.InlineLocalReferences});
 
             // Act
-            doc.SerializeAsV3(writer);
-            var actual = outputString.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            Assert.Equal(expected, actual);
-        }
-
-
-
-        [Fact]
-        public void WriteInlineSchemaV2()
-        {
-            var doc = CreateDocWithSimpleSchemaToInline();
-
-            var expected =
-@"swagger: '2.0'
-info:
-  title: Demo
-  version: 1.0.0
-paths:
-  /:
-    get:
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object";
-
-            var outputString = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiYamlWriter(outputString, new AsyncApiWriterSettings { ReferenceInline = ReferenceInlineSetting.InlineLocalReferences });
-
-            // Act
             doc.SerializeAsV2(writer);
             var actual = outputString.GetStringBuilder().ToString();
 
@@ -518,7 +482,7 @@ components:
             var writer = new AsyncApiYamlWriter(outputString, new AsyncApiWriterSettings { ReferenceInline = ReferenceInlineSetting.InlineLocalReferences });
 
             // Act
-            doc.SerializeAsV3(writer);
+            doc.SerializeAsV2(writer);
             var actual = outputString.GetStringBuilder().ToString();
 
             // Assert
@@ -589,57 +553,5 @@ components:
             };
             return doc;
         }
-
-        [Fact]
-        public void WriteInlineRecursiveSchemav2()
-        {
-            // Arrange
-            var doc = CreateDocWithRecursiveSchemaReference();
-
-            var expected =
-@"swagger: '2.0'
-info:
-  title: Demo
-  version: 1.0.0
-paths:
-  /:
-    get:
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-            properties:
-              children:
-                $ref: '#/definitions/thing'
-              related:
-                type: integer
-definitions:
-  thing:
-    type: object
-    properties:
-      children:
-        $ref: '#/definitions/thing'
-      related:
-        $ref: '#/definitions/related'
-  related:
-    type: integer";
-            // Component schemas that are there due to cycles are still inlined because the items they reference may not exist in the components because they don't have cycles.
-
-            var outputString = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiYamlWriter(outputString, new AsyncApiWriterSettings { ReferenceInline = ReferenceInlineSetting.InlineLocalReferences });
-
-            // Act
-            doc.SerializeAsV2(writer);
-            var actual = outputString.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            Assert.Equal(expected, actual);
-        }
-
     }
 }

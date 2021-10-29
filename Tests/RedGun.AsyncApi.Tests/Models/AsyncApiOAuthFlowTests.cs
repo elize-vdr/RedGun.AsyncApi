@@ -46,7 +46,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicOAuthFlowAsV3JsonWorks()
+        public void SerializeBasicOAuthFlowAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -64,7 +64,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicOAuthFlowAsV3YamlWorks()
+        public void SerializeBasicOAuthFlowAsV2YamlWorks()
         {
             // Arrange
             var expected =
@@ -80,7 +80,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializePartialOAuthFlowAsV3JsonWorks()
+        public void SerializePartialOAuthFlowAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -102,7 +102,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeCompleteOAuthFlowAsV3JsonWorks()
+        public void SerializeCompleteOAuthFlowAsV2JsonWorks()
         {
             // Arrange
             var expected =

@@ -9,7 +9,6 @@ namespace RedGun.AsyncApi.Readers.Tests.AsyncApiReaderTests
     [Collection("DefaultSettings")]
     public class AsyncApiDiagnosticTests
     {
-        // TODO: Change to Async API V2.0
         [Fact]
         public void DetectedSpecificationVersionShouldBeV2_0()
         {

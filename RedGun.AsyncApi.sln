@@ -3,6 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionBuildHelpers", "SolutionBuildHelpers", "{83EBFDDA-BBF4-4BD1-A7CA-568A666857D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D9ABDB54-AB90-4391-88F2-6E0FCA62F2A6}"
+ProjectSection(SolutionItems) = preProject
+	TODO.txt = TODO.txt
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F16F5B06-C698-4CD0-B983-53010A0C44C7}"
 EndProject

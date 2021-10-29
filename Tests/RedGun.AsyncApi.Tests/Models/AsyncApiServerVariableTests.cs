@@ -28,7 +28,7 @@ namespace RedGun.AsyncApi.Tests.Models
         [Theory]
         [InlineData(AsyncApiFormat.Json, "{ }")]
         [InlineData(AsyncApiFormat.Yaml, "{ }")]
-        public void SerializeBasicServerVariableAsV3Works(AsyncApiFormat format, string expected)
+        public void SerializeBasicServerVariableAsV2Works(AsyncApiFormat format, string expected)
         {
             // Arrange & Act
             var actual = BasicServerVariable.Serialize(AsyncApiSpecVersion.AsyncApi2_0, format);
@@ -40,7 +40,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedServerVariableAsV3JsonWorks()
+        public void SerializeAdvancedServerVariableAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -63,7 +63,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedServerVariableAsV3YamlWorks()
+        public void SerializeAdvancedServerVariableAsV2YamlWorks()
         {
             // Arrange
             var expected =

@@ -32,8 +32,8 @@ namespace RedGun.AsyncApi.Tests.Models
             reference.Type.Should().Be(type);
             reference.Id.Should().Be(id);
 
-            reference.ReferenceV3.Should().Be(input);
-            reference.ReferenceV2.Should().Be(input.Replace("schemas", "definitions").Replace("/components", ""));
+            //reference.ReferenceV2.Should().Be(input);
+            reference.ReferenceV2.Should().Be(input);
         }
 
         [Theory]
@@ -57,12 +57,12 @@ namespace RedGun.AsyncApi.Tests.Models
             reference.Type.Should().BeNull();
             reference.Id.Should().Be(id);
 
-            reference.ReferenceV3.Should().Be(expected);
+            //reference.ReferenceV2.Should().Be(expected);
             reference.ReferenceV2.Should().Be(expected);
         }
 
         [Fact]
-        public void SerializeSchemaReferenceAsJsonV3Works()
+        public void SerializeSchemaReferenceAsJsonV2Works()
         {
             // Arrange
             var reference = new AsyncApiReference { Type = ReferenceType.Schema, Id = "Pet" };
@@ -80,7 +80,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeSchemaReferenceAsYamlV3Works()
+        public void SerializeSchemaReferenceAsYamlV2Works()
         {
             // Arrange
             var reference = new AsyncApiReference
@@ -99,87 +99,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeSchemaReferenceAsJsonV2Works()
-        {
-            // Arrange
-            var reference = new AsyncApiReference
-            {
-                Type = ReferenceType.Schema,
-                Id = "Pet"
-            };
-
-            var expected = @"{
-  ""$ref"": ""#/definitions/Pet""
-}".MakeLineBreaksEnvironmentNeutral();
-
-            // Act
-            var actual = reference.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual.MakeLineBreaksEnvironmentNeutral().Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeSchemaReferenceAsYamlV2Works()
-        {
-            // Arrange
-            var reference = new AsyncApiReference
-            {
-                Type = ReferenceType.Schema,
-                Id = "Pet"
-            };
-            var expected = @"$ref: '#/definitions/Pet'";
-
-            // Act
-            var actual = reference.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
         public void SerializeExternalReferenceAsJsonV2Works()
-        {
-            // Arrange
-            var reference = new AsyncApiReference
-            {
-                ExternalResource = "main.json",
-                Id = "Pets"
-            };
-
-            var expected = @"{
-  ""$ref"": ""main.json#/Pets""
-}";
-
-            // Act
-            var actual = reference.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-
-            // Assert
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeExternalReferenceAsYamlV2Works()
-        {
-            // Arrange
-            var reference = new AsyncApiReference
-            {
-                ExternalResource = "main.json",
-                Id = "Pets"
-            };
-            var expected = @"$ref: main.json#/Pets";
-
-            // Act
-            var actual = reference.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeExternalReferenceAsJsonV3Works()
         {
             // Arrange
             var reference = new AsyncApiReference { ExternalResource = "main.json", Id = "Pets" };
@@ -198,7 +118,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeExternalReferenceAsYamlV3Works()
+        public void SerializeExternalReferenceAsYamlV2Works()
         {
             // Arrange
             var reference = new AsyncApiReference { ExternalResource = "main.json", Id = "Pets" };

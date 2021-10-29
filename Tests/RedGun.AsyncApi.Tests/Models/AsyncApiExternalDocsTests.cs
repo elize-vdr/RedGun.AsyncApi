@@ -22,22 +22,28 @@ namespace RedGun.AsyncApi.Tests.Models
 
         #region AsyncApi V3
 
+
+
+        #endregion
+
+        #region AsyncApi V2
+        
         [Theory]
         [InlineData(AsyncApiFormat.Json, "{ }")]
         [InlineData(AsyncApiFormat.Yaml, "{ }")]
-        public void SerializeBasicExternalDocsAsV3Works(AsyncApiFormat format, string expected)
+        public void SerializeBasicExternalDocsAsV2Works(AsyncApiFormat format, string expected)
         {
             // Arrange & Act
             var actual = BasicExDocs.Serialize(AsyncApiSpecVersion.AsyncApi2_0, format);
 
             // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
+            actual   = actual.MakeLineBreaksEnvironmentNeutral();
             expected = expected.MakeLineBreaksEnvironmentNeutral();
             actual.Should().Be(expected);
         }
 
         [Fact]
-        public void SerializeAdvanceExDocsAsV3JsonWorks()
+        public void SerializeAdvanceExDocsAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -50,13 +56,13 @@ namespace RedGun.AsyncApi.Tests.Models
             var actual = AdvanceExDocs.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
 
             // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
+            actual   = actual.MakeLineBreaksEnvironmentNeutral();
             expected = expected.MakeLineBreaksEnvironmentNeutral();
             actual.Should().Be(expected);
         }
 
         [Fact]
-        public void SerializeAdvanceExDocsAsV3YamlWorks()
+        public void SerializeAdvanceExDocsAs2YamlWorks()
         {
             // Arrange
             var expected =
@@ -67,14 +73,10 @@ url: https://example.com";
             var actual = AdvanceExDocs.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
 
             // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
+            actual   = actual.MakeLineBreaksEnvironmentNeutral();
             expected = expected.MakeLineBreaksEnvironmentNeutral();
             actual.Should().Be(expected);
         }
-
-        #endregion
-
-        #region AsyncApi V2
 
         #endregion
     }

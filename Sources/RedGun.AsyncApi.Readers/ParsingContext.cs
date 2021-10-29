@@ -58,17 +58,16 @@ namespace RedGun.AsyncApi.Readers
 
             switch (inputVersion)
             {
-                // TODO
+                // Example for future version 
                 /*
-                case string version when version == "2.0":
-                    VersionService = new AsyncApiV2VersionService();
+                case { } version when version == "3.0":
+                    VersionService = new AsyncApiV3VersionService();
                     doc = VersionService.LoadDocument(RootNode);
-                    this.Diagnostic.SpecificationVersion = AsyncApiSpecVersion.OpenApi2_0;
+                    this.Diagnostic.SpecificationVersion = AsyncApiSpecVersion.AsyncApi3_0;
                     break;
-                    */
+                */
 
-
-                case string version when version.StartsWith("3.0"):
+                case { } version when version.StartsWith("2.2"):
                     VersionService = new AsyncApiV2VersionService();
                     doc = VersionService.LoadDocument(RootNode);
                     this.Diagnostic.SpecificationVersion = AsyncApiSpecVersion.AsyncApi2_0;
@@ -95,10 +94,10 @@ namespace RedGun.AsyncApi.Readers
 
             switch (version)
             {
-                // TODO
+                // Example for future version 
                 /*
-                case AsyncApiSpecVersion.OpenApi2_0:
-                    VersionService = new AsyncApiV2VersionService();
+                case AsyncApiSpecVersion.AsyncApi3_0:
+                    VersionService = new AsyncApiV3VersionService();
                     element = this.VersionService.LoadElement<T>(node);
                     break;
                     */
@@ -118,13 +117,6 @@ namespace RedGun.AsyncApi.Readers
         private static string GetVersion(RootNode rootNode)
         {
             var versionNode = rootNode.Find(new JsonPointer("/asyncapi"));
-
-            if (versionNode != null)
-            {
-                return versionNode.GetScalarValue();
-            }
-
-            versionNode = rootNode.Find(new JsonPointer("/swagger"));
 
             return versionNode?.GetScalarValue();
         }

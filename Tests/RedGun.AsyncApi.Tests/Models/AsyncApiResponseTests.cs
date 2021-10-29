@@ -137,7 +137,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedResponseAsV3JsonWorks()
+        public void SerializeAdvancedResponseAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -180,7 +180,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedResponseAsV3YamlWorks()
+        public void SerializeAdvancedResponseAsV2YamlWorks()
         {
             // Arrange
             var expected =
@@ -213,74 +213,7 @@ content:
         }
 
         [Fact]
-        public void SerializeAdvancedResponseAsV2JsonWorks()
-        {
-            // Arrange
-            var expected = @"{
-  ""description"": ""A complex object array response"",
-  ""schema"": {
-    ""type"": ""array"",
-    ""items"": {
-      ""$ref"": ""#/definitions/customType""
-    }
-  },
-  ""examples"": {
-    ""text/plain"": ""Blabla""
-  },
-  ""myextension"": ""myextensionvalue"",
-  ""headers"": {
-    ""X-Rate-Limit-Limit"": {
-      ""description"": ""The number of allowed requests in the current period"",
-      ""type"": ""integer""
-    },
-    ""X-Rate-Limit-Reset"": {
-      ""description"": ""The number of seconds left in the current period"",
-      ""type"": ""integer""
-    }
-  }
-}";
-
-            // Act
-            var actual = AdvancedResponse.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeAdvancedResponseAsV2YamlWorks()
-        {
-            // Arrange
-            var expected =
-                @"description: A complex object array response
-schema:
-  type: array
-  items:
-    $ref: '#/definitions/customType'
-examples:
-  text/plain: Blabla
-myextension: myextensionvalue
-headers:
-  X-Rate-Limit-Limit:
-    description: The number of allowed requests in the current period
-    type: integer
-  X-Rate-Limit-Reset:
-    description: The number of seconds left in the current period
-    type: integer";
-
-            // Act
-            var actual = AdvancedResponse.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedResponseAsV3JsonWorks()
+        public void SerializeReferencedResponseAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -291,7 +224,7 @@ headers:
 }";
 
             // Act
-            ReferencedResponse.SerializeAsV3(writer);
+            ReferencedResponse.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -302,7 +235,7 @@ headers:
         }
 
         [Fact]
-        public void SerializeReferencedResponseAsV3JsonWithoutReferenceWorks()
+        public void SerializeReferencedResponseAsV2JsonWithoutReferenceWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -332,66 +265,6 @@ headers:
           ""$ref"": ""#/components/schemas/customType""
         }
       }
-    }
-  }
-}";
-
-            // Act
-            ReferencedResponse.SerializeAsV3WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedResponseAsV2JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""$ref"": ""#/responses/example1""
-}";
-
-            // Act
-            ReferencedResponse.SerializeAsV2(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedResponseAsV2JsonWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""description"": ""A complex object array response"",
-  ""schema"": {
-    ""type"": ""array"",
-    ""items"": {
-      ""$ref"": ""#/definitions/customType""
-    }
-  },
-  ""headers"": {
-    ""X-Rate-Limit-Limit"": {
-      ""description"": ""The number of allowed requests in the current period"",
-      ""type"": ""integer""
-    },
-    ""X-Rate-Limit-Reset"": {
-      ""description"": ""The number of seconds left in the current period"",
-      ""type"": ""integer""
     }
   }
 }";

@@ -303,7 +303,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicOperationAsV3JsonWorks()
+        public void SerializeBasicOperationAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -320,7 +320,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeOperationWithBodyAsV3JsonWorks()
+        public void SerializeOperationWithBodyAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -389,7 +389,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedOperationWithTagAndSecurityAsV3JsonWorks()
+        public void SerializeAdvancedOperationWithTagAndSecurityAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -471,24 +471,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicOperationAsV2JsonWorks()
-        {
-            // Arrange
-            var expected = @"{
-  ""responses"": { }
-}";
-
-            // Act
-            var actual = _basicOperation.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeOperationWithFormDataAsV3JsonWorks()
+        public void SerializeOperationWithFormDataAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -562,225 +545,6 @@ namespace RedGun.AsyncApi.Tests.Models
             expected = expected.MakeLineBreaksEnvironmentNeutral();
             actual.Should().Be(expected);
         }
-
-        [Fact]
-        public void SerializeOperationWithFormDataAsV2JsonWorks()
-        {
-            // Arrange
-            var expected = @"{
-  ""summary"": ""Updates a pet in the store with form data"",
-  ""description"": """",
-  ""operationId"": ""updatePetWithForm"",
-  ""consumes"": [
-    ""application/x-www-form-urlencoded"",
-    ""multipart/form-data""
-  ],
-  ""parameters"": [
-    {
-      ""in"": ""path"",
-      ""name"": ""petId"",
-      ""description"": ""ID of pet that needs to be updated"",
-      ""required"": true,
-      ""type"": ""string""
-    },
-    {
-      ""in"": ""formData"",
-      ""name"": ""name"",
-      ""description"": ""Updated name of the pet"",
-      ""required"": true,
-      ""type"": ""string""
-    },
-    {
-      ""in"": ""formData"",
-      ""name"": ""status"",
-      ""description"": ""Updated status of the pet"",
-      ""type"": ""string""
-    }
-  ],
-  ""responses"": {
-    ""200"": {
-      ""description"": ""Pet updated.""
-    },
-    ""405"": {
-      ""description"": ""Invalid input""
-    }
-  }
-}";
-
-            // Act
-            var actual = _operationWithFormData.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeOperationWithBodyAsV2JsonWorks()
-        {
-            // Arrange
-            var expected = @"{
-  ""summary"": ""summary1"",
-  ""description"": ""operationDescription"",
-  ""externalDocs"": {
-    ""description"": ""externalDocsDescription"",
-    ""url"": ""http://external.com""
-  },
-  ""operationId"": ""operationId1"",
-  ""consumes"": [
-    ""application/json""
-  ],
-  ""produces"": [
-    ""application/json""
-  ],
-  ""parameters"": [
-    {
-      ""in"": ""path"",
-      ""name"": ""parameter1""
-    },
-    {
-      ""in"": ""header"",
-      ""name"": ""parameter2""
-    },
-    {
-      ""in"": ""body"",
-      ""name"": ""body"",
-      ""description"": ""description2"",
-      ""required"": true,
-      ""schema"": {
-        ""maximum"": 10,
-        ""minimum"": 5,
-        ""type"": ""number""
-      }
-    }
-  ],
-  ""responses"": {
-    ""200"": {
-      ""$ref"": ""#/responses/response1""
-    },
-    ""400"": {
-      ""description"": null,
-      ""schema"": {
-        ""maximum"": 10,
-        ""minimum"": 5,
-        ""type"": ""number""
-      }
-    }
-  },
-  ""schemes"": [
-    ""http""
-  ]
-}";
-
-            // Act
-            var actual = _operationWithBody.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeAdvancedOperationWithTagAndSecurityAsV2JsonWorks()
-        {
-            // Arrange
-            var expected = @"{
-  ""tags"": [
-    ""tagName1"",
-    ""tagId1""
-  ],
-  ""summary"": ""summary1"",
-  ""description"": ""operationDescription"",
-  ""externalDocs"": {
-    ""description"": ""externalDocsDescription"",
-    ""url"": ""http://external.com""
-  },
-  ""operationId"": ""operationId1"",
-  ""consumes"": [
-    ""application/json""
-  ],
-  ""produces"": [
-    ""application/json""
-  ],
-  ""parameters"": [
-    {
-      ""in"": ""path"",
-      ""name"": ""parameter1""
-    },
-    {
-      ""in"": ""header"",
-      ""name"": ""parameter2""
-    },
-    {
-      ""in"": ""body"",
-      ""name"": ""body"",
-      ""description"": ""description2"",
-      ""required"": true,
-      ""schema"": {
-        ""maximum"": 10,
-        ""minimum"": 5,
-        ""type"": ""number""
-      }
-    }
-  ],
-  ""responses"": {
-    ""200"": {
-      ""$ref"": ""#/responses/response1""
-    },
-    ""400"": {
-      ""description"": null,
-      ""schema"": {
-        ""maximum"": 10,
-        ""minimum"": 5,
-        ""type"": ""number""
-      }
-    }
-  },
-  ""schemes"": [
-    ""http""
-  ],
-  ""security"": [
-    {
-      ""securitySchemeId1"": [ ],
-      ""securitySchemeId2"": [
-        ""scopeName1"",
-        ""scopeName2""
-      ]
-    }
-  ]
-}";
-
-            // Act
-            var actual = _advancedOperationWithTagsAndSecurity.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeOperationWithNullCollectionAsV2JsonWorks()
-        {
-            // Arrange
-            var expected = @"{
-  ""responses"": { }
-}";
-            var operation = new AsyncApiOperation
-            {
-                Parameters = null,
-                Servers = null,
-            };
-
-            // Act
-            var actual = operation.SerializeAsJson(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
+        
     }
 }

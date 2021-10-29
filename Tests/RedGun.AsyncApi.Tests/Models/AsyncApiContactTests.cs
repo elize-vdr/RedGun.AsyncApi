@@ -30,9 +30,9 @@ namespace RedGun.AsyncApi.Tests.Models
 
         [Theory]
         [InlineData(AsyncApiSpecVersion.AsyncApi2_0, AsyncApiFormat.Json, "{ }")]
-        [InlineData(AsyncApiSpecVersion.AsyncApi2_0, AsyncApiFormat.Json, "{ }")]
+        //[InlineData(AsyncApiSpecVersion.AsyncApi3_0, AsyncApiFormat.Json, "{ }")]
         [InlineData(AsyncApiSpecVersion.AsyncApi2_0, AsyncApiFormat.Yaml, "{ }")]
-        [InlineData(AsyncApiSpecVersion.AsyncApi2_0, AsyncApiFormat.Yaml, "{ }")]
+        //[InlineData(AsyncApiSpecVersion.AsyncApi3_0, AsyncApiFormat.Yaml, "{ }")]
         public void SerializeBasicContactWorks(
             AsyncApiSpecVersion version,
             AsyncApiFormat format,
@@ -49,7 +49,7 @@ namespace RedGun.AsyncApi.Tests.Models
 
         [Theory]
         [InlineData(AsyncApiSpecVersion.AsyncApi2_0)]
-        [InlineData(AsyncApiSpecVersion.AsyncApi2_0)]
+        //[InlineData(AsyncApiSpecVersion.AsyncApi3_0)]
         public void SerializeAdvanceContactAsJsonWorks(AsyncApiSpecVersion version)
         {
             // Arrange
@@ -72,7 +72,7 @@ namespace RedGun.AsyncApi.Tests.Models
 
         [Theory]
         [InlineData(AsyncApiSpecVersion.AsyncApi2_0)]
-        [InlineData(AsyncApiSpecVersion.AsyncApi2_0)]
+        //[InlineData(AsyncApiSpecVersion.AsyncApi3_0)]
         public void SerializeAdvanceContactAsYamlWorks(AsyncApiSpecVersion version)
         {
             // Arrange

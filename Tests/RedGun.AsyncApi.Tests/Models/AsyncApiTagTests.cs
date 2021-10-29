@@ -46,25 +46,6 @@ namespace RedGun.AsyncApi.Tests.Models
         };
 
         [Fact]
-        public void SerializeBasicTagAsV3JsonWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected = "{ }";
-
-            // Act
-            BasicTag.SerializeAsV3WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
         public void SerializeBasicTagAsV2JsonWithoutReferenceWorks()
         {
             // Arrange
@@ -84,24 +65,6 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicTagAsV3YamlWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiYamlWriter(outputStringWriter);
-            var expected = "{ }";
-
-            // Act
-            BasicTag.SerializeAsV3WithoutReference(writer);
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
         public void SerializeBasicTagAsV2YamlWithoutReferenceWorks()
         {
             // Arrange
@@ -111,35 +74,6 @@ namespace RedGun.AsyncApi.Tests.Models
 
             // Act
             BasicTag.SerializeAsV2WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeAdvancedTagAsV3JsonWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""name"": ""pet"",
-  ""description"": ""Pets operations"",
-  ""externalDocs"": {
-    ""description"": ""Find more info here"",
-    ""url"": ""https://example.com""
-  },
-  ""x-tag-extension"": null
-}";
-
-            // Act
-            AdvancedTag.SerializeAsV3WithoutReference(writer);
-            writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
             // Assert
@@ -175,32 +109,7 @@ namespace RedGun.AsyncApi.Tests.Models
             expected = expected.MakeLineBreaksEnvironmentNeutral();
             actual.Should().Be(expected);
         }
-
-        [Fact]
-        public void SerializeAdvancedTagAsV3YamlWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiYamlWriter(outputStringWriter);
-            var expected =
-                @"name: pet
-description: Pets operations
-externalDocs:
-  description: Find more info here
-  url: https://example.com
-x-tag-extension: ";
-
-            // Act
-            AdvancedTag.SerializeAsV3WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
+        
         [Fact]
         public void SerializeAdvancedTagAsV2YamlWithoutReferenceWorks()
         {
@@ -217,26 +126,6 @@ x-tag-extension: ";
 
             // Act
             AdvancedTag.SerializeAsV2WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeAdvancedTagAsV3JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-
-            var expected = @"""pet""";
-
-            // Act
-            AdvancedTag.SerializeAsV3(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -267,26 +156,6 @@ x-tag-extension: ";
         }
 
         [Fact]
-        public void SerializeAdvancedTagAsV3YamlWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiYamlWriter(outputStringWriter);
-
-            var expected = @" pet";
-
-            // Act
-            AdvancedTag.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
         public void SerializeAdvancedTagAsV2YamlWorks()
         {
             // Arrange
@@ -307,26 +176,6 @@ x-tag-extension: ";
         }
 
         [Fact]
-        public void SerializeReferencedTagAsV3JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-
-            var expected = @"""pet""";
-
-            // Act
-            ReferencedTag.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
         public void SerializeReferencedTagAsV2JsonWorks()
         {
             // Arrange
@@ -337,26 +186,6 @@ x-tag-extension: ";
 
             // Act
             ReferencedTag.SerializeAsV2(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedTagAsV3YamlWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiYamlWriter(outputStringWriter);
-
-            var expected = @" pet";
-
-            // Act
-            ReferencedTag.SerializeAsV3(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 

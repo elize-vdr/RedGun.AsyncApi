@@ -1,4 +1,4 @@
-﻿// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK
+﻿// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK.
 // Licensed under the MIT license. 
 
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ using RedGun.AsyncApi.Readers.ParseNodes;
 namespace RedGun.AsyncApi.Readers.V2
 {
     /// <summary>
-    /// Class containing logic to deserialize Async API V3 document into
-    /// runtime Async API object model.
+    /// Class containing logic to deserialize Open API V2 document into
+    /// runtime Open API object model.
     /// </summary>
     internal static partial class AsyncApiV2Deserializer
     {

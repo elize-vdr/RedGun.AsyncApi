@@ -123,12 +123,13 @@ namespace RedGun.AsyncApi.Extensions
 
             switch (specVersion)
             {
-                case AsyncApiSpecVersion.AsyncApi2_0:
+                /*
+                case AsyncApiSpecVersion.AsyncApi3_0:
                     element.SerializeAsV3(writer);
                     break;
-
-                // TODO: Remove
-                case AsyncApiSpecVersion.OpenApi2_0:
+                    */
+                
+                case AsyncApiSpecVersion.AsyncApi2_0:
                     element.SerializeAsV2(writer);
                     break;
 

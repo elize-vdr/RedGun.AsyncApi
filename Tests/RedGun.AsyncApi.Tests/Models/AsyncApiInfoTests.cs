@@ -37,7 +37,7 @@ namespace RedGun.AsyncApi.Tests.Models
 
         public static IEnumerable<object[]> BasicInfoJsonExpected()
         {
-            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0, AsyncApiSpecVersion.AsyncApi2_0 };
+            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0 /*, AsyncApiSpecVersion.AsyncApi3_0*/ };
             foreach (var specVersion in specVersions)
             {
                 yield return new object[]
@@ -66,7 +66,7 @@ namespace RedGun.AsyncApi.Tests.Models
 
         public static IEnumerable<object[]> BasicInfoYamlExpected()
         {
-            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0, AsyncApiSpecVersion.AsyncApi2_0 };
+            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0 /*, AsyncApiSpecVersion.AsyncApi3_0*/ };
             foreach (var specVersion in specVersions)
             {
                 yield return new object[]
@@ -93,7 +93,7 @@ version: '1.0'"
 
         public static IEnumerable<object[]> AdvanceInfoJsonExpect()
         {
-            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0, AsyncApiSpecVersion.AsyncApi2_0 };
+            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0 /*, AsyncApiSpecVersion.AsyncApi3_0*/ };
             foreach (var specVersion in specVersions)
             {
                 yield return new object[]
@@ -136,7 +136,7 @@ version: '1.0'"
 
         public static IEnumerable<object[]> AdvanceInfoYamlExpect()
         {
-            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0, AsyncApiSpecVersion.AsyncApi2_0 };
+            var specVersions = new[] { AsyncApiSpecVersion.AsyncApi2_0 /*, AsyncApiSpecVersion.AsyncApi3_0*/ };
             foreach (var specVersion in specVersions)
             {
                 yield return new object[]

@@ -216,8 +216,7 @@ namespace RedGun.AsyncApi.Tests.Models
 
         public static AsyncApiSchema NewPetSchemaWithReference = AdvancedComponentsWithReference.Schemas["newPet"];
 
-        public static AsyncApiSchema ErrorModelSchemaWithReference =
-            AdvancedComponentsWithReference.Schemas["errorModel"];
+        public static AsyncApiSchema ErrorModelSchemaWithReference = AdvancedComponentsWithReference.Schemas["errorModel"];
 
         public static AsyncApiDocument AdvancedDocumentWithReference = new AsyncApiDocument
         {
@@ -600,8 +599,7 @@ namespace RedGun.AsyncApi.Tests.Models
             {
                 Version = "1.0.0",
                 Title = "Swagger Petstore (Simple)",
-                Description =
-                    "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+                Description = "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
                 TermsOfService = new Uri("http://helloreverb.com/terms/"),
                 Contact = new AsyncApiContact
                 {
@@ -974,7 +972,7 @@ namespace RedGun.AsyncApi.Tests.Models
                 }
             }
         };
-
+        
         private readonly ITestOutputHelper _output;
 
         public AsyncApiDocumentTests(ITestOutputHelper output)
@@ -983,14 +981,14 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedDocumentAsV3JsonWorks()
+        public void SerializeAdvancedDocumentAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
             var writer = new AsyncApiJsonWriter(outputStringWriter);
             var expected =
                 @"{
-  ""AsyncApi"": ""3.0.1"",
+  ""AsyncApi"": ""2.0.2"",
   ""info"": {
     ""title"": ""Swagger Petstore (Simple)"",
     ""description"": ""A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification"",
@@ -1486,7 +1484,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            AdvancedDocument.SerializeAsV3(writer);
+            AdvancedDocument.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -1497,14 +1495,18 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedDocumentWithReferenceAsV3JsonWorks()
+        public void SerializeAdvancedDocumentWithReferenceAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
             var writer = new AsyncApiJsonWriter(outputStringWriter);
+            /*
+             * var filename = "./Resources/fake.pdf"
+             * File.OpenRead(filename)
+             */
             var expected =
                 @"{
-  ""AsyncApi"": ""3.0.1"",
+  ""asyncapi"": ""2.0.2"",
   ""info"": {
     ""title"": ""Swagger Petstore (Simple)"",
     ""description"": ""A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification"",
@@ -1801,7 +1803,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            AdvancedDocumentWithReference.SerializeAsV3(writer);
+            AdvancedDocumentWithReference.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -1812,441 +1814,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedDocumentAsV2JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected = @"{
-  ""swagger"": ""2.0"",
-  ""info"": {
-    ""title"": ""Swagger Petstore (Simple)"",
-    ""description"": ""A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification"",
-    ""termsOfService"": ""http://helloreverb.com/terms/"",
-    ""contact"": {
-      ""name"": ""Swagger API team"",
-      ""url"": ""http://swagger.io"",
-      ""email"": ""foo@example.com""
-    },
-    ""license"": {
-      ""name"": ""MIT"",
-      ""url"": ""http://opensource.org/licenses/MIT""
-    },
-    ""version"": ""1.0.0""
-  },
-  ""host"": ""petstore.swagger.io"",
-  ""basePath"": ""/api"",
-  ""schemes"": [
-    ""http""
-  ],
-  ""paths"": {
-    ""/pets"": {
-      ""get"": {
-        ""description"": ""Returns all pets from the system that the user has access to"",
-        ""operationId"": ""findPets"",
-        ""produces"": [
-          ""application/json"",
-          ""application/xml"",
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""query"",
-            ""name"": ""tags"",
-            ""description"": ""tags to filter by"",
-            ""type"": ""array"",
-            ""items"": {
-              ""type"": ""string""
-            }
-          },
-          {
-            ""in"": ""query"",
-            ""name"": ""limit"",
-            ""description"": ""maximum number of results to return"",
-            ""type"": ""integer"",
-            ""format"": ""int32""
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""type"": ""array"",
-              ""items"": {
-                ""required"": [
-                  ""id"",
-                  ""name""
-                ],
-                ""type"": ""object"",
-                ""properties"": {
-                  ""id"": {
-                    ""format"": ""int64"",
-                    ""type"": ""integer""
-                  },
-                  ""name"": {
-                    ""type"": ""string""
-                  },
-                  ""tag"": {
-                    ""type"": ""string""
-                  }
-                }
-              }
-            }
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          }
-        }
-      },
-      ""post"": {
-        ""description"": ""Creates a new pet in the store.  Duplicates are allowed"",
-        ""operationId"": ""addPet"",
-        ""consumes"": [
-          ""application/json""
-        ],
-        ""produces"": [
-          ""application/json"",
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""body"",
-            ""name"": ""body"",
-            ""description"": ""Pet to add to the store"",
-            ""required"": true,
-            ""schema"": {
-              ""required"": [
-                ""name""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""id"": {
-                  ""format"": ""int64"",
-                  ""type"": ""integer""
-                },
-                ""name"": {
-                  ""type"": ""string""
-                },
-                ""tag"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""required"": [
-                ""id"",
-                ""name""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""id"": {
-                  ""format"": ""int64"",
-                  ""type"": ""integer""
-                },
-                ""name"": {
-                  ""type"": ""string""
-                },
-                ""tag"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    ""/pets/{id}"": {
-      ""get"": {
-        ""description"": ""Returns a user based on a single ID, if the user does not have access to the pet"",
-        ""operationId"": ""findPetById"",
-        ""produces"": [
-          ""application/json"",
-          ""application/xml"",
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""path"",
-            ""name"": ""id"",
-            ""description"": ""ID of pet to fetch"",
-            ""required"": true,
-            ""type"": ""integer"",
-            ""format"": ""int64""
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""required"": [
-                ""id"",
-                ""name""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""id"": {
-                  ""format"": ""int64"",
-                  ""type"": ""integer""
-                },
-                ""name"": {
-                  ""type"": ""string""
-                },
-                ""tag"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          }
-        }
-      },
-      ""delete"": {
-        ""description"": ""deletes a single pet based on the ID supplied"",
-        ""operationId"": ""deletePet"",
-        ""produces"": [
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""path"",
-            ""name"": ""id"",
-            ""description"": ""ID of pet to delete"",
-            ""required"": true,
-            ""type"": ""integer"",
-            ""format"": ""int64""
-          }
-        ],
-        ""responses"": {
-          ""204"": {
-            ""description"": ""pet deleted""
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""required"": [
-                ""code"",
-                ""message""
-              ],
-              ""type"": ""object"",
-              ""properties"": {
-                ""code"": {
-                  ""format"": ""int32"",
-                  ""type"": ""integer""
-                },
-                ""message"": {
-                  ""type"": ""string""
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  ""definitions"": {
-    ""pet"": {
-      ""required"": [
-        ""id"",
-        ""name""
-      ],
-      ""type"": ""object"",
-      ""properties"": {
-        ""id"": {
-          ""format"": ""int64"",
-          ""type"": ""integer""
-        },
-        ""name"": {
-          ""type"": ""string""
-        },
-        ""tag"": {
-          ""type"": ""string""
-        }
-      }
-    },
-    ""newPet"": {
-      ""required"": [
-        ""name""
-      ],
-      ""type"": ""object"",
-      ""properties"": {
-        ""id"": {
-          ""format"": ""int64"",
-          ""type"": ""integer""
-        },
-        ""name"": {
-          ""type"": ""string""
-        },
-        ""tag"": {
-          ""type"": ""string""
-        }
-      }
-    },
-    ""errorModel"": {
-      ""required"": [
-        ""code"",
-        ""message""
-      ],
-      ""type"": ""object"",
-      ""properties"": {
-        ""code"": {
-          ""format"": ""int32"",
-          ""type"": ""integer""
-        },
-        ""message"": {
-          ""type"": ""string""
-        }
-      }
-    }
-  }
-}";
-
-            // Act
-            AdvancedDocument.SerializeAsV2(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeDuplicateExtensionsAsV3JsonWorks()
+        public void SerializeDuplicateExtensionsAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -2328,92 +1896,6 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            DuplicateExtensions.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeDuplicateExtensionsAsV2JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected = @"{
-  ""swagger"": ""2.0"",
-  ""info"": {
-    ""title"": ""Swagger Petstore (Simple)"",
-    ""description"": ""A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification"",
-    ""version"": ""1.0.0""
-  },
-  ""host"": ""petstore.swagger.io"",
-  ""basePath"": ""/api"",
-  ""schemes"": [
-    ""http""
-  ],
-  ""paths"": {
-    ""/add/{operand1}/{operand2}"": {
-      ""get"": {
-        ""operationId"": ""addByOperand1AndByOperand2"",
-        ""produces"": [
-          ""application/json""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""path"",
-            ""name"": ""operand1"",
-            ""description"": ""The first operand"",
-            ""required"": true,
-            ""type"": ""integer"",
-            ""my-extension"": 4
-          },
-          {
-            ""in"": ""path"",
-            ""name"": ""operand2"",
-            ""description"": ""The second operand"",
-            ""required"": true,
-            ""type"": ""integer"",
-            ""my-extension"": 4
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""type"": ""array"",
-              ""items"": {
-                ""required"": [
-                  ""id"",
-                  ""name""
-                ],
-                ""type"": ""object"",
-                ""properties"": {
-                  ""id"": {
-                    ""format"": ""int64"",
-                    ""type"": ""integer""
-                  },
-                  ""name"": {
-                    ""type"": ""string""
-                  },
-                  ""tag"": {
-                    ""type"": ""string""
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}";
-
-            // Act
             DuplicateExtensions.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
@@ -2425,304 +1907,10 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedDocumentWithReferenceAsV2JsonWorks()
+        public void SerializeSimpleDocumentWithTopLevelSelfReferencingComponentsAsYamlV2Works()
         {
             // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""swagger"": ""2.0"",
-  ""info"": {
-    ""title"": ""Swagger Petstore (Simple)"",
-    ""description"": ""A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification"",
-    ""termsOfService"": ""http://helloreverb.com/terms/"",
-    ""contact"": {
-      ""name"": ""Swagger API team"",
-      ""url"": ""http://swagger.io"",
-      ""email"": ""foo@example.com""
-    },
-    ""license"": {
-      ""name"": ""MIT"",
-      ""url"": ""http://opensource.org/licenses/MIT""
-    },
-    ""version"": ""1.0.0""
-  },
-  ""host"": ""petstore.swagger.io"",
-  ""basePath"": ""/api"",
-  ""schemes"": [
-    ""http""
-  ],
-  ""paths"": {
-    ""/pets"": {
-      ""get"": {
-        ""description"": ""Returns all pets from the system that the user has access to"",
-        ""operationId"": ""findPets"",
-        ""produces"": [
-          ""application/json"",
-          ""application/xml"",
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""query"",
-            ""name"": ""tags"",
-            ""description"": ""tags to filter by"",
-            ""type"": ""array"",
-            ""items"": {
-              ""type"": ""string""
-            }
-          },
-          {
-            ""in"": ""query"",
-            ""name"": ""limit"",
-            ""description"": ""maximum number of results to return"",
-            ""type"": ""integer"",
-            ""format"": ""int32""
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""type"": ""array"",
-              ""items"": {
-                ""$ref"": ""#/definitions/pet""
-              }
-            }
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          }
-        }
-      },
-      ""post"": {
-        ""description"": ""Creates a new pet in the store.  Duplicates are allowed"",
-        ""operationId"": ""addPet"",
-        ""consumes"": [
-          ""application/json""
-        ],
-        ""produces"": [
-          ""application/json"",
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""body"",
-            ""name"": ""body"",
-            ""description"": ""Pet to add to the store"",
-            ""required"": true,
-            ""schema"": {
-              ""$ref"": ""#/definitions/newPet""
-            }
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/pet""
-            }
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          }
-        }
-      }
-    },
-    ""/pets/{id}"": {
-      ""get"": {
-        ""description"": ""Returns a user based on a single ID, if the user does not have access to the pet"",
-        ""operationId"": ""findPetById"",
-        ""produces"": [
-          ""application/json"",
-          ""application/xml"",
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""path"",
-            ""name"": ""id"",
-            ""description"": ""ID of pet to fetch"",
-            ""required"": true,
-            ""type"": ""integer"",
-            ""format"": ""int64""
-          }
-        ],
-        ""responses"": {
-          ""200"": {
-            ""description"": ""pet response"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/pet""
-            }
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          }
-        }
-      },
-      ""delete"": {
-        ""description"": ""deletes a single pet based on the ID supplied"",
-        ""operationId"": ""deletePet"",
-        ""produces"": [
-          ""text/html""
-        ],
-        ""parameters"": [
-          {
-            ""in"": ""path"",
-            ""name"": ""id"",
-            ""description"": ""ID of pet to delete"",
-            ""required"": true,
-            ""type"": ""integer"",
-            ""format"": ""int64""
-          }
-        ],
-        ""responses"": {
-          ""204"": {
-            ""description"": ""pet deleted""
-          },
-          ""4XX"": {
-            ""description"": ""unexpected client error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          },
-          ""5XX"": {
-            ""description"": ""unexpected server error"",
-            ""schema"": {
-              ""$ref"": ""#/definitions/errorModel""
-            }
-          }
-        }
-      }
-    }
-  },
-  ""definitions"": {
-    ""pet"": {
-      ""required"": [
-        ""id"",
-        ""name""
-      ],
-      ""type"": ""object"",
-      ""properties"": {
-        ""id"": {
-          ""format"": ""int64"",
-          ""type"": ""integer""
-        },
-        ""name"": {
-          ""type"": ""string""
-        },
-        ""tag"": {
-          ""type"": ""string""
-        }
-      }
-    },
-    ""newPet"": {
-      ""required"": [
-        ""name""
-      ],
-      ""type"": ""object"",
-      ""properties"": {
-        ""id"": {
-          ""format"": ""int64"",
-          ""type"": ""integer""
-        },
-        ""name"": {
-          ""type"": ""string""
-        },
-        ""tag"": {
-          ""type"": ""string""
-        }
-      }
-    },
-    ""errorModel"": {
-      ""required"": [
-        ""code"",
-        ""message""
-      ],
-      ""type"": ""object"",
-      ""properties"": {
-        ""code"": {
-          ""format"": ""int32"",
-          ""type"": ""integer""
-        },
-        ""message"": {
-          ""type"": ""string""
-        }
-      }
-    }
-  }
-}";
-
-            // Act
-            AdvancedDocumentWithReference.SerializeAsV2(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeSimpleDocumentWithTopLevelReferencingComponentsAsYamlV2Works()
-        {
-            // Arrange
-            var expected = @"swagger: '2.0'
-info:
-  version: 1.0.0
-paths: { }
-definitions:
-  schema1:
-    $ref: '#/definitions/schema2'
-  schema2:
-    type: object
-    properties:
-      property1:
-        type: string";
-
-            // Act
-            var actual = SimpleDocumentWithTopLevelReferencingComponents.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeSimpleDocumentWithTopLevelSelfReferencingComponentsAsYamlV3Works()
-        {
-            // Arrange
-            var expected = @"swagger: '2.0'
+            var expected = @"asyncapi: '2.2.0'
 info:
   version: 1.0.0
 paths: { }
@@ -2739,7 +1927,7 @@ definitions:
         }
 
         [Fact]
-        public void SerializeSimpleDocumentWithTopLevelSelfReferencingWithOtherPropertiesComponentsAsYamlV3Works()
+        public void SerializeSimpleDocumentWithTopLevelSelfReferencingWithOtherPropertiesComponentsAsYamlV2Works()
         {
             // Arrange
             var expected = @"swagger: '2.0'
@@ -2822,96 +2010,6 @@ definitions:
             Assert.NotEmpty(actual);
         }
 
-        [Fact]
-        public void SerializeRelativePathAsV2JsonWorks()
-        {
-            // Arrange
-            var expected =
-                @"swagger: '2.0'
-info:
-  version: 1.0.0
-basePath: /server1
-paths: { }";
-            var doc = new AsyncApiDocument()
-            {
-                Info = new AsyncApiInfo() { Version = "1.0.0" },
-                Servers = new List<AsyncApiServer>() {
-                    new AsyncApiServer()
-                    {
-                        Url = "/server1"
-                    }
-                }
-            };
-
-            // Act
-            var actual = doc.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeRelativePathWithHostAsV2JsonWorks()
-        {
-            // Arrange
-            var expected =
-                @"swagger: '2.0'
-info:
-  version: 1.0.0
-host: //example.org
-basePath: /server1
-paths: { }";
-            var doc = new AsyncApiDocument()
-            {
-                Info = new AsyncApiInfo() { Version = "1.0.0" },
-                Servers = new List<AsyncApiServer>() {
-                    new AsyncApiServer()
-                    {
-                        Url = "//example.org/server1"
-                    }
-                }
-            };
-
-            // Act
-            var actual = doc.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeRelativeRootPathWithHostAsV2JsonWorks()
-        {
-            // Arrange
-            var expected =
-                @"swagger: '2.0'
-info:
-  version: 1.0.0
-host: //example.org
-paths: { }";
-            var doc = new AsyncApiDocument()
-            {
-                Info = new AsyncApiInfo() { Version = "1.0.0" },
-                Servers = new List<AsyncApiServer>() {
-                    new AsyncApiServer()
-                    {
-                        Url = "//example.org/"
-                    }
-                }
-            };
-
-            // Act
-            var actual = doc.SerializeAsYaml(AsyncApiSpecVersion.AsyncApi2_0);
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
 
     }
 }

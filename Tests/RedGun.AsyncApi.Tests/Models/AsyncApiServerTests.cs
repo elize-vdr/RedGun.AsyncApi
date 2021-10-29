@@ -47,7 +47,7 @@ namespace RedGun.AsyncApi.Tests.Models
         };
 
         [Fact]
-        public void SerializeBasicServerAsV3JsonWorks()
+        public void SerializeBasicServerAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -66,7 +66,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedServerAsV3JsonWorks()
+        public void SerializeAdvancedServerAsV2JsonWorks()
         {
             // Arrange
             var expected =

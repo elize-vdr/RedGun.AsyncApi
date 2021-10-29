@@ -131,7 +131,7 @@ namespace RedGun.AsyncApi.Tests.Models
         [Theory]
         [InlineData(AsyncApiFormat.Json, "{ }")]
         [InlineData(AsyncApiFormat.Yaml, "{ }")]
-        public void SerializeBasicMediaTypeAsV3Works(AsyncApiFormat format, string expected)
+        public void SerializeBasicMediaTypeAsV2Works(AsyncApiFormat format, string expected)
         {
             // Arrange & Act
             var actual = BasicMediaType.Serialize(AsyncApiSpecVersion.AsyncApi2_0, format);
@@ -143,7 +143,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvanceMediaTypeAsV3JsonWorks()
+        public void SerializeAdvanceMediaTypeAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -169,7 +169,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvanceMediaTypeAsV3YamlWorks()
+        public void SerializeAdvanceMediaTypeAsV2YamlWorks()
         {
             // Arrange
             var expected =
@@ -191,7 +191,7 @@ encoding:
         }
 
         [Fact]
-        public void SerializeMediaTypeWithObjectExampleAsV3YamlWorks()
+        public void SerializeMediaTypeWithObjectExampleAsV2YamlWorks()
         {
             // Arrange
             var expected =
@@ -224,7 +224,7 @@ encoding:
         }
 
         [Fact]
-        public void SerializeMediaTypeWithObjectExampleAsV3JsonWorks()
+        public void SerializeMediaTypeWithObjectExampleAsV2JsonWorks()
         {
             // Arrange
             var expected =
@@ -273,7 +273,7 @@ encoding:
         }
 
         [Fact]
-        public void SerializeMediaTypeWithXmlExampleAsV3YamlWorks()
+        public void SerializeMediaTypeWithXmlExampleAsV2YamlWorks()
         {
             // Arrange
             var expected =
@@ -295,7 +295,7 @@ encoding:
         }
 
         [Fact]
-        public void SerializeMediaTypeWithXmlExampleAsV3JsonWorks()
+        public void SerializeMediaTypeWithXmlExampleAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -320,7 +320,7 @@ encoding:
         }
 
         [Fact]
-        public void SerializeMediaTypeWithObjectExamplesAsV3YamlWorks()
+        public void SerializeMediaTypeWithObjectExamplesAsV2YamlWorks()
         {
             // Arrange
             var expected = @"examples:
@@ -355,7 +355,7 @@ encoding:
         }
 
         [Fact]
-        public void SerializeMediaTypeWithObjectExamplesAsV3JsonWorks()
+        public void SerializeMediaTypeWithObjectExamplesAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{

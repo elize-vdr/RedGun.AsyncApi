@@ -223,7 +223,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeBasicSchemaAsV3JsonWorks()
+        public void SerializeBasicSchemaAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{ }";
@@ -238,7 +238,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedSchemaNumberAsV3JsonWorks()
+        public void SerializeAdvancedSchemaNumberAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -265,7 +265,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedSchemaObjectAsV3JsonWorks()
+        public void SerializeAdvancedSchemaObjectAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -314,7 +314,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedSchemaWithAllOfAsV3JsonWorks()
+        public void SerializeAdvancedSchemaWithAllOfAsV2JsonWorks()
         {
             // Arrange
             var expected = @"{
@@ -366,7 +366,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeReferencedSchemaAsV3WithoutReferenceJsonWorks()
+        public void SerializeReferencedSchemaAsV2WithoutReferenceJsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -387,7 +387,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            ReferencedSchema.SerializeAsV3WithoutReference(writer);
+            ReferencedSchema.SerializeAsV2WithoutReference(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 
@@ -398,7 +398,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeReferencedSchemaAsV3JsonWorks()
+        public void SerializeReferencedSchemaAsV2JsonWorks()
         {
             // Arrange
             var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -409,66 +409,7 @@ namespace RedGun.AsyncApi.Tests.Models
 }";
 
             // Act
-            ReferencedSchema.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeSchemaWRequiredPropertiesAsV2JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected = @"{
-  ""title"": ""title1"",
-  ""required"": [
-    ""property1""
-  ],
-  ""properties"": {
-    ""property1"": {
-      ""required"": [
-        ""property3""
-      ],
-      ""properties"": {
-        ""property2"": {
-          ""type"": ""integer""
-        },
-        ""property3"": {
-          ""maxLength"": 15,
-          ""type"": ""string""
-        }
-      }
-    },
-    ""property4"": {
-      ""properties"": {
-        ""property5"": {
-          ""properties"": {
-            ""property6"": {
-              ""type"": ""boolean""
-            }
-          }
-        },
-        ""property7"": {
-          ""minLength"": 2,
-          ""type"": ""string""
-        }
-      },
-      ""readOnly"": true
-    }
-  },
-  ""externalDocs"": {
-    ""url"": ""http://example.com/externalDocs""
-  }
-}";
-
-            // Act
-            AdvancedSchemaWithRequiredPropertiesObject.SerializeAsV2(writer);
+            ReferencedSchema.SerializeAsV2(writer);
             writer.Flush();
             var actual = outputStringWriter.GetStringBuilder().ToString();
 

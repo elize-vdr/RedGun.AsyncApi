@@ -46,80 +46,7 @@ namespace RedGun.AsyncApi.Tests.Models
             _output = output;
         }
 
-        [Fact]
-        public void SerializeAdvancedHeaderAsV3JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""description"": ""sampleHeader"",
-  ""schema"": {
-    ""type"": ""integer"",
-    ""format"": ""int32""
-  }
-}";
-
-            // Act
-            AdvancedHeader.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedHeaderAsV3JsonWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""$ref"": ""#/components/headers/example1""
-}";
-
-            // Act
-            ReferencedHeader.SerializeAsV3(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
-        [Fact]
-        public void SerializeReferencedHeaderAsV3JsonWithoutReferenceWorks()
-        {
-            // Arrange
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new AsyncApiJsonWriter(outputStringWriter);
-            var expected =
-                @"{
-  ""description"": ""sampleHeader"",
-  ""schema"": {
-    ""type"": ""integer"",
-    ""format"": ""int32""
-  }
-}";
-
-            // Act
-            ReferencedHeader.SerializeAsV3WithoutReference(writer);
-            writer.Flush();
-            var actual = outputStringWriter.GetStringBuilder().ToString();
-
-            // Assert
-            actual = actual.MakeLineBreaksEnvironmentNeutral();
-            expected = expected.MakeLineBreaksEnvironmentNeutral();
-            actual.Should().Be(expected);
-        }
-
+        /* TODO: There are only V2 tests here and no OpenApi V3 which is our AsyncApi 2 equivalent, so can this file be deleted??
         [Fact]
         public void SerializeAdvancedHeaderAsV2JsonWorks()
         {
@@ -129,8 +56,10 @@ namespace RedGun.AsyncApi.Tests.Models
             var expected =
                 @"{
   ""description"": ""sampleHeader"",
-  ""type"": ""integer"",
-  ""format"": ""int32""
+  ""schema"": {
+    ""type"": ""integer"",
+    ""format"": ""int32""
+  }
 }";
 
             // Act
@@ -152,7 +81,7 @@ namespace RedGun.AsyncApi.Tests.Models
             var writer = new AsyncApiJsonWriter(outputStringWriter);
             var expected =
                 @"{
-  ""$ref"": ""#/headers/example1""
+  ""$ref"": ""#/components/headers/example1""
 }";
 
             // Act
@@ -175,8 +104,10 @@ namespace RedGun.AsyncApi.Tests.Models
             var expected =
                 @"{
   ""description"": ""sampleHeader"",
-  ""type"": ""integer"",
-  ""format"": ""int32""
+  ""schema"": {
+    ""type"": ""integer"",
+    ""format"": ""int32""
+  }
 }";
 
             // Act
@@ -189,5 +120,6 @@ namespace RedGun.AsyncApi.Tests.Models
             expected = expected.MakeLineBreaksEnvironmentNeutral();
             actual.Should().Be(expected);
         }
+        */
     }
 }

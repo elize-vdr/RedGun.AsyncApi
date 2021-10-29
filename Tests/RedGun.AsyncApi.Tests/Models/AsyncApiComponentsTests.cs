@@ -283,7 +283,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedComponentsAsJsonV3Works()
+        public void SerializeAdvancedComponentsAsJsonV2Works()
         {
             // Arrange
             var expected = @"{
@@ -332,7 +332,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedComponentsWithReferenceAsJsonV3Works()
+        public void SerializeAdvancedComponentsWithReferenceAsJsonV2Works()
         {
             // Arrange
             var expected = @"{
@@ -387,7 +387,7 @@ namespace RedGun.AsyncApi.Tests.Models
         }
 
         [Fact]
-        public void SerializeAdvancedComponentsAsYamlV3Works()
+        public void SerializeAdvancedComponentsAsYamlV2Works()
         {
             // Arrange
             var expected = @"schemas:
@@ -423,7 +423,7 @@ securitySchemes:
         }
 
         [Fact]
-        public void SerializeAdvancedComponentsWithReferenceAsYamlV3Works()
+        public void SerializeAdvancedComponentsWithReferenceAsYamlV2Works()
         {
             // Arrange
             var expected = @"schemas:
@@ -462,7 +462,7 @@ securitySchemes:
         }
 
         [Fact]
-        public void SerializeBrokenComponentsAsJsonV3Works()
+        public void SerializeBrokenComponentsAsJsonV2Works()
         {
             // Arrange
             var expected = @"{
@@ -497,7 +497,7 @@ securitySchemes:
         }
 
         [Fact]
-        public void SerializeBrokenComponentsAsYamlV3Works()
+        public void SerializeBrokenComponentsAsYamlV2Works()
         {
             // Arrange
             var expected = @"schemas:
@@ -524,7 +524,7 @@ securitySchemes:
         }
 
         [Fact]
-        public void SerializeTopLevelReferencingComponentsAsYamlV3Works()
+        public void SerializeTopLevelReferencingComponentsAsYamlV2Works()
         {
             // Arrange
             var expected = @"schemas:
@@ -546,7 +546,7 @@ securitySchemes:
         }
 
         [Fact]
-        public void SerializeTopLevelSelfReferencingComponentsAsYamlV3Works()
+        public void SerializeTopLevelSelfReferencingComponentsAsYamlV2Works()
         {
             // Arrange
             var expected = @"schemas:
@@ -562,7 +562,7 @@ securitySchemes:
         }
 
         [Fact]
-        public void SerializeTopLevelSelfReferencingWithOtherPropertiesComponentsAsYamlV3Works()
+        public void SerializeTopLevelSelfReferencingWithOtherPropertiesComponentsAsYamlV2Works()
         {
             // Arrange
             var expected = @"schemas:

@@ -12,14 +12,15 @@ namespace RedGun.AsyncApi
     public enum AsyncApiSpecVersion
     {
         /// <summary>
-        /// Represents OpenAPI V2.0 spec
+        /// Represents all patches of AsyncAPI V2.0 spec (e.g. 2.0.0, 2.1.0, 2.2.0)
         /// </summary>
-        // TODO: Remove
-        OpenApi2_0,
+        AsyncApi2_0,
 
         /// <summary>
-        /// Represents all patches of AsyncAPI V2.0 spec (e.g. 2.0.0, 2.1.0, 2.2.0)
-        /// </summary> 
-        AsyncApi2_0
+        /// Represents future . . . 
+        /// </summary>
+        /*
+        AsyncApi3_0
+        */
     }
 }

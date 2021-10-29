@@ -1,0 +1,7 @@
+Tests:
+    * Remove Callback Tests, not used in AsyncApi
+    * PublicApi test fails, have to set all this up, see: https://cezarypiatek.github.io/post/setting-assembly-and-package-metadata/
+
+Code:
+    * Delete Models not used:
+        - Callback

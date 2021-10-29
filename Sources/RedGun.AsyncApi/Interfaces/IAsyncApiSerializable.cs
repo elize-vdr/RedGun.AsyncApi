@@ -10,11 +10,13 @@ namespace RedGun.AsyncApi.Interfaces
     /// </summary>
     public interface IAsyncApiSerializable : IAsyncApiElement
     {
+        /*
         /// <summary>
         /// Serialize Async API element to v3.0.
         /// </summary>
         /// <param name="writer">The writer.</param>
         void SerializeAsV3(IAsyncApiWriter writer);
+        */
 
         /// <summary>
         /// Serialize Async API element to v2.0.

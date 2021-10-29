@@ -44,50 +44,8 @@ namespace RedGun.AsyncApi.Models
         public AsyncApiReference Reference { get; set; }
 
         /// <summary>
-        /// Serialize <see cref="AsyncApiTag"/> to Async API v3.0
-        /// </summary>
-        public void SerializeAsV3(IAsyncApiWriter writer)
-        {
-            if (writer == null)
-            {
-                throw Error.ArgumentNull(nameof(writer));
-            }
-
-            if (Reference != null)
-            {
-                Reference.SerializeAsV3(writer);
-                return;
-            }
-
-            writer.WriteValue(Name);
-        }
-
-        /// <summary>
-        /// Serialize to OpenAPI V3 document without using reference.
-        /// </summary>
-        public void SerializeAsV3WithoutReference(IAsyncApiWriter writer)
-        {
-            writer.WriteStartObject();
-
-            // name
-            writer.WriteProperty(AsyncApiConstants.Name, Name);
-
-            // description
-            writer.WriteProperty(AsyncApiConstants.Description, Description);
-
-            // external docs
-            writer.WriteOptionalObject(AsyncApiConstants.ExternalDocs, ExternalDocs, (w, e) => e.SerializeAsV3(w));
-
-            // extensions.
-            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
-
-            writer.WriteEndObject();
-        }
-
-        /// <summary>
         /// Serialize <see cref="AsyncApiTag"/> to Async API v2.0
         /// </summary>
-        // TODO: Remove
         public void SerializeAsV2(IAsyncApiWriter writer)
         {
             if (writer == null)
@@ -105,9 +63,8 @@ namespace RedGun.AsyncApi.Models
         }
 
         /// <summary>
-        /// Serialize to OpenAPI V2 document without using reference.
+        /// Serialize to AsyncAPI V2 document without using reference.
         /// </summary>
-        // TODO: Remove
         public void SerializeAsV2WithoutReference(IAsyncApiWriter writer)
         {
             writer.WriteStartObject();
@@ -121,8 +78,8 @@ namespace RedGun.AsyncApi.Models
             // external docs
             writer.WriteOptionalObject(AsyncApiConstants.ExternalDocs, ExternalDocs, (w, e) => e.SerializeAsV2(w));
 
-            // extensions
-            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
+            // extensions.
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }

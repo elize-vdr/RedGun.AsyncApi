@@ -47,20 +47,11 @@ namespace RedGun.AsyncApi.Models
         public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
-        /// Serialize <see cref="AsyncApiXml"/> to Async API v3.0
-        /// </summary>
-        public void SerializeAsV3(IAsyncApiWriter writer)
-        {
-            Write(writer, AsyncApiSpecVersion.AsyncApi2_0);
-        }
-
-        /// <summary>
         /// Serialize <see cref="AsyncApiXml"/> to Async API v2.0
         /// </summary>
-        // TODO: Remove
         public void SerializeAsV2(IAsyncApiWriter writer)
         {
-            Write(writer, AsyncApiSpecVersion.OpenApi2_0);
+            Write(writer, AsyncApiSpecVersion.AsyncApi2_0);
         }
 
         private void Write(IAsyncApiWriter writer, AsyncApiSpecVersion specVersion)

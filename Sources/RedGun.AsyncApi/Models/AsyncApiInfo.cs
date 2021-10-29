@@ -50,42 +50,6 @@ namespace RedGun.AsyncApi.Models
         public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
         /// <summary>
-        /// Serialize <see cref="AsyncApiInfo"/> to Async API v3.0
-        /// </summary>
-        public void SerializeAsV3(IAsyncApiWriter writer)
-        {
-            if (writer == null)
-            {
-                throw Error.ArgumentNull(nameof(writer));
-            }
-
-            writer.WriteStartObject();
-
-            // title
-            writer.WriteProperty(AsyncApiConstants.Title, Title);
-
-            // description
-            writer.WriteProperty(AsyncApiConstants.Description, Description);
-
-            // termsOfService
-            writer.WriteProperty(AsyncApiConstants.TermsOfService, TermsOfService?.OriginalString);
-
-            // contact object
-            writer.WriteOptionalObject(AsyncApiConstants.Contact, Contact, (w, c) => c.SerializeAsV3(w));
-
-            // license object
-            writer.WriteOptionalObject(AsyncApiConstants.License, License, (w, l) => l.SerializeAsV3(w));
-
-            // version
-            writer.WriteProperty(AsyncApiConstants.Version, Version);
-
-            // specification extensions
-            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
-
-            writer.WriteEndObject();
-        }
-
-        /// <summary>
         /// Serialize <see cref="AsyncApiInfo"/> to Async API v2.0
         /// </summary>
         public void SerializeAsV2(IAsyncApiWriter writer)
@@ -116,8 +80,7 @@ namespace RedGun.AsyncApi.Models
             writer.WriteProperty(AsyncApiConstants.Version, Version);
 
             // specification extensions
-            // TODO: Remove
-            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.OpenApi2_0);
+            writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
 
             writer.WriteEndObject();
         }

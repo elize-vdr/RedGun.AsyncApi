@@ -41,11 +41,10 @@ namespace RedGun.AsyncApi.Readers
         public AsyncApiDocument Read(YamlDocument input, out AsyncApiDiagnostic diagnostic)
         {
             diagnostic = new AsyncApiDiagnostic();
-            var context = new ParsingContext(diagnostic)
-            {
-                ExtensionParsers = _settings.ExtensionParsers,
-                BaseUrl = _settings.BaseUrl
-            };
+            var context = new ParsingContext(diagnostic) {
+                                                             ExtensionParsers = _settings.ExtensionParsers,
+                                                             BaseUrl = _settings.BaseUrl
+                                                         };
 
             AsyncApiDocument document = null;
             try

@@ -1,6 +1,6 @@
-[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/Microsoft/OpenAPI.NET")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(@"RedGun.AsyncApi.Readers.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100957cb48387b2a5f54f5ce39255f18f26d32a39990db27cf48737afc6bc62759ba996b8a2bfb675d4e39f3d06ecb55a178b1b4031dcb2a767e29977d88cce864a0d16bfc1b3bebb0edf9fe285f10fffc0a85f93d664fa05af07faa3aad2e545182dbf787e3fd32b56aca95df1a3c4e75dec164a3f1a4c653d971b01ffc39eb3c4")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(@"RedGun.AsyncApi.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100957cb48387b2a5f54f5ce39255f18f26d32a39990db27cf48737afc6bc62759ba996b8a2bfb675d4e39f3d06ecb55a178b1b4031dcb2a767e29977d88cce864a0d16bfc1b3bebb0edf9fe285f10fffc0a85f93d664fa05af07faa3aad2e545182dbf787e3fd32b56aca95df1a3c4e75dec164a3f1a4c653d971b01ffc39eb3c4")]
+[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/elize-vdr/RedGun.AsyncApi")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(@"RedGun.AsyncApi.Readers.Tests, PublicKey=00240000048000009400000006020000002400005253413100040000010001001934709a3bca69283a626f1ac69329a709bf107182ad8d03a085376bd270becbc56b8e29a72f5ccfd2113a582a1ece9ad0a3705bc6022325d7a489e6ef2e54fd9ad79520547f0cd4ecdc241b30e7bb26f85e214ca7bc5fd80181cf4890d7fa3a26eea5f0b564fcdae10e315220852ae68747a024c13829adfefd88317f4656bb")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(@"RedGun.AsyncApi.Tests, PublicKey=00240000048000009400000006020000002400005253413100040000010001001934709a3bca69283a626f1ac69329a709bf107182ad8d03a085376bd270becbc56b8e29a72f5ccfd2113a582a1ece9ad0a3705bc6022325d7a489e6ef2e54fd9ad79520547f0cd4ecdc241b30e7bb26f85e214ca7bc5fd80181cf4890d7fa3a26eea5f0b564fcdae10e315220852ae68747a024c13829adfefd88317f4656bb")]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETStandard,Version=v2.0", FrameworkDisplayName="")]
 namespace RedGun.AsyncApi.Any
 {
@@ -11,96 +11,96 @@ namespace RedGun.AsyncApi.Any
         Array = 2,
         Object = 3,
     }
-    public interface IOpenApiAny : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtension
+    public interface IAsyncApiAny : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtension
     {
         RedGun.AsyncApi.Any.AnyType AnyType { get; }
     }
-    public interface IOpenApiPrimitive : RedGun.AsyncApi.Any.IOpenApiAny, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtension
+    public interface IAsyncApiPrimitive : RedGun.AsyncApi.Any.IAsyncApiAny, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtension
     {
         RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiArray : System.Collections.Generic.List<RedGun.AsyncApi.Any.IOpenApiAny>, RedGun.AsyncApi.Any.IOpenApiAny, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtension
+    public class AsyncApiArray : System.Collections.Generic.List<RedGun.AsyncApi.Any.IAsyncApiAny>, RedGun.AsyncApi.Any.IAsyncApiAny, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtension
     {
-        public OpenApiArray() { }
+        public AsyncApiArray() { }
         public RedGun.AsyncApi.Any.AnyType AnyType { get; }
-        public void Write(RedGun.AsyncApi.Writers.IOpenApiWriter writer, RedGun.AsyncApi.OpenApiSpecVersion specVersion) { }
+        public void Write(RedGun.AsyncApi.Writers.IAsyncApiWriter writer, RedGun.AsyncApi.AsyncApiSpecVersion specVersion) { }
     }
-    public class OpenApiBinary : RedGun.AsyncApi.Any.OpenApiPrimitive<byte[]>
+    public class AsyncApiBinary : RedGun.AsyncApi.Any.AsyncApiPrimitive<byte[]>
     {
-        public OpenApiBinary(byte[] value) { }
+        public AsyncApiBinary(byte[] value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiBoolean : RedGun.AsyncApi.Any.OpenApiPrimitive<bool>
+    public class AsyncApiBoolean : RedGun.AsyncApi.Any.AsyncApiPrimitive<bool>
     {
-        public OpenApiBoolean(bool value) { }
+        public AsyncApiBoolean(bool value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiByte : RedGun.AsyncApi.Any.OpenApiPrimitive<byte[]>
+    public class AsyncApiByte : RedGun.AsyncApi.Any.AsyncApiPrimitive<byte[]>
     {
-        public OpenApiByte(byte value) { }
-        public OpenApiByte(byte[] value) { }
+        public AsyncApiByte(byte value) { }
+        public AsyncApiByte(byte[] value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiDate : RedGun.AsyncApi.Any.OpenApiPrimitive<System.DateTime>
+    public class AsyncApiDate : RedGun.AsyncApi.Any.AsyncApiPrimitive<System.DateTime>
     {
-        public OpenApiDate(System.DateTime value) { }
+        public AsyncApiDate(System.DateTime value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiDateTime : RedGun.AsyncApi.Any.OpenApiPrimitive<System.DateTimeOffset>
+    public class AsyncApiDateTime : RedGun.AsyncApi.Any.AsyncApiPrimitive<System.DateTimeOffset>
     {
-        public OpenApiDateTime(System.DateTimeOffset value) { }
+        public AsyncApiDateTime(System.DateTimeOffset value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiDouble : RedGun.AsyncApi.Any.OpenApiPrimitive<double>
+    public class AsyncApiDouble : RedGun.AsyncApi.Any.AsyncApiPrimitive<double>
     {
-        public OpenApiDouble(double value) { }
+        public AsyncApiDouble(double value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiFloat : RedGun.AsyncApi.Any.OpenApiPrimitive<float>
+    public class AsyncApiFloat : RedGun.AsyncApi.Any.AsyncApiPrimitive<float>
     {
-        public OpenApiFloat(float value) { }
+        public AsyncApiFloat(float value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiInteger : RedGun.AsyncApi.Any.OpenApiPrimitive<int>
+    public class AsyncApiInteger : RedGun.AsyncApi.Any.AsyncApiPrimitive<int>
     {
-        public OpenApiInteger(int value) { }
+        public AsyncApiInteger(int value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiLong : RedGun.AsyncApi.Any.OpenApiPrimitive<long>
+    public class AsyncApiLong : RedGun.AsyncApi.Any.AsyncApiPrimitive<long>
     {
-        public OpenApiLong(long value) { }
+        public AsyncApiLong(long value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public class OpenApiNull : RedGun.AsyncApi.Any.IOpenApiAny, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtension
+    public class AsyncApiNull : RedGun.AsyncApi.Any.IAsyncApiAny, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtension
     {
-        public OpenApiNull() { }
+        public AsyncApiNull() { }
         public RedGun.AsyncApi.Any.AnyType AnyType { get; }
-        public void Write(RedGun.AsyncApi.Writers.IOpenApiWriter writer, RedGun.AsyncApi.OpenApiSpecVersion specVersion) { }
+        public void Write(RedGun.AsyncApi.Writers.IAsyncApiWriter writer, RedGun.AsyncApi.AsyncApiSpecVersion specVersion) { }
     }
-    public class OpenApiObject : System.Collections.Generic.Dictionary<string, RedGun.AsyncApi.Any.IOpenApiAny>, RedGun.AsyncApi.Any.IOpenApiAny, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtension
+    public class AsyncApiObject : System.Collections.Generic.Dictionary<string, RedGun.AsyncApi.Any.IAsyncApiAny>, RedGun.AsyncApi.Any.IAsyncApiAny, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtension
     {
-        public OpenApiObject() { }
+        public AsyncApiObject() { }
         public RedGun.AsyncApi.Any.AnyType AnyType { get; }
-        public void Write(RedGun.AsyncApi.Writers.IOpenApiWriter writer, RedGun.AsyncApi.OpenApiSpecVersion specVersion) { }
+        public void Write(RedGun.AsyncApi.Writers.IAsyncApiWriter writer, RedGun.AsyncApi.AsyncApiSpecVersion specVersion) { }
     }
-    public class OpenApiPassword : RedGun.AsyncApi.Any.OpenApiPrimitive<string>
+    public class AsyncApiPassword : RedGun.AsyncApi.Any.AsyncApiPrimitive<string>
     {
-        public OpenApiPassword(string value) { }
+        public AsyncApiPassword(string value) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
     }
-    public abstract class OpenApiPrimitive<T> : RedGun.AsyncApi.Any.IOpenApiAny, RedGun.AsyncApi.Any.IOpenApiPrimitive, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtension
+    public abstract class AsyncApiPrimitive<T> : RedGun.AsyncApi.Any.IAsyncApiAny, RedGun.AsyncApi.Any.IAsyncApiPrimitive, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtension
     {
-        public OpenApiPrimitive(T value) { }
+        public AsyncApiPrimitive(T value) { }
         public RedGun.AsyncApi.Any.AnyType AnyType { get; }
         public abstract RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
         public T Value { get; }
-        public void Write(RedGun.AsyncApi.Writers.IOpenApiWriter writer, RedGun.AsyncApi.OpenApiSpecVersion specVersion) { }
+        public void Write(RedGun.AsyncApi.Writers.IAsyncApiWriter writer, RedGun.AsyncApi.AsyncApiSpecVersion specVersion) { }
     }
-    public class OpenApiString : RedGun.AsyncApi.Any.OpenApiPrimitive<string>
+    public class AsyncApiString : RedGun.AsyncApi.Any.AsyncApiPrimitive<string>
     {
-        public OpenApiString(string value) { }
-        public OpenApiString(string value, bool isExplicit) { }
-        public OpenApiString(string value, bool isExplicit, bool isRawString) { }
+        public AsyncApiString(string value) { }
+        public AsyncApiString(string value, bool isExplicit) { }
+        public AsyncApiString(string value, bool isExplicit, bool isRawString) { }
         public override RedGun.AsyncApi.Any.PrimitiveType PrimitiveType { get; }
         public bool IsExplicit() { }
         public bool IsRawString() { }
@@ -122,18 +122,18 @@ namespace RedGun.AsyncApi.Any
 }
 namespace RedGun.AsyncApi.Exceptions
 {
-    public class OpenApiException : System.Exception
+    public class AsyncApiException : System.Exception
     {
-        public OpenApiException() { }
-        public OpenApiException(string message) { }
-        public OpenApiException(string message, System.Exception innerException) { }
+        public AsyncApiException() { }
+        public AsyncApiException(string message) { }
+        public AsyncApiException(string message, System.Exception innerException) { }
         public string Pointer { get; set; }
     }
-    public class OpenApiWriterException : RedGun.AsyncApi.Exceptions.OpenApiException
+    public class AsyncApiWriterException : RedGun.AsyncApi.Exceptions.AsyncApiException
     {
-        public OpenApiWriterException() { }
-        public OpenApiWriterException(string message) { }
-        public OpenApiWriterException(string message, System.Exception innerException) { }
+        public AsyncApiWriterException() { }
+        public AsyncApiWriterException(string message) { }
+        public AsyncApiWriterException(string message, System.Exception innerException) { }
     }
 }
 namespace RedGun.AsyncApi.Expressions
@@ -232,37 +232,37 @@ namespace RedGun.AsyncApi.Extensions
             where T : System.Attribute { }
         public static string GetDisplayName(this System.Enum enumValue) { }
     }
-    public static class OpenApiElementExtensions
+    public static class AsyncApiElementExtensions
     {
-        public static System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Models.OpenApiError> Validate(this RedGun.AsyncApi.Interfaces.IOpenApiElement element, RedGun.AsyncApi.Validations.ValidationRuleSet ruleSet) { }
+        public static System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Models.AsyncApiError> Validate(this RedGun.AsyncApi.Interfaces.IAsyncApiElement element, RedGun.AsyncApi.Validations.ValidationRuleSet ruleSet) { }
     }
-    public static class OpenApiExtensibleExtensions
+    public static class AsyncApiExtensibleExtensions
     {
-        public static void AddExtension<T>(this T element, string name, RedGun.AsyncApi.Interfaces.IOpenApiExtension any)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiExtensible { }
+        public static void AddExtension<T>(this T element, string name, RedGun.AsyncApi.Interfaces.IAsyncApiExtension any)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiExtensible { }
     }
-    public static class OpenApiReferencableExtensions
+    public static class AsyncApiReferencableExtensions
     {
-        public static RedGun.AsyncApi.Interfaces.IOpenApiReferenceable ResolveReference(this RedGun.AsyncApi.Interfaces.IOpenApiReferenceable element, RedGun.AsyncApi.JsonPointer pointer) { }
+        public static RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable ResolveReference(this RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable element, RedGun.AsyncApi.JsonPointer pointer) { }
     }
-    public static class OpenApiSerializableExtensions
+    public static class AsyncApiSerializableExtensions
     {
-        public static string Serialize<T>(this T element, RedGun.AsyncApi.OpenApiSpecVersion specVersion, RedGun.AsyncApi.OpenApiFormat format)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static void Serialize<T>(this T element, RedGun.AsyncApi.Writers.IOpenApiWriter writer, RedGun.AsyncApi.OpenApiSpecVersion specVersion)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static void Serialize<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.OpenApiSpecVersion specVersion, RedGun.AsyncApi.OpenApiFormat format)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static void Serialize<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.OpenApiSpecVersion specVersion, RedGun.AsyncApi.OpenApiFormat format, RedGun.AsyncApi.Writers.OpenApiWriterSettings settings)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static string SerializeAsJson<T>(this T element, RedGun.AsyncApi.OpenApiSpecVersion specVersion)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static void SerializeAsJson<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.OpenApiSpecVersion specVersion)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static string SerializeAsYaml<T>(this T element, RedGun.AsyncApi.OpenApiSpecVersion specVersion)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
-        public static void SerializeAsYaml<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.OpenApiSpecVersion specVersion)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable { }
+        public static string Serialize<T>(this T element, RedGun.AsyncApi.AsyncApiSpecVersion specVersion, RedGun.AsyncApi.AsyncApiFormat format)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static void Serialize<T>(this T element, RedGun.AsyncApi.Writers.IAsyncApiWriter writer, RedGun.AsyncApi.AsyncApiSpecVersion specVersion)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static void Serialize<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.AsyncApiSpecVersion specVersion, RedGun.AsyncApi.AsyncApiFormat format)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static void Serialize<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.AsyncApiSpecVersion specVersion, RedGun.AsyncApi.AsyncApiFormat format, RedGun.AsyncApi.Writers.AsyncApiWriterSettings settings)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static string SerializeAsJson<T>(this T element, RedGun.AsyncApi.AsyncApiSpecVersion specVersion)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static void SerializeAsJson<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.AsyncApiSpecVersion specVersion)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static string SerializeAsYaml<T>(this T element, RedGun.AsyncApi.AsyncApiSpecVersion specVersion)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
+        public static void SerializeAsYaml<T>(this T element, System.IO.Stream stream, RedGun.AsyncApi.AsyncApiSpecVersion specVersion)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable { }
     }
     public static class StringExtensions
     {
@@ -271,26 +271,26 @@ namespace RedGun.AsyncApi.Extensions
 }
 namespace RedGun.AsyncApi.Interfaces
 {
-    public interface IOpenApiElement { }
-    public interface IOpenApiExtensible : RedGun.AsyncApi.Interfaces.IOpenApiElement
+    public interface IAsyncApiElement { }
+    public interface IAsyncApiExtensible : RedGun.AsyncApi.Interfaces.IAsyncApiElement
     {
-        System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
     }
-    public interface IOpenApiExtension
+    public interface IAsyncApiExtension
     {
-        void Write(RedGun.AsyncApi.Writers.IOpenApiWriter writer, RedGun.AsyncApi.OpenApiSpecVersion specVersion);
+        void Write(RedGun.AsyncApi.Writers.IAsyncApiWriter writer, RedGun.AsyncApi.AsyncApiSpecVersion specVersion);
     }
-    public interface IOpenApiReferenceable : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public interface IAsyncApiReferenceable : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         bool UnresolvedReference { get; set; }
-        void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer);
-        void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer);
+        void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer);
+        void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer);
     }
-    public interface IOpenApiSerializable : RedGun.AsyncApi.Interfaces.IOpenApiElement
+    public interface IAsyncApiSerializable : RedGun.AsyncApi.Interfaces.IAsyncApiElement
     {
-        void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer);
-        void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer);
+        void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer);
+        void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer);
     }
 }
 namespace RedGun.AsyncApi
@@ -302,49 +302,49 @@ namespace RedGun.AsyncApi
         public string[] Tokens { get; }
         public override string ToString() { }
     }
-    public enum OpenApiFormat
+    public enum AsyncApiFormat
     {
         Json = 0,
         Yaml = 1,
     }
-    public enum OpenApiSpecVersion
+    public enum AsyncApiSpecVersion
     {
-        OpenApi2_0 = 0,
-        OpenApi3_0 = 1,
+        AsyncApi2_0 = 0,
+        AsyncApi3_0 = 1,
     }
 }
 namespace RedGun.AsyncApi.Models
 {
-    public class OpenApiCallback : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiCallback : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiCallback() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public System.Collections.Generic.Dictionary<RedGun.AsyncApi.Expressions.RuntimeExpression, RedGun.AsyncApi.Models.OpenApiPathItem> PathItems { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public AsyncApiCallback() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.Dictionary<RedGun.AsyncApi.Expressions.RuntimeExpression, RedGun.AsyncApi.Models.AsyncApiPathItem> PathItems { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void AddPathItem(RedGun.AsyncApi.Expressions.RuntimeExpression expression, RedGun.AsyncApi.Models.OpenApiPathItem pathItem) { }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void AddPathItem(RedGun.AsyncApi.Expressions.RuntimeExpression expression, RedGun.AsyncApi.Models.AsyncApiPathItem pathItem) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiComponents : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiComponents : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiComponents() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiCallback> Callbacks { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiExample> Examples { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiHeader> Headers { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiLink> Links { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiParameter> Parameters { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiRequestBody> RequestBodies { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiResponse> Responses { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiSchema> Schemas { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiSecurityScheme> SecuritySchemes { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public AsyncApiComponents() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiCallback> Callbacks { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiExample> Examples { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiHeader> Headers { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiLink> Links { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiParameter> Parameters { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiRequestBody> RequestBodies { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiResponse> Responses { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiSchema> Schemas { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiSecurityScheme> SecuritySchemes { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public static class OpenApiConstants
+    public static class AsyncApiConstants
     {
         public const string AccessCode = "accessCode";
         public const string AdditionalProperties = "additionalProperties";
@@ -417,7 +417,7 @@ namespace RedGun.AsyncApi.Models
         public const string Not = "not";
         public const string Nullable = "nullable";
         public const string OneOf = "oneOf";
-        public const string OpenApi = "openapi";
+        public const string AsyncApi = "AsyncApi";
         public const string OpenIdConnectUrl = "openIdConnectUrl";
         public const string OperationId = "operationId";
         public const string OperationRef = "operationRef";
@@ -470,256 +470,256 @@ namespace RedGun.AsyncApi.Models
         public static readonly System.Version version2_0;
         public static readonly System.Version version3_0_0;
     }
-    public class OpenApiContact : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiContact : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiContact() { }
+        public AsyncApiContact() { }
         public string Email { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public string Name { get; set; }
         public System.Uri Url { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiDiscriminator : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiDiscriminator : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiDiscriminator() { }
+        public AsyncApiDiscriminator() { }
         public System.Collections.Generic.IDictionary<string, string> Mapping { get; set; }
         public string PropertyName { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiDocument : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiDocument : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiDocument() { }
-        public RedGun.AsyncApi.Models.OpenApiComponents Components { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiExternalDocs ExternalDocs { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiInfo Info { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiPaths Paths { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiSecurityRequirement> SecurityRequirements { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiServer> Servers { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiTag> Tags { get; set; }
-        public RedGun.AsyncApi.Services.OpenApiWorkspace Workspace { get; set; }
-        public RedGun.AsyncApi.Interfaces.IOpenApiReferenceable ResolveReference(RedGun.AsyncApi.Models.OpenApiReference reference) { }
-        public RedGun.AsyncApi.Interfaces.IOpenApiReferenceable ResolveReference(RedGun.AsyncApi.Models.OpenApiReference reference, bool useExternal) { }
-        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Models.OpenApiError> ResolveReferences(bool useExternal = false) { }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public AsyncApiDocument() { }
+        public RedGun.AsyncApi.Models.AsyncApiComponents Components { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiExternalDocs ExternalDocs { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiInfo Info { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiPaths Paths { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiSecurityRequirement> SecurityRequirements { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiServer> Servers { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiTag> Tags { get; set; }
+        public RedGun.AsyncApi.Services.AsyncApiWorkspace Workspace { get; set; }
+        public RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable ResolveReference(RedGun.AsyncApi.Models.AsyncApiReference reference) { }
+        public RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable ResolveReference(RedGun.AsyncApi.Models.AsyncApiReference reference, bool useExternal) { }
+        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Models.AsyncApiError> ResolveReferences(bool useExternal = false) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiEncoding : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiEncoding : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiEncoding() { }
+        public AsyncApiEncoding() { }
         public bool? AllowReserved { get; set; }
         public string ContentType { get; set; }
         public bool? Explode { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiHeader> Headers { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiHeader> Headers { get; set; }
         public RedGun.AsyncApi.Models.ParameterStyle? Style { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiError
+    public class AsyncApiError
     {
-        public OpenApiError(RedGun.AsyncApi.Exceptions.OpenApiException exception) { }
-        public OpenApiError(string pointer, string message) { }
+        public AsyncApiError(RedGun.AsyncApi.Exceptions.AsyncApiException exception) { }
+        public AsyncApiError(string pointer, string message) { }
         public string Message { get; set; }
         public string Pointer { get; set; }
         public override string ToString() { }
     }
-    public class OpenApiExample : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiExample : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiExample() { }
+        public AsyncApiExample() { }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public string ExternalValue { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public string Summary { get; set; }
         public bool UnresolvedReference { get; set; }
-        public RedGun.AsyncApi.Any.IOpenApiAny Value { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Value { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public abstract class OpenApiExtensibleDictionary<T> : System.Collections.Generic.Dictionary<string, T>, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
-        where T : RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public abstract class AsyncApiExtensibleDictionary<T> : System.Collections.Generic.Dictionary<string, T>, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
+        where T : RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        protected OpenApiExtensibleDictionary() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        protected AsyncApiExtensibleDictionary() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiExternalDocs : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiExternalDocs : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiExternalDocs() { }
+        public AsyncApiExternalDocs() { }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public System.Uri Url { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiHeader : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiHeader : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiHeader() { }
+        public AsyncApiHeader() { }
         public bool AllowEmptyValue { get; set; }
         public bool AllowReserved { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiMediaType> Content { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiMediaType> Content { get; set; }
         public bool Deprecated { get; set; }
         public string Description { get; set; }
-        public RedGun.AsyncApi.Any.IOpenApiAny Example { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiExample> Examples { get; set; }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Example { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiExample> Examples { get; set; }
         public bool Explode { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public bool Required { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiSchema Schema { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiSchema Schema { get; set; }
         public RedGun.AsyncApi.Models.ParameterStyle? Style { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiInfo : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiInfo : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiInfo() { }
-        public RedGun.AsyncApi.Models.OpenApiContact Contact { get; set; }
+        public AsyncApiInfo() { }
+        public RedGun.AsyncApi.Models.AsyncApiContact Contact { get; set; }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiLicense License { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiLicense License { get; set; }
         public System.Uri TermsOfService { get; set; }
         public string Title { get; set; }
         public string Version { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiLicense : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiLicense : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiLicense() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public AsyncApiLicense() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public string Name { get; set; }
         public System.Uri Url { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiLink : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiLink : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiLink() { }
+        public AsyncApiLink() { }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public string OperationId { get; set; }
         public string OperationRef { get; set; }
         public System.Collections.Generic.Dictionary<string, RedGun.AsyncApi.Models.RuntimeExpressionAnyWrapper> Parameters { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public RedGun.AsyncApi.Models.RuntimeExpressionAnyWrapper RequestBody { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiServer Server { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiServer Server { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiMediaType : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiMediaType : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiMediaType() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiEncoding> Encoding { get; set; }
-        public RedGun.AsyncApi.Any.IOpenApiAny Example { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiExample> Examples { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiSchema Schema { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public AsyncApiMediaType() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiEncoding> Encoding { get; set; }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Example { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiExample> Examples { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiSchema Schema { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiOAuthFlow : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiOAuthFlow : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiOAuthFlow() { }
+        public AsyncApiOAuthFlow() { }
         public System.Uri AuthorizationUrl { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public System.Uri RefreshUrl { get; set; }
         public System.Collections.Generic.IDictionary<string, string> Scopes { get; set; }
         public System.Uri TokenUrl { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiOAuthFlows : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiOAuthFlows : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiOAuthFlows() { }
-        public RedGun.AsyncApi.Models.OpenApiOAuthFlow AuthorizationCode { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiOAuthFlow ClientCredentials { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiOAuthFlow Implicit { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiOAuthFlow Password { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public AsyncApiOAuthFlows() { }
+        public RedGun.AsyncApi.Models.AsyncApiOAuthFlow AuthorizationCode { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiOAuthFlow ClientCredentials { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiOAuthFlow Implicit { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiOAuthFlow Password { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiOperation : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiOperation : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
         public const bool DeprecatedDefault = false;
-        public OpenApiOperation() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiCallback> Callbacks { get; set; }
+        public AsyncApiOperation() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiCallback> Callbacks { get; set; }
         public bool Deprecated { get; set; }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiExternalDocs ExternalDocs { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiExternalDocs ExternalDocs { get; set; }
         public string OperationId { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiParameter> Parameters { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiRequestBody RequestBody { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiResponses Responses { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiSecurityRequirement> Security { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiServer> Servers { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiParameter> Parameters { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiRequestBody RequestBody { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiResponses Responses { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiSecurityRequirement> Security { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiServer> Servers { get; set; }
         public string Summary { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiTag> Tags { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiTag> Tags { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiParameter : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiParameter : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiParameter() { }
+        public AsyncApiParameter() { }
         public bool AllowEmptyValue { get; set; }
         public bool AllowReserved { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiMediaType> Content { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiMediaType> Content { get; set; }
         public bool Deprecated { get; set; }
         public string Description { get; set; }
-        public RedGun.AsyncApi.Any.IOpenApiAny Example { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiExample> Examples { get; set; }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Example { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiExample> Examples { get; set; }
         public bool Explode { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public RedGun.AsyncApi.Models.ParameterLocation? In { get; set; }
         public string Name { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public bool Required { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiSchema Schema { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiSchema Schema { get; set; }
         public RedGun.AsyncApi.Models.ParameterStyle? Style { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiPathItem : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiPathItem : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiPathItem() { }
+        public AsyncApiPathItem() { }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public System.Collections.Generic.IDictionary<RedGun.AsyncApi.Models.OperationType, RedGun.AsyncApi.Models.OpenApiOperation> Operations { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiParameter> Parameters { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiServer> Servers { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<RedGun.AsyncApi.Models.OperationType, RedGun.AsyncApi.Models.AsyncApiOperation> Operations { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiParameter> Parameters { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiServer> Servers { get; set; }
         public string Summary { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void AddOperation(RedGun.AsyncApi.Models.OperationType operationType, RedGun.AsyncApi.Models.OpenApiOperation operation) { }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void AddOperation(RedGun.AsyncApi.Models.OperationType operationType, RedGun.AsyncApi.Models.AsyncApiOperation operation) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiPaths : RedGun.AsyncApi.Models.OpenApiExtensibleDictionary<RedGun.AsyncApi.Models.OpenApiPathItem>
+    public class AsyncApiPaths : RedGun.AsyncApi.Models.AsyncApiExtensibleDictionary<RedGun.AsyncApi.Models.AsyncApiPathItem>
     {
-        public OpenApiPaths() { }
+        public AsyncApiPaths() { }
     }
-    public class OpenApiReference : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiReference : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiReference() { }
+        public AsyncApiReference() { }
         public string ExternalResource { get; set; }
         public string Id { get; set; }
         public bool IsExternal { get; }
@@ -727,61 +727,61 @@ namespace RedGun.AsyncApi.Models
         public string ReferenceV2 { get; }
         public string ReferenceV3 { get; }
         public RedGun.AsyncApi.Models.ReferenceType? Type { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiRequestBody : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiRequestBody : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiRequestBody() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiMediaType> Content { get; set; }
+        public AsyncApiRequestBody() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiMediaType> Content { get; set; }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public bool Required { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiResponse : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiResponse : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiResponse() { }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiMediaType> Content { get; set; }
+        public AsyncApiResponse() { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiMediaType> Content { get; set; }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiHeader> Headers { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiLink> Links { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiHeader> Headers { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiLink> Links { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiResponses : RedGun.AsyncApi.Models.OpenApiExtensibleDictionary<RedGun.AsyncApi.Models.OpenApiResponse>
+    public class AsyncApiResponses : RedGun.AsyncApi.Models.AsyncApiExtensibleDictionary<RedGun.AsyncApi.Models.AsyncApiResponse>
     {
-        public OpenApiResponses() { }
+        public AsyncApiResponses() { }
     }
-    public class OpenApiSchema : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiSchema : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiSchema() { }
-        public RedGun.AsyncApi.Models.OpenApiSchema AdditionalProperties { get; set; }
+        public AsyncApiSchema() { }
+        public RedGun.AsyncApi.Models.AsyncApiSchema AdditionalProperties { get; set; }
         public bool AdditionalPropertiesAllowed { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiSchema> AllOf { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiSchema> AnyOf { get; set; }
-        public RedGun.AsyncApi.Any.IOpenApiAny Default { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiSchema> AllOf { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiSchema> AnyOf { get; set; }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Default { get; set; }
         public bool Deprecated { get; set; }
         public string Description { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiDiscriminator Discriminator { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Any.IOpenApiAny> Enum { get; set; }
-        public RedGun.AsyncApi.Any.IOpenApiAny Example { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiDiscriminator Discriminator { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Any.IAsyncApiAny> Enum { get; set; }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Example { get; set; }
         public bool? ExclusiveMaximum { get; set; }
         public bool? ExclusiveMinimum { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiExternalDocs ExternalDocs { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiExternalDocs ExternalDocs { get; set; }
         public string Format { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiSchema Items { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiSchema Items { get; set; }
         public int? MaxItems { get; set; }
         public int? MaxLength { get; set; }
         public int? MaxProperties { get; set; }
@@ -791,95 +791,95 @@ namespace RedGun.AsyncApi.Models
         public int? MinProperties { get; set; }
         public decimal? Minimum { get; set; }
         public decimal? MultipleOf { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiSchema Not { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiSchema Not { get; set; }
         public bool Nullable { get; set; }
-        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiSchema> OneOf { get; set; }
+        public System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiSchema> OneOf { get; set; }
         public string Pattern { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiSchema> Properties { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiSchema> Properties { get; set; }
         public bool ReadOnly { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public System.Collections.Generic.ISet<string> Required { get; set; }
         public string Title { get; set; }
         public string Type { get; set; }
         public bool? UniqueItems { get; set; }
         public bool UnresolvedReference { get; set; }
         public bool WriteOnly { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiXml Xml { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public RedGun.AsyncApi.Models.AsyncApiXml Xml { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiSecurityRequirement : System.Collections.Generic.Dictionary<RedGun.AsyncApi.Models.OpenApiSecurityScheme, System.Collections.Generic.IList<string>>, RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiSecurityRequirement : System.Collections.Generic.Dictionary<RedGun.AsyncApi.Models.AsyncApiSecurityScheme, System.Collections.Generic.IList<string>>, RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiSecurityRequirement() { }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public AsyncApiSecurityRequirement() { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiSecurityScheme : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiSecurityScheme : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiSecurityScheme() { }
+        public AsyncApiSecurityScheme() { }
         public string BearerFormat { get; set; }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiOAuthFlows Flows { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiOAuthFlows Flows { get; set; }
         public RedGun.AsyncApi.Models.ParameterLocation In { get; set; }
         public string Name { get; set; }
         public System.Uri OpenIdConnectUrl { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public string Scheme { get; set; }
         public RedGun.AsyncApi.Models.SecuritySchemeType Type { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiServer : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiServer : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiServer() { }
+        public AsyncApiServer() { }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public string Url { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiServerVariable> Variables { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiServerVariable> Variables { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiServerVariable : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiServerVariable : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiServerVariable() { }
+        public AsyncApiServerVariable() { }
         public string Default { get; set; }
         public string Description { get; set; }
         public System.Collections.Generic.List<string> Enum { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiTag : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiTag : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiTag() { }
+        public AsyncApiTag() { }
         public string Description { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiExternalDocs ExternalDocs { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiExternalDocs ExternalDocs { get; set; }
         public string Name { get; set; }
-        public RedGun.AsyncApi.Models.OpenApiReference Reference { get; set; }
+        public RedGun.AsyncApi.Models.AsyncApiReference Reference { get; set; }
         public bool UnresolvedReference { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV2WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3WithoutReference(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
-    public class OpenApiXml : RedGun.AsyncApi.Interfaces.IOpenApiElement, RedGun.AsyncApi.Interfaces.IOpenApiExtensible, RedGun.AsyncApi.Interfaces.IOpenApiSerializable
+    public class AsyncApiXml : RedGun.AsyncApi.Interfaces.IAsyncApiElement, RedGun.AsyncApi.Interfaces.IAsyncApiExtensible, RedGun.AsyncApi.Interfaces.IAsyncApiSerializable
     {
-        public OpenApiXml() { }
+        public AsyncApiXml() { }
         public bool Attribute { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> Extensions { get; set; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> Extensions { get; set; }
         public string Name { get; set; }
         public System.Uri Namespace { get; set; }
         public string Prefix { get; set; }
         public bool Wrapped { get; set; }
-        public void SerializeAsV2(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
-        public void SerializeAsV3(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void SerializeAsV2(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
+        public void SerializeAsV3(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
     public enum OperationType
     {
@@ -922,12 +922,12 @@ namespace RedGun.AsyncApi.Models
         Callback = 8,
         Tag = 9,
     }
-    public class RuntimeExpressionAnyWrapper : RedGun.AsyncApi.Interfaces.IOpenApiElement
+    public class RuntimeExpressionAnyWrapper : RedGun.AsyncApi.Interfaces.IAsyncApiElement
     {
         public RuntimeExpressionAnyWrapper() { }
-        public RedGun.AsyncApi.Any.IOpenApiAny Any { get; set; }
+        public RedGun.AsyncApi.Any.IAsyncApiAny Any { get; set; }
         public RedGun.AsyncApi.Expressions.RuntimeExpression Expression { get; set; }
-        public void WriteValue(RedGun.AsyncApi.Writers.IOpenApiWriter writer) { }
+        public void WriteValue(RedGun.AsyncApi.Writers.IAsyncApiWriter writer) { }
     }
     public enum SecuritySchemeType
     {
@@ -954,95 +954,95 @@ namespace RedGun.AsyncApi.Services
         public string Response { get; set; }
         public string ServerVariable { get; }
     }
-    public class OpenApiReferenceError : RedGun.AsyncApi.Models.OpenApiError
+    public class AsyncApiReferenceError : RedGun.AsyncApi.Models.AsyncApiError
     {
-        public OpenApiReferenceError(RedGun.AsyncApi.Exceptions.OpenApiException exception) { }
-        public OpenApiReferenceError(RedGun.AsyncApi.Models.OpenApiReference reference, string message) { }
+        public AsyncApiReferenceError(RedGun.AsyncApi.Exceptions.AsyncApiException exception) { }
+        public AsyncApiReferenceError(RedGun.AsyncApi.Models.AsyncApiReference reference, string message) { }
     }
-    public class OpenApiUrlTreeNode
+    public class AsyncApiUrlTreeNode
     {
         public System.Collections.Generic.IDictionary<string, System.Collections.Generic.List<string>> AdditionalData { get; set; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Services.OpenApiUrlTreeNode> Children { get; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Services.AsyncApiUrlTreeNode> Children { get; }
         public bool IsParameter { get; }
         public string Path { get; }
-        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiPathItem> PathItems { get; }
+        public System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiPathItem> PathItems { get; }
         public string Segment { get; }
         public void AddAdditionalData(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> additionalData) { }
-        public void Attach(RedGun.AsyncApi.Models.OpenApiDocument doc, string label) { }
-        public RedGun.AsyncApi.Services.OpenApiUrlTreeNode Attach(string path, RedGun.AsyncApi.Models.OpenApiPathItem pathItem, string label) { }
+        public void Attach(RedGun.AsyncApi.Models.AsyncApiDocument doc, string label) { }
+        public RedGun.AsyncApi.Services.AsyncApiUrlTreeNode Attach(string path, RedGun.AsyncApi.Models.AsyncApiPathItem pathItem, string label) { }
         public bool HasOperations(string label) { }
-        public static RedGun.AsyncApi.Services.OpenApiUrlTreeNode Create() { }
-        public static RedGun.AsyncApi.Services.OpenApiUrlTreeNode Create(RedGun.AsyncApi.Models.OpenApiDocument doc, string label) { }
+        public static RedGun.AsyncApi.Services.AsyncApiUrlTreeNode Create() { }
+        public static RedGun.AsyncApi.Services.AsyncApiUrlTreeNode Create(RedGun.AsyncApi.Models.AsyncApiDocument doc, string label) { }
     }
-    public abstract class OpenApiVisitorBase
+    public abstract class AsyncApiVisitorBase
     {
-        protected OpenApiVisitorBase() { }
+        protected AsyncApiVisitorBase() { }
         public RedGun.AsyncApi.Services.CurrentKeys CurrentKeys { get; }
         public string PathString { get; }
         public void Enter(string segment) { }
         public void Exit() { }
-        public virtual void Visit(RedGun.AsyncApi.Interfaces.IOpenApiExtensible openApiExtensible) { }
-        public virtual void Visit(RedGun.AsyncApi.Interfaces.IOpenApiExtension openApiExtension) { }
-        public virtual void Visit(RedGun.AsyncApi.Interfaces.IOpenApiReferenceable referenceable) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiCallback callback) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiComponents components) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiContact contact) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiDocument doc) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiEncoding encoding) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiExample example) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiExternalDocs externalDocs) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiHeader tag) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiInfo info) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiLicense license) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiLink link) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiMediaType mediaType) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiOAuthFlow openApiOAuthFlow) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiOperation operation) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiParameter parameter) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiPathItem pathItem) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiPaths paths) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiRequestBody requestBody) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiResponse response) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiResponses response) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiSchema schema) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiSecurityRequirement securityRequirement) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiSecurityScheme securityScheme) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiServer server) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiServerVariable serverVariable) { }
-        public virtual void Visit(RedGun.AsyncApi.Models.OpenApiTag tag) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<RedGun.AsyncApi.Models.OperationType, RedGun.AsyncApi.Models.OpenApiOperation> operations) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiCallback> callbacks) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiEncoding> encodings) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiExample> examples) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiHeader> headers) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiLink> links) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiMediaType> content) { }
-        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.OpenApiServerVariable> serverVariables) { }
-        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiExample> example) { }
-        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiParameter> parameters) { }
-        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiSecurityRequirement> openApiSecurityRequirements) { }
-        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiServer> servers) { }
-        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiTag> openApiTags) { }
+        public virtual void Visit(RedGun.AsyncApi.Interfaces.IAsyncApiExtensible AsyncApiExtensible) { }
+        public virtual void Visit(RedGun.AsyncApi.Interfaces.IAsyncApiExtension AsyncApiExtension) { }
+        public virtual void Visit(RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable referenceable) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiCallback callback) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiComponents components) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiContact contact) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiDocument doc) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiEncoding encoding) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiExample example) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiExternalDocs externalDocs) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiHeader tag) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiInfo info) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiLicense license) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiLink link) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiMediaType mediaType) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiOAuthFlow AsyncApiOAuthFlow) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiOperation operation) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiParameter parameter) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiPathItem pathItem) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiPaths paths) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiRequestBody requestBody) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiResponse response) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiResponses response) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiSchema schema) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiSecurityRequirement securityRequirement) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiSecurityScheme securityScheme) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiServer server) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiServerVariable serverVariable) { }
+        public virtual void Visit(RedGun.AsyncApi.Models.AsyncApiTag tag) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<RedGun.AsyncApi.Models.OperationType, RedGun.AsyncApi.Models.AsyncApiOperation> operations) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiCallback> callbacks) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiEncoding> encodings) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiExample> examples) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiHeader> headers) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiLink> links) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiMediaType> content) { }
+        public virtual void Visit(System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Models.AsyncApiServerVariable> serverVariables) { }
+        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiExample> example) { }
+        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiParameter> parameters) { }
+        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiSecurityRequirement> AsyncApiSecurityRequirements) { }
+        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiServer> servers) { }
+        public virtual void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiTag> AsyncApiTags) { }
     }
-    public class OpenApiWalker
+    public class AsyncApiWalker
     {
-        public OpenApiWalker(RedGun.AsyncApi.Services.OpenApiVisitorBase visitor) { }
-        public void Walk(RedGun.AsyncApi.Models.OpenApiDocument doc) { }
+        public AsyncApiWalker(RedGun.AsyncApi.Services.AsyncApiVisitorBase visitor) { }
+        public void Walk(RedGun.AsyncApi.Models.AsyncApiDocument doc) { }
     }
-    public class OpenApiWorkspace
+    public class AsyncApiWorkspace
     {
-        public OpenApiWorkspace() { }
-        public OpenApiWorkspace(System.Uri baseUrl) { }
+        public AsyncApiWorkspace() { }
+        public AsyncApiWorkspace(System.Uri baseUrl) { }
         public System.Collections.Generic.IEnumerable<System.IO.Stream> Artifacts { get; }
         public System.Uri BaseUrl { get; }
-        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Models.OpenApiDocument> Documents { get; }
-        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Interfaces.IOpenApiElement> Fragments { get; }
+        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Models.AsyncApiDocument> Documents { get; }
+        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Interfaces.IAsyncApiElement> Fragments { get; }
         public void AddArtifact(string location, System.IO.Stream artifact) { }
-        public void AddDocument(string location, RedGun.AsyncApi.Models.OpenApiDocument document) { }
-        public void AddFragment(string location, RedGun.AsyncApi.Interfaces.IOpenApiReferenceable fragment) { }
+        public void AddDocument(string location, RedGun.AsyncApi.Models.AsyncApiDocument document) { }
+        public void AddFragment(string location, RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable fragment) { }
         public bool Contains(string location) { }
         public System.IO.Stream GetArtifact(string location) { }
-        public RedGun.AsyncApi.Interfaces.IOpenApiReferenceable ResolveReference(RedGun.AsyncApi.Models.OpenApiReference reference) { }
+        public RedGun.AsyncApi.Interfaces.IAsyncApiReferenceable ResolveReference(RedGun.AsyncApi.Models.AsyncApiReference reference) { }
     }
 }
 namespace RedGun.AsyncApi.Validations
@@ -1050,39 +1050,39 @@ namespace RedGun.AsyncApi.Validations
     public interface IValidationContext
     {
         string PathString { get; }
-        void AddError(RedGun.AsyncApi.Validations.OpenApiValidatorError error);
+        void AddError(RedGun.AsyncApi.Validations.AsyncApiValidatorError error);
         void Enter(string segment);
         void Exit();
     }
-    public class OpenApiValidator : RedGun.AsyncApi.Services.OpenApiVisitorBase, RedGun.AsyncApi.Validations.IValidationContext
+    public class AsyncApiValidator : RedGun.AsyncApi.Services.AsyncApiVisitorBase, RedGun.AsyncApi.Validations.IValidationContext
     {
-        public OpenApiValidator(RedGun.AsyncApi.Validations.ValidationRuleSet ruleSet) { }
-        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Validations.OpenApiValidatorError> Errors { get; }
-        public void AddError(RedGun.AsyncApi.Validations.OpenApiValidatorError error) { }
-        public override void Visit(RedGun.AsyncApi.Interfaces.IOpenApiExtensible item) { }
-        public override void Visit(RedGun.AsyncApi.Interfaces.IOpenApiExtension item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiCallback item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiComponents item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiContact item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiDocument item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiEncoding item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiExternalDocs item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiHeader item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiInfo item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiLicense item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiMediaType item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiOAuthFlow item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiParameter item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiResponse item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiResponses item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiSchema item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiServer item) { }
-        public override void Visit(RedGun.AsyncApi.Models.OpenApiTag item) { }
-        public override void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.OpenApiExample> items) { }
+        public AsyncApiValidator(RedGun.AsyncApi.Validations.ValidationRuleSet ruleSet) { }
+        public System.Collections.Generic.IEnumerable<RedGun.AsyncApi.Validations.AsyncApiValidatorError> Errors { get; }
+        public void AddError(RedGun.AsyncApi.Validations.AsyncApiValidatorError error) { }
+        public override void Visit(RedGun.AsyncApi.Interfaces.IAsyncApiExtensible item) { }
+        public override void Visit(RedGun.AsyncApi.Interfaces.IAsyncApiExtension item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiCallback item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiComponents item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiContact item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiDocument item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiEncoding item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiExternalDocs item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiHeader item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiInfo item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiLicense item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiMediaType item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiOAuthFlow item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiParameter item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiResponse item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiResponses item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiSchema item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiServer item) { }
+        public override void Visit(RedGun.AsyncApi.Models.AsyncApiTag item) { }
+        public override void Visit(System.Collections.Generic.IList<RedGun.AsyncApi.Models.AsyncApiExample> items) { }
     }
-    public class OpenApiValidatorError : RedGun.AsyncApi.Models.OpenApiError
+    public class AsyncApiValidatorError : RedGun.AsyncApi.Models.AsyncApiError
     {
-        public OpenApiValidatorError(string ruleName, string pointer, string message) { }
+        public AsyncApiValidatorError(string ruleName, string pointer, string message) { }
         public string RuleName { get; set; }
     }
     public static class ValidationContextExtensions
@@ -1106,107 +1106,107 @@ namespace RedGun.AsyncApi.Validations
         public static RedGun.AsyncApi.Validations.ValidationRuleSet GetEmptyRuleSet() { }
     }
     public class ValidationRule<T> : RedGun.AsyncApi.Validations.ValidationRule
-        where T : RedGun.AsyncApi.Interfaces.IOpenApiElement
+        where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement
     {
         public ValidationRule(System.Action<RedGun.AsyncApi.Validations.IValidationContext, T> validate) { }
     }
 }
 namespace RedGun.AsyncApi.Validations.Rules
 {
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiComponentsRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiComponentsRules
     {
         public static System.Text.RegularExpressions.Regex KeyRegex;
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiComponents> KeyMustBeRegularExpression { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiComponents> KeyMustBeRegularExpression { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiContactRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiContactRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiContact> EmailMustBeEmailFormat { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiContact> EmailMustBeEmailFormat { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiDocumentRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiDocumentRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiDocument> OpenApiDocumentFieldIsMissing { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiDocument> AsyncApiDocumentFieldIsMissing { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiExtensibleRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiExtensibleRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Interfaces.IOpenApiExtensible> ExtensionNameMustStartWithXDash { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Interfaces.IAsyncApiExtensible> ExtensionNameMustStartWithXDash { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiExternalDocsRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiExternalDocsRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiExternalDocs> UrlIsRequired { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiExternalDocs> UrlIsRequired { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiHeaderRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiHeaderRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiHeader> HeaderMismatchedDataType { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiHeader> HeaderMismatchedDataType { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiInfoRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiInfoRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiInfo> InfoRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiInfo> InfoRequiredFields { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiLicenseRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiLicenseRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiLicense> LicenseRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiLicense> LicenseRequiredFields { get; }
     }
-    public static class OpenApiMediaTypeRules
+    public static class AsyncApiMediaTypeRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiMediaType> MediaTypeMismatchedDataType { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiMediaType> MediaTypeMismatchedDataType { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiOAuthFlowRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiOAuthFlowRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiOAuthFlow> OAuthFlowRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiOAuthFlow> OAuthFlowRequiredFields { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiParameterRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiParameterRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiParameter> ParameterMismatchedDataType { get; }
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiParameter> ParameterRequiredFields { get; }
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiParameter> PathParameterShouldBeInThePath { get; }
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiParameter> RequiredMustBeTrueWhenInIsPath { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiParameter> ParameterMismatchedDataType { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiParameter> ParameterRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiParameter> PathParameterShouldBeInThePath { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiParameter> RequiredMustBeTrueWhenInIsPath { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiPathsRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiPathsRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiPaths> PathNameMustBeginWithSlash { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiPaths> PathNameMustBeginWithSlash { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiResponseRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiResponseRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiResponse> ResponseRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiResponse> ResponseRequiredFields { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiResponsesRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiResponsesRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiResponses> ResponsesMustBeIdentifiedByDefaultOrStatusCode { get; }
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiResponses> ResponsesMustContainAtLeastOneResponse { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiResponses> ResponsesMustBeIdentifiedByDefaultOrStatusCode { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiResponses> ResponsesMustContainAtLeastOneResponse { get; }
     }
     [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
-    public class OpenApiRuleAttribute : System.Attribute
+    public class AsyncApiRuleAttribute : System.Attribute
     {
-        public OpenApiRuleAttribute() { }
+        public AsyncApiRuleAttribute() { }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiSchemaRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiSchemaRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiSchema> SchemaMismatchedDataType { get; }
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiSchema> ValidateSchemaDiscriminator { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiSchema> SchemaMismatchedDataType { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiSchema> ValidateSchemaDiscriminator { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiServerRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiServerRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiServer> ServerRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiServer> ServerRequiredFields { get; }
     }
-    [RedGun.AsyncApi.Validations.Rules.OpenApiRule]
-    public static class OpenApiTagRules
+    [RedGun.AsyncApi.Validations.Rules.AsyncApiRule]
+    public static class AsyncApiTagRules
     {
-        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.OpenApiTag> TagRequiredFields { get; }
+        public static RedGun.AsyncApi.Validations.ValidationRule<RedGun.AsyncApi.Models.AsyncApiTag> TagRequiredFields { get; }
     }
 }
 namespace RedGun.AsyncApi.Writers
@@ -1216,7 +1216,7 @@ namespace RedGun.AsyncApi.Writers
         public FormattingStreamWriter(System.IO.Stream stream, System.IFormatProvider formatProvider) { }
         public override System.IFormatProvider FormatProvider { get; }
     }
-    public interface IOpenApiWriter
+    public interface IAsyncApiWriter
     {
         void Flush();
         void WriteEndArray();
@@ -1232,10 +1232,10 @@ namespace RedGun.AsyncApi.Writers
         void WriteValue(object value);
         void WriteValue(string value);
     }
-    public class OpenApiJsonWriter : RedGun.AsyncApi.Writers.OpenApiWriterBase
+    public class AsyncApiJsonWriter : RedGun.AsyncApi.Writers.AsyncApiWriterBase
     {
-        public OpenApiJsonWriter(System.IO.TextWriter textWriter) { }
-        public OpenApiJsonWriter(System.IO.TextWriter textWriter, RedGun.AsyncApi.Writers.OpenApiWriterSettings settings) { }
+        public AsyncApiJsonWriter(System.IO.TextWriter textWriter) { }
+        public AsyncApiJsonWriter(System.IO.TextWriter textWriter, RedGun.AsyncApi.Writers.AsyncApiWriterSettings settings) { }
         protected override int BaseIndentation { get; }
         public override void WriteEndArray() { }
         public override void WriteEndObject() { }
@@ -1247,20 +1247,20 @@ namespace RedGun.AsyncApi.Writers
         public override void WriteValue(string value) { }
         protected override void WriteValueSeparator() { }
     }
-    public static class OpenApiWriterAnyExtensions
+    public static class AsyncApiWriterAnyExtensions
     {
-        public static void WriteAny<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, T any)
-            where T : RedGun.AsyncApi.Any.IOpenApiAny { }
-        public static void WriteExtensions(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IOpenApiExtension> extensions, RedGun.AsyncApi.OpenApiSpecVersion specVersion) { }
+        public static void WriteAny<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, T any)
+            where T : RedGun.AsyncApi.Any.IAsyncApiAny { }
+        public static void WriteExtensions(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, System.Collections.Generic.IDictionary<string, RedGun.AsyncApi.Interfaces.IAsyncApiExtension> extensions, RedGun.AsyncApi.AsyncApiSpecVersion specVersion) { }
     }
-    public abstract class OpenApiWriterBase : RedGun.AsyncApi.Writers.IOpenApiWriter
+    public abstract class AsyncApiWriterBase : RedGun.AsyncApi.Writers.IAsyncApiWriter
     {
         protected const string IndentationString = "  ";
         protected readonly System.Collections.Generic.Stack<RedGun.AsyncApi.Writers.Scope> Scopes;
-        public OpenApiWriterBase(System.IO.TextWriter textWriter) { }
-        public OpenApiWriterBase(System.IO.TextWriter textWriter, RedGun.AsyncApi.Writers.OpenApiWriterSettings settings) { }
+        public AsyncApiWriterBase(System.IO.TextWriter textWriter) { }
+        public AsyncApiWriterBase(System.IO.TextWriter textWriter, RedGun.AsyncApi.Writers.AsyncApiWriterSettings settings) { }
         protected abstract int BaseIndentation { get; }
-        public RedGun.AsyncApi.Writers.OpenApiWriterSettings Settings { get; set; }
+        public RedGun.AsyncApi.Writers.AsyncApiWriterSettings Settings { get; set; }
         protected System.IO.TextWriter Writer { get; }
         protected RedGun.AsyncApi.Writers.Scope CurrentScope() { }
         public virtual void DecreaseIndentation() { }
@@ -1292,43 +1292,43 @@ namespace RedGun.AsyncApi.Writers
         public abstract void WriteValue(string value);
         protected abstract void WriteValueSeparator();
     }
-    public static class OpenApiWriterExtensions
+    public static class AsyncApiWriterExtensions
     {
-        public static void WriteOptionalCollection(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IEnumerable<string> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, string> action) { }
-        public static void WriteOptionalCollection<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IEnumerable<T> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteOptionalMap(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IDictionary<string, string> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, string> action) { }
-        public static void WriteOptionalMap<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IDictionary<string, T> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteOptionalMap<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IDictionary<string, T> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, string, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteOptionalObject<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, T value, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteProperty(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, string value) { }
-        public static void WriteProperty(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, bool value, bool defaultValue = false) { }
-        public static void WriteProperty(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, bool? value, bool defaultValue = false) { }
-        public static void WriteProperty<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, T value)
+        public static void WriteOptionalCollection(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IEnumerable<string> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, string> action) { }
+        public static void WriteOptionalCollection<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IEnumerable<T> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteOptionalMap(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IDictionary<string, string> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, string> action) { }
+        public static void WriteOptionalMap<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IDictionary<string, T> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteOptionalMap<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IDictionary<string, T> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, string, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteOptionalObject<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, T value, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteProperty(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, string value) { }
+        public static void WriteProperty(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, bool value, bool defaultValue = false) { }
+        public static void WriteProperty(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, bool? value, bool defaultValue = false) { }
+        public static void WriteProperty<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, T value)
             where T :  struct { }
-        public static void WriteProperty<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, T? value)
+        public static void WriteProperty<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, T? value)
             where T :  struct { }
-        public static void WriteRequiredCollection<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IEnumerable<T> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteRequiredMap(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IDictionary<string, string> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, string> action) { }
-        public static void WriteRequiredMap<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, System.Collections.Generic.IDictionary<string, T> elements, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteRequiredObject<T>(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, T value, System.Action<RedGun.AsyncApi.Writers.IOpenApiWriter, T> action)
-            where T : RedGun.AsyncApi.Interfaces.IOpenApiElement { }
-        public static void WriteRequiredProperty(this RedGun.AsyncApi.Writers.IOpenApiWriter writer, string name, string value) { }
+        public static void WriteRequiredCollection<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IEnumerable<T> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteRequiredMap(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IDictionary<string, string> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, string> action) { }
+        public static void WriteRequiredMap<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, System.Collections.Generic.IDictionary<string, T> elements, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteRequiredObject<T>(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, T value, System.Action<RedGun.AsyncApi.Writers.IAsyncApiWriter, T> action)
+            where T : RedGun.AsyncApi.Interfaces.IAsyncApiElement { }
+        public static void WriteRequiredProperty(this RedGun.AsyncApi.Writers.IAsyncApiWriter writer, string name, string value) { }
     }
-    public class OpenApiWriterSettings
+    public class AsyncApiWriterSettings
     {
-        public OpenApiWriterSettings() { }
+        public AsyncApiWriterSettings() { }
         public RedGun.AsyncApi.Writers.ReferenceInlineSetting ReferenceInline { get; set; }
     }
-    public class OpenApiYamlWriter : RedGun.AsyncApi.Writers.OpenApiWriterBase
+    public class AsyncApiYamlWriter : RedGun.AsyncApi.Writers.AsyncApiWriterBase
     {
-        public OpenApiYamlWriter(System.IO.TextWriter textWriter) { }
-        public OpenApiYamlWriter(System.IO.TextWriter textWriter, RedGun.AsyncApi.Writers.OpenApiWriterSettings settings) { }
+        public AsyncApiYamlWriter(System.IO.TextWriter textWriter) { }
+        public AsyncApiYamlWriter(System.IO.TextWriter textWriter, RedGun.AsyncApi.Writers.AsyncApiWriterSettings settings) { }
         protected override int BaseIndentation { get; }
         public bool UseLiteralStyle { get; set; }
         public override void WriteEndArray() { }
