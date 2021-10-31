@@ -22,32 +22,33 @@ namespace RedGun.AsyncApi.Models
         /// Related workspace containing AsyncApiDocuments that are referenced in this document
         /// </summary>
         public AsyncApiWorkspace Workspace { get; set; }
+        
+        /// <summary>
+        /// Identifier of the application the AsyncAPI document is defining.
+        /// </summary>
+        public string Id { get; set; }
 
         /// <summary>
         /// REQUIRED. Provides metadata about the API. The metadata MAY be used by tooling as required.
         /// </summary>
         public AsyncApiInfo Info { get; set; }
+        
+        // TODO: Add defaultContentType
 
         /// <summary>
         /// An array of Server Objects, which provide connectivity information to a target server.
         /// </summary>
-        public IList<AsyncApiServer> Servers { get; set; } = new List<AsyncApiServer>();
+        public AsyncApiServers Servers { get; set; } = new AsyncApiServers();
 
         /// <summary>
-        /// REQUIRED. The available paths and operations for the API.
+        /// REQUIRED. The available channels and messages for the API.
         /// </summary>
-        public AsyncApiPaths Paths { get; set; }
+        public AsyncApiChannels Channels { get; set; }
 
         /// <summary>
         /// An element to hold various schemas for the specification.
         /// </summary>
         public AsyncApiComponents Components { get; set; }
-
-        /// <summary>
-        /// A declaration of which security mechanisms can be used across the API.
-        /// </summary>
-        public IList<AsyncApiSecurityRequirement> SecurityRequirements { get; set; } =
-            new List<AsyncApiSecurityRequirement>();
 
         /// <summary>
         /// A list of tags used by the specification with additional metadata.
@@ -81,21 +82,18 @@ namespace RedGun.AsyncApi.Models
 
             // info
             writer.WriteRequiredObject(AsyncApiConstants.Info, Info, (w, i) => i.SerializeAsV2(w));
+            
+            // id
+            writer.WriteProperty(AsyncApiConstants.Id, Id);
 
             // servers
-            writer.WriteOptionalCollection(AsyncApiConstants.Servers, Servers, (w, s) => s.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Servers, Servers, (w, s) => s.SerializeAsV2(w));
 
             // paths
-            writer.WriteRequiredObject(AsyncApiConstants.Paths, Paths, (w, p) => p.SerializeAsV2(w));
+            writer.WriteRequiredObject(AsyncApiConstants.Channels, Channels, (w, p) => p.SerializeAsV2(w));
 
             // components
             writer.WriteOptionalObject(AsyncApiConstants.Components, Components, (w, c) => c.SerializeAsV2(w));
-
-            // security
-            writer.WriteOptionalCollection(
-                AsyncApiConstants.Security,
-                SecurityRequirements,
-                (w, s) => s.SerializeAsV2(w));
 
             // tags
             writer.WriteOptionalCollection(AsyncApiConstants.Tags, Tags, (w, t) => t.SerializeAsV2WithoutReference(w));

@@ -13,6 +13,60 @@ namespace RedGun.AsyncApi.Tests
     public class ParseNodeTests
     {
         [Fact]
+        public void BasicContract()
+        {
+            var input = @"asyncapi: '2.2.0'
+id: 'urn:com:smartylighting:streetlights:server'
+info:
+    title: AsyncAPI Sample App
+    description: This is a sample server.
+    termsOfService: https://asyncapi.org/terms/
+    contact:
+      name: API Support
+      url: https://www.asyncapi.org/support
+      email: support@asyncapi.org
+    license:
+      name: Apache 2.0
+      url: https://www.apache.org/licenses/LICENSE-2.0.html
+    version: 1.0.1
+servers:
+    production:
+        url: production.gigantic-server.com
+        description: Production server
+        protocol: kafka
+        protocolVersion: '2.1.3'
+    development:
+        url: development.gigantic-server.com
+        description: Development server
+        protocol: kafka
+        protocolVersion: '2.1.3'
+    test:
+        url: test.gigantic-server.com
+        description: Test server
+        protocol: kafka
+        protocolVersion: '2.1.2'        
+tags:
+    - name: user
+      description: User-related messages
+    - name: search
+      description: Search a data set
+      externalDocs:
+        description: Find more info here
+        url: https://exampledocs.com
+channels:
+    user/signedup:
+        description: User signed up and created account
+        servers:
+            - production
+            - development";
+
+            var reader = new AsyncApiStringReader();
+            var asyncApiDocument = reader.Read(input, out var diagnostic);
+
+            diagnostic.Errors.Should().BeEmpty();
+        }
+        
+        [Fact]
         public void BrokenSimpleList()
         {
             var input = @"swagger: 2.0

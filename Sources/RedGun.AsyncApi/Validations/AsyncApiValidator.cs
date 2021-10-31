@@ -52,6 +52,7 @@ namespace RedGun.AsyncApi.Validations
             _errors.Add(error);
         }
 
+        // TODO: Remove here what we no longer need
 
         /// <summary>
         /// Execute validation rules against an <see cref="AsyncApiDocument"/>

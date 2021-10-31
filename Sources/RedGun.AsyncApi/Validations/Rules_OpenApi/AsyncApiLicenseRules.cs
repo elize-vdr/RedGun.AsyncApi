@@ -10,7 +10,7 @@ namespace RedGun.AsyncApi.Validations.Rules
     /// <summary>
     /// The validation rules for <see cref="AsyncApiLicense"/>.
     /// </summary>
-    [AsyncApiRule]
+    //[AsyncApiRule]
     public static class AsyncApiLicenseRules
     {
         /// <summary>

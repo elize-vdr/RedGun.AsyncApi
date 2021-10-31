@@ -16,32 +16,38 @@ namespace RedGun.AsyncApi.Readers.V2
     /// </summary>
     internal static partial class AsyncApiV2Deserializer
     {
-        private static FixedFieldMap<AsyncApiDocument> _openApiFixedFields = new FixedFieldMap<AsyncApiDocument>
+        private static FixedFieldMap<AsyncApiDocument> _asyncApiFixedFields = new FixedFieldMap<AsyncApiDocument>
         {
             {
-                "openapi", (o, n) =>
+                "asyncapi", (o, n) =>
                 {
                 } /* Version is valid field but we already parsed it */
             },
+            {
+                "id", (o, n) =>
+                {
+                    o.Id = n.GetScalarValue();
+                }
+            },
             {"info", (o, n) => o.Info = LoadInfo(n)},
-            {"servers", (o, n) => o.Servers = n.CreateList(LoadServer)},
-            {"paths", (o, n) => o.Paths = LoadPaths(n)},
-            {"components", (o, n) => o.Components = LoadComponents(n)},
+            {"servers", (o, n) => o.Servers = LoadServers(n)},
+            {"channels", (o, n) => o.Channels = LoadChannels(n)},
+            //{"components", (o, n) => o.Components = LoadComponents(n)},
             {"tags", (o, n) => {o.Tags = n.CreateList(LoadTag);
                 foreach (var tag in o.Tags)
-    {
+                {
                     tag.Reference = new AsyncApiReference()
                     {
                         Id = tag.Name,
                         Type = ReferenceType.Tag
                     };
-    }
+                }
             } },
-            {"externalDocs", (o, n) => o.ExternalDocs = LoadExternalDocs(n)},
-            {"security", (o, n) => o.SecurityRequirements = n.CreateList(LoadSecurityRequirement)}
+            //{"externalDocs", (o, n) => o.ExternalDocs = LoadExternalDocs(n)},
+            //{"security", (o, n) => o.SecurityRequirements = n.CreateList(LoadSecurityRequirement)}
         };
 
-        private static PatternFieldMap<AsyncApiDocument> _openApiPatternFields = new PatternFieldMap<AsyncApiDocument>
+        private static PatternFieldMap<AsyncApiDocument> _asyncApiPatternFields = new PatternFieldMap<AsyncApiDocument>
         {
             // We have no semantics to verify X- nodes, therefore treat them as just values.
             {s => s.StartsWith("x-"), (o, p, n) => o.AddExtension(p, LoadExtension(p, n))}
@@ -49,13 +55,13 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiDocument LoadAsyncApi(RootNode rootNode)
         {
-            var openApidoc = new AsyncApiDocument();
+            var asyncApidoc = new AsyncApiDocument();
 
-            var openApiNode = rootNode.GetMap();
+            var asyncApiNode = rootNode.GetMap();
 
-            ParseMap(openApiNode, openApidoc, _openApiFixedFields, _openApiPatternFields);
+            ParseMap(asyncApiNode, asyncApidoc, _asyncApiFixedFields, _asyncApiPatternFields);
 
-            return openApidoc;
+            return asyncApidoc;
         }
     }
 }

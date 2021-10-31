@@ -33,6 +33,11 @@ namespace RedGun.AsyncApi.Models
         /// This object MAY be extended with Specification Extensions.
         /// </summary>
         public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
+        
+        /// <summary>
+        /// An array of examples of the server variable.
+        /// </summary>
+        public List<string> Examples { get; set; } = new List<string>();
 
         /// <summary>
         /// Serialize <see cref="AsyncApiServerVariable"/> to Async API v2.0
@@ -57,6 +62,9 @@ namespace RedGun.AsyncApi.Models
 
             // specification extensions
             writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);
+            
+            // examples
+            writer.WriteOptionalCollection(AsyncApiConstants.Examples, Examples, (w, s) => w.WriteValue(s));
 
             writer.WriteEndObject();
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj": {}
+    "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj": {
+    "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj",
+        "projectUniqueName": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj",
         "projectName": "RedGun.AsyncApi.Readers",
-        "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj",
+        "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj",
         "packagesPath": "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi.Readers\\obj\\",
+        "outputPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
@@ -32,8 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
-                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj"
+              "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
+                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj"
               }
             }
           }
@@ -72,14 +72,14 @@
         }
       }
     },
-    "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
+    "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj",
+        "projectUniqueName": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj",
         "projectName": "RedGun.AsyncApi",
-        "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj",
+        "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj",
         "packagesPath": "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\obj\\",
+        "outputPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
@@ -130,14 +130,14 @@
         }
       }
     },
-    "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj": {
+    "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj",
         "projectName": "RedGun.AsyncApi.Readers.Tests",
-        "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj",
+        "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.Readers.Tests\\RedGun.AsyncApi.Readers.Tests.csproj",
         "packagesPath": "C:\\Users\\Elize.van.der.Riet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Tests\\RedGun.AsyncApi.Readers.Tests\\obj\\",
+        "outputPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Tests\\RedGun.AsyncApi.Readers.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
@@ -158,11 +158,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj": {
-                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj"
+              "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj": {
+                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi.Readers\\RedGun.AsyncApi.Readers.csproj"
               },
-              "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
-                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\Projects\\Examples\\.Net\\RedGun.AsyncApi.Net\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj"
+              "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj": {
+                "projectPath": "C:\\Users\\Elize.van.der.Riet\\Work\\RedGun\\RedGun.AsyncApi\\Sources\\RedGun.AsyncApi\\RedGun.AsyncApi.csproj"
               }
             }
           }

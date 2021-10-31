@@ -29,12 +29,12 @@ namespace RedGun.AsyncApi.Validations.Rules
                     }
                     context.Exit();
 
-                    // paths
-                    context.Enter("paths");
-                    if (item.Paths == null)
+                    // channels
+                    context.Enter("channels");
+                    if (item.Channels == null)
                     {
                         context.CreateError(nameof(AsyncApiDocumentFieldIsMissing),
-                            String.Format(SRResource.Validation_FieldIsRequired, "paths", "document"));
+                            String.Format(SRResource.Validation_FieldIsRequired, "channels", "document"));
                     }
                     context.Exit();
                 });

@@ -15,6 +15,8 @@ namespace RedGun.AsyncApi.Readers.Tests.V2Tests
     {
         private const string SampleFolderPath = "V2Tests/Samples/AsyncApiOperation/";
 
+        
+        /* TODO: Commenting out for now, have to change for AsyncAPI
         [Fact]
         public void OperationWithSecurityRequirementShouldReferenceSecurityScheme()
         {
@@ -85,5 +87,6 @@ namespace RedGun.AsyncApi.Readers.Tests.V2Tests
                 }
             });
         }
+         */
     }
 }

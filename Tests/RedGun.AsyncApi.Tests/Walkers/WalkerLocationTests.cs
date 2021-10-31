@@ -34,9 +34,9 @@ namespace RedGun.AsyncApi.Tests.Walkers
         {
             var doc = new AsyncApiDocument()
             {
-                Servers = new List<AsyncApiServer>() {
-                    new AsyncApiServer(),
-                    new AsyncApiServer()
+                Servers = new AsyncApiServers() {
+                    {"Server1", new AsyncApiServer()},
+                    {"Server2", new AsyncApiServer()}
                 },
                 Paths = new AsyncApiPaths(),
                 Tags = new List<AsyncApiTag>()

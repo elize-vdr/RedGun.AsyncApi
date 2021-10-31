@@ -8,7 +8,7 @@ namespace RedGun.AsyncApi.Validations.Rules
     /// <summary>
     /// The Validator attribute.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    //[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class AsyncApiRuleAttribute : Attribute
     {
     }

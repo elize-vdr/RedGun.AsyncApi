@@ -19,26 +19,9 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiParameter>
             {
                 {
-                    "name", (o, n) =>
-                    {
-                        o.Name = n.GetScalarValue();
-                    }
-                },
-                {
-                    "in", (o, n) =>
+                    "location", (o, n) =>
                     {
                         var inString = n.GetScalarValue();
-
-                        if ( Enum.GetValues(typeof(ParameterLocation)).Cast<ParameterLocation>()
-                            .Select( e => e.GetDisplayName() )
-                            .Contains(inString) )
-                        {
-                            o.In = n.GetScalarValue().GetEnumFromDisplayName<ParameterLocation>();
-                        }
-                        else
-                        {
-                            o.In = null;
-                        }
                     }
                 },
                 {
@@ -48,65 +31,11 @@ namespace RedGun.AsyncApi.Readers.V2
                     }
                 },
                 {
-                    "required", (o, n) =>
-                    {
-                        o.Required = bool.Parse(n.GetScalarValue());
-                    }
-                },
-                {
-                    "deprecated", (o, n) =>
-                    {
-                        o.Deprecated = bool.Parse(n.GetScalarValue());
-                    }
-                },
-                {
-                    "allowEmptyValue", (o, n) =>
-                    {
-                        o.AllowEmptyValue = bool.Parse(n.GetScalarValue());
-                    }
-                },
-                {
-                    "allowReserved", (o, n) =>
-                    {
-                        o.AllowReserved = bool.Parse(n.GetScalarValue());
-                    }
-                },
-                {
-                    "style", (o, n) =>
-                    {
-                        o.Style = n.GetScalarValue().GetEnumFromDisplayName<ParameterStyle>();
-                    }
-                },
-                {
-                    "explode", (o, n) =>
-                    {
-                        o.Explode = bool.Parse(n.GetScalarValue());
-                    }
-                },
-                {
                     "schema", (o, n) =>
                     {
                         o.Schema = LoadSchema(n);
                     }
-                },
-                {
-                    "content", (o, n) =>
-                    {
-                        o.Content = n.CreateMap(LoadMediaType);
-                    }
-                },
-                {
-                    "examples", (o, n) =>
-                    {
-                        o.Examples = n.CreateMap(LoadExample);
-                    }
-                },
-                {
-                    "example", (o, n) =>
-                    {
-                        o.Example = n.CreateAny();
-                    }
-                },
+                }
             };
 
         private static readonly PatternFieldMap<AsyncApiParameter> _parameterPatternFields =
@@ -114,30 +43,6 @@ namespace RedGun.AsyncApi.Readers.V2
             {
                 {s => s.StartsWith("x-"), (o, p, n) => o.AddExtension(p, LoadExtension(p,n))}
             };
-
-        private static readonly AnyFieldMap<AsyncApiParameter> _parameterAnyFields = new AnyFieldMap<AsyncApiParameter>
-        {
-            {
-                AsyncApiConstants.Example,
-                new AnyFieldMapParameter<AsyncApiParameter>(
-                    s => s.Example,
-                    (s, v) => s.Example = v,
-                    s => s.Schema)
-            }
-        };
-
-        private static readonly AnyMapFieldMap<AsyncApiParameter, AsyncApiExample> _parameterAnyMapAsyncApiExampleFields =
-            new AnyMapFieldMap<AsyncApiParameter, AsyncApiExample>
-        {
-            {
-                AsyncApiConstants.Examples,
-                new AnyMapFieldMapParameter<AsyncApiParameter, AsyncApiExample>(
-                    m => m.Examples,
-                    e => e.Value,
-                    (e, v) => e.Value = v,
-                    m => m.Schema)
-            }
-        };
 
         public static AsyncApiParameter LoadParameter(ParseNode node)
         {
@@ -152,8 +57,6 @@ namespace RedGun.AsyncApi.Readers.V2
             var parameter = new AsyncApiParameter();
 
             ParseMap(mapNode, parameter, _parameterFixedFields, _parameterPatternFields);
-            ProcessAnyFields(mapNode, parameter, _parameterAnyFields);
-            ProcessAnyMapFields(mapNode, parameter, _parameterAnyMapAsyncApiExampleFields);
 
             return parameter;
         }

@@ -26,16 +26,22 @@ namespace RedGun.AsyncApi.Readers.V2
             [typeof(AsyncApiLicense)] = AsyncApiV2Deserializer.LoadLicense,
             [typeof(AsyncApiServer)] = AsyncApiV2Deserializer.LoadServer,
             [typeof(AsyncApiServer)] = AsyncApiV2Deserializer.LoadServers,
+            [typeof(AsyncApiServerVariable)] = AsyncApiV2Deserializer.LoadServerVariable,
             [typeof(AsyncApiTag)] = AsyncApiV2Deserializer.LoadTag,
+            [typeof(AsyncApiExternalDocs)] = AsyncApiV2Deserializer.LoadExternalDocs,
+            [typeof(AsyncApiSchema)] = AsyncApiV2Deserializer.LoadSchema,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadChannels,
+            [typeof(AsyncApiChannelItem)] = AsyncApiV2Deserializer.LoadChannelItem,
+            [typeof(AsyncApiChannelBindings)] = AsyncApiV2Deserializer.LoadChannelBindings,
+            [typeof(AsyncApiBindingHttpOperation)] = AsyncApiV2Deserializer.LoadBindingWebSocketsChannel,
+            [typeof(AsyncApiBindingHttpOperation)] = AsyncApiV2Deserializer.LoadBindingHttpOperation,
             
             // TODO: Marker to check AsyncApi objects ---------------------------
             [typeof(AsyncApiCallback)] = AsyncApiV2Deserializer.LoadCallback,
             [typeof(AsyncApiComponents)] = AsyncApiV2Deserializer.LoadComponents,
             [typeof(AsyncApiEncoding)] = AsyncApiV2Deserializer.LoadEncoding,
             [typeof(AsyncApiExample)] = AsyncApiV2Deserializer.LoadExample,
-            [typeof(AsyncApiExternalDocs)] = AsyncApiV2Deserializer.LoadExternalDocs,
             [typeof(AsyncApiHeader)] = AsyncApiV2Deserializer.LoadHeader,
-            [typeof(AsyncApiInfo)] = AsyncApiV2Deserializer.LoadInfo,
             [typeof(AsyncApiLink)] = AsyncApiV2Deserializer.LoadLink,
             [typeof(AsyncApiMediaType)] = AsyncApiV2Deserializer.LoadMediaType,
             [typeof(AsyncApiOAuthFlow)] = AsyncApiV2Deserializer.LoadOAuthFlow,
@@ -47,10 +53,8 @@ namespace RedGun.AsyncApi.Readers.V2
             [typeof(AsyncApiRequestBody)] = AsyncApiV2Deserializer.LoadRequestBody,
             [typeof(AsyncApiResponse)] = AsyncApiV2Deserializer.LoadResponse,
             [typeof(AsyncApiResponses)] = AsyncApiV2Deserializer.LoadResponses,
-            [typeof(AsyncApiSchema)] = AsyncApiV2Deserializer.LoadSchema,
             [typeof(AsyncApiSecurityRequirement)] = AsyncApiV2Deserializer.LoadSecurityRequirement,
             [typeof(AsyncApiSecurityScheme)] = AsyncApiV2Deserializer.LoadSecurityScheme,
-            [typeof(AsyncApiServerVariable)] = AsyncApiV2Deserializer.LoadServerVariable,
             [typeof(AsyncApiXml)] = AsyncApiV2Deserializer.LoadXml
         };
 

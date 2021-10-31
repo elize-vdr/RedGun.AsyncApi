@@ -33,6 +33,8 @@ namespace RedGun.AsyncApi.Services
                 return _errors;
             }
         }
+        
+        // TODO: Remove here what we no longer need
 
         public override void Visit(AsyncApiDocument doc)
         {
@@ -59,18 +61,71 @@ namespace RedGun.AsyncApi.Services
         {
             ResolveMap(callbacks);
         }
+        
+        /// <summary>
+        /// Resolve all references used in a Channel Item
+        /// </summary>
+        public override void Visit(AsyncApiChannelItem channelItem)
+        {
+            ResolveObject(channelItem.Bindings, r => channelItem.Bindings = r);
+        }
 
         /// <summary>
         /// Resolve all references used in an operation
         /// </summary>
         public override void Visit(AsyncApiOperation operation)
         {
-            ResolveObject(operation.RequestBody, r => operation.RequestBody = r);
-            ResolveList(operation.Parameters);
+            ResolveObject(operation.Bindings, r => operation.Bindings = r);
+            ResolveList(operation.Traits);
+            ResolveList(operation.Message);
 
             if (operation.Tags != null)
             {
                 ResolveTags(operation.Tags);
+            }
+        }
+        
+        /// <summary>
+        /// Resolve all references used in an operation trait
+        /// </summary>
+        public override void Visit(AsyncApiOperationTrait operationTrait)
+        {
+            ResolveObject(operationTrait.Bindings, r => operationTrait.Bindings = r);
+
+            if (operationTrait.Tags != null)
+            {
+                ResolveTags(operationTrait.Tags);
+            }
+        }
+        
+        /// <summary>
+        /// Resolve all references used in a message
+        /// </summary>
+        public override void Visit(AsyncApiMessage message)
+        {
+            ResolveObject(message.Headers, r => message.Headers = r);
+            ResolveObject(message.CorrelationId, r => message.CorrelationId = r);
+            ResolveObject(message.Bindings, r => message.Bindings = r);
+            ResolveList(message.Traits);
+
+            if (message.Tags != null)
+            {
+                ResolveTags(message.Tags);
+            }
+        }
+        
+        /// <summary>
+        /// Resolve all references used in a message
+        /// </summary>
+        public override void Visit(AsyncApiMessageTrait messageTrait)
+        {
+            ResolveObject(messageTrait.Headers, r => messageTrait.Headers = r);
+            ResolveObject(messageTrait.CorrelationId, r => messageTrait.CorrelationId = r);
+            ResolveObject(messageTrait.Bindings, r => messageTrait.Bindings = r);
+
+            if (messageTrait.Tags != null)
+            {
+                ResolveTags(messageTrait.Tags);
             }
         }
 
@@ -144,7 +199,6 @@ namespace RedGun.AsyncApi.Services
         public override void Visit(AsyncApiParameter parameter)
         {
             ResolveObject(parameter.Schema, r => parameter.Schema = r);
-            ResolveMap(parameter.Examples);
         }
 
 

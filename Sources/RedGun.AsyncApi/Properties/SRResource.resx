@@ -213,10 +213,15 @@
   <data name="Validation_SchemaRequiredFieldListMustContainThePropertySpecifiedInTheDiscriminator" xml:space="preserve">
     <value>Schema {0} must contain property specified in the discriminator {1} in the required field list.</value>
   </data>
+
+  <data name="WorkspaceRequiredForExternalReferenceResolution" xml:space="preserve">
+    <value>AsyncAPI document must be added to an AsyncApiWorkspace to be able to resolve external references.</value>
+  </data>  
+  <!-- TODO: Check if all the above resources are still used in AsyncApi -->
   <data name="Validation_StringMustBeEmailAddress" xml:space="preserve">
     <value>The string '{0}' MUST be in the format of an email address.</value>
   </data>
-  <data name="WorkspaceRequiredForExternalReferenceResolution" xml:space="preserve">
-    <value>AsyncAPI document must be added to an AsyncApiWorkspace to be able to resolve external references.</value>
+  <data name="Validation_ServerNameMustMatchPattern" xml:space="preserve">
+    <value>The server item name '{0}' MUST match the pattern '{1}'</value>
   </data>
 </root>

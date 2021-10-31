@@ -330,6 +330,7 @@ namespace RedGun.AsyncApi.Properties {
             }
         }
         
+        
         /// <summary>
         ///   Looks up a localized string similar to The same rule cannot be in the same rule set twice..
         /// </summary>
@@ -364,6 +365,15 @@ namespace RedGun.AsyncApi.Properties {
         internal static string WorkspaceRequiredForExternalReferenceResolution {
             get {
                 return ResourceManager.GetString("WorkspaceRequiredForExternalReferenceResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path item name &apos;{0}&apos; MUST begin with a slash..
+        /// </summary>
+        internal static string Validation_ServerNameMustMatchPattern {
+            get {
+                return ResourceManager.GetString("Validation_ServerNameMustMatchPattern", resourceCulture);
             }
         }
     }

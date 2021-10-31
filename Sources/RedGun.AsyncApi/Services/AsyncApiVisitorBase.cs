@@ -48,6 +48,8 @@ namespace RedGun.AsyncApi.Services
                 return "#/" + String.Join("/", _path.Reverse());
             }
         }
+        
+        // TODO: Delete here what we no longer need
 
         /// <summary>
         /// Visits <see cref="AsyncApiDocument"/>
@@ -93,6 +95,27 @@ namespace RedGun.AsyncApi.Services
         }
 
         /// <summary>
+        /// Visits <see cref="AsyncApiChannels"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiChannels channels)
+        {
+        }
+
+        /// <summary>
+        /// Visits <see cref="AsyncApiChannelItem"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiChannelItem channelItem)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiChannelBindings"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiChannelBindings channelBindings)
+        {
+        }
+        
+        /// <summary>
         /// Visits <see cref="AsyncApiPaths"/>
         /// </summary>
         public virtual void Visit(AsyncApiPaths paths)
@@ -124,6 +147,27 @@ namespace RedGun.AsyncApi.Services
         /// Visits <see cref="AsyncApiOperation"/>
         /// </summary>
         public virtual void Visit(AsyncApiOperation operation)
+        {
+        }
+        
+        /// <summary>
+        /// Resolve all references used in an operation trait
+        /// </summary>
+        public virtual void Visit(AsyncApiOperationTrait operationTrait)
+        {
+        }
+        
+        /// <summary>
+        /// Resolve all references used in a message
+        /// </summary>
+        public virtual void Visit(AsyncApiMessage message)
+        {
+        }
+        
+        /// <summary>
+        /// Resolve all references used in a message
+        /// </summary>
+        public virtual void Visit(AsyncApiMessageTrait messageTrait)
         {
         }
 

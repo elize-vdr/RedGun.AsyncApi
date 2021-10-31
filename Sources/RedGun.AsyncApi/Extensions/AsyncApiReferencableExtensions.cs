@@ -51,6 +51,7 @@ namespace RedGun.AsyncApi.Extensions
             throw new AsyncApiException(string.Format(SRResource.InvalidReferenceId, pointer));
         }
 
+        // TODO: Remove here ones we no longer need
         private static IAsyncApiReferenceable ResolveReferenceOnHeaderElement(
             AsyncApiHeader headerElement,
             string propertyName,
@@ -78,8 +79,22 @@ namespace RedGun.AsyncApi.Extensions
             {
                 case AsyncApiConstants.Schema:
                     return parameterElement.Schema;
-                case AsyncApiConstants.Examples when mapKey != null:
-                    return parameterElement.Examples[mapKey];
+                default:
+                    throw new AsyncApiException(string.Format(SRResource.InvalidReferenceId, pointer));
+            }
+        }
+        
+        private static IAsyncApiReferenceable ResolveReferenceOnChannelItemElement(
+            AsyncApiChannelItem channelElement,
+            string propertyName,
+            string mapKey,
+            JsonPointer pointer)
+        {
+            switch (propertyName)
+            {
+                case AsyncApiConstants.Bindings:
+                    // TODO: resolve bindings
+                    //return channelElement.Bindings;
                 default:
                     throw new AsyncApiException(string.Format(SRResource.InvalidReferenceId, pointer));
             }

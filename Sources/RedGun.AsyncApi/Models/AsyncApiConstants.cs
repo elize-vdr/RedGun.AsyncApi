@@ -22,7 +22,12 @@ namespace RedGun.AsyncApi.Models
         /// Field: Info
         /// </summary>
         public const string Info = "info";
-
+        
+        /// <summary>
+        /// Field: Id
+        /// </summary>
+        public const string Id = "id";
+        
         /// <summary>
         /// Field: Title
         /// </summary>
@@ -32,6 +37,26 @@ namespace RedGun.AsyncApi.Models
         /// Field: Type
         /// </summary>
         public const string Type = "type";
+
+        /// <summary>
+        /// Field: Method
+        /// </summary>
+        public const string Method = "method";
+
+        /// <summary>
+        /// Field: Query
+        /// </summary>
+        public const string Query = "query";
+        
+        /// <summary>
+        /// Field: Key
+        /// </summary>
+        public const string Key = "key";
+        
+        /// <summary>
+        /// Field: BindingVersion
+        /// </summary>
+        public const string BindingVersion = "bindingVersion";
 
         /// <summary>
         /// Field: Format
@@ -72,7 +97,52 @@ namespace RedGun.AsyncApi.Models
         /// Field: Paths
         /// </summary>
         public const string Paths = "paths";
+        
+        /// <summary>
+        /// Field: Channels
+        /// </summary>
+        public const string Channels = "channels";
+        
+        /// <summary>
+        /// Field: Subscribe
+        /// </summary>
+        public const string Subscribe = "subscribe";
+        
+        /// <summary>
+        /// Field: Publish
+        /// </summary>
+        public const string Publish = "publish";
 
+        /// <summary>
+        /// Field: Bindings
+        /// </summary>
+        public const string Bindings = "bindings";
+        
+        /// <summary>
+        /// Field: Binding Http
+        /// </summary>
+        public const string BindingHttp = "http";
+        
+        /// <summary>
+        /// Field: Binding Http
+        /// </summary>
+        public const string BindingWebSockets = "ws";
+ 
+        /// <summary>
+        /// Field: Binding Kafka
+        /// </summary>
+        public const string BindingKafka = "kafka";
+        
+        /// <summary>
+        /// Field: Bindings
+        /// </summary>
+        public const string Traits = "traits";
+        
+        /// <summary>
+        /// Field: Message
+        /// </summary>
+        public const string Message = "message";
+        
         /// <summary>
         /// Field: Components
         /// </summary>
@@ -192,11 +262,21 @@ namespace RedGun.AsyncApi.Models
         /// Field: Schema
         /// </summary>
         public const string Schema = "schema";
-
+        
         /// <summary>
         /// Field: Schemas
         /// </summary>
         public const string Schemas = "schemas";
+        
+        /// <summary>
+        /// Field: SchemaFormat
+        /// </summary>
+        public const string SchemaFormat = "schemaFormat";
+
+        /// <summary>
+        /// Field: Payload
+        /// </summary>
+        public const string Payload = "payload";
 
         /// <summary>
         /// Field: Responses
@@ -502,6 +582,11 @@ namespace RedGun.AsyncApi.Models
         /// Field: Head
         /// </summary>
         public const string Head = "head";
+        
+        /// <summary>
+        /// Field: CorrelationId
+        /// </summary>
+        public const string CorrelationId = "correlationId";
 
         /// <summary>
         /// Field: Patch
@@ -629,6 +714,11 @@ namespace RedGun.AsyncApi.Models
         /// Field: Produces
         /// </summary>
         public const string Produces = "produces";
+        
+        /// <summary>
+        /// Field: Location
+        /// </summary>
+        public const string Location = "location";
 
         #endregion
     }

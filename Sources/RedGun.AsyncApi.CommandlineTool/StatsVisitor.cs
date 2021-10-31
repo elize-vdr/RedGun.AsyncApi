@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using RedGun.AsyncApi.Interfaces;
 using RedGun.AsyncApi.Models;
 using RedGun.AsyncApi.Services;
 
 namespace RedGun.AsyncApi.CommandlineTool {
    internal class StatsVisitor : AsyncApiVisitorBase
     {
+        // TODO: Delete here what we no longer need
+        
         public int ParameterCount { get; set; } = 0;
 
         public override void Visit(AsyncApiParameter parameter)
@@ -27,8 +30,15 @@ namespace RedGun.AsyncApi.CommandlineTool {
             HeaderCount++;
         }
 
-        public int PathItemCount { get; set; } = 0;
+        public int ChannelItemCount { get; set; } = 0;
 
+        public override void Visit(AsyncApiChannelItem channelItem)
+        {
+            ChannelItemCount++;
+        }
+        
+        public int PathItemCount { get; set; } = 0;
+        
         public override void Visit(AsyncApiPathItem pathItem)
         {
             PathItemCount++;

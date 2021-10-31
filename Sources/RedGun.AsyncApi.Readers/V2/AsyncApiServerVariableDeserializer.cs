@@ -34,6 +34,12 @@ namespace RedGun.AsyncApi.Readers.V2
                         o.Description = n.GetScalarValue();
                     }
                 },
+                {
+                    "examples", (o, n) =>
+                    {
+                        o.Examples = n.CreateSimpleList(s => s.GetScalarValue());
+                    }
+                }
             };
 
         private static readonly PatternFieldMap<AsyncApiServerVariable> _serverVariablePatternFields =

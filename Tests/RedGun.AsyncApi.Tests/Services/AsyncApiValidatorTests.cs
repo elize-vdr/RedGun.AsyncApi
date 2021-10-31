@@ -74,16 +74,20 @@ namespace RedGun.AsyncApi.Tests.Services
                     Title = "foo",
                     Version = "1.2.2"
                 },
-                Servers = new List<AsyncApiServer> {
-                new AsyncApiServer
-                {
-                    Url = "http://example.org"
-                },
-                new AsyncApiServer
-                {
+                Servers = new AsyncApiServers() {
+                    {"Server1", new AsyncApiServer
+                        {
+                            Url = "http://example.org"
+                        }
+                        
+                    },
+                    {"Server2", new AsyncApiServer
+                        {
 
+                        }
+                        
+                    }
                 },
-            },
                 Paths = new AsyncApiPaths()
             };
 

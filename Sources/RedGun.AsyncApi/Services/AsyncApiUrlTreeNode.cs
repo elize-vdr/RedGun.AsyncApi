@@ -84,55 +84,6 @@ namespace RedGun.AsyncApi.Services
         }
 
         /// <summary>
-        /// Creates a structured directory of <see cref="AsyncApiUrlTreeNode"/> nodes from the paths of an AsyncAPI document.
-        /// </summary>
-        /// <param name="doc">The AsyncAPI document.</param>
-        /// <param name="label">Name tag for labelling the <see cref="AsyncApiUrlTreeNode"/> nodes in the directory structure.</param>
-        /// <returns>The root node of the created <see cref="AsyncApiUrlTreeNode"/> directory structure.</returns>
-        public static AsyncApiUrlTreeNode Create(AsyncApiDocument doc, string label)
-        {
-            Utils.CheckArgumentNull(doc, nameof(doc));
-            Utils.CheckArgumentNullOrEmpty(label, nameof(label));
-
-            var root = Create();
-
-            var paths = doc.Paths;
-            if (paths != null)
-            {
-                foreach (var path in paths)
-                {
-                    root.Attach(path: path.Key,
-                                pathItem: path.Value,
-                                label: label);
-                }
-            }
-
-            return root;
-        }
-
-        /// <summary>
-        /// Retrieves the paths from an AsyncAPI document and appends the items to an <see cref="AsyncApiUrlTreeNode"/> node.
-        /// </summary>
-        /// <param name="doc">The AsyncAPI document.</param>
-        /// <param name="label">Name tag for labelling related <see cref="AsyncApiUrlTreeNode"/> nodes in the directory structure.</param>
-        public void Attach(AsyncApiDocument doc, string label)
-        {
-            Utils.CheckArgumentNull(doc, nameof(doc));
-            Utils.CheckArgumentNullOrEmpty(label, nameof(label));
-
-            var paths = doc.Paths;
-            if (paths != null)
-            {
-                foreach (var path in paths)
-                {
-                    Attach(path: path.Key,
-                           pathItem: path.Value,
-                           label: label);
-                }
-            }
-        }
-
-        /// <summary>
         /// Appends a path and the PathItem to an <see cref="AsyncApiUrlTreeNode"/> node.
         /// </summary>
         /// <param name="path">An AsyncAPI path.</param>

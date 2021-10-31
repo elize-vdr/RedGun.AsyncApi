@@ -17,13 +17,6 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiOperation>
             {
                 {
-                    "tags", (o, n) => o.Tags = n.CreateSimpleList(
-                        valueNode =>
-                            LoadTagByReference(
-                                valueNode.Context,
-                                valueNode.GetScalarValue()))
-                },
-                {
                     "summary", (o, n) =>
                     {
                         o.Summary = n.GetScalarValue();
@@ -33,6 +26,18 @@ namespace RedGun.AsyncApi.Readers.V2
                     "description", (o, n) =>
                     {
                         o.Description = n.GetScalarValue();
+                    }
+                },
+                {
+                    "tags", (o, n) => {o.Tags = n.CreateList(LoadTag);
+                        foreach (var tag in o.Tags)
+                        {
+                            tag.Reference = new AsyncApiReference()
+                            {
+                                Id = tag.Name,
+                                Type = ReferenceType.Tag
+                            };
+                        }
                     }
                 },
                 {
@@ -47,6 +52,7 @@ namespace RedGun.AsyncApi.Readers.V2
                         o.OperationId = n.GetScalarValue();
                     }
                 },
+                // TODO: Add correct fields
                 {
                     "parameters", (o, n) =>
                     {
@@ -69,18 +75,6 @@ namespace RedGun.AsyncApi.Readers.V2
                     "callbacks", (o, n) =>
                     {
                         o.Callbacks = n.CreateMap(LoadCallback);
-                    }
-                },
-                {
-                    "deprecated", (o, n) =>
-                    {
-                        o.Deprecated = bool.Parse(n.GetScalarValue());
-                    }
-                },
-                {
-                    "security", (o, n) =>
-                    {
-                        o.Security = n.CreateList(LoadSecurityRequirement);
                     }
                 },
                 {

@@ -239,12 +239,11 @@ namespace RedGun.AsyncApi.Tests.Models
                     Url = new Uri("http://opensource.org/licenses/MIT")
                 }
             },
-            Servers = new List<AsyncApiServer>
+            Servers = new AsyncApiServers
             {
-                new AsyncApiServer
-                {
+                {"Production", new AsyncApiServer() {
                     Url = "http://petstore.swagger.io/api"
-                }
+                }}
             },
             Paths = new AsyncApiPaths
             {
@@ -613,12 +612,11 @@ namespace RedGun.AsyncApi.Tests.Models
                     Url = new Uri("http://opensource.org/licenses/MIT")
                 }
             },
-            Servers = new List<AsyncApiServer>
+            Servers = new AsyncApiServers
             {
-                new AsyncApiServer
-                {
+                {"Production", new AsyncApiServer() {
                     Url = "http://petstore.swagger.io/api"
-                }
+                }}
             },
             Paths = new AsyncApiPaths
             {
@@ -892,12 +890,11 @@ namespace RedGun.AsyncApi.Tests.Models
                 Title = "Swagger Petstore (Simple)",
                 Description = "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
             },
-            Servers = new List<AsyncApiServer>
+            Servers = new AsyncApiServers
             {
-                new AsyncApiServer
-                {
+                {"Production", new AsyncApiServer() {
                     Url = "http://petstore.swagger.io/api"
-                }
+                }}
             },
             Paths = new AsyncApiPaths
             {
