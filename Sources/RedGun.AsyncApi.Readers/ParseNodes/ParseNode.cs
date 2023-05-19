@@ -66,7 +66,7 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
             throw new AsyncApiReaderException("Cannot create map from this reference.", Context);
         }
 
-        public virtual List<T> CreateSimpleList<T>(Func<ValueNode, T> map)
+        public virtual List<T> CreateSimpleList<T>(Func<ValueNode, T> mapFunc)
         {
             throw new AsyncApiReaderException("Cannot create simple list from this type of node.", Context);
         }

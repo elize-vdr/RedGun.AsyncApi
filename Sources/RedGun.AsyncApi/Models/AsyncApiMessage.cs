@@ -95,6 +95,12 @@ namespace RedGun.AsyncApi.Models
         /// </summary>
         public IList<AsyncApiMessageTrait> Traits { get; set; } = new List<AsyncApiMessageTrait>();
         
+        /// <summary>
+        /// oneOf is allowed here to specify multiple messages, however, a message MUST be valid only against
+        /// one of the referenced message objects.
+        /// </summary>
+        public IList<AsyncApiMessage> OneOf { get; set; } = new List<AsyncApiMessage>(); 
+        
          /// <summary>
          /// Indicates if object is populated with data or is just a reference to the data
          /// </summary>
@@ -177,6 +183,9 @@ namespace RedGun.AsyncApi.Models
             
             // traits
             writer.WriteOptionalCollection(AsyncApiConstants.Traits, Traits, (w, t) => t.SerializeAsV2(w));
+            
+            // oneOf
+            writer.WriteOptionalCollection(AsyncApiConstants.OneOf, OneOf, (w, t) => t.SerializeAsV2(w));
 
             // extensions
             writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);

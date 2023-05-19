@@ -21,7 +21,7 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, item) =>
                 {
 
-                    context.Enter("email");
+                    context.Enter(AsyncApiConstants.Email);
                     if (item != null && item.Email != null)
                     {
                         if (!item.Email.IsEmailAddress())

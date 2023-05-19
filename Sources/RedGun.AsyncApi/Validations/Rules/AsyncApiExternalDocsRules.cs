@@ -21,11 +21,11 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, item) =>
                 {
                     // url
-                    context.Enter("url");
+                    context.Enter(AsyncApiConstants.Url);
                     if (item.Url == null)
                     {
                         context.CreateError(nameof(UrlIsRequired),
-                            String.Format(SRResource.Validation_FieldIsRequired, "url", "External Documentation"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Url, "External Documentation"));
                     }
                     context.Exit();
                 });

@@ -40,8 +40,19 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// A map between a variable name and its value. The value is used for substitution in the server's URL template.
         /// </summary>
-        public IDictionary<string, AsyncApiServerVariable> Variables { get; set; } =
-            new Dictionary<string, AsyncApiServerVariable>();
+        public IDictionary<string, AsyncApiServerVariable> Variables { get; set; } = new Dictionary<string, AsyncApiServerVariable>();
+        
+        /// <summary>
+        /// A declaration of which security mechanisms can be used with this server. The list of values includes alternative
+        /// security requirement objects that can be used. Only one of the security requirement objects need to be satisfied
+        /// to authorize a connection or operation.
+        /// </summary>
+        public IList<AsyncApiSecurityRequirement> SecurityRequirements { get; set; } = new List<AsyncApiSecurityRequirement>();
+        
+        /// <summary>
+        /// A map where the keys describe the name of the protocol and the values describe protocol-specific definitions for the server.
+        /// </summary>
+        public AsyncApiServerBindings Bindings { get; set; }
 
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
@@ -61,13 +72,25 @@ namespace RedGun.AsyncApi.Models
             writer.WriteStartObject();
 
             // url
-            writer.WriteProperty(AsyncApiConstants.Url, Url);
+            writer.WriteRequiredProperty(AsyncApiConstants.Url, Url);
+            
+            // protocol
+            writer.WriteRequiredProperty(AsyncApiConstants.Protocol, Protocol);
+            
+            // protocolVersion
+            writer.WriteProperty(AsyncApiConstants.ProtocolVersion, ProtocolVersion);
 
             // description
             writer.WriteProperty(AsyncApiConstants.Description, Description);
 
             // variables
             writer.WriteOptionalMap(AsyncApiConstants.Variables, Variables, (w, v) => v.SerializeAsV2(w));
+            
+            // security
+            writer.WriteOptionalCollection(AsyncApiConstants.Security, SecurityRequirements, (w, s) => s.SerializeAsV2(w));
+            
+            // bindings
+            writer.WriteOptionalObject(AsyncApiConstants.Bindings, Bindings, (w, l) => l.SerializeAsV2(w));
 
             // specification extensions
             writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);

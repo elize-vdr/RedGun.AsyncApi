@@ -17,25 +17,25 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiServerVariable>
             {
                 {
-                    "enum", (o, n) =>
+                    AsyncApiConstants.Enum, (o, n) =>
                     {
                         o.Enum = n.CreateSimpleList(s => s.GetScalarValue());
                     }
                 },
                 {
-                    "default", (o, n) =>
+                    AsyncApiConstants.Default, (o, n) =>
                     {
                         o.Default = n.GetScalarValue();
                     }
                 },
                 {
-                    "description", (o, n) =>
+                    AsyncApiConstants.Description, (o, n) =>
                     {
                         o.Description = n.GetScalarValue();
                     }
                 },
                 {
-                    "examples", (o, n) =>
+                    AsyncApiConstants.Examples, (o, n) =>
                     {
                         o.Examples = n.CreateSimpleList(s => s.GetScalarValue());
                     }
@@ -50,7 +50,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiServerVariable LoadServerVariable(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("serverVariable");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.ServerVariable);
 
             var serverVariable = new AsyncApiServerVariable();
 

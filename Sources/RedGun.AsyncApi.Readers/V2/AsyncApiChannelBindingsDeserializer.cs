@@ -1,4 +1,3 @@
-// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK.
 // Licensed under the MIT license. 
 
 using RedGun.AsyncApi.Extensions;
@@ -19,7 +18,7 @@ namespace RedGun.AsyncApi.Readers.V2
             
             // ws
             {
-                "ws", (o, n) =>
+                AsyncApiConstants.BindingWebSockets, (o, n) =>
                 {
                     o.BindingWebSockets = LoadBindingWebSocketsChannel(n);
                 }
@@ -35,7 +34,13 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiChannelBindings LoadChannelBindings(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Channel Bindings");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.ChannelBindings);
+            
+            var pointer = mapNode.GetReferencePointer();
+            if (pointer != null)
+            {
+                return mapNode.GetReferencedObject<AsyncApiChannelBindings>(ReferenceType.ChannelBindings, pointer);
+            }
 
             var domainObject = new AsyncApiChannelBindings();
 

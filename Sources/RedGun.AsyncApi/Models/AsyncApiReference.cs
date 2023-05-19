@@ -125,20 +125,38 @@ namespace RedGun.AsyncApi.Models
                 case ReferenceType.Schema:
                     return AsyncApiConstants.Definitions;
 
+                case ReferenceType.Message:
+                    return AsyncApiConstants.Messages;
+
+                case ReferenceType.SecurityScheme:
+                    return AsyncApiConstants.SecuritySchemes;
+
                 case ReferenceType.Parameter:
                     return AsyncApiConstants.Parameters;
 
-                case ReferenceType.Response:
-                    return AsyncApiConstants.Responses;
+                case ReferenceType.CorrelationId:
+                    return AsyncApiConstants.CorrelationIds;
 
-                case ReferenceType.Header:
-                    return AsyncApiConstants.Headers;
+                case ReferenceType.OperationTrait:
+                    return AsyncApiConstants.OperationTraits;
+
+                case ReferenceType.MessageTrait:
+                    return AsyncApiConstants.MessageTraits;
+
+                case ReferenceType.ServerBindings:
+                    return AsyncApiConstants.ServerBindings;
+
+                case ReferenceType.ChannelBindings:
+                    return AsyncApiConstants.ChannelBindings;
+
+                case ReferenceType.OperationBindings:
+                    return AsyncApiConstants.OperationBindings;
+
+                case ReferenceType.MessageBindings:
+                    return AsyncApiConstants.MessageBindings;
 
                 case ReferenceType.Tag:
                     return AsyncApiConstants.Tags;
-
-                case ReferenceType.SecurityScheme:
-                    return AsyncApiConstants.SecurityDefinitions;
 
                 default:
                     // If the reference type is not supported in V2, simply return null

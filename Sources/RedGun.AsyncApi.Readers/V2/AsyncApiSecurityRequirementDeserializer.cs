@@ -14,7 +14,7 @@ namespace RedGun.AsyncApi.Readers.V2
     {
         public static AsyncApiSecurityRequirement LoadSecurityRequirement(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("security");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Security);
 
             var securityRequirement = new AsyncApiSecurityRequirement();
 

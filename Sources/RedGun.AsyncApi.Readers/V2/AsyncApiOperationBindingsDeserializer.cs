@@ -1,4 +1,3 @@
-// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK.
 // Licensed under the MIT license. 
 
 using RedGun.AsyncApi.Extensions;
@@ -13,29 +12,37 @@ namespace RedGun.AsyncApi.Readers.V2
     /// </summary>
     internal static partial class AsyncApiV2Deserializer
     {
-        private static FixedFieldMap<AsyncApiOperationBindings> _operationBindingsFixedFields = new FixedFieldMap<AsyncApiOperationBindings>()
+        private static readonly FixedFieldMap<AsyncApiOperationBindings> _operationBindingsFixedFields = new FixedFieldMap<AsyncApiOperationBindings>()
         {
-            // http
             {
-                "http", (o, n) =>
+                AsyncApiConstants.BindingHttp, (o, n) =>
                 {
                     o.BindingHttp = LoadBindingHttpOperation(n);
                 }
             },
-            
-            // ws: Not currently defined for Operations
-            
-            // TODO: Add rest of bindings here
+            {
+                AsyncApiConstants.BindingKafka, (o, n) =>
+                {
+                    o.BindingKafka = LoadBindingKafkaOperation(n);
+                }
+            }
+
         };
 
-        private static PatternFieldMap<AsyncApiOperationBindings> _operationBindingsPatternFields =
+        private static readonly PatternFieldMap<AsyncApiOperationBindings> _operationBindingsPatternFields =
             new PatternFieldMap<AsyncApiOperationBindings> {
                 {s => s.StartsWith("x-"), (o, p, n) => o.AddExtension(p, LoadExtension(p, n))}
             };
 
         public static AsyncApiOperationBindings LoadOperationBindings(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Operation Bindings");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.OperationBindings);
+            
+            var pointer = mapNode.GetReferencePointer();
+            if (pointer != null)
+            {
+                return mapNode.GetReferencedObject<AsyncApiOperationBindings>(ReferenceType.OperationBindings, pointer);
+            }
 
             var domainObject = new AsyncApiOperationBindings();
 

@@ -21,29 +21,29 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, flow) =>
                 {
                     // authorizationUrl
-                    context.Enter("authorizationUrl");
+                    context.Enter(AsyncApiConstants.AuthorizationUrl);
                     if (flow.AuthorizationUrl == null)
                     {
                         context.CreateError(nameof(OAuthFlowRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "authorizationUrl", "OAuth Flow"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.AuthorizationUrl, "OAuth Flow"));
                     }
                     context.Exit();
 
                     // tokenUrl
-                    context.Enter("tokenUrl");
+                    context.Enter(AsyncApiConstants.TokenUrl);
                     if (flow.TokenUrl == null)
                     {
                         context.CreateError(nameof(OAuthFlowRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "tokenUrl", "OAuth Flow"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.TokenUrl, "OAuth Flow"));
                     }
                     context.Exit();
 
                     // scopes
-                    context.Enter("scopes");
+                    context.Enter(AsyncApiConstants.Scopes);
                     if (flow.Scopes == null)
                     {
                         context.CreateError(nameof(OAuthFlowRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "scopes", "OAuth Flow"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Scopes, "OAuth Flow"));
                     }
                     context.Exit();
                 });

@@ -62,7 +62,7 @@ namespace RedGun.AsyncApi.Models
         /// oneOf is allowed here to specify multiple messages, however, a message MUST be valid only against
         /// one of the referenced message objects.
         /// </summary>
-        public IList<AsyncApiMessage> Message { get; set; } = new List<AsyncApiMessage>();
+        public AsyncApiMessage Message { get; set; } = new AsyncApiMessage();
         
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
@@ -103,7 +103,7 @@ namespace RedGun.AsyncApi.Models
             writer.WriteOptionalCollection(AsyncApiConstants.Traits, Traits, (w, p) => p.SerializeAsV2(w));
             
             // message
-            writer.WriteOptionalCollection(AsyncApiConstants.Message, Message, (w, p) => p.SerializeAsV2(w));
+            writer.WriteOptionalObject(AsyncApiConstants.Message, Message, (w, p) => p.SerializeAsV2(w));
 
             // specification extensions
             writer.WriteExtensions(Extensions, AsyncApiSpecVersion.AsyncApi2_0);

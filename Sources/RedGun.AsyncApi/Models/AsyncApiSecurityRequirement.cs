@@ -23,8 +23,7 @@ namespace RedGun.AsyncApi.Models
         /// This constructor ensures that only Reference.Id is considered when two dictionary keys
         /// of type <see cref="AsyncApiSecurityScheme"/> are compared.
         /// </summary>
-        public AsyncApiSecurityRequirement()
-            : base(new AsyncApiSecuritySchemeReferenceEqualityComparer())
+        public AsyncApiSecurityRequirement() : base(new AsyncApiSecuritySchemeReferenceEqualityComparer())
         {
         }
 

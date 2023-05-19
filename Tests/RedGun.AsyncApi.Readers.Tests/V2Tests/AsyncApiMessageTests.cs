@@ -7,6 +7,8 @@ using Xunit;
 
 namespace RedGun.AsyncApi.Readers.Tests.V2Tests
 {
+    // TODO: repalce this with message tests
+    /*
     [Collection("DefaultSettings")]
     public class AsyncApiResponseTests
     {
@@ -25,4 +27,5 @@ namespace RedGun.AsyncApi.Readers.Tests.V2Tests
             }
         }
     }
+    */
 }

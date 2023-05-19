@@ -21,11 +21,11 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, item) =>
                 {
                     // location
-                    context.Enter("location");
+                    context.Enter(AsyncApiConstants.Location);
                     if (item.Location == null)
                     {
                         context.CreateError(nameof(CorrelationIdRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "location", "correlationId"));
+                            string.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Location, AsyncApiConstants.CorrelationId));
                     }
                     context.Exit();
                 });

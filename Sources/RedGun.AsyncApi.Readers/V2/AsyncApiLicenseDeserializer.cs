@@ -17,13 +17,13 @@ namespace RedGun.AsyncApi.Readers.V2
         private static FixedFieldMap<AsyncApiLicense> _licenseFixedFields = new FixedFieldMap<AsyncApiLicense>
         {
             {
-                "name", (o, n) =>
+                AsyncApiConstants.Name, (o, n) =>
                 {
                     o.Name = n.GetScalarValue();
                 }
             },
             {
-                "url", (o, n) =>
+                AsyncApiConstants.Url, (o, n) =>
                 {
                     o.Url = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                 }
@@ -37,7 +37,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         internal static AsyncApiLicense LoadLicense(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("License");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.License);
 
             var license = new AsyncApiLicense();
 

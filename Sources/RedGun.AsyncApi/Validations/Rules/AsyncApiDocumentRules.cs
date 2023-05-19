@@ -21,20 +21,20 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, item) =>
                 {
                     // info
-                    context.Enter("info");
+                    context.Enter(AsyncApiConstants.Info);
                     if (item.Info == null)
                     {
                         context.CreateError(nameof(AsyncApiDocumentFieldIsMissing),
-                            String.Format(SRResource.Validation_FieldIsRequired, "info", "document"));
+                            string.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Info, AsyncApiConstants.Document));
                     }
                     context.Exit();
 
                     // channels
-                    context.Enter("channels");
+                    context.Enter(AsyncApiConstants.Channels);
                     if (item.Channels == null)
                     {
                         context.CreateError(nameof(AsyncApiDocumentFieldIsMissing),
-                            String.Format(SRResource.Validation_FieldIsRequired, "channels", "document"));
+                            string.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Channels, AsyncApiConstants.Document));
                     }
                     context.Exit();
                 });

@@ -21,7 +21,7 @@ namespace RedGun.AsyncApi.Validations.Rules
             new ValidationRule<IAsyncApiExtensible>(
                 (context, item) =>
                 {
-                    context.Enter("extensions");
+                    context.Enter(AsyncApiConstants.Extensions);
                     foreach (var extensible in item.Extensions)
                     {
                         if (!extensible.Key.StartsWith("x-"))

@@ -35,24 +35,20 @@ namespace RedGun.AsyncApi.Readers.V2
             [typeof(AsyncApiChannelBindings)] = AsyncApiV2Deserializer.LoadChannelBindings,
             [typeof(AsyncApiBindingHttpOperation)] = AsyncApiV2Deserializer.LoadBindingWebSocketsChannel,
             [typeof(AsyncApiBindingHttpOperation)] = AsyncApiV2Deserializer.LoadBindingHttpOperation,
-            
-            // TODO: Marker to check AsyncApi objects ---------------------------
-            [typeof(AsyncApiCallback)] = AsyncApiV2Deserializer.LoadCallback,
+            [typeof(AsyncApiBindingHttpOperation)] = AsyncApiV2Deserializer.LoadBindingKafkaMessage,
+            [typeof(AsyncApiBindingHttpOperation)] = AsyncApiV2Deserializer.LoadBindingKafkaOperation,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadOperation,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadOperationBindings,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadOperationTrait,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadMessage,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadMessageExample,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadMessageBindings,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadMessageTrait,
+            [typeof(AsyncApiChannels)] = AsyncApiV2Deserializer.LoadCorrelationId,
             [typeof(AsyncApiComponents)] = AsyncApiV2Deserializer.LoadComponents,
-            [typeof(AsyncApiEncoding)] = AsyncApiV2Deserializer.LoadEncoding,
-            [typeof(AsyncApiExample)] = AsyncApiV2Deserializer.LoadExample,
-            [typeof(AsyncApiHeader)] = AsyncApiV2Deserializer.LoadHeader,
-            [typeof(AsyncApiLink)] = AsyncApiV2Deserializer.LoadLink,
-            [typeof(AsyncApiMediaType)] = AsyncApiV2Deserializer.LoadMediaType,
             [typeof(AsyncApiOAuthFlow)] = AsyncApiV2Deserializer.LoadOAuthFlow,
             [typeof(AsyncApiOAuthFlows)] = AsyncApiV2Deserializer.LoadOAuthFlows,
-            [typeof(AsyncApiOperation)] = AsyncApiV2Deserializer.LoadOperation,
             [typeof(AsyncApiParameter)] = AsyncApiV2Deserializer.LoadParameter,
-            [typeof(AsyncApiPathItem)] = AsyncApiV2Deserializer.LoadPathItem,
-            [typeof(AsyncApiPaths)] = AsyncApiV2Deserializer.LoadPaths,
-            [typeof(AsyncApiRequestBody)] = AsyncApiV2Deserializer.LoadRequestBody,
-            [typeof(AsyncApiResponse)] = AsyncApiV2Deserializer.LoadResponse,
-            [typeof(AsyncApiResponses)] = AsyncApiV2Deserializer.LoadResponses,
             [typeof(AsyncApiSecurityRequirement)] = AsyncApiV2Deserializer.LoadSecurityRequirement,
             [typeof(AsyncApiSecurityScheme)] = AsyncApiV2Deserializer.LoadSecurityScheme,
             [typeof(AsyncApiXml)] = AsyncApiV2Deserializer.LoadXml
@@ -67,50 +63,46 @@ namespace RedGun.AsyncApi.Readers.V2
         {
             if (!string.IsNullOrWhiteSpace(reference))
             {
+                // According to this post: https://swagger.io/docs/specification/using-ref/ the 'JSON Reference' may be:
+                // 1. A reference to a local object starting from the root of the current document and this starts with '#'; e.g. '#/components/schemas/User'
+                // 2. A reference in an external document from the root of that document thisconsists of the url followed by the reference starting with '#'; e.g. 
+                //    'http://myexample.com/commonrefs.yaml#/components.schemas/category'
+                // 3. A reference to an external document without referencing a specific component this means the entire document is the reference; e.g.
+                //    'http://myexample.com/commonrefs.yaml'
                 var segments = reference.Split('#');
-                if (segments.Length == 1)
+                switch (segments.Length)
                 {
                     // Either this is an external reference as an entire file
                     // or a simple string-style reference for tag and security scheme.
-                    if (type == null)
-                    {
-                        // "$ref": "Pet.json"
-                        return new AsyncApiReference
-                        {
-                            Type = type,
-                            ExternalResource = segments[0]
-                        };
-                    }
-
-                    if (type == ReferenceType.Tag || type == ReferenceType.SecurityScheme)
-                    {
-                        return new AsyncApiReference
-                        {
+                    case 1 when type is ReferenceType.Tag or ReferenceType.SecurityScheme:
+                        return new AsyncApiReference {
                             Type = type,
                             Id = reference
-                        };
-                    }
-                }
-                else if (segments.Length == 2)
-                {
-                    if (reference.StartsWith("#"))
-                    {
+                            };
+                    case 1:
+                        // "$ref": "Pet.json"
+                        return new AsyncApiReference {
+                            Type = type,
+                            ExternalResource = segments[0]
+                            };
+                    case 2 when reference.StartsWith("#"):
                         // "$ref": "#/components/schemas/Pet"
                         return ParseLocalReference(segments[1]);
-                    }
                     // Where fragments point into a non-OpenAPI document, the id will be the complete fragment identifier
-                    string id = segments[1];
-                    // $ref: externalSource.yaml#/Pet
-                    if (id.StartsWith("/components/"))
+                    case 2:
                     {
-                        id = segments[1].Split('/')[3];
-                    } 
-                    return new AsyncApiReference
-                    {
-                        ExternalResource = segments[0],
-                        Type = type,
-                        Id = id
-                    };
+                        string id = segments[1];
+                        // $ref: externalSource.yaml#/Pet
+                        if (id.StartsWith("/components/"))
+                        {
+                            id = segments[1].Split('/')[3];
+                        } 
+                        return new AsyncApiReference {
+                            ExternalResource = segments[0],
+                            Type = type,
+                            Id = id
+                            };
+                    }
                 }
             }
 

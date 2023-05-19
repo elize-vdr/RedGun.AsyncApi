@@ -41,7 +41,7 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
                 .ToList();
         }
 
-        public override List<T> CreateSimpleList<T>(Func<ValueNode, T> map)
+        public override List<T> CreateSimpleList<T>(Func<ValueNode, T> mapFunc)
         {
             if (_nodeList == null)
             {
@@ -49,7 +49,7 @@ namespace RedGun.AsyncApi.Readers.ParseNodes
                     $"Expected list at line {_nodeList.Start.Line} while parsing {typeof(T).Name}", _nodeList);
             }
 
-            return _nodeList.Select(n => map(new ValueNode(Context, n))).ToList();
+            return _nodeList.Select(n => mapFunc(new ValueNode(Context, n))).ToList();
         }
 
         public IEnumerator<ParseNode> GetEnumerator()

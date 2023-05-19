@@ -19,32 +19,54 @@ namespace RedGun.AsyncApi.Readers.V2
         private static FixedFieldMap<AsyncApiDocument> _asyncApiFixedFields = new FixedFieldMap<AsyncApiDocument>
         {
             {
-                "asyncapi", (o, n) =>
+                AsyncApiConstants.AsyncApi, (o, n) =>
                 {
                 } /* Version is valid field but we already parsed it */
             },
-            {
-                "id", (o, n) =>
+            {AsyncApiConstants.Id, (o, n) =>
                 {
                     o.Id = n.GetScalarValue();
                 }
             },
-            {"info", (o, n) => o.Info = LoadInfo(n)},
-            {"servers", (o, n) => o.Servers = LoadServers(n)},
-            {"channels", (o, n) => o.Channels = LoadChannels(n)},
-            //{"components", (o, n) => o.Components = LoadComponents(n)},
-            {"tags", (o, n) => {o.Tags = n.CreateList(LoadTag);
-                foreach (var tag in o.Tags)
+            {AsyncApiConstants.Info, (o, n) =>
                 {
-                    tag.Reference = new AsyncApiReference()
-                    {
-                        Id = tag.Name,
-                        Type = ReferenceType.Tag
-                    };
+                    o.Info = LoadInfo(n);
                 }
-            } },
-            //{"externalDocs", (o, n) => o.ExternalDocs = LoadExternalDocs(n)},
-            //{"security", (o, n) => o.SecurityRequirements = n.CreateList(LoadSecurityRequirement)}
+            },
+            {AsyncApiConstants.Servers, (o, n) =>
+                {
+                    o.Servers = LoadServers(n);
+                }
+            },
+            {AsyncApiConstants.DefaultContentType, (o, n) =>
+                {
+                    o.DefaultContentType = n.GetScalarValue();
+                }
+            },
+            {AsyncApiConstants.Channels, (o, n) =>
+                {
+                    o.Channels = LoadChannels(n);
+                }
+            },
+            {AsyncApiConstants.Components, (o, n) =>
+                {
+                    o.Components = LoadComponents(n);
+                }
+            },
+            {AsyncApiConstants.Tags, (o, n) => 
+                {
+                    o.Tags = n.CreateList(LoadTag);
+                    foreach (var tag in o.Tags)
+                    {
+                        tag.Reference = new AsyncApiReference()
+                        {
+                            Id = tag.Name,
+                            Type = ReferenceType.Tag
+                        };
+                    }
+                } 
+            },
+            {AsyncApiConstants.ExternalDocs, (o, n) => o.ExternalDocs = LoadExternalDocs(n)}
         };
 
         private static PatternFieldMap<AsyncApiDocument> _asyncApiPatternFields = new PatternFieldMap<AsyncApiDocument>
@@ -55,13 +77,13 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiDocument LoadAsyncApi(RootNode rootNode)
         {
-            var asyncApidoc = new AsyncApiDocument();
+            var asyncApiDocument = new AsyncApiDocument();
 
             var asyncApiNode = rootNode.GetMap();
 
-            ParseMap(asyncApiNode, asyncApidoc, _asyncApiFixedFields, _asyncApiPatternFields);
+            ParseMap(asyncApiNode, asyncApiDocument, _asyncApiFixedFields, _asyncApiPatternFields);
 
-            return asyncApidoc;
+            return asyncApiDocument;
         }
     }
 }

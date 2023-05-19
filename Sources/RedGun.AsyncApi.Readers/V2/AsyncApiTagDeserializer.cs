@@ -42,7 +42,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiTag LoadTag(ParseNode n)
         {
-            var mapNode = n.CheckMapNode("tag");
+            var mapNode = n.CheckMapNode(AsyncApiConstants.Tag);
 
             var domainObject = new AsyncApiTag();
 
@@ -52,6 +52,19 @@ namespace RedGun.AsyncApi.Readers.V2
             }
 
             return domainObject;
+        }
+        
+        private static AsyncApiTag LoadTagByReference(ParseNode n)
+        {
+            var tagObject = LoadTag(n);
+            tagObject.UnresolvedReference = true;
+            tagObject.Reference = new AsyncApiReference()
+            {
+                Type = ReferenceType.Tag,
+                Id = tagObject.Name
+            };
+
+            return tagObject;
         }
     }
 }

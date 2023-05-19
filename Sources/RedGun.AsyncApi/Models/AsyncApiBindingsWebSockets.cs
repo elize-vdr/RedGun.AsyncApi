@@ -10,35 +10,6 @@ namespace RedGun.AsyncApi.Models
     // Defines the Server, Channel, Operation and Message Bindings for HTTP Bindings. Current version is 0.1.0.
     
     /// <summary>
-    /// Server Binding object.
-    /// </summary>
-    public class AsyncApiBindingWebSocketsServer : IAsyncApiSerializable, IAsyncApiExtensible
-    {
-        // This object MUST NOT contain any properties. Its name is reserved for future use.
-        
-        /// <summary>
-        /// This object MAY be extended with Specification Extensions.
-        /// </summary>
-        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
-
-        /// <summary>
-        /// Serialize <see cref="AsyncApiBindingWebSocketsServer"/> to Async API v2.0
-        /// </summary>
-        public void SerializeAsV2(IAsyncApiWriter writer)
-        {
-            if (writer == null)
-            {
-                throw Error.ArgumentNull(nameof(writer));
-            }
-            
-            // writer.WriteStartObject();
-
-            
-            // writer.WriteEndObject();
-        }
-    }
-    
-    /// <summary>
     /// Channel Binding object.
     /// </summary>
     public class AsyncApiBindingWebSocketsChannel : IAsyncApiSerializable, IAsyncApiExtensible
@@ -102,62 +73,5 @@ namespace RedGun.AsyncApi.Models
         }
 
     }
-    
-    /// <summary>
-    /// Operation Binding object.
-    /// </summary>
-    public class AsyncApiBindingWebSocketsOperation : IAsyncApiSerializable, IAsyncApiExtensible
-    {
-        // This object MUST NOT contain any properties. Its name is reserved for future use.
-        
-        /// <summary>
-        /// This object MAY be extended with Specification Extensions.
-        /// </summary>
-        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
 
-        /// <summary>
-        /// Serialize <see cref="AsyncApiBindingWebSocketsOperation"/> to Async API v2.0
-        /// </summary>
-        public void SerializeAsV2(IAsyncApiWriter writer)
-        {
-            if (writer == null)
-            {
-                throw Error.ArgumentNull(nameof(writer));
-            }
-            
-            // writer.WriteStartObject();
-
-            
-            // writer.WriteEndObject();
-        }
-    }
-    
-    /// <summary>
-    /// Message Binding object.
-    /// </summary>
-    public class AsyncApiBindingWebSocketsMessage : IAsyncApiSerializable, IAsyncApiExtensible
-    {
-        // This object MUST NOT contain any properties. Its name is reserved for future use.
-        
-        /// <summary>
-        /// This object MAY be extended with Specification Extensions.
-        /// </summary>
-        public IDictionary<string, IAsyncApiExtension> Extensions { get; set; } = new Dictionary<string, IAsyncApiExtension>();
-
-        /// <summary>
-        /// Serialize <see cref="AsyncApiBindingWebSocketsMessage"/> to Async API v2.0
-        /// </summary>
-        public void SerializeAsV2(IAsyncApiWriter writer)
-        {
-            if (writer == null)
-            {
-                throw Error.ArgumentNull(nameof(writer));
-            }
-            
-            // writer.WriteStartObject();
-
-            
-            // writer.WriteEndObject();
-        }
-    }
 }

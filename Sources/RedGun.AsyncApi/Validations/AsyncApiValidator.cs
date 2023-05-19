@@ -51,6 +51,101 @@ namespace RedGun.AsyncApi.Validations
 
             _errors.Add(error);
         }
+        
+        // TODO: New added validators for Async API --------------------------
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiChannels"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiChannels item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiChannelItem"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiChannelItem item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiOperation"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiOperation item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiOperationBindings"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiOperationBindings item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiOperationTrait"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiOperationTrait item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiMessage"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiMessage item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiCorrelationId"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiCorrelationId item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiMessageBindings"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiMessageBindings item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiMessageExample"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiMessageExample item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiMessageTrait"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiMessageTrait item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiChannelBindings"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiChannelBindings item) => Validate(item);
+        
+        // All the Channel Bindings ===========================================
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiBindingWebSocketsChannel"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiBindingWebSocketsChannel item) => Validate(item);
+        
+        // All the Operation Bindings =========================================
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiChannelBindings"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiBindingHttpOperation item) => Validate(item);
+        
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiBindingKafkaOperation"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiBindingKafkaOperation item) => Validate(item);
+        
+        // All the Message Bindings ===========================================
+        /// <summary>
+        /// Execute validation rules against an <see cref="AsyncApiBindingKafkaMessage"/>
+        /// </summary>
+        /// <param name="item">The object to be validated</param>
+        public override void Visit(AsyncApiBindingKafkaMessage item) => Validate(item);
 
         // TODO: Remove here what we no longer need
 
@@ -107,7 +202,7 @@ namespace RedGun.AsyncApi.Validations
         /// </summary>
         /// <param name="item">The object to be validated</param>
         public override void Visit(AsyncApiExternalDocs item) => Validate(item);
-
+        
         /// <summary>
         /// Execute validation rules against an <see cref="AsyncApiLicense"/>
         /// </summary>

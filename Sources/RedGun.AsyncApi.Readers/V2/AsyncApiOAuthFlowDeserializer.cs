@@ -18,24 +18,28 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiOAuthFlow>
             {
                 {
-                    "authorizationUrl", (o, n) =>
+                    AsyncApiConstants.AuthorizationUrl, (o, n) =>
                     {
                         o.AuthorizationUrl = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                     }
                 },
                 {
-                    "tokenUrl", (o, n) =>
+                    AsyncApiConstants.TokenUrl, (o, n) =>
                     {
                         o.TokenUrl = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                     }
                 },
                 {
-                    "refreshUrl", (o, n) =>
+                    AsyncApiConstants.RefreshUrl, (o, n) =>
                     {
                         o.RefreshUrl = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                     }
                 },
-                {"scopes", (o, n) => o.Scopes = n.CreateSimpleMap(LoadString)}
+                {AsyncApiConstants.Scopes, (o, n) =>
+                    {
+                        o.Scopes = n.CreateSimpleMap(LoadString);
+                    }
+                }
             };
 
         private static readonly PatternFieldMap<AsyncApiOAuthFlow> _oAuthFlowPatternFields =
@@ -46,7 +50,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiOAuthFlow LoadOAuthFlow(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("OAuthFlow");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Flow);
 
             var oauthFlow = new AsyncApiOAuthFlow();
             foreach (var property in mapNode)

@@ -16,13 +16,13 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiDiscriminator>
             {
                 {
-                    "propertyName", (o, n) =>
+                    AsyncApiConstants.PropertyName, (o, n) =>
                     {
                         o.PropertyName = n.GetScalarValue();
                     }
                 },
                 {
-                    "mapping", (o, n) =>
+                    AsyncApiConstants.Mapping, (o, n) =>
                     {
                         o.Mapping = n.CreateSimpleMap(LoadString);
                     }
@@ -34,7 +34,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiDiscriminator LoadDiscriminator(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("discriminator");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Discriminator);
 
             var discriminator = new AsyncApiDiscriminator();
             foreach (var property in mapNode)

@@ -18,49 +18,49 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiSecurityScheme>
             {
                 {
-                    "type", (o, n) =>
+                    AsyncApiConstants.Type, (o, n) =>
                     {
                         o.Type = n.GetScalarValue().GetEnumFromDisplayName<SecuritySchemeType>();
                     }
                 },
                 {
-                    "description", (o, n) =>
+                    AsyncApiConstants.Description, (o, n) =>
                     {
                         o.Description = n.GetScalarValue();
                     }
                 },
                 {
-                    "name", (o, n) =>
+                    AsyncApiConstants.Name, (o, n) =>
                     {
                         o.Name = n.GetScalarValue();
                     }
                 },
                 {
-                    "in", (o, n) =>
+                    AsyncApiConstants.In, (o, n) =>
                     {
                         o.In = n.GetScalarValue().GetEnumFromDisplayName<ParameterLocation>();
                     }
                 },
                 {
-                    "scheme", (o, n) =>
+                    AsyncApiConstants.Scheme, (o, n) =>
                     {
                         o.Scheme = n.GetScalarValue();
                     }
                 },
                 {
-                    "bearerFormat", (o, n) =>
+                    AsyncApiConstants.BearerFormat, (o, n) =>
                     {
                         o.BearerFormat = n.GetScalarValue();
                     }
                 },
                 {
-                    "openIdConnectUrl", (o, n) =>
+                    AsyncApiConstants.OpenIdConnectUrl, (o, n) =>
                     {
                         o.OpenIdConnectUrl = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                     }
                 },
                 {
-                    "flows", (o, n) =>
+                    AsyncApiConstants.Flows, (o, n) =>
                     {
                         o.Flows = LoadOAuthFlows(n);
                     }
@@ -75,7 +75,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiSecurityScheme LoadSecurityScheme(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("securityScheme");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.SecurityScheme);
 
             var securityScheme = new AsyncApiSecurityScheme();
             foreach (var property in mapNode)

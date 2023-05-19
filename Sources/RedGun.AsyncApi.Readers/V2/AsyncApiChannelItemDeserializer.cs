@@ -1,4 +1,3 @@
-// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK.
 // Licensed under the MIT license. 
 
 using RedGun.AsyncApi.Extensions;
@@ -17,27 +16,49 @@ namespace RedGun.AsyncApi.Readers.V2
         {
             
             {
-                "$ref", (o,n) => {
+                AsyncApiConstants.DollarRef, (o,n) => {
                     o.Reference = new AsyncApiReference() { ExternalResource = n.GetScalarValue() };
                     o.UnresolvedReference =true;
                 }  
             },
             {
-                "description", (o, n) =>
+                AsyncApiConstants.Description, (o, n) =>
                 {
                     o.Description = n.GetScalarValue();
                 }
             },
             {
-                "servers", (o, n) =>
+                AsyncApiConstants.Servers, (o, n) =>
                 {
                     o.Servers = n.CreateSimpleList(s => s.GetScalarValue());
                 }
             },
+            {
+                AsyncApiConstants.Subscribe, (o, n) =>
+                {
+                    o.Subscribe = LoadOperation(n);
+                }
+            },
+            {
+                AsyncApiConstants.Publish, (o, n) =>
+                {
+                    o.Publish = LoadOperation(n);
+                }
+            },
+            {
+                AsyncApiConstants.Parameters, (o, n) =>
+                {
+                    o.Parameters = LoadParameters(n);
+                }
+            },
+            {
+                AsyncApiConstants.Bindings, (o, n) =>
+                {
+                    o.Bindings = LoadChannelBindings(n);
+                }
+            }
             
-            // TODO: add subscribe, publish, parameters, and bindings
-          
-            //{"parameters", (o, n) => o.Parameters = n.CreateList(LoadParameter)}
+            
         };
 
         private static readonly PatternFieldMap<AsyncApiChannelItem> _channelItemPatternFields =
@@ -48,7 +69,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiChannelItem LoadChannelItem(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Channel Item");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Channel);
 
             var channelItem = new AsyncApiChannelItem();
 

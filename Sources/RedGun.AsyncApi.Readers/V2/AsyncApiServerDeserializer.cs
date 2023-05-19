@@ -16,34 +16,45 @@ namespace RedGun.AsyncApi.Readers.V2
         private static readonly FixedFieldMap<AsyncApiServer> _serverFixedFields = new FixedFieldMap<AsyncApiServer>
         {
             {
-                "url", (o, n) =>
+                AsyncApiConstants.Url, (o, n) =>
                 {
                     o.Url = n.GetScalarValue();
                 }
             },
             {
-                "description", (o, n) =>
-                {
-                    o.Description = n.GetScalarValue();
-                }
-            },
-            {
-                "variables", (o, n) =>
-                {
-                    o.Variables =
-                        n.CreateMap(LoadServerVariable);
-                }
-            },
-            {
-                "protocol", (o, n) =>
+                AsyncApiConstants.Protocol, (o, n) =>
                 {
                     o.Protocol = n.GetScalarValue();
                 }
             },
             {
-                "protocolVersion", (o, n) =>
+                AsyncApiConstants.ProtocolVersion, (o, n) =>
                 {
                     o.ProtocolVersion = n.GetScalarValue();
+                }
+            },
+            {
+                AsyncApiConstants.Description, (o, n) =>
+                {
+                    o.Description = n.GetScalarValue();
+                }
+            },
+            {
+                AsyncApiConstants.Variables, (o, n) =>
+                {
+                    o.Variables = n.CreateMap(LoadServerVariable);
+                }
+            },
+            {
+                AsyncApiConstants.Security, (o, n) =>
+                {
+                    o.SecurityRequirements = n.CreateList(LoadSecurityRequirement);
+                }
+            },
+            {
+                AsyncApiConstants.Bindings, (o, n) =>
+                {
+                    o.Bindings = LoadServerBindings(n);
                 }
             }
         };
@@ -60,7 +71,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiServer LoadServer(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("server");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Server);
 
             var server = new AsyncApiServer();
 

@@ -18,37 +18,37 @@ namespace RedGun.AsyncApi.Readers.V2
         public static FixedFieldMap<AsyncApiInfo> InfoFixedFields = new FixedFieldMap<AsyncApiInfo>
         {
             {
-                "title", (o, n) =>
+                AsyncApiConstants.Title, (o, n) =>
                 {
                     o.Title = n.GetScalarValue();
                 }
             },
             {
-                "version", (o, n) =>
+                AsyncApiConstants.Version, (o, n) =>
                 {
                     o.Version = n.GetScalarValue();
                 }
             },
             {
-                "description", (o, n) =>
+                AsyncApiConstants.Description, (o, n) =>
                 {
                     o.Description = n.GetScalarValue();
                 }
             },
             {
-                "termsOfService", (o, n) =>
+                AsyncApiConstants.TermsOfService, (o, n) =>
                 {
                     o.TermsOfService = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                 }
             },
             {
-                "contact", (o, n) =>
+                AsyncApiConstants.Contact, (o, n) =>
                 {
                     o.Contact = LoadContact(n);
                 }
             },
             {
-                "license", (o, n) =>
+                AsyncApiConstants.License, (o, n) =>
                 {
                     o.License = LoadLicense(n);
                 }
@@ -62,10 +62,10 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiInfo LoadInfo(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Info");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Info);
 
             var info = new AsyncApiInfo();
-            var required = new List<string> { "title", "version" };
+            var required = new List<string> { AsyncApiConstants.Title, AsyncApiConstants.Version };
 
             ParseMap(mapNode, info, InfoFixedFields, InfoPatternFields);
 

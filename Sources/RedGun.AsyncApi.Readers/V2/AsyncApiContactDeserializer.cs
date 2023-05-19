@@ -17,19 +17,19 @@ namespace RedGun.AsyncApi.Readers.V2
         private static FixedFieldMap<AsyncApiContact> _contactFixedFields = new FixedFieldMap<AsyncApiContact>
         {
             {
-                "name", (o, n) =>
+                AsyncApiConstants.Name, (o, n) =>
                 {
                     o.Name = n.GetScalarValue();
                 }
             },
             {
-                "email", (o, n) =>
+                AsyncApiConstants.Email, (o, n) =>
                 {
                     o.Email = n.GetScalarValue();
                 }
             },
             {
-                "url", (o, n) =>
+                AsyncApiConstants.Url, (o, n) =>
                 {
                     o.Url = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                 }
@@ -43,7 +43,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiContact LoadContact(ParseNode node)
         {
-            var mapNode = node as MapNode;
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Contact);
             var contact = new AsyncApiContact();
 
             ParseMap(mapNode, contact, _contactFixedFields, _contactPatternFields);

@@ -21,47 +21,54 @@ namespace RedGun.AsyncApi.Models
         public IDictionary<string, AsyncApiSchema> Schemas { get; set; } = new Dictionary<string, AsyncApiSchema>();
 
         /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiResponse"/> Objects.
+        /// An object to hold reusable <see cref="AsyncApiMessage"/> Objects.
         /// </summary>
-        public IDictionary<string, AsyncApiResponse> Responses { get; set; } = new Dictionary<string, AsyncApiResponse>();
-
-        /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiParameter"/> Objects.
-        /// </summary>
-        public IDictionary<string, AsyncApiParameter> Parameters { get; set; } =
-            new Dictionary<string, AsyncApiParameter>();
-
-        /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiExample"/> Objects.
-        /// </summary>
-        public IDictionary<string, AsyncApiExample> Examples { get; set; } = new Dictionary<string, AsyncApiExample>();
-
-        /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiRequestBody"/> Objects.
-        /// </summary>
-        public IDictionary<string, AsyncApiRequestBody> RequestBodies { get; set; } =
-            new Dictionary<string, AsyncApiRequestBody>();
-
-        /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiHeader"/> Objects.
-        /// </summary>
-        public IDictionary<string, AsyncApiHeader> Headers { get; set; } = new Dictionary<string, AsyncApiHeader>();
-
+        public IDictionary<string, AsyncApiMessage> Messages { get; set; } = new Dictionary<string, AsyncApiMessage>();
+        
         /// <summary>
         /// An object to hold reusable <see cref="AsyncApiSecurityScheme"/> Objects.
         /// </summary>
-        public IDictionary<string, AsyncApiSecurityScheme> SecuritySchemes { get; set; } =
-            new Dictionary<string, AsyncApiSecurityScheme>();
+        public IDictionary<string, AsyncApiSecurityScheme> SecuritySchemes { get; set; } = new Dictionary<string, AsyncApiSecurityScheme>();
+        
+        /// <summary>
+        /// An object to hold reusable <see cref="AsyncApiParameter"/> Objects.
+        /// </summary>
+        public IDictionary<string, AsyncApiParameter> Parameters { get; set; } = new Dictionary<string, AsyncApiParameter>();
+        
+        /// <summary>
+        /// An object to hold reusable <see cref="AsyncApiCorrelationId"/> Objects.
+        /// </summary>
+        public IDictionary<string, AsyncApiCorrelationId> CorrelationIds { get; set; } = new Dictionary<string, AsyncApiCorrelationId>();
+        
+        /// <summary>
+        /// An object to hold reusable <see cref="AsyncApiOperationTrait"/> Objects.
+        /// </summary>
+        public IDictionary<string, AsyncApiOperationTrait> OperationTraits { get; set; } = new Dictionary<string, AsyncApiOperationTrait>();
 
         /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiLink"/> Objects.
+        /// An object to hold reusable <see cref="AsyncApiMessageTrait"/> Objects.
         /// </summary>
-        public IDictionary<string, AsyncApiLink> Links { get; set; } = new Dictionary<string, AsyncApiLink>();
+        public IDictionary<string, AsyncApiMessageTrait> MessageTraits { get; set; } = new Dictionary<string, AsyncApiMessageTrait>();
 
         /// <summary>
-        /// An object to hold reusable <see cref="AsyncApiCallback"/> Objects.
+        /// An object to hold reusable <see cref="AsyncApiServerBindings"/> Objects.
         /// </summary>
-        public IDictionary<string, AsyncApiCallback> Callbacks { get; set; } = new Dictionary<string, AsyncApiCallback>();
+        public IDictionary<string, AsyncApiServerBindings> ServerBindings { get; set; } = new Dictionary<string, AsyncApiServerBindings>();
+
+        /// <summary>
+        /// An object to hold reusable <see cref="AsyncApiChannelBindings"/> Objects.
+        /// </summary>
+        public IDictionary<string, AsyncApiChannelBindings> ChannelBindings { get; set; } = new Dictionary<string, AsyncApiChannelBindings>();
+
+        /// <summary>
+        /// An object to hold reusable <see cref="AsyncApiOperationBindings"/> Objects.
+        /// </summary>
+        public IDictionary<string, AsyncApiOperationBindings> OperationBindings { get; set; } = new Dictionary<string, AsyncApiOperationBindings>();
+
+        /// <summary>
+        /// An object to hold reusable <see cref="AsyncApiMessageBindings"/> Objects.
+        /// </summary>
+        public IDictionary<string, AsyncApiMessageBindings> MessageBindings { get; set; } = new Dictionary<string, AsyncApiMessageBindings>();
 
         /// <summary>
         /// This object MAY be extended with Specification Extensions.
@@ -78,7 +85,7 @@ namespace RedGun.AsyncApi.Models
                 throw Error.ArgumentNull(nameof(writer));
             }
 
-            // If references have been inlined we don't need the to render the components section
+            // If references have been inlined we don't need to render the components section
             // however if they have cycles, then we will need a component rendered
             if (writer.GetSettings().ReferenceInline != ReferenceInlineSetting.DoNotInlineReferences)
             {
@@ -102,7 +109,7 @@ namespace RedGun.AsyncApi.Models
 
             writer.WriteStartObject();
 
-            // Serialize each referenceable object as full object without reference if the reference in the object points to itself.
+            // Serialize each referencable object as full object without reference if the reference in the object points to itself.
             // If the reference exists but points to other objects, the object is serialized to just that reference.
 
             // schemas
@@ -123,86 +130,14 @@ namespace RedGun.AsyncApi.Models
                     }
                 });
 
-            // responses
+            // messages
             writer.WriteOptionalMap(
-                AsyncApiConstants.Responses,
-                Responses,
+                AsyncApiConstants.Messages,
+                Messages,
                 (w, key, component) =>
                 {
                     if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.Response &&
-                        component.Reference.Id == key)
-                    {
-                        component.SerializeAsV2WithoutReference(w);
-                    }
-                    else
-                    {
-                        component.SerializeAsV2(w);
-                    }
-                });
-
-            // parameters
-            writer.WriteOptionalMap(
-                AsyncApiConstants.Parameters,
-                Parameters,
-                (w, key, component) =>
-                {
-                    if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.Parameter &&
-                        component.Reference.Id == key)
-                    {
-                        component.SerializeAsV2WithoutReference(w);
-                    }
-                    else
-                    {
-                        component.SerializeAsV2(w);
-                    }
-                });
-
-            // examples
-            writer.WriteOptionalMap(
-                AsyncApiConstants.Examples,
-                Examples,
-                (w, key, component) =>
-                {
-                    if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.Example &&
-                        component.Reference.Id == key)
-                    {
-                        component.SerializeAsV2WithoutReference(w);
-                    }
-                    else
-                    {
-                        component.SerializeAsV2(w);
-                    }
-                });
-
-            // requestBodies
-            writer.WriteOptionalMap(
-                AsyncApiConstants.RequestBodies,
-                RequestBodies,
-                (w, key, component) =>
-                {
-                    if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.RequestBody &&
-                        component.Reference.Id == key)
-                    {
-                        component.SerializeAsV2WithoutReference(w);
-                    }
-                    else
-                    {
-                        component.SerializeAsV2(w);
-                    }
-                });
-
-            // headers
-            writer.WriteOptionalMap(
-                AsyncApiConstants.Headers,
-                Headers,
-                (w, key, component) =>
-                {
-                    if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.Header &&
+                        component.Reference.Type == ReferenceType.MessageBindings &&
                         component.Reference.Id == key)
                     {
                         component.SerializeAsV2WithoutReference(w);
@@ -230,15 +165,52 @@ namespace RedGun.AsyncApi.Models
                         component.SerializeAsV2(w);
                     }
                 });
-
-            // links
+            
+            
+            // parameters
             writer.WriteOptionalMap(
-                AsyncApiConstants.Links,
-                Links,
+                AsyncApiConstants.Parameters,
+                Parameters,
                 (w, key, component) =>
                 {
                     if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.Link &&
+                        component.Reference.Type == ReferenceType.Parameter &&
+                        component.Reference.Id == key)
+                    {
+                        component.SerializeAsV2WithoutReference(w);
+                    }
+                    else
+                    {
+                        component.SerializeAsV2(w);
+                    }
+                });
+            
+            // correlationIds
+            writer.WriteOptionalMap(
+                AsyncApiConstants.CorrelationIds,
+                CorrelationIds,
+                (w, key, component) =>
+                {
+                    if (component.Reference != null &&
+                        component.Reference.Type == ReferenceType.CorrelationId &&
+                        component.Reference.Id == key)
+                    {
+                        component.SerializeAsV2WithoutReference(w);
+                    }
+                    else
+                    {
+                        component.SerializeAsV2(w);
+                    }
+                });
+            
+            // operationTraits
+            writer.WriteOptionalMap(
+                AsyncApiConstants.OperationTraits,
+                OperationTraits,
+                (w, key, component) =>
+                {
+                    if (component.Reference != null &&
+                        component.Reference.Type == ReferenceType.OperationTrait &&
                         component.Reference.Id == key)
                     {
                         component.SerializeAsV2WithoutReference(w);
@@ -249,14 +221,86 @@ namespace RedGun.AsyncApi.Models
                     }
                 });
 
-            // callbacks
+            // messageTraits
             writer.WriteOptionalMap(
-                AsyncApiConstants.Callbacks,
-                Callbacks,
+                AsyncApiConstants.MessageTraits,
+                MessageTraits,
                 (w, key, component) =>
                 {
                     if (component.Reference != null &&
-                        component.Reference.Type == ReferenceType.Callback &&
+                        component.Reference.Type == ReferenceType.MessageTrait &&
+                        component.Reference.Id == key)
+                    {
+                        component.SerializeAsV2WithoutReference(w);
+                    }
+                    else
+                    {
+                        component.SerializeAsV2(w);
+                    }
+                });
+
+            // serverBindings
+            writer.WriteOptionalMap(
+                AsyncApiConstants.ServerBindings,
+                ServerBindings,
+                (w, key, component) =>
+                {
+                    if (component.Reference != null &&
+                        component.Reference.Type == ReferenceType.ServerBindings &&
+                        component.Reference.Id == key)
+                    {
+                        component.SerializeAsV2WithoutReference(w);
+                    }
+                    else
+                    {
+                        component.SerializeAsV2(w);
+                    }
+                });
+
+            // channelBindings
+            writer.WriteOptionalMap(
+                AsyncApiConstants.ChannelBindings,
+                ChannelBindings,
+                (w, key, component) =>
+                {
+                    if (component.Reference != null &&
+                        component.Reference.Type == ReferenceType.ChannelBindings &&
+                        component.Reference.Id == key)
+                    {
+                        component.SerializeAsV2WithoutReference(w);
+                    }
+                    else
+                    {
+                        component.SerializeAsV2(w);
+                    }
+                });
+
+            // operationBindings
+            writer.WriteOptionalMap(
+                AsyncApiConstants.OperationBindings,
+                OperationBindings,
+                (w, key, component) =>
+                {
+                    if (component.Reference != null &&
+                        component.Reference.Type == ReferenceType.OperationBindings &&
+                        component.Reference.Id == key)
+                    {
+                        component.SerializeAsV2WithoutReference(w);
+                    }
+                    else
+                    {
+                        component.SerializeAsV2(w);
+                    }
+                });
+
+            // messageBindings
+            writer.WriteOptionalMap(
+                AsyncApiConstants.MessageBindings,
+                MessageBindings,
+                (w, key, component) =>
+                {
+                    if (component.Reference != null &&
+                        component.Reference.Type == ReferenceType.MessageBindings &&
                         component.Reference.Id == key)
                     {
                         component.SerializeAsV2WithoutReference(w);

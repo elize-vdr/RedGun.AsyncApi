@@ -19,6 +19,21 @@ namespace RedGun.AsyncApi.Models
         public const string AsyncApi = "asyncapi";
 
         /// <summary>
+        /// Field: Document
+        /// </summary>
+        public const string Document = "document";
+
+        /// <summary>
+        /// Field: Extension
+        /// </summary>
+        public const string Extension = "extension";
+
+        /// <summary>
+        /// Field: Extensions
+        /// </summary>
+        public const string Extensions = "extensions";
+
+        /// <summary>
         /// Field: Info
         /// </summary>
         public const string Info = "info";
@@ -57,6 +72,16 @@ namespace RedGun.AsyncApi.Models
         /// Field: BindingVersion
         /// </summary>
         public const string BindingVersion = "bindingVersion";
+        
+        /// <summary>
+        /// Field: GroupId
+        /// </summary>
+        public const string GroupId = "groupId";
+        
+        /// <summary>
+        /// Field: ClientId
+        /// </summary>
+        public const string ClientId = "clientId";
 
         /// <summary>
         /// Field: Format
@@ -104,6 +129,11 @@ namespace RedGun.AsyncApi.Models
         public const string Channels = "channels";
         
         /// <summary>
+        /// Field: Channel
+        /// </summary>
+        public const string Channel = "channel";
+        
+        /// <summary>
         /// Field: Subscribe
         /// </summary>
         public const string Subscribe = "subscribe";
@@ -117,6 +147,26 @@ namespace RedGun.AsyncApi.Models
         /// Field: Bindings
         /// </summary>
         public const string Bindings = "bindings";
+        
+        /// <summary>
+        /// Field: ServerBindings
+        /// </summary>
+        public const string ServerBindings = "serverBindings";
+        
+        /// <summary>
+        /// Field: ChannelBindings
+        /// </summary>
+        public const string ChannelBindings = "channelBindings";
+        
+        /// <summary>
+        /// Field: OperationBindings
+        /// </summary>
+        public const string OperationBindings = "operationBindings";
+        
+        /// <summary>
+        /// Field: MessageBindings
+        /// </summary>
+        public const string MessageBindings = "messageBindings";
         
         /// <summary>
         /// Field: Binding Http
@@ -134,14 +184,44 @@ namespace RedGun.AsyncApi.Models
         public const string BindingKafka = "kafka";
         
         /// <summary>
-        /// Field: Bindings
+        /// Field: Traits
         /// </summary>
         public const string Traits = "traits";
         
         /// <summary>
+        /// Field: Operation
+        /// </summary>
+        public const string Operation = "operation";
+
+        /// <summary>
+        /// Field: OperationTraits
+        /// </summary>
+        public const string OperationTraits = "operationTraits";
+
+        /// <summary>
+        /// Field: OperationTrait
+        /// </summary>
+        public const string OperationTrait = "operationTrait";
+
+        /// <summary>
+        /// Field: MessageTraits
+        /// </summary>
+        public const string MessageTraits = "messageTraits";
+
+        /// <summary>
+        /// Field: MessageTrait
+        /// </summary>
+        public const string MessageTrait = "messageTrait";
+
+        /// <summary>
         /// Field: Message
         /// </summary>
         public const string Message = "message";
+        
+        /// <summary>
+        /// Field: Messages
+        /// </summary>
+        public const string Messages = "messages";
         
         /// <summary>
         /// Field: Components
@@ -157,6 +237,11 @@ namespace RedGun.AsyncApi.Models
         /// Field: Tags
         /// </summary>
         public const string Tags = "tags";
+
+        /// <summary>
+        /// Field: Tag
+        /// </summary>
+        public const string Tag = "tag";
 
         /// <summary>
         /// Field: ExternalDocs
@@ -177,6 +262,11 @@ namespace RedGun.AsyncApi.Models
         /// Field: Parameters
         /// </summary>
         public const string Parameters = "parameters";
+
+        /// <summary>
+        /// Field: Parameter
+        /// </summary>
+        public const string Parameter = "parameter";
 
         /// <summary>
         /// Field: RequestBody
@@ -227,6 +317,11 @@ namespace RedGun.AsyncApi.Models
         /// Field: Variables
         /// </summary>
         public const string Variables = "variables";
+
+        /// <summary>
+        /// Field: ServerVariable
+        /// </summary>
+        public const string ServerVariable = "serverVariable";
 
         /// <summary>
         /// Field: Description
@@ -334,6 +429,11 @@ namespace RedGun.AsyncApi.Models
         public const string SecuritySchemes = "securitySchemes";
 
         /// <summary>
+        /// Field: SecuritySchemes
+        /// </summary>
+        public const string SecurityScheme = "securityScheme";
+
+        /// <summary>
         /// Field: Content
         /// </summary>
         public const string Content = "content";
@@ -352,11 +452,26 @@ namespace RedGun.AsyncApi.Models
         /// Field: Url
         /// </summary>
         public const string Url = "url";
+        
+        /// <summary>
+        /// Field: Protocol
+        /// </summary>
+        public const string Protocol = "protocol";
+        
+        /// <summary>
+        /// Field: ProtocolVersion
+        /// </summary>
+        public const string ProtocolVersion = "protocolVersion";
 
         /// <summary>
         /// Field: Email
         /// </summary>
         public const string Email = "email";
+
+        /// <summary>
+        /// Field: DefaultContentType
+        /// </summary>
+        public const string DefaultContentType = "defaultContentType";
 
         /// <summary>
         /// Field: Default
@@ -587,6 +702,11 @@ namespace RedGun.AsyncApi.Models
         /// Field: CorrelationId
         /// </summary>
         public const string CorrelationId = "correlationId";
+        
+        /// <summary>
+        /// Field: CorrelationIds
+        /// </summary>
+        public const string CorrelationIds = "correlationIds";
 
         /// <summary>
         /// Field: Patch
@@ -661,7 +781,7 @@ namespace RedGun.AsyncApi.Models
         /// <summary>
         /// Field: defaultUrl
         /// </summary>
-        public static readonly Uri defaultUrl = new Uri("http://localhost/");
+        public static readonly Uri DefaultUrl = new Uri("http://localhost/");
 
         #region V2.0
 

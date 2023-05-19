@@ -17,15 +17,14 @@ namespace RedGun.AsyncApi.Readers.V2
         private static readonly FixedFieldMap<AsyncApiExternalDocs> _externalDocsFixedFields =
             new FixedFieldMap<AsyncApiExternalDocs>
             {
-                // $ref
                 {
-                    "description", (o, n) =>
+                    AsyncApiConstants.Description, (o, n) =>
                     {
                         o.Description = n.GetScalarValue();
                     }
                 },
                 {
-                    "url", (o, n) =>
+                    AsyncApiConstants.Url, (o, n) =>
                     {
                         o.Url = new Uri(n.GetScalarValue(), UriKind.RelativeOrAbsolute);
                     }
@@ -40,7 +39,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
     public static AsyncApiExternalDocs LoadExternalDocs(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("externalDocs");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.ExternalDocs);
 
             var externalDocs = new AsyncApiExternalDocs();
 

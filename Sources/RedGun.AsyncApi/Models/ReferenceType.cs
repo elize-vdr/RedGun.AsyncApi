@@ -16,47 +16,57 @@ namespace RedGun.AsyncApi.Models
         [Display("schemas")] Schema,
 
         /// <summary>
-        /// Responses item.
+        /// Message item.
         /// </summary>
-        [Display("responses")] Response,
+        [Display("messages")] Message,
 
         /// <summary>
-        /// Parameters item.
-        /// </summary>
-        [Display("parameters")] Parameter,
-
-        /// <summary>
-        /// Examples item.
-        /// </summary>
-        [Display("examples")] Example,
-
-        /// <summary>
-        /// RequestBodies item.
-        /// </summary>
-        [Display("requestBodies")] RequestBody,
-
-        /// <summary>
-        /// Headers item.
-        /// </summary>
-        [Display("headers")] Header,
-
-        /// <summary>
-        /// SecuritySchemes item.
+        /// SecurityScheme item.
         /// </summary>
         [Display("securitySchemes")] SecurityScheme,
 
         /// <summary>
-        /// Links item.
+        /// Parameter item.
         /// </summary>
-        [Display("links")] Link,
+        [Display("parameters")] Parameter,
 
         /// <summary>
-        /// Callbacks item.
+        /// CorrelationId item.
         /// </summary>
-        [Display("callbacks")] Callback,
+        [Display("correlationIds")] CorrelationId,
 
         /// <summary>
-        /// Tags item.
+        /// OperationTrait item.
+        /// </summary>
+        [Display("operationTraits")] OperationTrait,
+
+        /// <summary>
+        /// MessageTrait item.
+        /// </summary>
+        [Display("messageTraits")] MessageTrait,
+
+        /// <summary>
+        /// ServerBindings item.
+        /// </summary>
+        [Display("serverBindings")] ServerBindings,
+
+        /// <summary>
+        /// ChannelBindings item.
+        /// </summary>
+        [Display("channelBindings")] ChannelBindings,
+        
+        /// <summary>
+        /// OperationBindings item.
+        /// </summary>
+        [Display("operationBindings")] OperationBindings,
+        
+        /// <summary>
+        /// MessageBindings item.
+        /// </summary>
+        [Display("messageBindings")] MessageBindings,
+
+        /// <summary>
+        /// Tag item.
         /// </summary>
         [Display("tags")] Tag
     }

@@ -52,7 +52,6 @@ namespace RedGun.AsyncApi.Models
         /// </summary>
         public AsyncApiOperation Publish { get; set; }
         
-        
         /// <summary>
         /// A map of the parameters included in the channel name.
         /// It SHOULD be present only when using channels with expressions (as defined by RFC 6570 section 2.2).

@@ -19,19 +19,19 @@ namespace RedGun.AsyncApi.Readers.V2
             new FixedFieldMap<AsyncApiParameter>
             {
                 {
-                    "location", (o, n) =>
+                    AsyncApiConstants.Location, (o, n) =>
                     {
                         var inString = n.GetScalarValue();
                     }
                 },
                 {
-                    "description", (o, n) =>
+                    AsyncApiConstants.Description, (o, n) =>
                     {
                         o.Description = n.GetScalarValue();
                     }
                 },
                 {
-                    "schema", (o, n) =>
+                    AsyncApiConstants.Schema, (o, n) =>
                     {
                         o.Schema = LoadSchema(n);
                     }
@@ -46,7 +46,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiParameter LoadParameter(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("parameter");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Parameter);
 
             var pointer = mapNode.GetReferencePointer();
             if (pointer != null)

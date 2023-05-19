@@ -17,7 +17,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static PatternFieldMap<AsyncApiResponses> ResponsesPatternFields = new PatternFieldMap<AsyncApiResponses>
         {
-            {s => !s.StartsWith("x-"), (o, p, n) => o.Add(p, LoadResponse(n))},
+            //{s => !s.StartsWith("x-"), (o, p, n) => o.Add(p, LoadResponse(n))},
             {s => s.StartsWith("x-"), (o, p, n) => o.AddExtension(p, LoadExtension(p,n))}
         };
 

@@ -22,7 +22,7 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, schema) =>
                 {
                     // default
-                    context.Enter("default");
+                    context.Enter(AsyncApiConstants.Default);
 
                     if (schema.Default != null)
                     {
@@ -32,7 +32,7 @@ namespace RedGun.AsyncApi.Validations.Rules
                     context.Exit();
 
                     // example
-                    context.Enter("example");
+                    context.Enter(AsyncApiConstants.Example);
 
                     if (schema.Example != null)
                     {
@@ -42,7 +42,7 @@ namespace RedGun.AsyncApi.Validations.Rules
                     context.Exit();
 
                     // enum
-                    context.Enter("enum");
+                    context.Enter(AsyncApiConstants.Enum);
 
                     if (schema.Enum != null)
                     {
@@ -65,7 +65,7 @@ namespace RedGun.AsyncApi.Validations.Rules
                 (context, schema) =>
                 {
                     // discriminator
-                    context.Enter("discriminator");
+                    context.Enter(AsyncApiConstants.Discriminator);
 
                     if (schema.Reference != null && schema.Discriminator != null)
                     {

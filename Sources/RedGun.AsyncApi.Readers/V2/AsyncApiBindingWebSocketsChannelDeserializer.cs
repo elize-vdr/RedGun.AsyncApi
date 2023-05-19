@@ -15,25 +15,25 @@ namespace RedGun.AsyncApi.Readers.V2
         private static readonly FixedFieldMap<AsyncApiBindingWebSocketsChannel> _channelBindingWebSocketsChannelFixedFields = new FixedFieldMap<AsyncApiBindingWebSocketsChannel>
         {
             {
-                "method", (o, n) =>
+                AsyncApiConstants.Method, (o, n) =>
                 {
                     o.Method = n.GetScalarValue();
                 }
             },
             {
-                "query", (o, n) =>
+                AsyncApiConstants.Query, (o, n) =>
                 {
                     o.Query = LoadSchema(n);;
                 }
             },
             {
-                "headers", (o, n) =>
+                AsyncApiConstants.Headers, (o, n) =>
                 {
                     o.Headers = LoadSchema(n);;
                 }
             },
             {
-                "bindingVersion", (o, n) =>
+                AsyncApiConstants.BindingVersion, (o, n) =>
                 {
                     o.BindingVersion = n.GetScalarValue();
                 }
@@ -52,7 +52,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiBindingWebSocketsChannel LoadBindingWebSocketsChannel(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Channel Binding WebSockets");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.BindingWebSockets);
 
             var channelBindingWebSockets = new AsyncApiBindingWebSocketsChannel();
 

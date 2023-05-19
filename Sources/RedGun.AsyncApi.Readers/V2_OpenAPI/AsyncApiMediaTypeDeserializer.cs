@@ -26,12 +26,14 @@ namespace RedGun.AsyncApi.Readers.V2
                         o.Schema = LoadSchema(n);
                     }
                 },
+                /*
                 {
                     AsyncApiConstants.Examples, (o, n) =>
                     {
                         o.Examples = n.CreateMap(LoadExample);
                     }
                 },
+                */
                 {
                     AsyncApiConstants.Example, (o, n) =>
                     {

@@ -46,15 +46,17 @@ namespace RedGun.AsyncApi.Services
 
         public override void Visit(AsyncApiComponents components)
         {
-            ResolveMap(components.Parameters);
-            ResolveMap(components.RequestBodies);
-            ResolveMap(components.Responses);
-            ResolveMap(components.Links);
-            ResolveMap(components.Callbacks);
-            ResolveMap(components.Examples);
             ResolveMap(components.Schemas);
+            ResolveMap(components.Messages);
             ResolveMap(components.SecuritySchemes);
-            ResolveMap(components.Headers);
+            ResolveMap(components.Parameters);
+            ResolveMap(components.CorrelationIds);
+            ResolveMap(components.OperationTraits);
+            ResolveMap(components.MessageTraits);
+            ResolveMap(components.ServerBindings);
+            ResolveMap(components.ChannelBindings);
+            ResolveMap(components.OperationBindings);
+            ResolveMap(components.MessageBindings);
         }
 
         public override void Visit(IDictionary<string, AsyncApiCallback> callbacks)
@@ -77,7 +79,7 @@ namespace RedGun.AsyncApi.Services
         {
             ResolveObject(operation.Bindings, r => operation.Bindings = r);
             ResolveList(operation.Traits);
-            ResolveList(operation.Message);
+            ResolveObject(operation.Message, m => operation.Message = m);
 
             if (operation.Tags != null)
             {

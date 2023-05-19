@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RedGun.AsyncApi.Any;
 using RedGun.AsyncApi.Interfaces;
 using RedGun.AsyncApi.Models;
 
@@ -93,6 +94,20 @@ namespace RedGun.AsyncApi.Services
         public virtual void Visit(AsyncApiServer server)
         {
         }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiServerBindings"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiServerBindings serverBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiServerBindings"/>
+        /// </summary>
+        public virtual void Visit(IList<AsyncApiServerBindings> serverBindings)
+        {
+        }
 
         /// <summary>
         /// Visits <see cref="AsyncApiChannels"/>
@@ -112,6 +127,13 @@ namespace RedGun.AsyncApi.Services
         /// Visits <see cref="AsyncApiChannelBindings"/>
         /// </summary>
         public virtual void Visit(AsyncApiChannelBindings channelBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingWebSocketsChannel"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiBindingWebSocketsChannel channelBindings)
         {
         }
         
@@ -137,6 +159,13 @@ namespace RedGun.AsyncApi.Services
         }
 
         /// <summary>
+        /// Visits a dictionary of server variables
+        /// </summary>
+        public virtual void Visit(IDictionary<string, AsyncApiServerVariable> serverVariables)
+        {
+        }
+
+        /// <summary>
         /// Visits the operations.
         /// </summary>
         public virtual void Visit(IDictionary<OperationType, AsyncApiOperation> operations)
@@ -151,16 +180,79 @@ namespace RedGun.AsyncApi.Services
         }
         
         /// <summary>
-        /// Resolve all references used in an operation trait
+        /// Visits <see cref="AsyncApiOperationBindings"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiOperationBindings operationBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingHttpOperation"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiBindingHttpOperation operationBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingKafkaOperation"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiBindingKafkaOperation operationBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiOperationTrait"/>
         /// </summary>
         public virtual void Visit(AsyncApiOperationTrait operationTrait)
         {
         }
         
         /// <summary>
-        /// Resolve all references used in a message
+        /// Visits list of <see cref="AsyncApiOperationTrait"/>
+        /// </summary>
+        public virtual void Visit(IList<AsyncApiOperationTrait> operationTraits)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessage"/>
         /// </summary>
         public virtual void Visit(AsyncApiMessage message)
+        {
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiMessage"/>
+        /// </summary>
+        public virtual void Visit(IList<AsyncApiMessage> message)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessageBindings"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiMessageBindings messageBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingKafkaMessage"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiBindingKafkaMessage messageBindings)
+        {
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiMessageExample"/>
+        /// </summary>
+        public virtual void Visit(IList<AsyncApiMessageExample> messageExamples)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessageExample"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiMessageExample messageExample)
         {
         }
         
@@ -168,6 +260,27 @@ namespace RedGun.AsyncApi.Services
         /// Resolve all references used in a message
         /// </summary>
         public virtual void Visit(AsyncApiMessageTrait messageTrait)
+        {
+        }
+
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiMessageTrait"/>
+        /// </summary>
+        public virtual void Visit(IList<AsyncApiMessageTrait> messageTraits)
+        {
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiCorrelationId"/>
+        /// </summary>
+        public virtual void Visit(AsyncApiCorrelationId correlationId)
+        {
+        }
+
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiCorrelationId"/>
+        /// </summary>
+        public virtual void Visit(IList<AsyncApiCorrelationId> correlationId)
         {
         }
 
@@ -185,13 +298,12 @@ namespace RedGun.AsyncApi.Services
         {
         }
 
-        /// <summary>
+         /// <summary>
         /// Visits <see cref="AsyncApiRequestBody"/>
         /// </summary>
         public virtual void Visit(AsyncApiRequestBody requestBody)
         {
         }
-
 
         /// <summary>
         /// Visits headers.
@@ -361,18 +473,18 @@ namespace RedGun.AsyncApi.Services
         public virtual void Visit(IAsyncApiExtension asyncApiExtension)
         {
         }
+        
+        /// <summary>
+        /// Visits map of <see cref="IAsyncApiAny"/>
+        /// </summary>
+        public virtual void Visit(IDictionary<string, IAsyncApiAny> asyncApiAny)
+        {
+        }
 
         /// <summary>
         /// Visits list of <see cref="AsyncApiExample"/>
         /// </summary>
         public virtual void Visit(IList<AsyncApiExample> example)
-        {
-        }
-
-        /// <summary>
-        /// Visits a dictionary of server variables
-        /// </summary>
-        public virtual void Visit(IDictionary<string, AsyncApiServerVariable> serverVariables)
         {
         }
 

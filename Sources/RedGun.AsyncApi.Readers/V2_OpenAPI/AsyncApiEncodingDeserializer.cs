@@ -22,12 +22,14 @@ namespace RedGun.AsyncApi.Readers.V2
                     o.ContentType = n.GetScalarValue();
                 }
             },
+            /*
             {
                 "headers", (o, n) =>
                 {
                     o.Headers = n.CreateMap(LoadHeader);
                 }
             },
+            */
             {
                 "style", (o, n) =>
                 {

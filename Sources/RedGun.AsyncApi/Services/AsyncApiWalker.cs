@@ -197,6 +197,188 @@ namespace RedGun.AsyncApi.Services
                 }
             }
         }
+        
+                /// <summary>
+        /// Visits <see cref="AsyncApiChannels"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiChannels channels)
+        {
+            if (channels == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(channels);
+
+            // Visit Channels
+            if (channels != null)
+            {
+                foreach (var channelItem in channels)
+                {
+                    _visitor.CurrentKeys.Channel = channelItem.Key;
+                    Walk(channelItem.Key, () => Walk(channelItem.Value));
+                    _visitor.CurrentKeys.Channel = null;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiChannelItem"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiChannelItem channelItem)
+        {
+            if (channelItem == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(channelItem);
+
+            if (channelItem != null)
+            {
+                Walk(channelItem.Subscribe);
+                Walk(channelItem.Publish);
+                Walk(channelItem.Parameters);
+                Walk(channelItem.Bindings);
+            }
+            Walk(channelItem as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiChannelBindings"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiChannelBindings channelBindings, bool isComponent = false)
+        {
+            if (channelBindings == null || ProcessAsReference(channelBindings, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(channelBindings);
+
+            if (channelBindings != null)
+            {
+                Walk(channelBindings.BindingWebSockets);
+            }
+            Walk(channelBindings as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingWebSocketsChannel"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiBindingWebSocketsChannel bindingWebSocketsChannel)
+        {
+            if (bindingWebSocketsChannel == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(bindingWebSocketsChannel);
+            
+            if (bindingWebSocketsChannel != null)
+            {
+                Walk(bindingWebSocketsChannel.Query);
+                Walk(bindingWebSocketsChannel.Headers);
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingHttpOperation"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiBindingHttpOperation bindingHttpOperation)
+        {
+            if (bindingHttpOperation == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(bindingHttpOperation);
+            
+            if (bindingHttpOperation != null)
+            {
+                Walk(bindingHttpOperation.Query);
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingKafkaMessage"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiBindingKafkaMessage bindingKafkaMessage)
+        {
+            if (bindingKafkaMessage == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(bindingKafkaMessage);
+            
+            if (bindingKafkaMessage != null)
+            {
+                Walk(bindingKafkaMessage.Key);
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiBindingKafkaOperation"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiBindingKafkaOperation bindingKafkaOperation)
+        {
+            if (bindingKafkaOperation == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(bindingKafkaOperation);
+            
+            if (bindingKafkaOperation != null)
+            {
+                Walk(bindingKafkaOperation.GroupId);
+                Walk(bindingKafkaOperation.ClientId);
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiServerBindings"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiServerBindings serverBindings, bool isComponent = false)
+        {
+            if (serverBindings == null || ProcessAsReference(serverBindings, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(serverBindings);
+
+            if (serverBindings != null)
+            {
+                // TODO: Nothing to walk for ServerBindings at present
+                //Walk(channelBindings.BindingWebSockets);
+            }
+            Walk(serverBindings as IAsyncApiExtensible);
+        }
+
+
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiServerBindings"/>
+        /// </summary>
+        internal void Walk(IList<AsyncApiServerBindings> serverBindings)
+        {
+            if (serverBindings == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(serverBindings);
+
+            if (serverBindings != null)
+            {
+                for (int i = 0; i < serverBindings.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(serverBindings[i]));
+                }
+            }
+        }
 
         /// <summary>
         /// Visits <see cref="AsyncApiServerVariable"/> and child objects
@@ -213,6 +395,457 @@ namespace RedGun.AsyncApi.Services
         }
 
         /// <summary>
+        /// Visits dictionary of <see cref="AsyncApiOperation"/>
+        /// </summary>
+        internal void Walk(IDictionary<OperationType, AsyncApiOperation> operations)
+        {
+            if (operations == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(operations);
+            if (operations != null)
+            {
+                foreach (var operation in operations)
+                {
+                    _visitor.CurrentKeys.Operation = operation.Key;
+                    Walk(operation.Key.GetDisplayName(), () => Walk(operation.Value));
+                    _visitor.CurrentKeys.Operation = null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Visits <see cref="AsyncApiOperation"/> and child objects
+        /// </summary>
+        /// <param name="operation"></param>
+        internal void Walk(AsyncApiOperation operation)
+        {
+            if (operation == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(operation);
+            
+            Walk(AsyncApiConstants.Tags, () => Walk(operation.Tags));
+            Walk(operation.ExternalDocs);
+            Walk(operation.Bindings);
+            Walk(AsyncApiConstants.Traits, () => Walk(operation.Traits));
+            Walk(AsyncApiConstants.Message, () => Walk(operation.Message));
+
+            Walk(operation as IAsyncApiExtensible);
+        }
+
+        /// <summary>
+        /// Visits <see cref="AsyncApiOperationBindings"/> and child objects
+        /// </summary>
+        /// <param name="operationBindings"></param>
+        internal void Walk(AsyncApiOperationBindings operationBindings, bool isComponent = false)
+        {
+            if (operationBindings == null || ProcessAsReference(operationBindings, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(operationBindings);
+            
+            Walk(operationBindings.BindingHttp);
+            Walk(operationBindings as IAsyncApiExtensible);
+        }
+
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiOperationTrait"/> and child objects
+        /// </summary>
+        /// <param name="operationTraits"></param>
+        internal void Walk(IList<AsyncApiOperationTrait> operationTraits)
+        {
+            if (operationTraits == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(operationTraits);
+
+            // Visit traits
+            if (operationTraits != null)
+            {
+                for (int i = 0; i < operationTraits.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(operationTraits[i]));
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiOperationTrait"/> and child objects
+        /// </summary>
+        /// <param name="operationTrait"></param>
+        /// <param name="isComponent"></param>
+        internal void Walk(AsyncApiOperationTrait operationTrait, bool isComponent = false)
+        {
+            if (operationTrait == null || ProcessAsReference(operationTrait, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(operationTrait);
+            
+            Walk(AsyncApiConstants.Tags, () => Walk(operationTrait.Tags));
+            Walk(operationTrait.ExternalDocs);
+            Walk(operationTrait.Bindings);
+            Walk(operationTrait as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiMessage"/> and child objects
+        /// </summary>
+        /// <param name="messages"></param>
+        internal void Walk(IList<AsyncApiMessage> messages)
+        {
+            if (messages == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(messages);
+            
+            // Visit messages
+            if (messages != null)
+            {
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(messages[i]));
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessage"/> and child objects
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="isComponent"></param>
+        internal void Walk(AsyncApiMessage message, bool isComponent = false)
+        {
+            
+            if (message == null || ProcessAsReference(message, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(message);
+            
+            Walk(message.Headers);
+            Walk(message.Payload);
+            Walk(message.CorrelationId);
+            Walk(AsyncApiConstants.Tags, () => Walk(message.Tags));
+            Walk(message.ExternalDocs);
+            Walk(message.Bindings);
+            Walk(AsyncApiConstants.Examples, () => Walk(message.Examples));
+            Walk(AsyncApiConstants.Traits, () => Walk(message.Traits));
+
+            Walk(message as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessageBindings"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiMessageBindings messageBindings, bool isComponent = false)
+        {
+            if (messageBindings == null || ProcessAsReference(messageBindings, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(messageBindings);
+            
+            Walk(messageBindings.BindingKafka);
+
+            Walk(messageBindings as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiMessageBindings"/> and child objects
+        /// </summary>
+        /// <param name="messageExamples"></param>
+        internal void Walk(IList<AsyncApiMessageExample> messageExamples)
+        {
+            if (messageExamples == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(messageExamples);
+            
+            // Visit examples
+            if (messageExamples != null)
+            {
+                for (int i = 0; i < messageExamples.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(messageExamples[i]));
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessageExample"/> and child objects
+        /// </summary>
+        /// <param name="messageExample"></param>
+        internal void Walk(AsyncApiMessageExample messageExample)
+        {
+            if (messageExample == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(messageExample);
+            
+            Walk(AsyncApiConstants.Headers, () => Walk(messageExample.Headers));
+
+            Walk(messageExample as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiMessageTrait"/> and child objects
+        /// </summary>
+        /// <param name="messageTraits"></param>
+        internal void Walk(IList<AsyncApiMessageTrait> messageTraits)
+        {
+            if (messageTraits == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(messageTraits);
+            
+            // Visit traits
+            if (messageTraits != null)
+            {
+                for (int i = 0; i < messageTraits.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(messageTraits[i]));
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiMessageTrait"/> and child objects
+        /// </summary>
+        /// <param name="messageTrait"></param>
+        internal void Walk(AsyncApiMessageTrait messageTrait, bool isComponent = false)
+        {
+            if (messageTrait == null || ProcessAsReference(messageTrait, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(messageTrait);
+            
+            Walk(messageTrait.Headers);
+            Walk(messageTrait.CorrelationId);
+            Walk(AsyncApiConstants.Tags, () => Walk(messageTrait.Tags));
+            Walk(messageTrait.ExternalDocs);
+            Walk(messageTrait.Bindings);
+            Walk(AsyncApiConstants.Examples, () => Walk(messageTrait.Examples));
+
+            Walk(messageTrait as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits <see cref="AsyncApiCorrelationId"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiCorrelationId correlationId, bool isComponent = false)
+        {
+            if (correlationId == null || ProcessAsReference(correlationId, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(correlationId);
+            
+            Walk(correlationId as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiCorrelationId"/>
+        /// </summary>
+        internal void Walk(IList<AsyncApiCorrelationId> correlationIds)
+        {
+            if (correlationIds == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(correlationIds);
+
+            if (correlationIds != null)
+            {
+                for (int i = 0; i < correlationIds.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(correlationIds[i]));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Visits <see cref="AsyncApiSchema"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiSchema schema, bool isComponent = false)
+        {
+            if (schema == null || ProcessAsReference(schema, isComponent))
+            {
+                return;
+            }
+
+            if (_schemaLoop.Contains(schema))
+            {
+                return; // Loop detected, this schema has already been walked.
+            }
+            else
+            {
+                _schemaLoop.Push(schema);
+            }
+
+            _visitor.Visit(schema);
+
+            if (schema.Items != null)
+            {
+                Walk("items", () => Walk(schema.Items));
+            }
+
+            if (schema.AllOf != null)
+            {
+                Walk("allOf", () => Walk(schema.AllOf));
+            }
+
+            if (schema.AnyOf != null)
+            {
+                Walk("anyOf", () => Walk(schema.AnyOf));
+            }
+
+            if (schema.OneOf != null)
+            {
+                Walk("oneOf", () => Walk(schema.OneOf));
+            }
+
+            if (schema.Properties != null)
+            {
+                Walk("properties", () =>
+                {
+                    foreach (var item in schema.Properties)
+                    {
+                        Walk(item.Key, () => Walk(item.Value));
+                    }
+                });
+            }
+
+            if (schema.AdditionalProperties != null)
+            {
+                Walk("additionalProperties", () => Walk(schema.AdditionalProperties));
+            }
+
+            Walk(AsyncApiConstants.ExternalDocs, () => Walk(schema.ExternalDocs));
+
+            Walk(schema as IAsyncApiExtensible);
+
+            _schemaLoop.Pop();
+        }
+
+        /// <summary>
+        /// Visits a list of <see cref="AsyncApiSchema"/> and child objects
+        /// </summary>
+        internal void Walk(IList<AsyncApiSchema> schemas)
+        {
+            if (schemas == null)
+            {
+                return;
+            }
+
+            // Visit Schemass
+            if (schemas != null)
+            {
+                for (int i = 0; i < schemas.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(schemas[i]));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Visits list of <see cref="AsyncApiParameter"/>
+        /// </summary>
+        internal void Walk(IList<AsyncApiParameter> parameters)
+        {
+            if (parameters == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(parameters);
+
+            if (parameters != null)
+            {
+                for (int i = 0; i < parameters.Count; i++)
+                {
+                    Walk(i.ToString(), () => Walk(parameters[i]));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Visits <see cref="AsyncApiParameter"/> and child objects
+        /// </summary>
+        internal void Walk(AsyncApiParameter parameter, bool isComponent = false)
+        {
+            if (parameter == null || ProcessAsReference(parameter, isComponent))
+            {
+                return;
+            }
+
+            _visitor.Visit(parameter);
+            Walk(AsyncApiConstants.Schema, () => Walk(parameter.Schema));
+            
+            Walk(parameter as IAsyncApiExtensible);
+        }
+        
+        /// <summary>
+        /// Visits <see cref="IAsyncApiAny"/> and child objects
+        /// </summary>
+        internal void Walk(IAsyncApiAny example)
+        {
+            if (example == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(example);
+        }
+        
+        /// <summary>
+        /// Visits map of <see cref="IAsyncApiAny"/> and child objects
+        /// </summary>
+        internal void Walk(IDictionary<string, IAsyncApiAny> dictionaryOfAny)
+        {
+            if (dictionaryOfAny == null)
+            {
+                return;
+            }
+
+            _visitor.Visit(dictionaryOfAny);
+            
+            if (dictionaryOfAny != null)
+            {
+                foreach (var header in dictionaryOfAny)
+                {
+                    _visitor.CurrentKeys.Header = header.Key;
+                    Walk(header.Key, () => Walk(header.Value));
+                    _visitor.CurrentKeys.Header = null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Visits <see cref="AsyncApiExternalDocs"/> and child objects
         /// </summary>
         internal void Walk(AsyncApiExternalDocs externalDocs)
@@ -224,9 +857,9 @@ namespace RedGun.AsyncApi.Services
 
             _visitor.Visit(externalDocs);
         }
-
+        
         /// <summary>
-        /// Visits <see cref="AsyncApiSecurityScheme"/> and child objects
+        /// Visits <see cref="IAsyncApiReferenceable"/> and child objects
         /// </summary>
         internal void Walk(IAsyncApiReferenceable referenceable)
         {
@@ -269,10 +902,6 @@ namespace RedGun.AsyncApi.Services
             _visitor.Visit(extension);
         }
 
-
-        #region OldOpenApiWalkers
-        
-
         /// <summary>
         /// Visits <see cref="AsyncApiComponents"/> and child objects
         /// </summary>
@@ -301,16 +930,20 @@ namespace RedGun.AsyncApi.Services
                 }
             });
 
-            Walk(AsyncApiConstants.Callbacks, () =>
+            Walk(AsyncApiConstants.Messages, () =>
             {
-                if (components.Callbacks != null)
+                if (components.Parameters != null)
                 {
-                    foreach (var item in components.Callbacks)
+                    foreach (var item in components.Parameters)
                     {
                         Walk(item.Key, () => Walk(item.Value, isComponent: true));
                     }
                 }
             });
+            
+            // TODO: In the original OpenApi implementation the SecurityScheme is not walked, 
+            // not sure I understand why, something to do with how it is declared win Servers 
+            // on OpenApi it is declared on the root Document.
 
             Walk(AsyncApiConstants.Parameters, () =>
             {
@@ -322,56 +955,78 @@ namespace RedGun.AsyncApi.Services
                     }
                 }
             });
-
-            Walk(AsyncApiConstants.Examples, () =>
+            
+            Walk(AsyncApiConstants.CorrelationId, () =>
             {
-                if (components.Examples != null)
+                if (components.CorrelationIds != null)
                 {
-                    foreach (var item in components.Examples)
+                    foreach (var item in components.CorrelationIds)
                     {
                         Walk(item.Key, () => Walk(item.Value, isComponent: true));
                     }
                 }
             });
-
-            Walk(AsyncApiConstants.Headers, () =>
+            
+            Walk(AsyncApiConstants.OperationTraits, () =>
             {
-                if (components.Headers != null)
+                if (components.OperationTraits != null)
                 {
-                    foreach (var item in components.Headers)
+                    foreach (var item in components.OperationTraits)
                     {
                         Walk(item.Key, () => Walk(item.Value, isComponent: true));
                     }
                 }
             });
-
-            Walk(AsyncApiConstants.Links, () =>
+            
+            Walk(AsyncApiConstants.MessageTraits, () =>
             {
-                if (components.Links != null)
+                if (components.MessageTraits != null)
                 {
-                    foreach (var item in components.Links)
+                    foreach (var item in components.MessageTraits)
                     {
                         Walk(item.Key, () => Walk(item.Value, isComponent: true));
                     }
                 }
             });
-
-            Walk(AsyncApiConstants.RequestBodies, () =>
+            
+            Walk(AsyncApiConstants.ServerBindings, () =>
             {
-                if (components.RequestBodies != null)
+                if (components.ServerBindings != null)
                 {
-                    foreach (var item in components.RequestBodies)
+                    foreach (var item in components.ServerBindings)
                     {
                         Walk(item.Key, () => Walk(item.Value, isComponent: true));
                     }
                 }
             });
-
-            Walk(AsyncApiConstants.Responses, () =>
+            
+            Walk(AsyncApiConstants.ChannelBindings, () =>
             {
-                if (components.Responses != null)
+                if (components.ChannelBindings != null)
                 {
-                    foreach (var item in components.Responses)
+                    foreach (var item in components.ChannelBindings)
+                    {
+                        Walk(item.Key, () => Walk(item.Value, isComponent: true));
+                    }
+                }
+            });
+            
+            Walk(AsyncApiConstants.OperationBindings, () =>
+            {
+                if (components.OperationBindings != null)
+                {
+                    foreach (var item in components.OperationBindings)
+                    {
+                        Walk(item.Key, () => Walk(item.Value, isComponent: true));
+                    }
+                }
+            });
+            
+            Walk(AsyncApiConstants.MessageBindings, () =>
+            {
+                if (components.MessageBindings != null)
+                {
+                    foreach (var item in components.MessageBindings)
                     {
                         Walk(item.Key, () => Walk(item.Value, isComponent: true));
                     }
@@ -380,97 +1035,40 @@ namespace RedGun.AsyncApi.Services
 
             Walk(components as IAsyncApiExtensible);
         }
-        
+
         /// <summary>
-        /// Visits <see cref="AsyncApiChannels"/> and child objects
+        /// Visits <see cref="AsyncApiSecurityRequirement"/> and child objects
         /// </summary>
-        internal void Walk(AsyncApiChannels channels)
+        internal void Walk(AsyncApiSecurityRequirement securityRequirement)
         {
-            if (channels == null)
+            if (securityRequirement == null)
             {
                 return;
             }
 
-            _visitor.Visit(channels);
-
-            // Visit Channels
-            if (channels != null)
-            {
-                foreach (var channelItem in channels)
-                {
-                    _visitor.CurrentKeys.Channel = channelItem.Key;
-                    Walk(channelItem.Key, () => Walk(channelItem.Value));
-                    _visitor.CurrentKeys.Channel = null;
-                }
-            }
+            _visitor.Visit(securityRequirement);
+            Walk(securityRequirement as IAsyncApiExtensible);
         }
-        
+
         /// <summary>
-        /// Visits <see cref="AsyncApiChannelItem"/> and child objects
+        /// Visits <see cref="AsyncApiSecurityScheme"/> and child objects
         /// </summary>
-        internal void Walk(AsyncApiChannelItem channelItem)
+        internal void Walk(AsyncApiSecurityScheme securityScheme)
         {
-            if (channelItem == null)
+            if (securityScheme == null || ProcessAsReference(securityScheme))
             {
                 return;
             }
 
-            _visitor.Visit(channelItem);
-
-            if (channelItem != null)
-            {
-                // TODO: Walk subscribe, publish, parameters bindings
-                //Walk(AsyncApiConstants.Parameters, () => Walk(channelItem.Parameters));
-                //Walk(channelItem.Operations);
-                Walk(channelItem.Bindings);
-            }
-            Walk(channelItem as IAsyncApiExtensible);
+            _visitor.Visit(securityScheme);
+            Walk(securityScheme as IAsyncApiExtensible);
         }
+
+
+        #region OldOpenApiWalkers //********************************************
         
-        /// <summary>
-        /// Visits <see cref="AsyncApiChannelBindings"/> and child objects
-        /// </summary>
-        internal void Walk(AsyncApiChannelBindings channelBindings)
-        {
-            if (channelBindings == null)
-            {
-                return;
-            }
 
-            _visitor.Visit(channelBindings);
-
-            if (channelBindings != null)
-            {
-                // TODO: Walk subscribe, publish, parameters bindings
-                //Walk(AsyncApiConstants.Parameters, () => Walk(channelItem.Parameters));
-                //Walk(channelItem.Operations);
-                Walk(channelBindings.BindingHttp);
-                // TODO: Add rest of bindings
-            }
-            Walk(channelBindings as IAsyncApiExtensible);
-        }
-        
-        /// <summary>
-        /// Visits <see cref="AsyncApiBindingHttpOperation"/> and child objects
-        /// </summary>
-        internal void Walk(AsyncApiBindingHttpOperation bindingHttpOperation)
-        {
-            if (bindingHttpOperation == null)
-            {
-                return;
-            }
-
-            _visitor.Visit(bindingHttpOperation);
-
-            if (bindingHttpOperation != null)
-            {
-                Walk(AsyncApiConstants.Query, () => Walk(bindingHttpOperation.Query));
-            }
-            Walk(bindingHttpOperation as IAsyncApiExtensible);
-        }
-
-
-        /// <summary>
+         /// <summary>
         /// Visits <see cref="AsyncApiPaths"/> and child objects
         /// </summary>
         internal void Walk(AsyncApiPaths paths)
@@ -549,51 +1147,7 @@ namespace RedGun.AsyncApi.Services
             _pathItemLoop.Pop();
         }
 
-        /// <summary>
-        /// Visits dictionary of <see cref="AsyncApiOperation"/>
-        /// </summary>
-        internal void Walk(IDictionary<OperationType, AsyncApiOperation> operations)
-        {
-            if (operations == null)
-            {
-                return;
-            }
-
-            _visitor.Visit(operations);
-            if (operations != null)
-            {
-                foreach (var operation in operations)
-                {
-                    _visitor.CurrentKeys.Operation = operation.Key;
-                    Walk(operation.Key.GetDisplayName(), () => Walk(operation.Value));
-                    _visitor.CurrentKeys.Operation = null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Visits <see cref="AsyncApiOperation"/> and child objects
-        /// </summary>
-        /// <param name="operation"></param>
-        internal void Walk(AsyncApiOperation operation)
-        {
-            if (operation == null)
-            {
-                return;
-            }
-
-            _visitor.Visit(operation);
-
-            Walk(AsyncApiConstants.Parameters, () => Walk(operation.Parameters));
-            Walk(AsyncApiConstants.RequestBody, () => Walk(operation.RequestBody));
-            Walk(AsyncApiConstants.Responses, () => Walk(operation.Responses));
-            Walk(AsyncApiConstants.Callbacks, () => Walk(operation.Callbacks));
-            Walk(AsyncApiConstants.Tags, () => Walk(operation.Tags));
-            Walk(AsyncApiConstants.Security, () => Walk(operation.Security));
-            Walk(operation as IAsyncApiExtensible);
-        }
-
-        /// <summary>
+         /// <summary>
         /// Visits list of <see cref="AsyncApiSecurityRequirement"/>
         /// </summary>
         internal void Walk(IList<AsyncApiSecurityRequirement> securityRequirements)
@@ -615,44 +1169,7 @@ namespace RedGun.AsyncApi.Services
         }
 
 
-        /// <summary>
-        /// Visits list of <see cref="AsyncApiParameter"/>
-        /// </summary>
-        internal void Walk(IList<AsyncApiParameter> parameters)
-        {
-            if (parameters == null)
-            {
-                return;
-            }
-
-            _visitor.Visit(parameters);
-
-            if (parameters != null)
-            {
-                for (int i = 0; i < parameters.Count; i++)
-                {
-                    Walk(i.ToString(), () => Walk(parameters[i]));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Visits <see cref="AsyncApiParameter"/> and child objects
-        /// </summary>
-        internal void Walk(AsyncApiParameter parameter, bool isComponent = false)
-        {
-            if (parameter == null || ProcessAsReference(parameter, isComponent))
-            {
-                return;
-            }
-
-            _visitor.Visit(parameter);
-            Walk(AsyncApiConstants.Schema, () => Walk(parameter.Schema));
-            
-            Walk(parameter as IAsyncApiExtensible);
-        }
-
-        /// <summary>
+         /// <summary>
         /// Visits <see cref="AsyncApiResponses"/> and child objects
         /// </summary>
         internal void Walk(AsyncApiResponses responses)
@@ -842,70 +1359,6 @@ namespace RedGun.AsyncApi.Services
         }
 
         /// <summary>
-        /// Visits <see cref="AsyncApiSchema"/> and child objects
-        /// </summary>
-        internal void Walk(AsyncApiSchema schema, bool isComponent = false)
-        {
-            if (schema == null || ProcessAsReference(schema, isComponent))
-            {
-                return;
-            }
-
-            if (_schemaLoop.Contains(schema))
-            {
-                return;  // Loop detected, this schema has already been walked.
-            }
-            else
-            {
-                _schemaLoop.Push(schema);
-            }
-
-            _visitor.Visit(schema);
-
-            if (schema.Items != null)
-            {
-                Walk("items", () => Walk(schema.Items));
-            }
-
-            if (schema.AllOf != null)
-            {
-                Walk("allOf", () => Walk(schema.AllOf));
-            }
-
-            if (schema.AnyOf != null)
-            {
-                Walk("anyOf", () => Walk(schema.AnyOf));
-            }
-
-            if (schema.OneOf != null)
-            {
-                Walk("oneOf", () => Walk(schema.OneOf));
-            }
-
-            if (schema.Properties != null)
-            {
-                Walk("properties", () =>
-                {
-                    foreach (var item in schema.Properties)
-                    {
-                        Walk(item.Key, () => Walk(item.Value));
-                    }
-                });
-            }
-
-            if (schema.AdditionalProperties != null)
-            {
-                Walk("additionalProperties", () => Walk(schema.AdditionalProperties));
-            }
-
-            Walk(AsyncApiConstants.ExternalDocs, () => Walk(schema.ExternalDocs));
-
-            Walk(schema as IAsyncApiExtensible);
-
-            _schemaLoop.Pop();
-        }
-
-        /// <summary>
         /// Visits dictionary of <see cref="AsyncApiExample"/>
         /// </summary>
         internal void Walk(IDictionary<string, AsyncApiExample> examples)
@@ -926,19 +1379,6 @@ namespace RedGun.AsyncApi.Services
                     _visitor.CurrentKeys.Example = null;
                 }
             }
-        }
-
-        /// <summary>
-        /// Visits <see cref="IAsyncApiAny"/> and child objects
-        /// </summary>
-        internal void Walk(IAsyncApiAny example)
-        {
-            if (example == null)
-            {
-                return;
-            }
-
-            _visitor.Visit(example);
         }
 
         /// <summary>
@@ -977,27 +1417,7 @@ namespace RedGun.AsyncApi.Services
             }
         }
 
-        /// <summary>
-        /// Visits a list of <see cref="AsyncApiSchema"/> and child objects
-        /// </summary>
-        internal void Walk(IList<AsyncApiSchema> schemas)
-        {
-            if (schemas == null)
-            {
-                return;
-            }
-
-            // Visit Schemass
-            if (schemas != null)
-            {
-                for (int i = 0; i < schemas.Count; i++)
-                {
-                    Walk(i.ToString(), () => Walk(schemas[i]));
-                }
-            }
-        }
-
-        /// <summary>
+         /// <summary>
         /// Visits <see cref="AsyncApiOAuthFlows"/> and child objects
         /// </summary>
         internal void Walk(AsyncApiOAuthFlows flows)
@@ -1080,34 +1500,6 @@ namespace RedGun.AsyncApi.Services
             Walk(header as IAsyncApiExtensible);
         }
 
-        /// <summary>
-        /// Visits <see cref="AsyncApiSecurityRequirement"/> and child objects
-        /// </summary>
-        internal void Walk(AsyncApiSecurityRequirement securityRequirement)
-        {
-            if (securityRequirement == null)
-            {
-                return;
-            }
-
-            _visitor.Visit(securityRequirement);
-            Walk(securityRequirement as IAsyncApiExtensible);
-        }
-
-        /// <summary>
-        /// Visits <see cref="AsyncApiSecurityScheme"/> and child objects
-        /// </summary>
-        internal void Walk(AsyncApiSecurityScheme securityScheme)
-        {
-            if (securityScheme == null || ProcessAsReference(securityScheme))
-            {
-                return;
-            }
-
-            _visitor.Visit(securityScheme);
-            Walk(securityScheme as IAsyncApiExtensible);
-        }
-       
          #endregion OldOpenApiWalkers
 
         /// <summary>
@@ -1144,15 +1536,18 @@ namespace RedGun.AsyncApi.Services
                 case AsyncApiMessage e: Walk(e); break;
                 case IList<AsyncApiMessage> e: Walk(e); break;
                 case IList<AsyncApiMessageExample> e: Walk(e); break;
+                case AsyncApiMessageTrait e: Walk(e); break;
+                case IList<AsyncApiMessageTrait> e: Walk(e); break;
                 case AsyncApiCorrelationId e: Walk(e); break;
                 case AsyncApiMessageExample e: Walk(e); break;
-                case AsyncApiMessageTrait e: Walk(e); break;
                 case AsyncApiMessageBindings e: Walk(e); break;
                 case AsyncApiParameters e: Walk(e); break;
                 case AsyncApiParameter e: Walk(e); break;
+                case AsyncApiSecurityRequirement e: Walk(e); break;
+                case AsyncApiSecurityScheme e: Walk(e); break;
+                case AsyncApiComponents e: Walk(e); break;
             
                 // TODO: Marker for old OpenAPI walkers --------------------------------------------
-                case AsyncApiComponents e: Walk(e); break;
                 case AsyncApiCallback e: Walk(e); break;
                 case AsyncApiEncoding e: Walk(e); break;
                 case AsyncApiExample e: Walk(e); break;
@@ -1165,8 +1560,6 @@ namespace RedGun.AsyncApi.Services
                 case AsyncApiOAuthFlow e: Walk(e); break;
                 case AsyncApiRequestBody e: Walk(e); break;
                 case AsyncApiResponse e: Walk(e); break;
-                case AsyncApiSecurityRequirement e: Walk(e); break;
-                case AsyncApiSecurityScheme e: Walk(e); break;
                 //-----------------------------------
                 
                 case IAsyncApiExtensible e: Walk(e); break;

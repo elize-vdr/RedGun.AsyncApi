@@ -1,4 +1,4 @@
-﻿// Licensed under the MIT license. 
+// Licensed under the MIT license. 
 
 using RedGun.AsyncApi.Extensions;
 using RedGun.AsyncApi.Models;
@@ -12,15 +12,9 @@ namespace RedGun.AsyncApi.Readers.V2
     /// </summary>
     internal static partial class AsyncApiV2Deserializer
     {
-        private static readonly FixedFieldMap<AsyncApiOperation> _operationFixedFields =
-            new FixedFieldMap<AsyncApiOperation>
+        private static readonly FixedFieldMap<AsyncApiOperationTrait> _operationTraitFixedFields =
+            new FixedFieldMap<AsyncApiOperationTrait>
             {
-                {
-                    AsyncApiConstants.OperationId, (o, n) =>
-                    {
-                        o.OperationId = n.GetScalarValue();
-                    }
-                },
                 {
                     AsyncApiConstants.Summary, (o, n) =>
                     {
@@ -37,7 +31,6 @@ namespace RedGun.AsyncApi.Readers.V2
                     AsyncApiConstants.Tags, (o, n) =>
                     {
                         o.Tags = n.CreateList(LoadTagByReference);
-                        
                     }
                 },
                 {
@@ -51,37 +44,30 @@ namespace RedGun.AsyncApi.Readers.V2
                     {
                         o.Bindings = LoadOperationBindings(n);
                     }
-                },
-               {
-                   AsyncApiConstants.Traits, (o, n) =>
-                    {
-                        o.Traits = n.CreateList(LoadOperationTrait);
-                    }
-                },
-                {
-                    AsyncApiConstants.Message, (o, n) =>
-                    {
-                        o.Message = LoadMessage(n);
-                    }
                 }
             };
 
-        private static readonly PatternFieldMap<AsyncApiOperation> _operationPatternFields =
-            new PatternFieldMap<AsyncApiOperation>
+        private static readonly PatternFieldMap<AsyncApiOperationTrait> _operationTraitPatternFields =
+            new PatternFieldMap<AsyncApiOperationTrait>
             {
                 {s => s.StartsWith("x-"), (o, p, n) => o.AddExtension(p, LoadExtension(p,n))},
             };
 
-        internal static AsyncApiOperation LoadOperation(ParseNode node)
+        internal static AsyncApiOperationTrait LoadOperationTrait(ParseNode node)
         {
-            var mapNode = node.CheckMapNode(AsyncApiConstants.Operation);
+            var mapNode = node.CheckMapNode(AsyncApiConstants.OperationTrait);
+            
+            var pointer = mapNode.GetReferencePointer();
+            if (pointer != null)
+            {
+                return mapNode.GetReferencedObject<AsyncApiOperationTrait>(ReferenceType.OperationTrait, pointer);
+            }
 
-            var operation = new AsyncApiOperation();
+            var operationTrait = new AsyncApiOperationTrait();
 
-            ParseMap(mapNode, operation, _operationFixedFields, _operationPatternFields);
+            ParseMap(mapNode, operationTrait, _operationTraitFixedFields, _operationTraitPatternFields);
 
-            return operation;
+            return operationTrait;
         }
-        
     }
 }

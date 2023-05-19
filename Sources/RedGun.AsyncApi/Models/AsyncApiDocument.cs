@@ -32,8 +32,11 @@ namespace RedGun.AsyncApi.Models
         /// REQUIRED. Provides metadata about the API. The metadata MAY be used by tooling as required.
         /// </summary>
         public AsyncApiInfo Info { get; set; }
-        
-        // TODO: Add defaultContentType
+
+        /// <summary>
+        /// Default content type to use when encoding/decoding a message's payload.
+        /// </summary>
+        public string DefaultContentType { get; set; }
 
         /// <summary>
         /// An array of Server Objects, which provide connectivity information to a target server.
@@ -88,6 +91,9 @@ namespace RedGun.AsyncApi.Models
 
             // servers
             writer.WriteOptionalObject(AsyncApiConstants.Servers, Servers, (w, s) => s.SerializeAsV2(w));
+            
+            // defaultContentType
+            writer.WriteProperty(AsyncApiConstants.Default, DefaultContentType);
 
             // paths
             writer.WriteRequiredObject(AsyncApiConstants.Channels, Channels, (w, p) => p.SerializeAsV2(w));
@@ -119,18 +125,18 @@ namespace RedGun.AsyncApi.Models
             return resolver.Errors;
         }
 
-            /// <summary>
-            /// Load the referenced <see cref="IAsyncApiReferenceable"/> object from a <see cref="AsyncApiReference"/> object
-            /// </summary>
-            public IAsyncApiReferenceable ResolveReference(AsyncApiReference reference)
-            {
-                return ResolveReference(reference, false);
-            }
+        /// <summary>
+        /// Load the referenced <see cref="IAsyncApiReferenceable"/> object from a <see cref="AsyncApiReference"/> object
+        /// </summary>
+        public IAsyncApiReferenceable ResolveReference(AsyncApiReference reference)
+        {
+            return ResolveReference(reference, false);
+        }
 
-            /// <summary>
-            /// Load the referenced <see cref="IAsyncApiReferenceable"/> object from a <see cref="AsyncApiReference"/> object
-            /// </summary>
-            public IAsyncApiReferenceable ResolveReference(AsyncApiReference reference, bool useExternal)
+        /// <summary>
+        /// Load the referenced <see cref="IAsyncApiReferenceable"/> object from a <see cref="AsyncApiReference"/> object
+        /// </summary>
+        public IAsyncApiReferenceable ResolveReference(AsyncApiReference reference, bool useExternal)
         {
             if (reference == null)
             {
@@ -179,29 +185,35 @@ namespace RedGun.AsyncApi.Models
                     case ReferenceType.Schema:
                         return this.Components.Schemas[reference.Id];
 
-                    case ReferenceType.Response:
-                        return this.Components.Responses[reference.Id];
-
-                    case ReferenceType.Parameter:
-                        return this.Components.Parameters[reference.Id];
-
-                    case ReferenceType.Example:
-                        return this.Components.Examples[reference.Id];
-
-                    case ReferenceType.RequestBody:
-                        return this.Components.RequestBodies[reference.Id];
-
-                    case ReferenceType.Header:
-                        return this.Components.Headers[reference.Id];
+                    case ReferenceType.Message:
+                        return this.Components.Messages[reference.Id];
 
                     case ReferenceType.SecurityScheme:
                         return this.Components.SecuritySchemes[reference.Id];
 
-                    case ReferenceType.Link:
-                        return this.Components.Links[reference.Id];
+                    case ReferenceType.Parameter:
+                        return this.Components.Parameters[reference.Id];
 
-                    case ReferenceType.Callback:
-                        return this.Components.Callbacks[reference.Id];
+                    case ReferenceType.CorrelationId:
+                        return this.Components.CorrelationIds[reference.Id];
+
+                    case ReferenceType.OperationTrait:
+                        return this.Components.OperationTraits[reference.Id];
+
+                    case ReferenceType.MessageTrait:
+                        return this.Components.MessageTraits[reference.Id];
+
+                    case ReferenceType.ServerBindings:
+                        return this.Components.ServerBindings[reference.Id];
+
+                    case ReferenceType.ChannelBindings:
+                        return this.Components.ChannelBindings[reference.Id];
+
+                    case ReferenceType.OperationBindings:
+                        return this.Components.OperationBindings[reference.Id];
+
+                    case ReferenceType.MessageBindings:
+                        return this.Components.MessageBindings[reference.Id];
 
                     default:
                         throw new AsyncApiException(Properties.SRResource.InvalidReferenceType);

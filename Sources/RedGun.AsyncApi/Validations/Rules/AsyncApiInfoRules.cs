@@ -22,20 +22,20 @@ namespace RedGun.AsyncApi.Validations.Rules
                 {
 
                     // title
-                    context.Enter("title");
+                    context.Enter(AsyncApiConstants.Title);
                     if (item.Title == null)
                     {
                         context.CreateError(nameof(InfoRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "title", "info"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Title, AsyncApiConstants.Info));
                     }
                     context.Exit();
 
                     // version
-                    context.Enter("version");
+                    context.Enter(AsyncApiConstants.Version);
                     if (item.Version == null)
                     {
                         context.CreateError(nameof(InfoRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "version", "info"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Version, AsyncApiConstants.Info));
                     }
                     context.Exit();
 

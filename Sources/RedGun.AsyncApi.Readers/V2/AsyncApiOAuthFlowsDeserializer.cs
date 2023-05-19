@@ -13,13 +13,29 @@ namespace RedGun.AsyncApi.Readers.V2
     /// </summary>
     internal static partial class AsyncApiV2Deserializer
     {
-        private static readonly FixedFieldMap<AsyncApiOAuthFlows> _oAuthFlowsFixedFileds =
+        private static readonly FixedFieldMap<AsyncApiOAuthFlows> _oAuthFlowsFixedFields =
             new FixedFieldMap<AsyncApiOAuthFlows>
             {
-                {"implicit", (o, n) => o.Implicit = LoadOAuthFlow(n)},
-                {"password", (o, n) => o.Password = LoadOAuthFlow(n)},
-                {"clientCredentials", (o, n) => o.ClientCredentials = LoadOAuthFlow(n)},
-                {"authorizationCode", (o, n) => o.AuthorizationCode = LoadOAuthFlow(n)}
+                {AsyncApiConstants.Implicit, (o, n) =>
+                    {
+                        o.Implicit = LoadOAuthFlow(n);
+                    }
+                },
+                {AsyncApiConstants.Password, (o, n) =>
+                    {
+                        o.Password = LoadOAuthFlow(n);
+                    }
+                },
+                {AsyncApiConstants.ClientCredentials, (o, n) =>
+                    {
+                        o.ClientCredentials = LoadOAuthFlow(n);
+                    }
+                },
+                {AsyncApiConstants.AuthorizationCode, (o, n) =>
+                    {
+                        o.AuthorizationCode = LoadOAuthFlow(n);
+                    }
+                }
             };
 
         private static readonly PatternFieldMap<AsyncApiOAuthFlows> _oAuthFlowsPatternFields =
@@ -30,12 +46,12 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiOAuthFlows LoadOAuthFlows(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("OAuthFlows");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Flows);
 
             var oAuthFlows = new AsyncApiOAuthFlows();
             foreach (var property in mapNode)
             {
-                property.ParseField(oAuthFlows, _oAuthFlowsFixedFileds, _oAuthFlowsPatternFields);
+                property.ParseField(oAuthFlows, _oAuthFlowsFixedFields, _oAuthFlowsPatternFields);
             }
 
             return oAuthFlows;

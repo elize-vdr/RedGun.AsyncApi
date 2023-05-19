@@ -20,11 +20,11 @@ namespace RedGun.AsyncApi.Validations.Rules
             new ValidationRule<AsyncApiServer>(
                 (context, server) =>
                 {
-                    context.Enter("url");
+                    context.Enter(AsyncApiConstants.Url);
                     if (server.Url == null)
                     {
                         context.CreateError(nameof(ServerRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "url", "server"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Url, AsyncApiConstants.Server));
                     }
                     context.Exit();
                 });

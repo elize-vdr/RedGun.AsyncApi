@@ -23,7 +23,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiServers LoadServers(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Servers");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Servers);
 
             var domainObject = new AsyncApiServers();
 

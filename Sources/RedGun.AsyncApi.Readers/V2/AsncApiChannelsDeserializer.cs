@@ -23,7 +23,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiChannels LoadChannels(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Channels");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.Channels);
 
             var domainObject = new AsyncApiChannels();
 

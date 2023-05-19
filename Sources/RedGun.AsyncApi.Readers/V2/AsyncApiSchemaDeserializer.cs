@@ -1,6 +1,7 @@
 ﻿// Copied from Microsoft OpenAPI.Net SDK and altered to obtain an AsyncAPI.Net SDK.
 // Licensed under the MIT license. 
 
+using System;
 using RedGun.AsyncApi.Any;
 using RedGun.AsyncApi.Extensions;
 using RedGun.AsyncApi.Models;
@@ -19,145 +20,145 @@ namespace RedGun.AsyncApi.Readers.V2
         private static readonly FixedFieldMap<AsyncApiSchema> _schemaFixedFields = new FixedFieldMap<AsyncApiSchema>
         {
             {
-                "title", (o, n) =>
+                AsyncApiConstants.Title, (o, n) =>
                 {
                     o.Title = n.GetScalarValue();
                 }
             },
             {
-                "multipleOf", (o, n) =>
+                AsyncApiConstants.MultipleOf, (o, n) =>
                 {
                     o.MultipleOf = decimal.Parse(n.GetScalarValue(), NumberStyles.Float, CultureInfo.InvariantCulture); 
                 }
             },
             {
-                "maximum", (o, n) =>
+                AsyncApiConstants.Maximum, (o, n) =>
                 {
                     o.Maximum = decimal.Parse(n.GetScalarValue(), NumberStyles.Float, CultureInfo.InvariantCulture);
                 }
             },
             {
-                "exclusiveMaximum", (o, n) =>
+                AsyncApiConstants.ExclusiveMaximum, (o, n) =>
                 {
                     o.ExclusiveMaximum = bool.Parse(n.GetScalarValue());
                 }
             },
             {
-                "minimum", (o, n) =>
+                AsyncApiConstants.Minimum, (o, n) =>
                 {
                     o.Minimum = decimal.Parse(n.GetScalarValue(), NumberStyles.Float, CultureInfo.InvariantCulture);
                 }
             },
             {
-                "exclusiveMinimum", (o, n) =>
+                AsyncApiConstants.ExclusiveMinimum, (o, n) =>
                 {
                     o.ExclusiveMinimum = bool.Parse(n.GetScalarValue());
                 }
             },
             {
-                "maxLength", (o, n) =>
+                AsyncApiConstants.MaxLength, (o, n) =>
                 {
                     o.MaxLength = int.Parse(n.GetScalarValue(), CultureInfo.InvariantCulture);
                 }
             },
             {
-                "minLength", (o, n) =>
+                AsyncApiConstants.MinLength, (o, n) =>
                 {
                     o.MinLength = int.Parse(n.GetScalarValue(), CultureInfo.InvariantCulture);
                 }
             },
             {
-                "pattern", (o, n) =>
+                AsyncApiConstants.Pattern, (o, n) =>
                 {
                     o.Pattern = n.GetScalarValue();
                 }
             },
             {
-                "maxItems", (o, n) =>
+                AsyncApiConstants.MaxItems, (o, n) =>
                 {
                     o.MaxItems = int.Parse(n.GetScalarValue(), CultureInfo.InvariantCulture);
                 }
             },
             {
-                "minItems", (o, n) =>
+                AsyncApiConstants.MinItems, (o, n) =>
                 {
                     o.MinItems = int.Parse(n.GetScalarValue(), CultureInfo.InvariantCulture);
                 }
             },
             {
-                "uniqueItems", (o, n) =>
+                AsyncApiConstants.UniqueItems, (o, n) =>
                 {
                     o.UniqueItems = bool.Parse(n.GetScalarValue());
                 }
             },
             {
-                "maxProperties", (o, n) =>
+                AsyncApiConstants.MaxProperties, (o, n) =>
                 {
                     o.MaxProperties = int.Parse(n.GetScalarValue(), CultureInfo.InvariantCulture);
                 }
             },
             {
-                "minProperties", (o, n) =>
+                AsyncApiConstants.MinProperties, (o, n) =>
                 {
                     o.MinProperties = int.Parse(n.GetScalarValue(), CultureInfo.InvariantCulture);
                 }
             },
             {
-                "required", (o, n) =>
+                AsyncApiConstants.Required, (o, n) =>
                 {
                     o.Required = new HashSet<string>(n.CreateSimpleList(n2 => n2.GetScalarValue()));
                 }
             },
             {
-                "enum", (o, n) =>
+                AsyncApiConstants.Enum, (o, n) =>
                 {
                     o.Enum = n.CreateListOfAny();
                 }
             },
             {
-                "type", (o, n) =>
+                AsyncApiConstants.Type, (o, n) =>
                 {
                     o.Type = n.GetScalarValue();
                 }
             },
             {
-                "allOf", (o, n) =>
+                AsyncApiConstants.AllOf, (o, n) =>
                 {
                     o.AllOf = n.CreateList(LoadSchema);
                 }
             },
             {
-                "oneOf", (o, n) =>
+                AsyncApiConstants.OneOf, (o, n) =>
                 {
                     o.OneOf = n.CreateList(LoadSchema);
                 }
             },
             {
-                "anyOf", (o, n) =>
+                AsyncApiConstants.AnyOf, (o, n) =>
                 {
                     o.AnyOf = n.CreateList(LoadSchema);
                 }
             },
             {
-                "not", (o, n) =>
+                AsyncApiConstants.Not, (o, n) =>
                 {
                     o.Not = LoadSchema(n);
                 }
             },
             {
-                "items", (o, n) =>
+                AsyncApiConstants.Items, (o, n) =>
                 {
                     o.Items = LoadSchema(n);
                 }
             },
             {
-                "properties", (o, n) =>
+                AsyncApiConstants.Properties, (o, n) =>
                 {
                     o.Properties = n.CreateMap(LoadSchema);
                 }
             },
             {
-                "additionalProperties", (o, n) =>
+                AsyncApiConstants.AdditionalProperties, (o, n) =>
                 {
                     if (n is ValueNode)
                     {
@@ -170,68 +171,68 @@ namespace RedGun.AsyncApi.Readers.V2
                 }
             },
             {
-                "description", (o, n) =>
+                AsyncApiConstants.Description, (o, n) =>
                 {
                     o.Description = n.GetScalarValue();
                 }
             },
             {
-                "format", (o, n) =>
+                AsyncApiConstants.Format, (o, n) =>
                 {
                     o.Format = n.GetScalarValue();
                 }
             },
             {
-                "default", (o, n) =>
+                AsyncApiConstants.Default, (o, n) =>
                 {
                     o.Default = n.CreateAny();
                 }
             },
 
             {
-                "nullable", (o, n) =>
+                AsyncApiConstants.Nullable, (o, n) =>
                 {
                     o.Nullable = bool.Parse(n.GetScalarValue());
                 }
             },
             {
-                "discriminator", (o, n) =>
+                AsyncApiConstants.Discriminator, (o, n) =>
                 {
                     o.Discriminator = LoadDiscriminator(n);
                 }
             },
             {
-                "readOnly", (o, n) =>
+                AsyncApiConstants.ReadOnly, (o, n) =>
                 {
                     o.ReadOnly = bool.Parse(n.GetScalarValue());
                 }
             },
             {
-                "writeOnly", (o, n) =>
+                AsyncApiConstants.WriteOnly, (o, n) =>
                 {
                     o.WriteOnly = bool.Parse(n.GetScalarValue());
                 }
             },
             {
-                "xml", (o, n) =>
+                AsyncApiConstants.Xml, (o, n) =>
                 {
                     o.Xml = LoadXml(n);
                 }
             },
             {
-                "externalDocs", (o, n) =>
+                AsyncApiConstants.ExternalDocs, (o, n) =>
                 {
                     o.ExternalDocs = LoadExternalDocs(n);
                 }
             },
             {
-                "example", (o, n) =>
+                AsyncApiConstants.Example, (o, n) =>
                 {
                     o.Example = n.CreateAny();
                 }
             },
             {
-                "deprecated", (o, n) =>
+                AsyncApiConstants.Deprecated, (o, n) =>
                 {
                     o.Deprecated = bool.Parse(n.GetScalarValue());
                 }

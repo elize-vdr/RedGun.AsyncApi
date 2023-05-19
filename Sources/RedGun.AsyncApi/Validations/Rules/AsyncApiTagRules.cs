@@ -20,11 +20,11 @@ namespace RedGun.AsyncApi.Validations.Rules
             new ValidationRule<AsyncApiTag>(
                 (context, tag) =>
                 {
-                    context.Enter("name");
+                    context.Enter(AsyncApiConstants.Name);
                     if (tag.Name == null)
                     {
                         context.CreateError(nameof(TagRequiredFields),
-                            String.Format(SRResource.Validation_FieldIsRequired, "name", "tag"));
+                            String.Format(SRResource.Validation_FieldIsRequired, AsyncApiConstants.Name, AsyncApiConstants.Tag));
                     }
                     context.Exit();
                 });

@@ -27,23 +27,28 @@ namespace RedGun.AsyncApi.Validations.Rules
             new ValidationRule<AsyncApiComponents>(
                 (context, components) =>
                 {
-                    ValidateKeys(context, components.Schemas?.Keys, "schemas");
+                    ValidateKeys(context, components.Schemas?.Keys, AsyncApiConstants.Schemas);
 
-                    ValidateKeys(context, components.Responses?.Keys, "responses");
+                    ValidateKeys(context, components.Messages?.Keys, AsyncApiConstants.Messages);
 
-                    ValidateKeys(context, components.Parameters?.Keys, "parameters");
+                    ValidateKeys(context, components.SecuritySchemes?.Keys, AsyncApiConstants.SecuritySchemes);
 
-                    ValidateKeys(context, components.Examples?.Keys, "examples");
+                    ValidateKeys(context, components.Parameters?.Keys, AsyncApiConstants.Parameters);
 
-                    ValidateKeys(context, components.RequestBodies?.Keys, "requestBodies");
+                    ValidateKeys(context, components.CorrelationIds?.Keys, AsyncApiConstants.CorrelationIds);
 
-                    ValidateKeys(context, components.Headers?.Keys, "headers");
+                    ValidateKeys(context, components.OperationTraits?.Keys, AsyncApiConstants.OperationTraits);
 
-                    ValidateKeys(context, components.SecuritySchemes?.Keys, "securitySchemes");
+                    ValidateKeys(context, components.MessageTraits?.Keys, AsyncApiConstants.MessageTraits);
 
-                    ValidateKeys(context, components.Links?.Keys, "links");
+                    ValidateKeys(context, components.ServerBindings?.Keys, AsyncApiConstants.ServerBindings);
 
-                    ValidateKeys(context, components.Callbacks?.Keys, "callbacks");
+                    ValidateKeys(context, components.ChannelBindings?.Keys, AsyncApiConstants.ChannelBindings);
+                    
+                    ValidateKeys(context, components.OperationBindings?.Keys, AsyncApiConstants.OperationBindings);
+                    
+                    ValidateKeys(context, components.MessageBindings?.Keys, AsyncApiConstants.MessageBindings);
+
                 });
 
         private static void ValidateKeys(IValidationContext context, IEnumerable<string> keys, string component)

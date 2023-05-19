@@ -15,25 +15,25 @@ namespace RedGun.AsyncApi.Readers.V2
         private static readonly FixedFieldMap<AsyncApiBindingHttpOperation> _channelBindingHttpOperationFixedFields = new FixedFieldMap<AsyncApiBindingHttpOperation>
         {
             {
-                "type", (o, n) =>
+                AsyncApiConstants.Type, (o, n) =>
                 {
                     o.Type = n.GetScalarValue();
                 }
             },
             {
-                "method", (o, n) =>
+                AsyncApiConstants.Method, (o, n) =>
                 {
                     o.Method = n.GetScalarValue();
                 }
             },
             {
-                "query", (o, n) =>
+                AsyncApiConstants.Query, (o, n) =>
                 {
-                    o.Query = LoadSchema(n);;
+                    o.Query = LoadSchema(n);
                 }
             },
             {
-                "bindingVersion", (o, n) =>
+                AsyncApiConstants.BindingVersion, (o, n) =>
                 {
                     o.BindingVersion = n.GetScalarValue();
                 }
@@ -52,7 +52,7 @@ namespace RedGun.AsyncApi.Readers.V2
 
         public static AsyncApiBindingHttpOperation LoadBindingHttpOperation(ParseNode node)
         {
-            var mapNode = node.CheckMapNode("Operation Binding HTTP");
+            var mapNode = node.CheckMapNode(AsyncApiConstants.BindingHttp);
 
             var operationBindingHttp = new AsyncApiBindingHttpOperation();
 

@@ -16,8 +16,12 @@ namespace RedGun.AsyncApi.Models
         /// </summary>
         public AsyncApiBindingHttpOperation BindingHttp { get; set; }
         
+        /// <summary>
+        /// Protocol-specific information for an Kafka operation.
+        /// </summary>
+        public AsyncApiBindingKafkaOperation BindingKafka { get; set; }
+        
         /* TODO: Add rest of channel binding fixed fields, see: https://www.asyncapi.com/docs/specifications/v2.2.0#operationBindingsObject
-            kafka	Kafka Operation Binding	Protocol-specific information for a Kafka operation.
             anypointmq	Anypoint MQ Operation Binding	Protocol-specific information for an Anypoint MQ operation.
             amqp	AMQP Operation Binding	Protocol-specific information for an AMQP 0-9-1 operation.
             amqp1	AMQP 1.0 Operation Binding	Protocol-specific information for an AMQP 1.0 operation.
