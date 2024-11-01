@@ -3,4 +3,4 @@ This is a converstion of the OpenApi.Net code base to AsyncAPI.Net. Because ther
 
 # Progress
 Most of the code has been converted, the unit tests still needs to be converted and everything tested.
-In Progres . . .
+In Progress . . .
